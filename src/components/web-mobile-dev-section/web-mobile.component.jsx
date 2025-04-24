@@ -23,24 +23,24 @@ const WebMobile = () => {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-2 w-full">
-        <div className="w-[40%] h-[560px] overflow-hidden">
+      <div className="flex flex-col md:grid md:grid-cols-[45%_55%] w-full">
+        <div className="bg-[#0c0c0c] w-full h-[386px] md:h-[570px] p-6 md:p-0 md:rounded-tl-2xl">
           <img
             src="https://i.ibb.co/TDBYBXPq/web-mobile-image-1.jpg"
             alt="woman using phone"
-            className="w-full h-full object-cover rounded-tr-2xl will-change-transform scale-x-[-1]"
+            className="w-full h-full object-cover rounded-2xl md:rounded-tr-2xl md:rounded-bl-none md:rounded-none scale-x-[-1]"
           />
         </div>
-        <div className="w-[60%]">
+        <div className="relative w-full h-[570px] p-6 md:p-0 overflow-hidden bg-[#0c0c0c] md:rounded-tr-2xl">
           <img
             src="https://i.ibb.co/BHKSC8T7/web-mobile-image-2.png"
             alt="abstract glob"
-            className="absoute w-full h-full object-cover"
+            className="absolute w-[118.5px] h-[79px] md:w-[303px] md:h-[202px] object-contain"
           />
           <img
             src="https://i.ibb.co/k24bNNbP/web-mobile-image-3.png"
             alt="sign in image"
-            className="absoute w-full h-full object-cover"
+            className="absolute bottom-[150px] right-[-63px] md:bottom-[-115px] md:right-[-150px] w-[399px] h-[266px] md:w-[921px] md:h-[auto] rounded-[12px]"
           />
         </div>
       </div>
