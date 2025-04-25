@@ -1,33 +1,34 @@
 import React from "react";
 
-const PrintingSection = () => {
+const DreamJobSection = () => {
   return (
-    <div className="flex flex-col-reverse md:flex-col py-10 md:py-22">
-      <div className="w-full  text-center flex flex-col justify-center items-center p-5 md:pb-10">
+    <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
+      <div className="w-full  text-center flex flex-col justify-center datas-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
-          Printing
+          Your Dream Job Starts Here
         </h1>
-        <p className="mt-4 md:mt-8 text-[16px] md:text-[20px] text-[#667085] font-bold leading-[1.4]">
-          Professional & clean
+        <p className="mt-4 md:mt-8 text-[16px] md:w-[500px] md:mx-auto md:text-[20px] text-[#667085] md:font-semibold leading-[1.4]">
+          Explore curated jobs, internships and freelance gigs that match your
+          skills
         </p>
         <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
           <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
-            Start Printing
+            Post a job
           </button>
           <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
-            View service
+            Explore jobs
           </button>
         </div>
       </div>
-      <div className="bg-[#ffadd9] w-full h-[420px] md:h-[761px] rounded-xl">
+      <div className=" w-full h-[326px] md:h-[712px] rounded-2xl">
         <img
-          src="https://i.ibb.co/5g545Bcy/fb3b12a1f7966448ea8070205ed1cd33afc5c66c.png"
-          alt="products mock-up"
-          className="w-full h-full object-cover object-center"
+          src="https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png"
+          alt="lady image"
+          className="w-full h-full object-cover object-center rounded-2xl"
         />
       </div>
     </div>
   );
 };
 
-export default PrintingSection;
+export default DreamJobSection;
