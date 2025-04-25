@@ -12,6 +12,9 @@ import OurStorySection from "../../components/our-story-section/our-story-sectio
 import OurCommunity from "../../components/our-community-section/our-community.component";
 import DreamJobSection from "../../components/dream-job-section/dream-job-section.component";
 import Sustainability from "../../components/sustainability-section/sustainability.component";
+import SolutionsSection from "../../components/solutions-section/solutions-section.component";
+import NewsletterSection from "../../components/newsletter-section/newsletter-section.component";
+import FooterSection from "../../components/footer-section/footer-section.component";
 
 const HomePage = () => {
   return (
@@ -28,6 +31,9 @@ const HomePage = () => {
       <OurCommunity />
       <DreamJobSection />
       <Sustainability />
+      <SolutionsSection />
+      <NewsletterSection />
+      <FooterSection />
     </>
   );
 };

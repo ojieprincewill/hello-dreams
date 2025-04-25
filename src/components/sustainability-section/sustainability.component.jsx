@@ -1,4 +1,5 @@
 import React from "react";
+import FaqSection from "../faq-section/faq-section.component";
 
 const Sustainability = () => {
   return (
@@ -23,6 +24,7 @@ const Sustainability = () => {
           className="w-full h-full object-cover object-center rounded-2xl"
         />
       </div>
+      <FaqSection />
     </div>
   );
 };
