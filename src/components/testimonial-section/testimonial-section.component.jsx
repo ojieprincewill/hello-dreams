@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { TestimonialData } from "../../data/choose-us-data/choose-us.data";
 import { StarIcon } from "@heroicons/react/24/solid";
 
 const TestimonialSection = () => {
+  const [activeId, setActiveId] = useState(null);
+
+  const toggleModal = (id) => {
+    setActiveId(activeId === id ? null : id);
+  };
+
+  const closeModal = () => {
+    setActiveId(null);
+  };
+
   return (
     <div className="w-full pt-40">
       <div className="flex flex-col md:flex-row justify-between">
@@ -50,10 +60,31 @@ const TestimonialSection = () => {
               <p className="text-[14px] md:text-[16px] text-[#fff] line-clamp-4 leading-[1.5] ">
                 {data.text}
               </p>
-              <span className="text-[14px] md:text-[16px] text-[#fff] font-semibold cursor-pointer">
+              <span
+                onClick={() => toggleModal(data.id)}
+                className="text-[14px] md:text-[16px] text-[#fff] font-semibold hover:text-[#3c4b8479] transition-colors duration-300 cursor-pointer"
+              >
                 Read more
               </span>
             </div>
+
+            {activeId === data.id && (
+              <>
+                <div
+                  onClick={closeModal}
+                  className="fixed inset-0 bg-black/50 z-40"
+                ></div>
+
+                <div className="absolute z-50 left-[1%] bottom-3 bg-white p-4 rounded-lg shadow-lg w-[98%] h-[95%]">
+                  <p className="text-24px md:text-[30px] font-bold text-[#101828] mb-4">
+                    {data.name}
+                  </p>
+                  <p className="text-14px md:text-[16px] text-[#101828] leading-[1.5]">
+                    {data.text}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>

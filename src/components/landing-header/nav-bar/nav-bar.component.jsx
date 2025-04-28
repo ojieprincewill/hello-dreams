@@ -8,7 +8,7 @@ import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 
 const NavBar = () => {
   return (
-    <nav className="bg-white relative w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-50 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
+    <nav className="bg-white relative w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
       {/* Logo Section */}
       <div className="flex-shrink-0 cursor-pointer">
         <Logo />
