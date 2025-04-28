@@ -1,32 +1,59 @@
 import React, { useState } from "react";
 import { FaqData } from "../../data/faq-data/faq.data";
-import { SunIcon } from "@heroicons/react/24/solid"; // Heroicons Import
+import { SunIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
 
 const FaqSection = () => {
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, setActiveId] = useState(1);
+
+  const toggleQuestion = (id) => {
+    setActiveId(activeId === id ? null : id); // Toggle active answer visibility
+  };
 
   return (
-    <div className="bg-[#fff] rounded-2xl grid grid-cols-2 w-full gap-4 my-20 p-10">
+    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full md:gap-4 my-10 md:my-20 md:p-10">
       <div>
-        <p className="text-[56px] text-[#101828] font-bold mb-4">FAQs.</p>
+        <p className="text-[15.05px] md:text-[56px] text-[#101828] font-bold mb-4">
+          FAQs.
+        </p>
         <div className="flex flex-col space-y-2 h-full">
           {FaqData.map((faq) => (
-            <div
-              key={faq.id}
-              onClick={() => setActiveId(faq.id)}
-              className={`w-full flex justify-between items-center text-left text-[#041856] p-4 rounded-xl border border-[#e7eeec] hover:bg-[#101828] hover:text-[#fff] transition-all duration-300 cursor-pointer ${
-                activeId === faq.id ? "bg-[#101828] text-[#fff]" : "bg-[#fff]"
-              }`}
-            >
-              <p className=" text-[18px] font-bold">{faq.question}</p>
+            <div key={faq.id} onClick={() => toggleQuestion(faq.id)}>
+              <div
+                className={`w-full flex justify-between items-center text-left text-[#041856] rounded-md px-2 py-4 md:rounded-xl border border-[#e7eeec] hover:bg-[#101828] hover:text-[#fff] transition-all duration-300 cursor-pointer ${
+                  activeId === faq.id ? "bg-[#101828] text-[#fff]" : "bg-[#fff]"
+                }`}
+              >
+                <p className="text-[14px] md:text-[18px] w-[230px] md:w-full font-bold">
+                  {faq.question}{" "}
+                  {activeId === faq.id && (
+                    <span>
+                      <SunIcon className="md:hidden inline align-middle h-[18px] w-[18px] text-[#ffc501]" />
+                    </span>
+                  )}
+                </p>
+                {activeId === faq.id && (
+                  <SunIcon className="hidden md:block h-6 w-6 text-[#ffc501]" />
+                )}
+                {activeId === faq.id ? (
+                  <MinusIcon className="h-6 w-6 font-bold md:hidden" />
+                ) : (
+                  <PlusIcon className="h-6 w-6 font-bold md:hidden" />
+                )}
+              </div>
               {activeId === faq.id && (
-                <SunIcon className="h-6 w-6 text-[#ffc501]" /> // Sun Icon only appears when active
+                <div className="md:hidden bg-[#1342ff] text-[#fff] rounded-xl p-4">
+                  <p className="text-[14px]">
+                    <SunIcon className="block h-[18px] w-[18px] mb-2 " />
+                    {faq.answer}
+                  </p>
+                </div>
               )}
             </div>
           ))}
         </div>
       </div>
-      <div>
+      <div className="hidden md:block">
         <p className="text-[56px] text-[#101828] font-bold mb-4">Ans.</p>
         <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 h-[84.5%]">
           {activeId !== null ? (
