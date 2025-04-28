@@ -45,12 +45,12 @@ const NavBar = () => {
 
       <div className="space-x-5">
         {/* First Button */}
-        <button className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer">
+        <button className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer">
           Refer & Earn
         </button>
 
         {/* Second Button */}
-        <button className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:text-white cursor-pointer">
+        <button className="bg-[#010413] text-white border border-[#010413] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer">
           Work with Us
         </button>
         <button className="h-8 w-8 text-[#010413] md:hidden cursor-pointer align-middle">

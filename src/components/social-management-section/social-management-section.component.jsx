@@ -53,10 +53,10 @@ const SocialManagementSection = () => {
             Management
           </h1>
           <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-            <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-6 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+            <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
               Manage your social media
             </button>
-            <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+            <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
               View service
             </button>
           </div>
@@ -70,10 +70,10 @@ const SocialManagementSection = () => {
             Branding
           </h1>
           <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-            <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-6 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+            <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
               Design your brand
             </button>
-            <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+            <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
               View service
             </button>
           </div>

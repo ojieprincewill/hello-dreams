@@ -61,7 +61,7 @@ const SolutionsSection = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#1342ff] text-[#fff] text-[24px] font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              className="w-full bg-[#1342ff] text-[#fff] text-[24px] font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
             >
               Send
             </button>

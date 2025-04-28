@@ -13,15 +13,15 @@ const UxDesignSection = () => {
           experiences.
         </p>
         <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-          <button className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] px-6 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+          <button className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
             Design your idea
           </button>
-          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[16px] px-12 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
             View service
           </button>
         </div>
       </div>
-      <div className="bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] w-full text-[#fff] h-[845px] pl-6 md:pl-20 py-5 md:py-25">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[845px] pl-6 md:pl-20 py-5 md:py-25">
         <div className="w-[220px] md:w-[540px]">
           <p className="text-[16px] md:text-[40px] leading-[1.1] font-extrabold">
             Effortless Design.
@@ -33,6 +33,13 @@ const UxDesignSection = () => {
             functional. From research to pixel-perfect designs, we ensure your
             users stay engaged and satisfied.
           </p>
+        </div>
+        <div className=" absolute w-[285px] h-auto md:w-[955px] md:h-[600px] bottom-0 right-[-105px]">
+          <img
+            src="https://i.ibb.co/SXypMCYw/be2fcc5390cdc081ed0b94431ff02178db711b6e.png"
+            alt=""
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
     </div>

@@ -3,13 +3,13 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 const NewsletterSection = () => {
   return (
-    <div className="bg-[#fff] p-20">
-      <h1 className="text-[#041856] text-[24px] font-bold text-center mb-3">
+    <div className="hidden md:block bg-[#fff] p-20">
+      <span className="text-[#041856] text-[30px] font-bold mb-3">
         Stay informed, nothing boring
-      </h1>
-      <p className="text-[#010413] text-[20px] font-bold text-center mb-3">
+      </span>
+      <span className="text-[#010413] text-[20px] font-bold ml-3">
         Subscribe to our newsletter
-      </p>
+      </span>
       <form className="flex flex-row justify-between items-center py-10">
         <input
           type="text"

@@ -19,7 +19,7 @@ const TestimonialSection = () => {
           <button className="bg-transparent text-[#344054] font-semibold border border-[#d0d5dd] text-[14px] md:text-[16px] px-4 py-4 rounded-lg cursor-pointer">
             Apply for mentorship
           </button>
-          <button className="bg-[#1b212c] text-[#fff] font-semibold border border-[#1b212c] text-[14px] md:text-[16px] px-4 py-4 rounded-lg hover:bg-[#6941c6] hover:text-white hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+          <button className="bg-[#1b212c] text-[#fff] font-semibold border border-[#1b212c] text-[14px] md:text-[16px] px-4 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
             Learn Design from us
           </button>
         </div>
