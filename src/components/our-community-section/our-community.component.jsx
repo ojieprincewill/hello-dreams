@@ -2,11 +2,6 @@ import React from "react";
 import { CommunityData } from "../../data/community-data/community.data";
 
 const OurCommunity = () => {
-  const dataClasses = {
-    small: "w-[30%]",
-    large: "w-[40%]",
-  };
-
   return (
     <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
       <div className="w-full  text-center flex flex-col justify-center datas-center p-5 md:pb-10">
@@ -28,21 +23,40 @@ const OurCommunity = () => {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-2 md:gap-4">
-        {CommunityData.map((data) => (
-          <div
-            key={data.id}
-            className={`w-full h-[59.21px] md:h-[203.18px] ${
-              dataClasses[data.size]
-            }`}
-          >
-            <img
-              src={data.image}
-              alt={`Bento Grid Image ${data.id}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
+      <div className="space-y-1 md:space-y-4 w-[98%]">
+        <div className="grid grid-cols-[30%_30%_40%] gap-1 md:gap-4">
+          {CommunityData.slice(0, 3).map((data) => (
+            <div key={data.id} className="w-full h-[59.21px] md:h-[203.18px]">
+              <img
+                src={data.image}
+                alt={`Bento Grid Image ${data.id}`}
+                className="w-full h-full object-cover rounded-sm"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-[40%_30%_30%] gap-1 md:gap-4">
+          {CommunityData.slice(3, 6).map((data) => (
+            <div key={data.id} className="w-full h-[59.21px] md:h-[203.18px]">
+              <img
+                src={data.image}
+                alt={`Bento Grid Image ${data.id}`}
+                className="w-full h-full object-cover rounded-sm"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-[30%_30%_40%] gap-1 md:gap-4">
+          {CommunityData.slice(6, 9).map((data) => (
+            <div key={data.id} className="w-full h-[59.21px] md:h-[203.18px]">
+              <img
+                src={data.image}
+                alt={`Bento Grid Image ${data.id}`}
+                className="w-full h-full object-cover rounded-sm"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

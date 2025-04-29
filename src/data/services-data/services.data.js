@@ -1,0 +1,51 @@
+export const ServicesData = [
+  {
+    id: 1,
+    icon: null,
+    title: "UI/UX Design",
+    text: "Stunning web & app design",
+    target: "/services/#",
+  },
+  {
+    id: 2,
+    icon: null,
+    title: "Graphics & Branding",
+    text: "Get creative inspiration",
+    target: "/services/#",
+  },
+  {
+    id: 3,
+    icon: null,
+    title: "CV & LinkedIn Optimisation",
+    text: "Artistic visual expression",
+    target: "/services/#",
+  },
+  {
+    id: 4,
+    icon: null,
+    title: "Web & Mobile Dev",
+    text: "Functional digital products",
+    target: "/services/#",
+  },
+  {
+    id: 5,
+    icon: null,
+    title: "Printing Services",
+    text: "Beautiful crafted prints",
+    target: "/services/#",
+  },
+  {
+    id: 6,
+    icon: null,
+    title: "Hello Dreams Collections",
+    text: "T-shirts, Hoodies, Caps, Planners & more",
+    target: "/services/#",
+  },
+  {
+    id: 7,
+    icon: null,
+    title: "Social Media Mgmt",
+    text: "Impactful story telling",
+    target: "/services/#",
+  },
+];

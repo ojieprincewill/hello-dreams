@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TestimonialData } from "../../data/choose-us-data/choose-us.data";
 import { StarIcon } from "@heroicons/react/24/solid";
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "motion/react";
 
 const TestimonialSection = () => {
   const [activeId, setActiveId] = useState(null);
@@ -67,24 +69,31 @@ const TestimonialSection = () => {
                 Read more
               </span>
             </div>
+            <AnimatePresence>
+              {activeId === data.id && (
+                <>
+                  <div
+                    onClick={closeModal}
+                    className="fixed inset-0 bg-black/20 z-40"
+                  ></div>
 
-            {activeId === data.id && (
-              <>
-                <div
-                  onClick={closeModal}
-                  className="fixed inset-0 bg-black/50 z-40"
-                ></div>
-
-                <div className="absolute z-50 left-[1%] bottom-3 bg-white p-4 rounded-lg shadow-lg w-[98%] h-[95%]">
-                  <p className="text-24px md:text-[30px] font-bold text-[#101828] mb-4">
-                    {data.name}
-                  </p>
-                  <p className="text-14px md:text-[16px] text-[#101828] leading-[1.5]">
-                    {data.text}
-                  </p>
-                </div>
-              </>
-            )}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    className="absolute overflow-auto z-50 left-[1%] bottom-3 bg-white p-4 rounded-lg shadow-lg w-[98%] h-[95%]"
+                  >
+                    <p className="text-24px md:text-[30px] font-bold text-[#101828] mb-4">
+                      {data.name}
+                    </p>
+                    <p className="text-14px md:text-[16px] text-[#101828] leading-[1.5]">
+                      {data.text}
+                    </p>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>
