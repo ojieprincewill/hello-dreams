@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaqData } from "../../data/faq-data/faq.data";
 import { SunIcon } from "@heroicons/react/24/solid";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "motion/react";
 
 const FaqSection = () => {
   const [activeId, setActiveId] = useState(1);
@@ -41,14 +43,23 @@ const FaqSection = () => {
                   <PlusIcon className="h-6 w-6 font-bold md:hidden" />
                 )}
               </div>
-              {activeId === faq.id && (
-                <div className="md:hidden bg-[#1342ff] text-[#fff] rounded-xl p-4">
-                  <p className="text-[14px]">
-                    <SunIcon className="block h-[18px] w-[18px] mb-2 " />
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
+
+              <AnimatePresence>
+                {activeId === faq.id && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="md:hidden bg-[#1342ff] text-[#fff] rounded-xl p-4"
+                  >
+                    <p className="text-[14px]">
+                      <SunIcon className="block h-[18px] w-[18px] mb-2 " />
+                      {faq.answer}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
