@@ -33,7 +33,7 @@ const HomePage = () => {
       <Sustainability />
       <SolutionsSection />
       <NewsletterSection />
-      {/* <FooterSection /> */}
+      <FooterSection />
     </>
   );
 };
