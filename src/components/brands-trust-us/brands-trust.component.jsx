@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 
 const BrandsTrust = () => {
   return (
-    <div className="w-full px-[5%] md:px-[10%] py-15 overflow-hidden whitespace-nowrap">
+    <div className="w-full px-[5%] lg:px-[10%] py-15 overflow-hidden whitespace-nowrap">
       <p
         className="text-[24px] lg:text-[36px] text-[#000000] text-center mb-10"
         style={{ fontFamily: "'DM Serif Display', serif" }}
