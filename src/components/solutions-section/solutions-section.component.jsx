@@ -54,7 +54,7 @@ const SolutionsSection = () => {
               <textarea
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                className="mt-2 w-full h-[200px] p-3 border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
+                className="mt-2 w-full h-[200px] p-3 resize-none border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
                 placeholder="Type description here"
               />
             </div>

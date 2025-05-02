@@ -35,7 +35,7 @@ const NavBar = () => {
           onClick={() => setServicesOpen(false)}
         ></div>
       )}
-      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
+      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[120px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
         {/* Logo Section */}
         <div className="flex-shrink-0 cursor-pointer">
           <Logo />
@@ -77,14 +77,20 @@ const NavBar = () => {
 
         <div className="space-x-5">
           {/* First Button */}
-          <button className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer">
+          <Link
+            to=""
+            className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+          >
             Refer & Earn
-          </button>
+          </Link>
 
           {/* Second Button */}
-          <button className="bg-[#010413] text-white border border-[#010413] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer">
+          <Link
+            to="/workwithus"
+            className="bg-[#010413] text-white border border-[#010413] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
+          >
             Work with Us
-          </button>
+          </Link>
           <button
             onClick={openSideBar}
             className="h-8 w-8 text-[#010413] md:hidden cursor-pointer align-middle"
@@ -93,6 +99,7 @@ const NavBar = () => {
           </button>
         </div>
       </nav>
+      <div className="hidden md:block md:h-[120px]"></div>
       <AnimatePresence>
         {servicesOpen && (
           <motion.div
@@ -100,7 +107,7 @@ const NavBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-[90px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-14 z-80 rounded-xl"
+            className="fixed top-[100px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-14 z-80 rounded-xl"
           >
             {ServicesData.map((data) => (
               <Link

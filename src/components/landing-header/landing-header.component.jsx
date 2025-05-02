@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "./nav-bar/nav-bar.component";
+import { Link } from "react-router-dom";
 
 const LandingHeader = () => {
   return (
@@ -18,9 +19,12 @@ const LandingHeader = () => {
             better future!
           </p>
           <div className="mt-10 space-x-4">
-            <button className="bg-white text-[#010413] font-semibold border border-[#010413] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer">
+            <Link
+              to="/workwithus"
+              className="bg-white text-[#010413] font-semibold border border-[#010413] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
+            >
               Book a free career call
-            </button>
+            </Link>
             <button className="bg-transparent text-white font-semibold border border-[#fff] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer">
               Explore our courses
             </button>

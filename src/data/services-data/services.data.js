@@ -4,7 +4,7 @@ export const ServicesData = [
     icon: null,
     title: "UI/UX Design",
     text: "Stunning web & app design",
-    target: "/services/#",
+    target: "/services/uidesign",
   },
   {
     id: 2,
