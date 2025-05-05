@@ -3,24 +3,30 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 const NewsletterSection = () => {
   return (
-    <div className="hidden md:block bg-[#fff] p-20">
-      <span className="text-[#041856] text-[30px] font-bold mb-3">
+    <div className="bg-[#fff] p-5 md:p-10 lg:p-20">
+      <span
+        className="text-[#041856] text-[12px] md:text-[16px] lg:text-[30px] lg:font-bold mb-3"
+        style={{ fontFamily: "'DM Serif Display', serif" }}
+      >
         Stay informed, nothing boring
       </span>
-      <span className="text-[#010413] text-[20px] font-bold ml-3">
+      <span
+        className="text-[#010413] text-[8px] md:text-[12px] lg:text-[20px] lg:font-bold ml-1 md:ml-3"
+        style={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
         Subscribe to our newsletter
       </span>
-      <form className="flex flex-row justify-between items-center py-10">
+      <form className="flex flex-row justify-between items-center py-5 lg:py-10">
         <input
           type="text"
           placeholder="yourname@email.com"
-          className="border border-r-0 border-l-0 p-[18px] border-[#010413] focus:outline-0 w-full leading-normal"
+          className="border border-r-0 border-l-0 p-[12px] md:p-[19px] lg:p-[21px] placeholder:text-[8px] text-[8px] md:placeholder:text-[12px] md:text-[12px] lg:placeholder:text-[16px] lg:text-16px border-[#010413] focus:outline-0 w-full leading-normal"
         />
         <button
           type="submit"
-          className="border border-r-0 border-l-0 px-18 py-[18px] border-[#010413] text-center w-max leading-normal"
+          className="border border-r-0 border-l-0 px-5 md:px-16 lg:px-18 py-[12px] md:py-[16px] lg:py-[18px] border-[#010413] text-center w-max leading-normal"
         >
-          <ArrowRightIcon className="w-6 h-6 text-[#1342ff]" />
+          <ArrowRightIcon className="w-3 h-3 md:w-6 md:h-6 text-[#1342ff]" />
         </button>
       </form>
     </div>

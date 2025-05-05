@@ -1,8 +1,6 @@
 import React from "react";
 import { ChooseData } from "../../data/choose-us-data/choose-us.data";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import TestimonialSection from "../testimonial-section/testimonial-section.component";
-import OurPortfolioSection from "../portfolio-section/our-portfolio-section.component";
 
 const WhyChooseUs = () => {
   return (
@@ -30,8 +28,6 @@ const WhyChooseUs = () => {
           </div>
         ))}
       </div>
-      <TestimonialSection />
-      <OurPortfolioSection />
     </div>
   );
 };

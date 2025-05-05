@@ -13,12 +13,12 @@ const FaqSection = () => {
   };
 
   return (
-    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full md:gap-4 my-10 md:my-20 md:p-10">
+    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full md:gap-4 my-8 p-8 lg:my-15 lg:p-10">
       <div>
-        <p className="text-[15.05px] md:text-[56px] text-[#101828] font-bold mb-4">
+        <p className="text-[15.05px] md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
           FAQs.
         </p>
-        <div className="flex flex-col space-y-2 h-full">
+        <div className="flex flex-col space-y-2 md:h-[330px] lg:h-[616px] overflow-auto">
           {FaqData.map((faq) => (
             <div key={faq.id} onClick={() => toggleQuestion(faq.id)}>
               <div
@@ -26,7 +26,7 @@ const FaqSection = () => {
                   activeId === faq.id ? "bg-[#101828] text-[#fff]" : "bg-[#fff]"
                 }`}
               >
-                <p className="text-[14px] md:text-[18px] w-[230px] md:w-full font-bold">
+                <p className="text-[14px] md:text-[10px] lg:text-[18px] w-[230px] md:w-full font-bold">
                   {faq.question}{" "}
                   {activeId === faq.id && (
                     <span>
@@ -35,7 +35,7 @@ const FaqSection = () => {
                   )}
                 </p>
                 {activeId === faq.id && (
-                  <SunIcon className="hidden md:block h-6 w-6 text-[#ffc501]" />
+                  <SunIcon className="hidden md:block md:w-3 md:h-3 lg:h-6 lg:w-6  text-[#ffc501]" />
                 )}
                 {activeId === faq.id ? (
                   <MinusIcon className="h-6 w-6 font-bold md:hidden" />
@@ -65,17 +65,19 @@ const FaqSection = () => {
         </div>
       </div>
       <div className="hidden md:block">
-        <p className="text-[56px] text-[#101828] font-bold mb-4">Ans.</p>
-        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 h-[84.5%]">
+        <p className="md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
+          Ans.
+        </p>
+        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] lg:h-[74%] overflow-auto">
           {activeId !== null ? (
-            <p className="text-[24px] font-bold">
+            <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
               <span className="mb-2 block">
-                <SunIcon className="h-6 w-6 " />
+                <SunIcon className="md:w-3 md:h-3 lg:h-6 lg:w-6 " />
               </span>
               {FaqData.find((faq) => faq.id === activeId)?.answer}
             </p>
           ) : (
-            <p className="text-[24px] font-bold">
+            <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
               Select a question to view the answer.
             </p>
           )}

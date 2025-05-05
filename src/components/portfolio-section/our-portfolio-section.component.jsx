@@ -2,7 +2,7 @@ import React from "react";
 
 const OurPortfolioSection = () => {
   return (
-    <div className="py-20">
+    <div className="w-full px-[5%] py-10 md:py-20">
       <div className="w-full text-center flex flex-col justify-center items-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Our Team's Portfolio

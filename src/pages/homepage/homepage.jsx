@@ -15,6 +15,8 @@ import Sustainability from "../../components/sustainability-section/sustainabili
 import SolutionsSection from "../../components/solutions-section/solutions-section.component";
 import NewsletterSection from "../../components/newsletter-section/newsletter-section.component";
 import FooterSection from "../../components/footer-section/footer-section.component";
+import TestimonialSection from "../../components/testimonial-section/testimonial-section.component";
+import OurPortfolioSection from "../../components/portfolio-section/our-portfolio-section.component";
 
 const HomePage = () => {
   return (
@@ -26,6 +28,8 @@ const HomePage = () => {
       <SocialManagementSection />
       <PrintingSection />
       <WhyChooseUs />
+      <TestimonialSection />
+      <OurPortfolioSection />
       <AcademySection />
       <OurStorySection />
       <OurCommunity />
