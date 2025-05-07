@@ -72,3 +72,34 @@ export const TestimonialData = [
     text: "It's been an incredible journey so far for me, I was not seeing myself to be here where I am now, couldn't have done it without the guidance and the support of my amazing coach, Pamela Ohaeri, She’s the best scrum master (coach) of all time, she made it easy to understand therefore I will give the instructor a 10/10 because she was completely effective and always available.",
   },
 ];
+
+export const MeetExpertsData = [
+  {
+    id: 1,
+    image:
+      "https://i.ibb.co/rKnWM25b/b1932eed067625f29e50b23a9671fb77f1a61c3b.png",
+    name: "Pamela Ohaeri",
+    text: "Make use of the perfect solution when the speed of development is crucial to your success.",
+  },
+  {
+    id: 2,
+    image:
+      "https://i.ibb.co/b5bPxBmd/5d85fc7c25981c6d1182607b92f56fcd30381dba.jpg",
+    name: "Arinze Mbonu",
+    text: "Make use of the perfect solution when the speed of development is crucial to your success.",
+  },
+  {
+    id: 3,
+    image:
+      "https://i.ibb.co/zVj9mTLt/0403d085380ae5044431065acc5f41ea08b08b7c.jpg",
+    name: "Cynthia",
+    text: "Make use of the perfect solution when the speed of development is crucial to your success.",
+  },
+  {
+    id: 4,
+    image:
+      "https://i.ibb.co/zHxSmDhB/f236598616a2191240d7dd6190f0338064493aa2.jpg",
+    name: "Lilian",
+    text: "Make use of the perfect solution when the speed of development is crucial to your success.",
+  },
+];

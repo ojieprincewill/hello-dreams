@@ -16,7 +16,7 @@ const TestimonialSection = () => {
   };
 
   return (
-    <div className="w-full pt-40 px-[5%] py-10">
+    <div className="w-full pt-20 px-[5%] py-10">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="space-y-4">
           <p className="text-[24px] md:text-[20px] text-center md:text-left lg:text-[36px] text-[#101828] font-semibold ">

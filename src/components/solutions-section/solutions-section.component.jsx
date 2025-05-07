@@ -17,11 +17,11 @@ const SolutionsSection = () => {
         for your current professional pain points
       </h1>
       <div className="grid grid-cols-[55%_45%] gap-2 mt-20">
-        <div className="w-full h-[800] bg-[#ffc501] rounded-2xl">
+        <div className="w-full h-[800] bg-[#ffc501] rounded-2xl overflow-hidden">
           <img
             src="https://i.ibb.co/60TNJtL3/ae3bfa13ccf709991e22a3b74450b625f5b8f7f0.png"
             alt="lady vector image"
-            className="w-full h-full object-contain object-center"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="mt-25">

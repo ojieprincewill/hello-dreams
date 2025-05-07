@@ -1,12 +1,8 @@
 import React from "react";
-import { ProcessData } from "../../data/our-process-data/our-process.data";
+import { CvProcessData } from "../../data/our-process-data/our-process.data";
 import { Link } from "react-router-dom";
 
-const OurProcess = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
-
+const CvProcess = () => {
   return (
     <div className="w-full px-[5%] lg:px-[10%] py-15">
       <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
@@ -16,10 +12,10 @@ const OurProcess = () => {
         className="text-[12px] lg:text-[17.44px] text-[#667085] text-center font-bold capitalize"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        User experience design services
+        CV Writing & LinkedIn Optimisation
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20">
-        {ProcessData.map((data) => (
+        {CvProcessData.map((data) => (
           <div
             key={data.id}
             className="bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl"
@@ -37,23 +33,14 @@ const OurProcess = () => {
             >
               {data.title}
             </p>
-            <p className="text-[15px] md:text-[16px] text-[#000000] lg:font-bold text-center leading-[1.5] ">
+            <p className="text-[15px] md:text-[16px] text-[#000000] text-center leading-[1.7] ">
               {data.text}
             </p>
           </div>
         ))}
       </div>
-      <Link
-        to="/services/ui-design-consultation"
-        className="flex justify-center items-center mt-15"
-        onClick={handleOrigins}
-      >
-        <button className="bg-[#1342ff] lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
-          Get a Free Consultation
-        </button>
-      </Link>
     </div>
   );
 };
 
-export default OurProcess;
+export default CvProcess;

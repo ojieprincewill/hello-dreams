@@ -18,8 +18,13 @@ import { ServicesData } from "../../../data/services-data/services.data";
 import { AnimatePresence, motion } from "motion/react";
 const SidebarNav = ({ closeSidebar }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+
   const toggleDropdown = () => {
     setDropDownOpen(!dropDownOpen);
+  };
+
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -70,6 +75,7 @@ const SidebarNav = ({ closeSidebar }) => {
                     key={data.id}
                     className="grid grid-cols-[10%_90%] gap-1 items-center hover:bg-[#ecf3f5] p-1 rounded-xl cursor-pointer"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    onClick={handleOrigins}
                   >
                     <div className="w-[16px] h-[16px] ">
                       <img
@@ -93,6 +99,7 @@ const SidebarNav = ({ closeSidebar }) => {
           <Link
             className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
             to="/portfolio"
+            onClick={handleOrigins}
           >
             <CursorArrowRaysIcon className="h-5 w-5 mr-2" />
             Our Work
@@ -100,6 +107,7 @@ const SidebarNav = ({ closeSidebar }) => {
           <Link
             className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
             to="/academy"
+            onClick={handleOrigins}
           >
             <AcademicCapIcon className="h-5 w-5 mr-2" />
             Academy
@@ -107,6 +115,7 @@ const SidebarNav = ({ closeSidebar }) => {
           <Link
             className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
             to="/portfolio"
+            onClick={handleOrigins}
           >
             <FolderIcon className="h-5 w-5 mr-2" />
             Our Portfolio
@@ -115,11 +124,15 @@ const SidebarNav = ({ closeSidebar }) => {
           <Link
             className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
             to="/about"
+            onClick={handleOrigins}
           >
             <UserGroupIcon className="h-5 w-5 mr-2" />
             About Us
           </Link>
-          <button className="flex flex-row bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer">
+          <button
+            className="flex flex-row bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
+            onClick={handleOrigins}
+          >
             <ArrowPathIcon className="h-5 w-5 mr-2" />
             Refer & Earn
           </button>

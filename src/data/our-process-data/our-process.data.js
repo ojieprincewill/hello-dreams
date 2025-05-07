@@ -16,6 +16,24 @@ export const ProcessData = [
   },
 ];
 
+export const CvProcessData = [
+  {
+    id: 1,
+    title: "Consultation And Strategy:",
+    text: "We begin with a comprehensive consultation to understand your career goals and professional background, allowing us to tailor a strategic plan that aligns with your aspirations",
+  },
+  {
+    id: 2,
+    title: "CV & LinkedIn Profile Optimisation",
+    text: "Our experts craft compelling CVs and optimize LinkedIn profiles with the right keywords, ensuring your professional brand stands out to potential employers and clients.",
+  },
+  {
+    id: 3,
+    title: "Review, Feedback, And Finalization",
+    text: "We conduct a thorough review and incorporate your feedback to ensure your CV and LinkedIn profile meet the highest standards. Our goal is to equip you with powerful tools for career advancement",
+  },
+];
+
 export const GetHiredData = [
   {
     id: 1,

@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const DesignHeader = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex flex-col justify-center items-center py-15 px-2 space-y-6 md:space-y-10 w-full">
       <div className="relative flex justify-center items-center">
@@ -51,11 +56,11 @@ const DesignHeader = () => {
           reviews.
         </p>
       </div>
-      <div>
+      <Link to="/services/ui-design-consultation" onClick={handleOrigins}>
         <button className="bg-[#1342ff] lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
           Get a Free Consultation
         </button>
-      </div>
+      </Link>
     </div>
   );
 };

@@ -4,7 +4,7 @@ export const ServicesData = [
     icon: null,
     title: "UI/UX Design",
     text: "Stunning web & app design",
-    target: "/services/uidesign",
+    target: "/services/ui-design",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const ServicesData = [
     icon: null,
     title: "CV & LinkedIn Optimisation",
     text: "Artistic visual expression",
-    target: "/services/#",
+    target: "/services/cv-optimization",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ export const ServicesData = [
     icon: null,
     title: "Printing Services",
     text: "Beautiful crafted prints",
-    target: "/services/#",
+    target: "/services/printing",
   },
   {
     id: 6,

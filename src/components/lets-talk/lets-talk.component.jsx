@@ -9,54 +9,54 @@ const LetsTalk = () => {
   };
 
   return (
-    <div className="bg-[#f8f8f8] md:bg-[#fff] grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20 px-[5%] py-15 md:py-25">
+    <div className="bg-[#f8f8f8] md:bg-[#fff] grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20 px-[5%] py-15 md:py-25">
       <div className="text-[#000000] space-y-6 md:space-y-10 ">
         <div>
           <p
-            className="text-[32px] md:text-[64px] font-bold mb-2 md:mb-4"
+            className="text-[20px] md:text-[32px] lg:text-[64px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Let's Talk
           </p>
-          <p className="text-[15px] md:text-[20px] font-bold leading-[1.5]">
+          <p className="text-[14px] md:text-[15px] lg:text-[20px] lg:font-bold leading-[1.5]">
             Have some big idea or brand to develop and need help? Then reach out
             we'd love to hear about your project and provide help
           </p>
         </div>
         <div>
           <p
-            className="text-[16px] md:text-[32px] font-bold mb-2 md:mb-4"
+            className="text-[16px] md:text-[20px] lg:text-[32px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Email
           </p>
-          <p className="text-[12px] md:text-[16px] font-bold mb-3">
+          <p className="text-[12px] md:text-[16px] lg:font-bold mb-3">
             Support@myhellodreams.com
           </p>
-          <p className="text-[12px] md:text-[16px] font-bold mb-3">
+          <p className="text-[12px] md:text-[16px] lg:font-bold mb-3">
             Partnership@myhellodreams.com
           </p>
         </div>
         <div>
           <p
-            className="text-[16px] md:text-[32px] font-bold mb-2 md:mb-4"
+            className="text-[16px] md:text-[20px] lg:text-[32px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Socials
           </p>
-          <p className="text-[12px] md:text-[16px] underline font-bold mb-3 cursor-pointer">
+          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
             LinkedIn
           </p>
-          <p className="text-[12px] md:text-[16px] underline font-bold mb-3 cursor-pointer">
+          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
             Instagram
           </p>
-          <p className="text-[12px] md:text-[16px] underline font-bold mb-3 cursor-pointer">
+          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
             Youtube
           </p>
-          <p className="text-[12px] md:text-[16px] underline font-bold mb-3 cursor-pointer">
+          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
             Twitter
           </p>
-          <p className="text-[12px] md:text-[16px] underline font-bold mb-3 cursor-pointer">
+          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
             Facebook
           </p>
         </div>
@@ -64,7 +64,7 @@ const LetsTalk = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full space-y-6 md:space-y-10 text-[#000000] md:p-6"
+        className="w-full space-y-6 md:space-y-10 text-[#000000] lg:p-6"
       >
         <div>
           <label className="block text-[12px] md:text-[16px] font-bold mb-3 md:mb-4">

@@ -1,13 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OurPackages = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="w-full lg:h-[800px] bg-gradient-to-b from-[#010413] to-[#ffffff] p-3 lg:p-5 my-10">
       <p
         className="text-[24px] lg:text-[48px] text-[#f7f7f7] text-center mb-4"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
-        Our Packages
+        Pricing
       </p>
       <p
         className="text-[12px] lg:text-[17px] text-[#f7f7f7] font-medium lg:font-bold text-center mb-5 lg:mb-7"
@@ -40,11 +45,15 @@ const OurPackages = () => {
               2-3 Specialised design professionals with a design lead
             </p>
           </div>
-          <div className="flex justify-center items-center mt-5">
+          <Link
+            to="/services/ui-design-consultation"
+            className="flex justify-center items-center mt-5"
+            onClick={handleOrigins}
+          >
             <button className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
               Book a free Consultation
             </button>
-          </div>
+          </Link>
         </div>
         <div className="bg-[#1342ff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl overflow-hidden md:w-[230px] lg:w-[411px]">
           <p className="text-[#f7f7f7] text-[12.41px] lg:text-[20px] font-bold mb-4 lg:mb-6 uppercase">
@@ -71,11 +80,15 @@ const OurPackages = () => {
               Pause and resume work anytime within a 30-day window
             </p>
           </div>
-          <div className="flex justify-center items-center mt-5">
+          <Link
+            to="/services/ui-design-consultation"
+            className="flex justify-center items-center mt-5"
+            onClick={handleOrigins}
+          >
             <button className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
               Book a free Consultation
             </button>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

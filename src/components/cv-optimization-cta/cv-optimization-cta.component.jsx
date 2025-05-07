@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ConsultationCall = () => {
-  const handleOrigins = () => {
+const CvOptimizationCta = () => {
+  const HandleOrigins = () => {
     window.scrollTo(0, 0);
   };
 
@@ -17,20 +17,20 @@ const ConsultationCall = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center mb-6 md:mb-0">
-          <div className="bg-[#009379] w-[64px] h-[64px] md:w-[71.82px] md:h-[71.82px] lg:w-[124px] lg:h-[124px] mb-10 rounded-tr-[40%] rounded-bl-[40%] md:rounded-tr-[40%] md:rounded-bl-[40%] overflow-hidden"></div>
+          <div className="bg-[#ff6250] w-[66.54px] h-[66.54px] lg:w-[124px] lg:h-[124px] mb-4 rounded-tr-[100%] overflow-hidden"></div>
           <p
-            className="text-[#fff] text-[25px] lg:text-[40px] text-center font-bold mb-6"
+            className="text-[#fff] text-[25px] lg:text-[40px] text-center mb-6"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Ready to start?
+            Ready to elevate your professional career?
           </p>
           <Link
-            to="/services/ui-design-consultation"
-            className="text-[#f7f7f7] text-[18.7px] lg:text-[36px] text-center font-bold underline cursor-pointer"
+            to="/services/optimize-profile"
+            className="text-[#f7f7f7] text-[18.7px] lg:text-[36px] text-center underline cursor-pointer"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
-            onClick={handleOrigins}
+            onClick={HandleOrigins}
           >
-            Get a free Consultation
+            Optimize your profile now
           </Link>
         </div>
       </div>
@@ -38,4 +38,4 @@ const ConsultationCall = () => {
   );
 };
 
-export default ConsultationCall;
+export default CvOptimizationCta;

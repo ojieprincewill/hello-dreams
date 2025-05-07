@@ -3,6 +3,10 @@ import NavBar from "./nav-bar/nav-bar.component";
 import { Link } from "react-router-dom";
 
 const LandingHeader = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div className="relative pt-[15px] w-full h-[435px] md:h-[904px] bg-[url('https://i.ibb.co/HfKwMMQv/landing-image.jpg')] bg-cover bg-center">
@@ -22,6 +26,7 @@ const LandingHeader = () => {
             <Link
               to="/workwithus"
               className="bg-white text-[#010413] font-semibold border border-[#010413] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
+              onClick={handleOrigins}
             >
               Book a free career call
             </Link>
@@ -41,9 +46,13 @@ const LandingHeader = () => {
           future!
         </p>
         <div className="mt-5 flex flex-col space-y-3">
-          <button className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer">
+          <Link
+            to="/workwithus"
+            className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
+            onClick={handleOrigins}
+          >
             Book a free career call
-          </button>
+          </Link>
           <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer">
             Explore our courses
           </button>

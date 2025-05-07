@@ -27,6 +27,10 @@ const NavBar = () => {
     setSideBarOpen(false);
   };
 
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       {servicesOpen && (
@@ -58,18 +62,21 @@ const NavBar = () => {
           <Link
             className="text-[#010413] font-bold text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/portfolio"
+            onClick={handleOrigins}
           >
             Portfolio
           </Link>
           <Link
             className="text-[#010413] font-bold text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/academy"
+            onClick={handleOrigins}
           >
             Acade<span className="text-[#1342ff]">m</span>y
           </Link>
           <Link
             className="text-[#010413] font-bold text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/about"
+            onClick={handleOrigins}
           >
             About Us
           </Link>
@@ -80,6 +87,7 @@ const NavBar = () => {
           <Link
             to=""
             className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+            onClick={handleOrigins}
           >
             Refer & Earn
           </Link>
@@ -88,6 +96,7 @@ const NavBar = () => {
           <Link
             to="/workwithus"
             className="bg-[#010413] text-white border border-[#010413] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
+            onClick={handleOrigins}
           >
             Work with Us
           </Link>
@@ -115,6 +124,7 @@ const NavBar = () => {
                 key={data.id}
                 className="grid grid-cols-[10%_90%] gap-1 items-center hover:bg-[#ecf3f5] p-2 rounded-xl cursor-pointer"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
+                onClick={handleOrigins}
               >
                 <div className="w-[37px] h-[37px] ">
                   <img
