@@ -11,6 +11,9 @@ import UiConsultationPage from "./pages/ui-consultation-page/ui-consultation-pag
 import CvOptimizationPage from "./pages/cv-optimization-page/cv-optimzation-page";
 import OptimizeProfilePage from "./pages/optimize-profile-page/optimize-profile-page";
 import PrintingPage from "./pages/printing-page/printing-page";
+import PrintingConsultationPage from "./pages/printing-consultation-page/printing-consultation-page";
+import SocialManagementPage from "./pages/social-management-page/social-management-page";
+import SocialConsultationPage from "./pages/social-consultation-page/social-consultation-page";
 
 function App() {
   return (
@@ -32,6 +35,18 @@ function App() {
           element={<OptimizeProfilePage />}
         />
         <Route path="/services/printing" element={<PrintingPage />} />
+        <Route
+          path="/services/printing-consultation"
+          element={<PrintingConsultationPage />}
+        />
+        <Route
+          path="/services/social-management"
+          element={<SocialManagementPage />}
+        />
+        <Route
+          path="/services/social-consultation"
+          element={<SocialConsultationPage />}
+        />
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
         <Route path="/about" element={<AboutPage />} />

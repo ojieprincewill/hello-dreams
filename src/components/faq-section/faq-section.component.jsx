@@ -13,12 +13,12 @@ const FaqSection = () => {
   };
 
   return (
-    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full md:gap-4 my-8 p-8 lg:my-15 lg:p-10">
+    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 lg:my-15 lg:p-10">
       <div>
         <p className="text-[15.05px] md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
           FAQs.
         </p>
-        <div className="flex flex-col space-y-2 md:h-[330px] lg:h-[616px] overflow-auto">
+        <div className="flex flex-col space-y-2 md:h-[330px] lg:h-[470px] overflow-auto">
           {FaqData.map((faq) => (
             <div key={faq.id} onClick={() => toggleQuestion(faq.id)}>
               <div
@@ -68,7 +68,7 @@ const FaqSection = () => {
         <p className="md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
           Ans.
         </p>
-        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] lg:h-[74%] overflow-auto">
+        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] lg:h-[470px] overflow-auto">
           {activeId !== null ? (
             <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
               <span className="mb-2 block">

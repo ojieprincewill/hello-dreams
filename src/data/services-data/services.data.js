@@ -46,6 +46,6 @@ export const ServicesData = [
     icon: null,
     title: "Social Media Mgmt",
     text: "Impactful story telling",
-    target: "/services/#",
+    target: "/services/social-management",
   },
 ];

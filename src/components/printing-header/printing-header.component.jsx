@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PrintingHeader = () => {
+  const HandleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full md:h-[463.33px] lg:h-[800px] md:place-items-center bg-[#eef2fe]">
       <div className="relative px-3 py-6 md:px-10">
@@ -23,16 +28,17 @@ const PrintingHeader = () => {
         </p>
         <div className="absolute top-[-30px] left-[484px] w-[54px] h-[54px] ">
           <img
-            src=""
+            src="https://i.ibb.co/ycmTsNT0/caf76bbf69e13f18aa187a597538509b2ec8680b.png"
             alt="pink arrow"
             className="w-full h-full object-contain"
           />
         </div>
-        <div>
+
+        <Link to="/services/printing-consultation" onClick={HandleOrigins}>
           <button className="bg-[#1342ff] lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
             Get a free consultation
           </button>
-        </div>
+        </Link>
       </div>
       <div className="bg-[#ffadd9] w-full h-full">
         <img
