@@ -11,7 +11,7 @@ export const ServicesData = [
     icon: null,
     title: "Graphics & Branding",
     text: "Get creative inspiration",
-    target: "/services/#",
+    target: "/services/graphics-design",
   },
   {
     id: 3,

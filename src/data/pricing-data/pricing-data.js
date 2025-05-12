@@ -94,3 +94,107 @@ export const CvPricingData = [
     message: "We cater for all",
   },
 ];
+
+export const BrandingSmeData = [
+  {
+    id: 1,
+    title: "Mega Package",
+    price: "$250",
+    options: [
+      {
+        id: 1,
+        text: "Logo Design (3 concepts)",
+      },
+      {
+        id: 2,
+        text: "Packaging materials design",
+      },
+      {
+        id: 3,
+        text: "1 Flyer - 2 Design Concepts",
+      },
+      {
+        id: 4,
+        text: "Letterhead Design",
+      },
+      {
+        id: 5,
+        text: "1 Reels thumbnail design for all social media & Font to pair",
+      },
+      {
+        id: 6,
+        text: "Email Template Design",
+      },
+      {
+        id: 7,
+        text: "Business card - 100 Print outs",
+      },
+      {
+        id: 8,
+        text: "Social media banner ( LinkedIn, Twitter, YT  )",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Wow Package",
+    price: "$150",
+    options: [
+      {
+        id: 1,
+        text: "Logo Design (1 Design concept)",
+      },
+      {
+        id: 2,
+        text: "Packaging materials design",
+      },
+      {
+        id: 3,
+        text: "1 Flyer ( 1 Design concept )",
+      },
+      {
+        id: 4,
+        text: "Business card Design",
+      },
+      {
+        id: 5,
+        text: "Letterhead Design",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Standard Package",
+    price: "$200",
+    options: [
+      {
+        id: 1,
+        text: "Logo Design (2 Design concepts)",
+      },
+      {
+        id: 2,
+        text: "Packaging materials design",
+      },
+      {
+        id: 3,
+        text: "1 Flyer ( 2 Design concepts )",
+      },
+      {
+        id: 4,
+        text: "Business card  Design ( 2 concepts )",
+      },
+      {
+        id: 5,
+        text: "Letterhead Design",
+      },
+      {
+        id: 6,
+        text: "Email Template Design",
+      },
+      {
+        id: 7,
+        text: "Social media banner ( LinkedIn)",
+      },
+    ],
+  },
+];

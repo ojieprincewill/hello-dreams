@@ -14,6 +14,8 @@ import PrintingPage from "./pages/printing-page/printing-page";
 import PrintingConsultationPage from "./pages/printing-consultation-page/printing-consultation-page";
 import SocialManagementPage from "./pages/social-management-page/social-management-page";
 import SocialConsultationPage from "./pages/social-consultation-page/social-consultation-page";
+import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-page";
+import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
 
 function App() {
   return (
@@ -47,6 +49,15 @@ function App() {
           path="/services/social-consultation"
           element={<SocialConsultationPage />}
         />
+        <Route
+          path="/services/graphics-design"
+          element={<GraphicsDesignPage />}
+        />
+        <Route
+          path="/services/graphics-consultation"
+          element={<GraphicsConsultationPage />}
+        />
+
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
         <Route path="/about" element={<AboutPage />} />
