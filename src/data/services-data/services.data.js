@@ -25,7 +25,7 @@ export const ServicesData = [
     icon: null,
     title: "Web & Mobile Dev",
     text: "Functional digital products",
-    target: "/services/#",
+    target: "/services/web-and-mobile-dev",
   },
   {
     id: 5,

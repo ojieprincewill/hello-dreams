@@ -38,7 +38,13 @@ const SidebarNav = ({ closeSidebar }) => {
         className="bg-[#fff] w-[90%] p-2 h-screen overflow-auto"
       >
         <div className="flex flex-row p-4 justify-between items-center w-full px-[2%] py-2">
-          <Logo />
+          <Link
+            to="/"
+            onClick={handleOrigins}
+            className="flex-shrink-0 w-[57.32px] h-[40px] cursor-pointer"
+          >
+            <Logo />
+          </Link>
           <XMarkIcon
             onClick={closeSidebar}
             className="h-8 w-8 text-[#010413]"

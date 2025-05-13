@@ -100,6 +100,24 @@ export const SocialProcessData = [
   },
 ];
 
+export const WebDevProcessData = [
+  {
+    id: 1,
+    title: "Consultation And Planning",
+    text: "By taking an active part in governance, you gain the power to directly influence the laws and policies that impact your community and your life.",
+  },
+  {
+    id: 2,
+    title: "Design And Development",
+    text: "Your engagement in the legislative and electoral processes promotes transparency and ensures that elected officials are accountable for their actions.",
+  },
+  {
+    id: 3,
+    title: "Testing, Deployment And Support",
+    text: "Your participation guarantees that your unique perspectives and needs are represented, leading to more inclusive and responsive governance.",
+  },
+];
+
 export const GetHiredData = [
   {
     id: 1,

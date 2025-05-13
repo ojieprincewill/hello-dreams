@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
-
 const Logo = () => {
   return (
-    <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-      Logo
-    </Link>
+    <img
+      src="https://i.ibb.co/cSLNMxHF/LOGO.png"
+      alt="logo"
+      className="w-full h-full object-contain"
+    />
   );
 };
 

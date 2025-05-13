@@ -42,3 +42,24 @@ export const SocialSetApartData = [
     text: "Our decisions are backed by insights. We track, analyze, and optimize your performance to ensure your pages grow with purpose",
   },
 ];
+
+export const DevSetApartData = [
+  {
+    id: 1,
+    image: null,
+    title: "Expertise & Experience",
+    text: "We have a team of professionals with expertise in various areas such as design, marketing, data analysis.",
+  },
+  {
+    id: 2,
+    image: null,
+    title: "Strategic Approach",
+    text: "We develop a comprehensive branding strategy tailored to your business or individual goals & target audience.",
+  },
+  {
+    id: 3,
+    image: null,
+    title: "Mentorship Programs",
+    text: "We have structured mentorship programs connecting experienced professionals with aspiring talents.",
+  },
+];

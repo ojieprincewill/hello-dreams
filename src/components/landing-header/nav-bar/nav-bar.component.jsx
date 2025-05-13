@@ -41,9 +41,13 @@ const NavBar = () => {
       )}
       <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[120px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
         {/* Logo Section */}
-        <div className="flex-shrink-0 cursor-pointer">
+        <Link
+          to="/"
+          onClick={handleOrigins}
+          className="flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px] lg:w-[78.68px] lg:h-[54.89px] cursor-pointer"
+        >
           <Logo />
-        </div>
+        </Link>
 
         {/* Navigation Links */}
         <div className=" hidden md:flex space-x-10">
@@ -134,10 +138,18 @@ const NavBar = () => {
                   />
                 </div>
                 <div>
-                  <p className="flex flex-row justify-between items-center text-[#353535] text-[18px] font-bold mb-1">
-                    {data.title}
-                    <ArrowRightIcon className="text-[#1d68f4] font-bold w-[25px] h-auto" />
-                  </p>
+                  <div className="flex flex-row justify-between items-center">
+                    <p className=" text-[#353535] max-w-[200px] text-[18px] font-bold mb-1">
+                      {data.title}
+                    </p>
+                    <span>
+                      <img
+                        src="https://i.ibb.co/B2tvMj9t/Button-SVG.png"
+                        alt="blue arrow"
+                        className="w-[17.87px] h-[13.8px] object-cover"
+                      />
+                    </span>
+                  </div>
                   <p className="text-[#353535] max-w-[200px] text-[14px] font-bold">
                     {data.text}
                   </p>

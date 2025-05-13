@@ -1,12 +1,17 @@
 import React from "react";
-import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const OurStorySection = () => {
   return (
     <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
-      <h1 className="text-center text-[#10182827] text-[24px] md:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
+      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
         Our Story
-        <ArrowDownIcon className="w-[36.67px] h-[36.67px] md:w-[126px] md:h-[128px] text-[#10182827]" />
+        <span className="ml-1">
+          <img
+            src="https://i.ibb.co/dhxXhPY/arrow-block-down.png"
+            alt="arrow-block"
+            className="w-[36.67px] h-[36.67px] lg:w-[128px] lg:h-[128px] object-cover"
+          />
+        </span>
       </h1>
       <div className="w-full h-[221px] md:h-[800px] rounded-2xl bg-[#008080]">
         <video
