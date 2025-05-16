@@ -43,14 +43,14 @@ const OurPrintingPortfolio = () => {
           >
             Graphics & Branding
           </p>
-          <button className="[background:linear-gradient(to_bottom,_#f7f7f7_15%,_#ef8863)] text-[#041856] text-[16px] px-6 py-3 font-bold text-center rounded-4xl cursor-pointer  ">
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#f49674d5] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer  ">
             View Details
           </button>
-          <div className="absolute bottom-[-110px] right-[-180px] w-[775px] h-[775px]">
+          <div className="absolute bottom-[-110px] right-[-180px] w-[680px] h-[680px]">
             <img
               src="https://i.ibb.co/4wTSvFLF/cb55d20c2b1ec22f23ecf20d5f992a50b65c90fa.png"
               alt="branded hoodie"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
@@ -73,10 +73,10 @@ const OurPrintingPortfolio = () => {
           >
             Graphics & Branding
           </p>
-          <button className="[background:linear-gradient(to_bottom,_#f7f7f7_15%,_#299393)] text-[#041856] text-[16px] px-6 py-3 font-bold text-center rounded-4xl cursor-pointer ">
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
             View Details
           </button>
-          <div className="absolute bottom-[-150px] right-[-292px] w-[1000px] h-[765px]">
+          <div className="absolute bottom-[-180px] right-[-270px] w-[970px] h-[765px]">
             <img
               src="https://i.ibb.co/MDrT4VnF/45cc8d67dfd4b9caf6b41181e3fd7bbc0d33dea7.png"
               alt="logo design"

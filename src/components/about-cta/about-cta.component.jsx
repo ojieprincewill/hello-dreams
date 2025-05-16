@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SolutionsSection = () => {
+const AboutCta = () => {
   const [selectedService, setSelectedService] = useState("");
   const [userInput, setUserInput] = useState("");
 
@@ -12,9 +12,7 @@ const SolutionsSection = () => {
   return (
     <div className="hidden md:block bg-[#010413] text-[#fff] px-10 py-20">
       <h1 className="text-[48px] semibold leading-[1.5] text-center">
-        We would love to provide you with a solution
-        <br />
-        for your current professional pain points
+        Ready to change your strategy?
       </h1>
       <div className="grid grid-cols-[55%_45%] gap-2 mt-20">
         <div className="w-full h-[800] bg-[#ffc501] rounded-2xl overflow-hidden">
@@ -72,4 +70,4 @@ const SolutionsSection = () => {
   );
 };
 
-export default SolutionsSection;
+export default AboutCta;

@@ -103,3 +103,34 @@ export const MeetExpertsData = [
     text: "Make use of the perfect solution when the speed of development is crucial to your success.",
   },
 ];
+
+export const AboutExpertsData = [
+  {
+    id: 1,
+    image:
+      "https://i.ibb.co/rKnWM25b/b1932eed067625f29e50b23a9671fb77f1a61c3b.png",
+    name: "Pamela Ohaeri",
+    text: "Pamela is the founder and CEO  of hello dreams, she is a lawyer and a UI/UX Designer read more",
+  },
+  {
+    id: 2,
+    image:
+      "https://i.ibb.co/b5bPxBmd/5d85fc7c25981c6d1182607b92f56fcd30381dba.jpg",
+    name: "Arinze Mbonu",
+    text: "Pamela is the founder and CEO  of hello dreams, she is a lawyer and a UI/UX Designer read more",
+  },
+  {
+    id: 3,
+    image:
+      "https://i.ibb.co/C3Wsqvj2/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d.jpg",
+    name: "Cynthia",
+    text: "Pamela is the founder and CEO  of hello dreams, she is a lawyer and a UI/UX Designer read more",
+  },
+  {
+    id: 4,
+    image:
+      "https://i.ibb.co/zHxSmDhB/f236598616a2191240d7dd6190f0338064493aa2.jpg",
+    name: "Lilian",
+    text: "Pamela is the founder and CEO  of hello dreams, she is a lawyer and a UI/UX Designer read more",
+  },
+];

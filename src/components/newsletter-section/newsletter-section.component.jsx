@@ -20,13 +20,17 @@ const NewsletterSection = () => {
         <input
           type="text"
           placeholder="yourname@email.com"
-          className="border border-r-0 border-l-0 p-[12px] md:p-[19px] lg:p-[21px] placeholder:text-[8px] text-[8px] md:placeholder:text-[12px] md:text-[12px] lg:placeholder:text-[16px] lg:text-16px border-[#010413] focus:outline-0 w-full leading-normal"
+          className="border border-r-0 border-l-0 p-[14px] md:p-[19px] lg:p-[27px] placeholder:text-[8px] text-[8px] md:placeholder:text-[12px] md:text-[12px] lg:placeholder:text-[16px] lg:text-16px border-[#010413] focus:outline-0 w-full leading-normal"
         />
         <button
           type="submit"
           className="border border-r-0 border-l-0 px-5 md:px-16 lg:px-18 py-[12px] md:py-[16px] lg:py-[18px] border-[#010413] text-center w-max leading-normal"
         >
-          <ArrowRightIcon className="w-3 h-3 md:w-6 md:h-6 text-[#1342ff]" />
+          <img
+            src="https://i.ibb.co/B2tvMj9t/Button-SVG.png"
+            alt="blue arrow"
+            className="w-4 h-4 md:w-6 md:h-6 lg:w-9 lg:h-9 object-cover"
+          />
         </button>
       </form>
     </div>
