@@ -87,16 +87,14 @@ const NavBar = () => {
         </div>
 
         <div className="space-x-5">
-          {/* First Button */}
           <Link
-            to=""
+            to="/refer-and-earn"
             className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
             Refer & Earn
           </Link>
 
-          {/* Second Button */}
           <Link
             to="/workwithus"
             className="bg-[#010413] text-white border border-[#010413] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"

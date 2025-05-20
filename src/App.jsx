@@ -18,6 +18,9 @@ import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-pag
 import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
 import WebDevPage from "./pages/web-dev-page/web-dev-page";
 import WebDevConsultationPage from "./pages/web-dev-consultation-page/web-dev-consultation-page";
+import ReferPage from "./pages/refer-page/refer-page";
+import CommunityChallengePage from "./pages/community-challenge-page/community-challenge-page";
+import JoinCommunityPage from "./pages/join-community-page/join-community-page";
 
 function App() {
   return (
@@ -68,7 +71,13 @@ function App() {
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/refer-and-earn" element={<ReferPage />} />
         <Route path="/workwithus" element={<BookCallPage />} />
+        <Route
+          path="/community-challenge"
+          element={<CommunityChallengePage />}
+        />
+        <Route path="/join-our-community" element={<JoinCommunityPage />} />
       </Routes>
     </>
   );

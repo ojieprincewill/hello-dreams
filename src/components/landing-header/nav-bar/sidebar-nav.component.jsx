@@ -135,13 +135,14 @@ const SidebarNav = ({ closeSidebar }) => {
             <UserGroupIcon className="h-5 w-5 mr-2" />
             About Us
           </Link>
-          <button
+          <Link
+            to="/refer-and-earn"
             className="flex flex-row bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
             <ArrowPathIcon className="h-5 w-5 mr-2" />
             Refer & Earn
-          </button>
+          </Link>
         </div>
       </motion.div>
     </div>
