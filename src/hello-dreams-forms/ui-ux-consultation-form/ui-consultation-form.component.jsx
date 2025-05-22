@@ -1,15 +1,69 @@
 import React, { useState } from "react";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 
 const UiConsultationForm = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [userInput, setUserInput] = useState("");
+  const [details, setDetails] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    companyName: "",
+    message: "",
+    publicityChannel: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { name, email, phoneNumber, companyName, message, publicityChannel } =
+      details;
+
+    setLoading(true);
+
+    const response = await fetch(
+      "https://vpwzqxrkyawljqrrvolj.supabase.co/functions/v1/handle-service-enquiries",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: { name },
+          email: { email },
+          phoneNumber: { phoneNumber },
+          companyName: { companyName },
+          message: { message },
+          publicityChannel: { publicityChannel },
+        }),
+      },
+      console.log(response)
+    );
+
+    setLoading(false);
+
+    setDetails({
+      name: "",
+      email: "",
+      phoneNumber: "",
+      companyName: "",
+      message: "",
+      publicityChannel: "",
+    });
   };
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    setDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const { name, email, phoneNumber, companyName, message, publicityChannel } =
+    details;
 
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] py-15 md:py-25">
+      {loading && <LoadingSpinner />}
       <p
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-10 md:mb-20"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -29,6 +83,9 @@ const UiConsultationForm = () => {
           </label>
           <input
             type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
         </div>
@@ -41,6 +98,9 @@ const UiConsultationForm = () => {
           </label>
           <input
             type="text"
+            name="email"
+            value={email}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
         </div>
@@ -53,6 +113,9 @@ const UiConsultationForm = () => {
           </label>
           <input
             type="tel"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
         </div>
@@ -62,6 +125,9 @@ const UiConsultationForm = () => {
           </label>
           <input
             type="text"
+            name="companyName"
+            value={companyName}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
         </div>
@@ -73,8 +139,9 @@ const UiConsultationForm = () => {
             Message <span class="text-red-500">*</span>
           </label>
           <textarea
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            name="message"
+            value={message}
+            onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
           <span className="mt-2 text-[#161616] text-[11px]">
@@ -86,16 +153,17 @@ const UiConsultationForm = () => {
             How did you hear about us?
           </label>
           <select
-            value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
-            className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="publicityChannel"
+            value={publicityChannel}
+            onChange={handleChange}
+            className="w-full text-[#010413] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">Instagram</option>
+            <option value="service2">LinkedIn</option>
+            <option value="service3">Word of mouth</option>
           </select>
           <div>
             <button
