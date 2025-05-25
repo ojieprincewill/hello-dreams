@@ -1,6 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import supabase  from  "../../supabase/client"; 
+
 
 const GraphicsConsultationForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    type: "Graphics Design",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+    service: "",
+    accompanyingService: "",
+    howDidYouHear: "",
+  });
+  const [success, setSuccess] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+    
+
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";
+    if (!formData.message) newErrors.message = "Message is required";
+    if (!formData.service) newErrors.service = "Service selection is required";
+    if (!formData.accompanyingService) newErrors.accompanyingService = "Accompanying service selection is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+  
+    setIsSubmitting(true);
+    setSuccess(null);
+  
+    const { type, name, email, phone, ...rest } = formData;
+  
+    const payload = {
+      type,
+      name,
+      email,
+      phone,
+      data: rest,
+    };
+  
+    try {
+      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
+        body: payload,
+      });
+  
+      if (error) {
+        console.error("Supabase Error:", error.message || error);
+        toast.error("Submission failed. Please try again.");
+        return;
+      }
+  
+      toast.success("Your enquiry has been submitted!");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        message: "",
+        service: "",
+        accompanyingService: "",
+        howDidYouHear: "",
+        type: "Graphics Design",
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       <p
@@ -15,42 +101,55 @@ const GraphicsConsultationForm = () => {
       >
         Please provide the details below
       </p>
-      <form className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20 space-y-8 text-[#000000] md:p-6">
         <div>
+          <input type="hidden" name="type" value="Graphics Design"/>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
           >
-            Name <span class="text-red-500">*</span>
+            Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
           >
-            Email <span class="text-red-500">*</span>
+            Email <span className="text-red-500">*</span>
           </label>
           <input
-            type="text"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
           >
-            Phone number <span class="text-red-500">*</span>
+            Phone number <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -58,6 +157,9 @@ const GraphicsConsultationForm = () => {
           </label>
           <input
             type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
         </div>
@@ -66,13 +168,15 @@ const GraphicsConsultationForm = () => {
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
           >
-            Message <span class="text-red-500">*</span>
+            Message <span className="text-red-500">*</span>
           </label>
           <textarea
-            value=""
-            onChange=""
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
+          {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
           <span className="mt-2 text-[#161616] text-[11px]">
             Tell us a bit about your project and what you hope to achieve
           </span>
@@ -80,37 +184,41 @@ const GraphicsConsultationForm = () => {
         <div className="space-y-5 md:space-y-10">
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-              Select service <span class="text-red-500">*</span>
+              Select service <span className="text-red-500">*</span>
             </label>
             <select
-              value=""
-              onChange=""
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
-              <option value="" disabled className="">
+              <option value="" disabled>
                 Select an option
               </option>
               <option value="service1">Option 1</option>
               <option value="service2">Option 2</option>
               <option value="service3">Option 3</option>
             </select>
+            {errors.service && <p className="text-red-500 text-sm mt-1">{errors.service}</p>}
           </div>
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-              Choose accompanying services <span class="text-red-500">*</span>
+              Choose accompanying services <span className="text-red-500">*</span>
             </label>
             <select
-              value=""
-              onChange=""
+              name="accompanyingService"
+              value={formData.accompanyingService}
+              onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
-              <option value="" disabled className="">
+              <option value="" disabled>
                 Select an option
               </option>
               <option value="service1">Option 1</option>
               <option value="service2">Option 2</option>
               <option value="service3">Option 3</option>
             </select>
+            {errors.accompanyingService && <p className="text-red-500 text-sm mt-1">{errors.accompanyingService}</p>}
           </div>
         </div>
         <div>
@@ -118,11 +226,12 @@ const GraphicsConsultationForm = () => {
             How did you hear about us?
           </label>
           <select
-            value=""
-            onChange=""
+            name="howDidYouHear"
+            value={formData.referral}
+            onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
-            <option value="" disabled className="">
+            <option value="" disabled>
               Select an option
             </option>
             <option value="service1">Option 1</option>
@@ -133,10 +242,14 @@ const GraphicsConsultationForm = () => {
         <div>
           <button
             type="submit"
+            disabled={isSubmitting}
             className="bg-[#1342ff] w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
           </button>
+
+          {error && <p className="text-red-600 mt-4">{error}</p>}
+          {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
       </form>
     </div>
