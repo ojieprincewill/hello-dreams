@@ -1,5 +1,89 @@
-import React from "react";
+import {React, useState, useEffect } from "react";
+import supabase  from "../../supabase/client";
+
 const SocialConsultationForm = () => {
+  const [formData, setFormData] = useState({
+    type: "Social Media Management",
+    name: "",
+    email: "",
+    phone: "",
+    socialMediaLink: "",
+    socialMediaPlatforms: "",
+    services: "",
+    competitors: "",
+    brandStyleGuide: "",
+    socialMediaGoals: "",
+    howDidYouHear: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setSuccess(null);
+    setError(null);
+
+    const { name, email, phone, socialMediaGoals, socialMediaPlatforms } = formData;
+    if (!name || !email || !phone || !socialMediaGoals || !socialMediaPlatforms ) {
+      setError("Please fill in all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    const { type, ...rest } = formData;
+
+    const payload = {
+      type,
+      name,
+      email,
+      phone,
+      data: rest, // includes company, message, howDidYouHear, etc.
+    };
+
+    try {
+      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
+        body: payload,
+      });
+
+      if (error) {
+        const supabaseError = error.message || error;
+        console.error("Supabase Error:", supabaseError);
+        setError("Submission failed. Please try again.");
+        return;
+      }
+
+      setSuccess("Your enquiry has been submitted!");
+      setFormData({
+        type: "Social Media Management",
+        name: "",
+        email: "",
+        phone: "",
+        socialMediaLink: "",
+        socialMediaPlatforms: "",
+        services: "",
+        competitors: "",
+        brandStyleGuide: "",
+        socialMediaGoals: "",
+        howDidYouHear: "",  
+          });
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       <p
@@ -16,7 +100,9 @@ const SocialConsultationForm = () => {
         preferences. Once submitted, our team will review your request and get
         back to you within 1 to 5 days.
       </p>
-      <form className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <form 
+      onSubmit={handleSubmit}
+      className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
@@ -27,6 +113,14 @@ const SocialConsultationForm = () => {
           <input
             type="text"
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <input
+            type="hidden"
+            name="type"
+            value="Social Media Management"
           />
         </div>
         <div>
@@ -39,6 +133,9 @@ const SocialConsultationForm = () => {
           <input
             type="text"
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -51,6 +148,9 @@ const SocialConsultationForm = () => {
           <input
             type="tel"
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -60,6 +160,9 @@ const SocialConsultationForm = () => {
           <input
             type="text"
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="socialMediaLink"
+            value={formData.socialMediaLink}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -68,8 +171,9 @@ const SocialConsultationForm = () => {
             <span class="text-red-500">*</span>
           </label>
           <select
-            value=""
-            onChange=""
+            name="socialMediaPlatforms"
+            value={formData.socialMediaPlatforms}
+            onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
@@ -87,8 +191,9 @@ const SocialConsultationForm = () => {
             Select services
           </label>
           <select
-            value=""
-            onChange=""
+            name="services"
+            value={formData.services}
+            onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
@@ -104,8 +209,9 @@ const SocialConsultationForm = () => {
             Any Competitors or Pages You Admire?
           </label>
           <select
-            value=""
-            onChange=""
+            name="competitors"
+            value={formData.competitors}
+            onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
@@ -121,8 +227,9 @@ const SocialConsultationForm = () => {
             Do You Already Have a Brand Style Guide?
           </label>
           <select
-            value=""
-            onChange=""
+            name="brandStyleGuide"
+            value={formData.brandStyleGuide}
+            onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
@@ -142,8 +249,9 @@ const SocialConsultationForm = () => {
             <span class="text-red-500">*</span>
           </label>
           <textarea
-            value=""
-            onChange=""
+            name="socialMediaGoals"
+            value={formData.socialMediaGoals}
+            onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
         </div>
@@ -153,8 +261,9 @@ const SocialConsultationForm = () => {
               How did you hear about us?
             </label>
             <select
-              value=""
-              onChange=""
+              name="howDidYouHear"
+              value={formData.howDidYouHear}
+              onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
               <option value="" disabled className="">
@@ -167,11 +276,14 @@ const SocialConsultationForm = () => {
           </div>
           <div>
             <button
+
               type="submit"
               className="bg-[#1342ff] w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
             >
-              Proceed
+             {loading ? "Submitting..." : "Schedule My Free Consultation"}
             </button>
+            {error && <p className="text-red-600 mt-4">{error}</p>}
+          {success && <p className="text-green-600 mt-4">{success}</p>}
           </div>
         </div>
       </form>
