@@ -39,7 +39,7 @@ export const ServicesData = [
     icon: null,
     title: "Hello Dreams Collections",
     text: "T-shirts, Hoodies, Caps, Planners & more",
-    target: "/services/#",
+    target: "/services/our-collection",
   },
   {
     id: 7,

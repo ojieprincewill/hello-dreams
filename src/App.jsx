@@ -18,6 +18,8 @@ import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-pag
 import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
 import WebDevPage from "./pages/web-dev-page/web-dev-page";
 import WebDevConsultationPage from "./pages/web-dev-consultation-page/web-dev-consultation-page";
+import CollectionsPage from "./pages/collections-page/collections-page";
+
 import ReferPage from "./pages/refer-page/refer-page";
 import CommunityChallengePage from "./pages/community-challenge-page/community-challenge-page";
 import JoinCommunityPage from "./pages/join-community-page/join-community-page";
@@ -70,6 +72,7 @@ function App() {
           path="/services/app-dev-consultation"
           element={<WebDevConsultationPage />}
         />
+        <Route path="/services/our-collection" element={<CollectionsPage />} />
 
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
