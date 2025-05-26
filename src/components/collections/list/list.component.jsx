@@ -68,18 +68,18 @@ const CollectionsList = () => {
                 className="bg-[#fff] w-[90%] md:w-[327px] h-[80vh] md:h-[90vh] lg:h-[564.09px] p-2 rounded-sm overflow-auto"
               >
                 <div className="flex justify-between items-center mb-3 pb-1 border-b border-b-[#e6e2dd] text-[#1b212c]">
-                  <h2 className=" text-[12px] lg:text-[16px] font-medium  ">
+                  <h2 className=" text-[14px] lg:text-[16px] font-medium  ">
                     Product Details
                   </h2>
                   <XMarkIcon
                     onClick={() => setActiveProduct(null)}
-                    className="w-4 h-4 md:w-6 md:h-6 cursor-pointer"
+                    className="w-6 h-6 cursor-pointer"
                   />
                 </div>
                 <p className="text-[#1e1e1e] text-[16px] md:text-[20px] text-center font-semibold my-3">
                   {data.title}
                 </p>
-                <div className="w-full md:h-[316.11px] rounded-md overflow-hidden">
+                <div className="w-full h-[316.11px] rounded-md overflow-hidden">
                   <img
                     src={data.image}
                     alt={data.title}
