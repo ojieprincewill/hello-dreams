@@ -13,7 +13,7 @@ const CvProcess = () => {
       >
         CV Writing & LinkedIn Optimisation
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-15 lg:mt-20">
         {CvProcessData.map((data) => (
           <div
             key={data.id}

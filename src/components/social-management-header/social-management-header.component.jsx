@@ -16,7 +16,7 @@ const SocialManagementHeader = () => {
           Social Media Management
         </p>
         <p
-          className="text-[#667085] text-[11px] lg:text-[16px] leading-[1.8] lg:w-[530px] mb-10 md:mb-15"
+          className="text-[#667085] text-[11px] lg:text-[16px] leading-[1.8] lg:w-[530px] mb-10"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           Our social media Management service are designed to elevate your
@@ -26,7 +26,7 @@ const SocialManagementHeader = () => {
         </p>
 
         <Link to="/services/social-consultation" onClick={HandleOrigins}>
-          <button className="bg-[#1342ff] md:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] md:border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 md:py-4 rounded-3xl md:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+          <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 md:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
             Get a free consultation
           </button>
         </Link>

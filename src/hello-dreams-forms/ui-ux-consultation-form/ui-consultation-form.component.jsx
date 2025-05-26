@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import supabase  from  "../../supabase/client"; 
+import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 
 const UiConsultationForm = () => {
@@ -49,9 +49,12 @@ const UiConsultationForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
-        body: payload,
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "handle-service-enquiries",
+        {
+          body: payload,
+        }
+      );
 
       if (error) {
         const supabaseError = error.message || error;
@@ -77,8 +80,6 @@ const UiConsultationForm = () => {
       setLoading(false);
     }
   };
-
-
 
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] py-15 md:py-25">
@@ -180,7 +181,7 @@ const UiConsultationForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="bg-[#1342ff] w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-10 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-10 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             {loading ? "Submitting..." : "Schedule My Free Consultation"}
           </button>

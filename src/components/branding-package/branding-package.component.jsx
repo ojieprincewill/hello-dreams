@@ -60,9 +60,9 @@ const BrandingPackage = () => {
               <Link
                 to="/services/printing-consultation"
                 onClick={handleOrigins}
-                className="md:mt-5 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
+                className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
               >
-                <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 md:px-6 md:py-2 lg:py-3 rounded-3xl hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
+                <button className="bg-[#efece9] w-[120px] md:w-full text-[#101828] font-bold border border-[#efece9] text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 mt-5 md:px-6 md:py-2 lg:py-3 rounded-3xl hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
                   Order now
                 </button>
               </Link>

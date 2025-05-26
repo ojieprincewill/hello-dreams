@@ -19,7 +19,8 @@ import { AnimatePresence, motion } from "motion/react";
 const SidebarNav = ({ closeSidebar }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (event) => {
+    event.stopPropagation();
     setDropDownOpen(!dropDownOpen);
   };
 
@@ -28,14 +29,17 @@ const SidebarNav = ({ closeSidebar }) => {
   };
 
   return (
-    <div className="fixed top-0 right-0 w-full h-full bg-black/50 z-80">
+    <div
+      onClick={closeSidebar}
+      className="fixed top-0 right-0 w-full h-full bg-black/50 z-80"
+    >
       <motion.div
         key="content"
         initial={{ x: "-100%" }}
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="bg-[#fff] w-[90%] p-2 h-screen overflow-auto"
+        className="bg-[#fff] w-[90%] md:w-[350px] p-2 h-screen overflow-auto"
       >
         <div className="flex flex-row p-4 justify-between items-center w-full px-[2%] py-2">
           <Link
@@ -55,7 +59,7 @@ const SidebarNav = ({ closeSidebar }) => {
           <div
             className="bg-transparent pr-4 text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300 flex justify-between items-center"
             to="/services"
-            onClick={toggleDropdown}
+            onClick={(event) => toggleDropdown(event)}
           >
             <p className="flex flex-row p-4">
               <Cog6ToothIcon className="h-5 w-5 mr-2" /> Services

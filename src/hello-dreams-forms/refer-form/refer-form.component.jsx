@@ -264,7 +264,7 @@ const ReferForm = () => {
         <div className="flex justify-center items-center">
           <button
             type="submit"
-            className="bg-[#1342ff] lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-3 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-3 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             {loading ? "Submitting..." : "Send Referral"}
           </button>

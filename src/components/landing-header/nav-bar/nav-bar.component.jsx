@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Logo from "../../logo/logo.component";
 
@@ -18,6 +18,18 @@ import { motion, AnimatePresence } from "motion/react";
 const NavBar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const [isTabletScreen, setIsTabletScreen] = useState(
+    window.innerWidth <= 768
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTabletScreen(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize); // Cleanup
+  }, []);
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -39,7 +51,7 @@ const NavBar = () => {
           onClick={() => setServicesOpen(false)}
         ></div>
       )}
-      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[120px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
+      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[120px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
         {/* Logo Section */}
         <Link
           to="/"
@@ -50,7 +62,7 @@ const NavBar = () => {
         </Link>
 
         {/* Navigation Links */}
-        <div className=" hidden md:flex space-x-10">
+        <div className=" hidden lg:flex space-x-10">
           <div
             className="relative text-[#010413] font-bold text-[18px] hover:text-[#1342ff] transition-colors duration-300 flex items-center space-x-1 cursor-pointer"
             onClick={() => setServicesOpen(true)}
@@ -89,7 +101,7 @@ const NavBar = () => {
         <div className="space-x-5">
           <Link
             to="/refer-and-earn"
-            className="hidden md:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+            className="hidden lg:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
             Refer & Earn
@@ -97,20 +109,20 @@ const NavBar = () => {
 
           <Link
             to="/workwithus"
-            className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
+            className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[16px] lg:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
             onClick={handleOrigins}
           >
-            Work with Us
+            {isTabletScreen ? "Contact us" : "Work with us"}
           </Link>
           <button
             onClick={openSideBar}
-            className="h-8 w-8 text-[#010413] md:hidden cursor-pointer align-middle"
+            className="h-8 w-8 text-[#010413] lg:hidden cursor-pointer align-middle"
           >
             <Bars3BottomLeftIcon />
           </button>
         </div>
       </nav>
-      <div className="hidden md:block md:h-[120px]"></div>
+      <div className="hidden md:block md:h-[80px] lg:h-[120px]"></div>
       <AnimatePresence>
         {servicesOpen && (
           <motion.div

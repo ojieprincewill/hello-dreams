@@ -32,7 +32,7 @@ const GraphicsDesignHeader = () => {
         className="pt-3"
       >
         <button
-          className="bg-[#fff] text-[#010413] font-semibold border border-[#1342ff] lg:border-[#fff] text-[10.91px] lg:text-[24px] px-6 py-2 w-[418px] h-[77px] rounded-[50px] hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[10.91px] lg:text-[24px] px-6 py-2 w-[418px] h-[77px] rounded-[50px] hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           Get a free consultation

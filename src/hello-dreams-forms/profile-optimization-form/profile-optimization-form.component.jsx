@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import supabase from "../../supabase/client";
 
 const ProfileOptimizationForm = () => {
@@ -16,7 +16,7 @@ const ProfileOptimizationForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -30,63 +30,73 @@ const ProfileOptimizationForm = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
-  
 
-  const { name, email, phone, selectService, currentJob, selectCareerLevel, price } = formData;
-  if (!name || !email || !phone || !selectService) {
-    setError("Please fill in all required fields.");
-    setLoading(false);
-    return;
-  }
-
-  const { type, ...rest } = formData;
-
-  const payload = {
-    type: "Profile Optimization",
-    name,
-    email,
-    phone,
-    data: {
-      currentJob,
+    const {
+      name,
+      email,
+      phone,
       selectService,
+      currentJob,
       selectCareerLevel,
       price,
-    },
-  };
-
-  try {
-    const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
-      body: payload,
-    });
-
-    console.log(data);
-    
-    if (error) {
-      const supabaseError = error.message || error;
-      console.error("Supabase Error:", supabaseError);
-      setError("Submission failed. Please try again.");
+    } = formData;
+    if (!name || !email || !phone || !selectService) {
+      setError("Please fill in all required fields.");
+      setLoading(false);
       return;
     }
 
-    setSuccess("Your enquiry has been submitted!");
+    const { type, ...rest } = formData;
 
-    setFormData({
+    const payload = {
       type: "Profile Optimization",
-      name: "",
-      email: "",
-      phone: "",
-      currentJob: "",
-      selectService: "",
-      selectCareerLevel: "",
-      price: "",
-    });
-  } catch (err) {
-    console.error(err);
-    setError("Something went wrong. Please try again later.");
-  } finally {
-    setLoading(false);
-  }
-};
+      name,
+      email,
+      phone,
+      data: {
+        currentJob,
+        selectService,
+        selectCareerLevel,
+        price,
+      },
+    };
+
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "handle-service-enquiries",
+        {
+          body: payload,
+        }
+      );
+
+      console.log(data);
+
+      if (error) {
+        const supabaseError = error.message || error;
+        console.error("Supabase Error:", supabaseError);
+        setError("Submission failed. Please try again.");
+        return;
+      }
+
+      setSuccess("Your enquiry has been submitted!");
+
+      setFormData({
+        type: "Profile Optimization",
+        name: "",
+        email: "",
+        phone: "",
+        currentJob: "",
+        selectService: "",
+        selectCareerLevel: "",
+        price: "",
+      });
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       <p
@@ -104,9 +114,10 @@ const ProfileOptimizationForm = () => {
         to complete. After payment confirmation, we will promptly reach out to
         you to start the work
       </p>
-      <form 
-      onSubmit={handleSubmit}
-      className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
+      >
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
@@ -216,7 +227,7 @@ const ProfileOptimizationForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="bg-[#1342ff] w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             {loading ? "Submitting..." : "Proceed"}
           </button>

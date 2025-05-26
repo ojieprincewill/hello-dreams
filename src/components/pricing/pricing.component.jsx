@@ -60,9 +60,9 @@ const Pricing = () => {
               <Link
                 to="/services/optimize-profile"
                 onClick={handleOrigins}
-                className="md:mt-5 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
+                className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
               >
-                <button className="bg-[#1342ff] md:w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-4 md:mt-0 text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 md:px-6 md:py-2 lg:py-3 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+                <button className="md:w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-5 text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 md:px-6 md:py-2 lg:py-3 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                   Get a Free Consultation
                 </button>
               </Link>
@@ -102,7 +102,7 @@ const Pricing = () => {
               </div>
 
               <Link to="/services/optimize-profile" onClick={handleOrigins}>
-                <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 md:px-6 md:py-2 lg:py-3 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
+                <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.11px] md:text-[8.91px] lg:text-[15px] px-3 py-1 md:px-6 md:py-2 lg:py-3 rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
                   Get a Free Consultation
                 </button>
               </Link>

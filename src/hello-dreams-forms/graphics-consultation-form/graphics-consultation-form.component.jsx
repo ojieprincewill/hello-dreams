@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import supabase  from  "../../supabase/client"; 
-
+import supabase from "../../supabase/client";
 
 const GraphicsConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -24,8 +23,6 @@ const GraphicsConsultationForm = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-    
-
 
   const validateForm = () => {
     const newErrors = {};
@@ -34,7 +31,9 @@ const GraphicsConsultationForm = () => {
     if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.message) newErrors.message = "Message is required";
     if (!formData.service) newErrors.service = "Service selection is required";
-    if (!formData.accompanyingService) newErrors.accompanyingService = "Accompanying service selection is required";
+    if (!formData.accompanyingService)
+      newErrors.accompanyingService =
+        "Accompanying service selection is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -42,12 +41,12 @@ const GraphicsConsultationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
+
     setIsSubmitting(true);
     setSuccess(null);
-  
+
     const { type, name, email, phone, ...rest } = formData;
-  
+
     const payload = {
       type,
       name,
@@ -55,18 +54,21 @@ const GraphicsConsultationForm = () => {
       phone,
       data: rest,
     };
-  
+
     try {
-      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
-        body: payload,
-      });
-  
+      const { data, error } = await supabase.functions.invoke(
+        "handle-service-enquiries",
+        {
+          body: payload,
+        }
+      );
+
       if (error) {
         console.error("Supabase Error:", error.message || error);
         toast.error("Submission failed. Please try again.");
         return;
       }
-  
+
       toast.success("Your enquiry has been submitted!");
       setFormData({
         name: "",
@@ -86,7 +88,7 @@ const GraphicsConsultationForm = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       <p
@@ -101,9 +103,12 @@ const GraphicsConsultationForm = () => {
       >
         Please provide the details below
       </p>
-      <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20 space-y-8 text-[#000000] md:p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20 space-y-8 text-[#000000] md:p-6"
+      >
         <div>
-          <input type="hidden" name="type" value="Graphics Design"/>
+          <input type="hidden" name="type" value="Graphics Design" />
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
@@ -117,7 +122,9 @@ const GraphicsConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+          )}
         </div>
         <div>
           <label
@@ -133,7 +140,9 @@ const GraphicsConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
         </div>
         <div>
           <label
@@ -149,7 +158,9 @@ const GraphicsConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
-          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+          )}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -176,7 +187,9 @@ const GraphicsConsultationForm = () => {
             onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
-          {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+          )}
           <span className="mt-2 text-[#161616] text-[11px]">
             Tell us a bit about your project and what you hope to achieve
           </span>
@@ -199,11 +212,14 @@ const GraphicsConsultationForm = () => {
               <option value="service2">Option 2</option>
               <option value="service3">Option 3</option>
             </select>
-            {errors.service && <p className="text-red-500 text-sm mt-1">{errors.service}</p>}
+            {errors.service && (
+              <p className="text-red-500 text-sm mt-1">{errors.service}</p>
+            )}
           </div>
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-              Choose accompanying services <span className="text-red-500">*</span>
+              Choose accompanying services{" "}
+              <span className="text-red-500">*</span>
             </label>
             <select
               name="accompanyingService"
@@ -218,7 +234,11 @@ const GraphicsConsultationForm = () => {
               <option value="service2">Option 2</option>
               <option value="service3">Option 3</option>
             </select>
-            {errors.accompanyingService && <p className="text-red-500 text-sm mt-1">{errors.accompanyingService}</p>}
+            {errors.accompanyingService && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.accompanyingService}
+              </p>
+            )}
           </div>
         </div>
         <div>
@@ -243,12 +263,12 @@ const GraphicsConsultationForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-[#1342ff] w-full lg:bg-[#010413] text-[#f7f7f7] font-semibold border border-[#1342ff] lg:border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
           </button>
 
-          {error && <p className="text-red-600 mt-4">{error}</p>}
+          {errors && <p className="text-red-600 mt-4">{errors}</p>}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
       </form>

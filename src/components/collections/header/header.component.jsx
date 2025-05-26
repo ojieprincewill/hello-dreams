@@ -7,7 +7,7 @@ const CollectionsHeader = () => {
       <div className=" bg-[#eef2fe]">
         <NavBar />
         <div className="w-full h-max lg:h-[900px] flex flex-col-reverse lg:grid lg:grid-cols-2 lg:place-items-center">
-          <div className="flex flex-col items-start justify-start text-[#010413] px-5 py-10">
+          <div className="flex flex-col items-start justify-start text-[#010413] px-5">
             <h1
               className="text-[22px] md:text-[56px] lg:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
               style={{ fontFamily: "'Inter', sans-serif" }}
@@ -32,7 +32,7 @@ const CollectionsHeader = () => {
             <img
               src="https://i.ibb.co/8Shk6KK/ad625f059d4c14c3194e4dfc8466bf552e36e87f.png"
               alt="pamela ohaeri"
-              className="w-full h-full object-center"
+              className="w-full h-full object-contain md:object-contain lg:object-cover"
             />
           </div>
         </div>
