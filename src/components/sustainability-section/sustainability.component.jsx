@@ -1,5 +1,6 @@
 import React from "react";
 import FaqSection from "../faq-section/faq-section.component";
+import { Link } from "react-router-dom";
 
 const Sustainability = () => {
   return (
@@ -11,10 +12,13 @@ const Sustainability = () => {
         <p className="mt-4 md:mt-8 text-[16px] md:text-[20px] text-[#667085] md:font-semibold leading-[1.4]">
           Let's thrive today without destroying tomorrow
         </p>
-        <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-          <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <div className="mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <Link
+            to="/sustainability"
+            className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Read our articles
-          </button>
+          </Link>
         </div>
       </div>
       <div className=" w-full h-[326px] md:h-[712px] rounded-2xl">

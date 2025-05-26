@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const DreamJobSection = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
       <div className="w-full  text-center flex flex-col justify-center datas-center p-5 md:pb-10">
@@ -11,13 +16,21 @@ const DreamJobSection = () => {
           Explore curated jobs, internships and freelance gigs that match your
           skills
         </p>
-        <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-          <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <div className="mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <Link
+            to="/jobs"
+            onClick={handleOrigins}
+            className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Post a job
-          </button>
-          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+          </Link>
+          <Link
+            to="/jobs"
+            onClick={handleOrigins}
+            className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Explore jobs
-          </button>
+          </Link>
         </div>
       </div>
       <div className=" w-full h-[326px] md:h-[712px] rounded-2xl">

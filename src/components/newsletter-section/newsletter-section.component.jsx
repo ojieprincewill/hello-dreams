@@ -5,13 +5,13 @@ const NewsletterSection = () => {
   return (
     <div className="bg-[#fff] p-5 md:p-10 lg:p-20">
       <span
-        className="text-[#041856] text-[12px] md:text-[16px] lg:text-[30px] lg:font-bold mb-3"
+        className="text-[#041856] text-[14px] md:text-[16px] lg:text-[30px] lg:font-bold mb-3"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Stay informed, nothing boring
       </span>
       <span
-        className="text-[#010413] text-[8px] md:text-[12px] lg:text-[20px] lg:font-bold ml-1 md:ml-3"
+        className="text-[#010413] text-[10px] md:text-[12px] lg:text-[20px] lg:font-bold ml-1 md:ml-3"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Subscribe to our newsletter

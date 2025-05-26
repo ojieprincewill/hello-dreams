@@ -18,9 +18,14 @@ import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-pag
 import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
 import WebDevPage from "./pages/web-dev-page/web-dev-page";
 import WebDevConsultationPage from "./pages/web-dev-consultation-page/web-dev-consultation-page";
+import CollectionsPage from "./pages/collections-page/collections-page";
+
 import ReferPage from "./pages/refer-page/refer-page";
 import CommunityChallengePage from "./pages/community-challenge-page/community-challenge-page";
 import JoinCommunityPage from "./pages/join-community-page/join-community-page";
+import JobPage from "./pages/job-page/job-page";
+import SustainabilityPage from "./pages/sustainability-page/sustainability-page";
+import BlogPage from "./pages/sustainability-page/blog-page";
 
 function App() {
   return (
@@ -67,6 +72,7 @@ function App() {
           path="/services/app-dev-consultation"
           element={<WebDevConsultationPage />}
         />
+        <Route path="/services/our-collection" element={<CollectionsPage />} />
 
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
@@ -78,6 +84,9 @@ function App() {
           element={<CommunityChallengePage />}
         />
         <Route path="/join-our-community" element={<JoinCommunityPage />} />
+        <Route path="/jobs" element={<JobPage />} />
+        <Route path="/sustainability" element={<SustainabilityPage />} />
+        <Route path="/sustainability/:blogId" element={<BlogPage />} />
       </Routes>
     </>
   );

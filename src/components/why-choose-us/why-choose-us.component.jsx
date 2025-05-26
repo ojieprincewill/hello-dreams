@@ -5,13 +5,13 @@ import { ArrowDownIcon } from "@heroicons/react/24/solid";
 const WhyChooseUs = () => {
   return (
     <div className="w-full px-[5%] py-10 md:py-20">
-      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
+      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
         Why Choose Us
         <span className="ml-1">
           <img
             src="https://i.ibb.co/dhxXhPY/arrow-block-down.png"
             alt="arrow-block"
-            className="w-[36.67px] h-[36.67px] lg:w-[128px] lg:h-[128px] object-cover"
+            className="w-[36.67px] h-[36.67px] md:w-[64px] md:h-[64px] lg:w-[128px] lg:h-[128px] object-cover"
           />
         </span>
       </h1>

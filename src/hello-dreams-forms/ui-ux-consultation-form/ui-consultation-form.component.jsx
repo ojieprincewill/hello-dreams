@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import supabase  from  "../../supabase/client"; 
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 
 const UiConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -77,9 +78,15 @@ const UiConsultationForm = () => {
     }
   };
 
+
+
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] py-15 md:py-25">
-      <p className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-10 md:mb-20">
+      {loading && <LoadingSpinner />}
+      <p
+        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-10 md:mb-20"
+        style={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
         Get a Free Consultation with Our Expert UI/UX Designers
       </p>
 
