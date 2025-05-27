@@ -108,14 +108,6 @@ const SidebarNav = ({ closeSidebar }) => {
           </AnimatePresence>
           <Link
             className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
-            to="/portfolio"
-            onClick={handleOrigins}
-          >
-            <CursorArrowRaysIcon className="h-5 w-5 mr-2" />
-            Our Work
-          </Link>
-          <Link
-            className="flex flex-row p-4 bg-transparent text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300"
             to="/academy"
             onClick={handleOrigins}
           >
