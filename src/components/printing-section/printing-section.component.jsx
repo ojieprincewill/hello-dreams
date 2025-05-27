@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PrintingSection = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex flex-col-reverse md:flex-col py-10 md:py-22">
       <div className="w-full  text-center flex flex-col justify-center items-center p-5 md:pb-10">
@@ -10,13 +15,21 @@ const PrintingSection = () => {
         <p className="mt-4 md:mt-8 text-[16px] md:text-[20px] text-[#667085] font-bold leading-[1.4]">
           Professional & clean
         </p>
-        <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-          <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <Link
+            to="/services/printing-consultation"
+            onClick={handleOrigins}
+            className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Start Printing
-          </button>
-          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+          </Link>
+          <Link
+            to="/services/printing"
+            onClick={handleOrigins}
+            className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             View service
-          </button>
+          </Link>
         </div>
       </div>
       <div className="bg-[#ffadd9] w-full h-[420px] md:h-[761px] rounded-xl">

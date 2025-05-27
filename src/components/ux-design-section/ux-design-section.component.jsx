@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UxDesignSection = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="flex flex-col-reverse md:flex-col">
       <div className="px-10 md:px-5 py-10 md:py-20 w-full text-center flex flex-col justify-center items-center">
@@ -12,13 +17,21 @@ const UxDesignSection = () => {
           <br />→ Just <span className="text-[#1342ff]">seamless</span>{" "}
           experiences.
         </p>
-        <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
-          <button className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <Link
+            to="/services/ui-design-consultation"
+            onClick={handleOrigins}
+            className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Design your idea
-          </button>
-          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+          </Link>
+          <Link
+            to="/services/ui-design"
+            onClick={handleOrigins}
+            className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[16px] px-12 py-4 rounded-lg hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             View service
-          </button>
+          </Link>
         </div>
       </div>
       <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[845px] pl-6 md:pl-20 py-5 md:py-25">

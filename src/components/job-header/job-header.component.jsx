@@ -22,8 +22,8 @@ const JobHeader = () => {
           </p>
           <div className="mt-10">
             <Link
-              to="/workwithus"
-              className="bg-white text-[#010413] font-semibold border border-[#fff] text-[24px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
+              to="/post-a-job"
+              className="bg-white text-[#010413] font-semibold border border-[#fff] text-[24px] px-4 py-2 rounded-lg hover:text-[#fff] hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
               onClick={handleOrigins}
             >
               Post a Job
@@ -40,7 +40,7 @@ const JobHeader = () => {
           skills. We connect passionate dreamers with companies that value
           growth, creativity, and impact
         </p>
-        <Link to="/workwithus">
+        <Link to="/post-a-job">
           <button
             className="bg-[#010413] w-full mt-5 text-[#fff] font-semibold border border-[#010413] text-[14px] px-4 py-3 rounded-lg transition-colors duration-300 cursor-pointer"
             onClick={handleOrigins}

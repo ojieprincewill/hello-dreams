@@ -1,6 +1,7 @@
 import React from "react";
 import { AcademyData } from "../../data/academy-data/academy.data";
 import { ArrowTopRightOnSquareIcon, PlayIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 const AcademySection = () => {
   return (
@@ -15,12 +16,15 @@ const AcademySection = () => {
           through skill aquisition and ethical growth
         </p>
         <div className="mt-6 flex flex-col w-full space-y-4 md:flex-row md:space-x-4 justify-center">
-          <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+          <Link
+            to="/academy"
+            className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Go to academy
-          </button>
+          </Link>
         </div>
       </div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 pt-20">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 pt-10">
         {AcademyData.map((data) => (
           <div
             key={data.id}

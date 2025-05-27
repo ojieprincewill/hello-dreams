@@ -3,6 +3,7 @@ import { TestimonialData } from "../../data/choose-us-data/choose-us.data";
 import { StarIcon } from "@heroicons/react/24/solid";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 const TestimonialSection = () => {
   const [activeId, setActiveId] = useState(null);
@@ -13,6 +14,10 @@ const TestimonialSection = () => {
 
   const closeModal = () => {
     setActiveId(null);
+  };
+
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -28,12 +33,20 @@ const TestimonialSection = () => {
         </div>
 
         <div className="flex flex-col w-auto h-max space-y-4 mt-5 md:mt-0 md:flex-row md:space-y-0 md:space-x-2">
-          <button className="bg-transparent text-[#344054] font-semibold border border-[#d0d5dd] text-[14px] md:text-[10px] lg:text-[16px] px-4 py-4 rounded-lg cursor-pointer">
+          <Link
+            to="/apply-for-mentorship"
+            onClick={handleOrigins}
+            className="bg-transparent text-[#344054] font-semibold border border-[#d0d5dd] text-[14px] md:text-[10px] lg:text-[16px] px-4 py-4 rounded-lg cursor-pointer"
+          >
             Apply for mentorship
-          </button>
-          <button className="bg-[#1b212c] text-[#fff] font-semibold border border-[#1b212c] text-[14px] md:text-[10px] lg:text-[16px] px-4 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+          </Link>
+          <Link
+            to=""
+            onClick={handleOrigins}
+            className="bg-[#1b212c] text-[#fff] font-semibold border border-[#1b212c] text-[14px] md:text-[10px] lg:text-[16px] px-4 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             Learn Design from us
-          </button>
+          </Link>
         </div>
       </div>
 

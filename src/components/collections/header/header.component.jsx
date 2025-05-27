@@ -23,7 +23,7 @@ const CollectionsHeader = () => {
               etc.
             </p>
             <div className="mt-8 md:mt-15 w-[164px] md:w-[273px]">
-              <div className="bg-[#010413] w-full text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[24px] text-center px-4 py-3 rounded-sm hover:bg-[#6941c6] hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+              <div className="bg-[#010413] w-full text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[24px] text-center px-4 py-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                 Shop now
               </div>
             </div>

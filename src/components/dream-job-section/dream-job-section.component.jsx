@@ -16,9 +16,9 @@ const DreamJobSection = () => {
           Explore curated jobs, internships and freelance gigs that match your
           skills
         </p>
-        <div className="mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
           <Link
-            to="/jobs"
+            to="/post-a-job"
             onClick={handleOrigins}
             className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-6 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >

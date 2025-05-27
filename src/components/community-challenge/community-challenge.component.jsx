@@ -128,7 +128,7 @@ const CommunityChallenge = () => {
                   <div className="mt-5">
                     <button
                       onClick={handleCopy}
-                      className="bg-[#fff] text-[#1b212c] font-semibold border border-[#1a212a] text-[10.91px] lg:text-[16px] px-3 py-2 rounded-xl hover:text-white hover:bg-[#6941c6] hover:border-[#6941c6] transition-colors duration-300 cursor-pointer"
+                      className="bg-[#fff] text-[#1b212c] font-semibold border border-[#1a212a] text-[10.91px] lg:text-[16px] px-3 py-2 rounded-xl hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                     >
                       <span>
                         <ClipboardDocumentIcon className="inline w-5 h-5 align-middle mr-1" />

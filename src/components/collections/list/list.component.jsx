@@ -42,12 +42,12 @@ const CollectionsList = () => {
               <li>{data.quality}</li>
             </ul>
             <div className="flex flex-col space-y-3 md:flex-row md:space-x-3 md:space-y-0 items-center mt-6">
-              <button className="w-full md:w-[95px] bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] text-center px-4 py-3 rounded-sm hover:bg-[#6941c6] hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+              <button className="w-full md:w-[95px] bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[16px] text-center px-4 py-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                 Buy
               </button>
               <button
                 onClick={() => toggleModal(data.id)}
-                className="w-full md:w-[104px] bg-[#eef2fe] text-[#010413] font-semibold border border-[#eef2fe] text-[16px] text-center px-4 py-3 rounded-sm hover:bg-[#6941c6] hover:border-[#6941c6] hover:text-[#f7f7f7] transition-colors duration-300 cursor-pointer"
+                className="w-full md:w-[104px] bg-[#eef2fe] text-[#010413] font-semibold border border-[#eef2fe] text-[16px] text-center px-4 py-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-[#f7f7f7] transition-colors duration-300 cursor-pointer"
               >
                 View
               </button>
@@ -65,7 +65,7 @@ const CollectionsList = () => {
             (data) => (
               <div
                 key={data.id}
-                className="bg-[#fff] w-[90%] md:w-[327px] h-[80vh] md:h-[90vh] lg:h-[564.09px] p-2 rounded-sm overflow-auto"
+                className="bg-[#fff] w-[90%] md:w-[427px] h-max md:h-[90vh] lg:h-[564.09px] p-2 rounded-sm overflow-auto"
               >
                 <div className="flex justify-between items-center mb-3 pb-1 border-b border-b-[#e6e2dd] text-[#1b212c]">
                   <h2 className=" text-[14px] lg:text-[16px] font-medium  ">
@@ -92,7 +92,7 @@ const CollectionsList = () => {
                   <li>{data.shipment}</li>
                   <li>{data.shipTime}</li>
                 </ul>
-                <button className="w-full bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] text-center px-4 py-3 mt-3 rounded-sm hover:bg-[#6941c6] hover:border-[#6941c6] transition-colors duration-300 cursor-pointer">
+                <button className="w-full bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] text-center px-4 py-3 mt-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                   Pay &#8358;{data.price}
                 </button>
               </div>

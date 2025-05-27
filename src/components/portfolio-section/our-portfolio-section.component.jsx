@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OurPortfolioSection = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="w-full px-[5%] py-10 md:py-20">
       <div className="w-full text-center flex flex-col justify-center items-center p-5 md:pb-10">
@@ -13,9 +18,13 @@ const OurPortfolioSection = () => {
           Achievements and Creativity
         </p>
         <div className="mt-6 flex flex-col justify-center w-full space-y-4 md:flex-row md:space-x-4">
-          <button className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+          <Link
+            to="/portfolio"
+            onClick={handleOrigins}
+            className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             View all
-          </button>
+          </Link>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

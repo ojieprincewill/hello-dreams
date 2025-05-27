@@ -19,7 +19,7 @@ const OurCommunity = () => {
           <br />
           Hello Dreams Community
         </p>
-        <div className="mt-6 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
           <Link
             to="/community-challenge"
             onClick={handleOrigins}

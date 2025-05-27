@@ -26,6 +26,8 @@ import JoinCommunityPage from "./pages/join-community-page/join-community-page";
 import JobPage from "./pages/job-page/job-page";
 import SustainabilityPage from "./pages/sustainability-page/sustainability-page";
 import BlogPage from "./pages/sustainability-page/blog-page";
+import MentorshipApplicationPage from "./pages/mentorship-application-page/mentorship-application-page";
+import PostJobPage from "./pages/post-job-page/post-job-page";
 
 function App() {
   return (
@@ -74,6 +76,10 @@ function App() {
         />
         <Route path="/services/our-collection" element={<CollectionsPage />} />
 
+        <Route
+          path="/apply-for-mentorship"
+          element={<MentorshipApplicationPage />}
+        />
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/academy" element={<AcademyPage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -85,6 +91,7 @@ function App() {
         />
         <Route path="/join-our-community" element={<JoinCommunityPage />} />
         <Route path="/jobs" element={<JobPage />} />
+        <Route path="/post-a-job" element={<PostJobPage />} />
         <Route path="/sustainability" element={<SustainabilityPage />} />
         <Route path="/sustainability/:blogId" element={<BlogPage />} />
       </Routes>

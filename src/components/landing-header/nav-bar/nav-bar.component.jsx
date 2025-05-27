@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Logo from "../../logo/logo.component";
 
@@ -18,18 +18,6 @@ import { motion, AnimatePresence } from "motion/react";
 const NavBar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const [isTabletScreen, setIsTabletScreen] = useState(
-    window.innerWidth <= 768
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsTabletScreen(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize); // Cleanup
-  }, []);
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -112,7 +100,7 @@ const NavBar = () => {
             className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[16px] lg:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
             onClick={handleOrigins}
           >
-            {isTabletScreen ? "Contact us" : "Work with us"}
+            Work with us
           </Link>
           <button
             onClick={openSideBar}

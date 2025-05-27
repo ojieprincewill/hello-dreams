@@ -59,9 +59,21 @@ const SolutionsSection = () => {
               />
             </div>
 
+            <div>
+              <label className="block text-[20px] font-bold text-[#fff]">
+                Enter your email
+              </label>
+              <input
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                className="mt-2 w-full p-3 border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
+                placeholder="email@example.com"
+              />
+            </div>
+
             <button
               type="submit"
-              className="w-full bg-[#1342ff] text-[#fff] text-[24px] font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
+              className="w-full bg-[#1342ff] text-[#fff] text-[24px] font-semibold py-3 mt-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
             >
               Send
             </button>

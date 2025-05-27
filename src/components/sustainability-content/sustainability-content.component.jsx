@@ -31,7 +31,7 @@ const SustainabilityContent = () => {
           <Link
             to={`/sustainability/${data.id}`}
             onClick={handleOrigins}
-            className="text-[#010413] font-semibold flex justify-between mb-5 hover:text-[#6941c6] transition-colors duration-300 cursor-pointer"
+            className="text-[#010413] font-semibold flex justify-between mb-5 hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             <p className="text-[24px]">{data.title}</p>
             <ArrowUpRightIcon className="w-6 h-6" />
