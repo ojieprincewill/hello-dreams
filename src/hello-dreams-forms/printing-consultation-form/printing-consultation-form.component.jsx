@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import supabase from "../../supabase/client";
 
 const PrintingConsultationForm = () => {
@@ -31,29 +31,37 @@ const PrintingConsultationForm = () => {
     setSuccess(null);
     setError(null);
 
-    const { name, email, phone, company, message, service, accompanyingServices, howDidYouHear } = formData;
+    const {
+      name,
+      email,
+      phone,
+      company,
+      message,
+      service,
+      accompanyingServices,
+      howDidYouHear,
+    } = formData;
     if (!name || !email || !phone || !service) {
       setError("Please fill in all required fields.");
       setLoading(false);
       return;
     }
-    
+
     const payload = {
       type: "Printing Consultation",
       name,
       email,
       phone,
-      data: {company,
-      message,
-      service,
-      accompanyingServices,
-      howDidYouHear,}
+      data: { company, message, service, accompanyingServices, howDidYouHear },
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
-        body: payload,
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "handle-service-enquiries",
+        {
+          body: payload,
+        }
+      );
 
       if (error) {
         const supabaseError = error.message || error;
@@ -78,9 +86,9 @@ const PrintingConsultationForm = () => {
       setError("An error occurred. Please try again later.");
     } finally {
       setLoading(false);
-    };
+    }
   };
-  
+
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       <p
@@ -95,9 +103,10 @@ const PrintingConsultationForm = () => {
       >
         Please provide the details below
       </p>
-      <form 
-      onSubmit={handleSubmit}
-      className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
+      >
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
@@ -183,12 +192,16 @@ const PrintingConsultationForm = () => {
               onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
-              <option value="" disabled className="">
+              <option value="" disabled>
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">UI/UX Design</option>
+              <option value="service2">Logo Design</option>
+              <option value="service3">Branding</option>
+              <option value="service4">User Research</option>
+              <option value="service5">Redesign</option>
+              <option value="service6">Development</option>
+              <option value="service7">Printing</option>
             </select>
           </div>
           <div>
@@ -201,12 +214,19 @@ const PrintingConsultationForm = () => {
               onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
-              <option value="" disabled className="">
+              <option value="" disabled>
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">Business Cards</option>
+              <option value="service2">Flyers and Brochures</option>
+              <option value="service3">Posters and Banners</option>
+              <option value="service4">Company Souvenirs</option>
+              <option value="service5">Custom Prints</option>
+              <option value="service6">Brochures</option>
+              <option value="service7">Menus</option>
+              <option value="service8">Labels and Stickers</option>
+              <option value="service9">Notepads and Stationery</option>
+              <option value="service10">Others</option>
             </select>
           </div>
         </div>
@@ -214,18 +234,20 @@ const PrintingConsultationForm = () => {
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
             How did you hear about us?
           </label>
-          <select 
+          <select
             name="howDidYouHear"
             value={formData.howDidYouHear}
             onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
-            <option value="" disabled className="">
+            <option value="" disabled>
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="google">Google search</option>
+            <option value="referral">From a friend</option>
+            <option value="social">LinkedIn</option>
+            <option value="social">Instagram</option>
+            <option value="social">Youtube</option>
           </select>
         </div>
         <div>

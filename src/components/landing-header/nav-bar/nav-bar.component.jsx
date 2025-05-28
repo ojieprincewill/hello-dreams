@@ -124,7 +124,7 @@ const NavBar = () => {
               <Link
                 to={data.target}
                 key={data.id}
-                className="grid grid-cols-[10%_90%] gap-1 items-center hover:bg-[#ecf3f5] p-2 rounded-xl cursor-pointer"
+                className="grid grid-cols-[10%_90%] gap-5 items-center hover:bg-[#ecf3f5] p-2 rounded-xl cursor-pointer"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
                 onClick={handleOrigins}
               >

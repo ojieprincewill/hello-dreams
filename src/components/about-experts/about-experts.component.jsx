@@ -1,5 +1,5 @@
 import React from "react";
-import { AboutExpertsData } from "../../data/choose-us-data/choose-us.data";
+import { MeetExpertsData } from "../../data/choose-us-data/choose-us.data";
 
 const AboutExperts = () => {
   return (
@@ -9,7 +9,7 @@ const AboutExperts = () => {
       </p>
 
       <div className="w-full mt-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-        {AboutExpertsData.map((data) => (
+        {MeetExpertsData.map((data) => (
           <div key={data.id} className="p-3 border border-[#dfdfe2] rounded-xl">
             <div className="w-full h-[221.35px] md:h-[286.65px] lg:h-[360px] mb-5">
               <img

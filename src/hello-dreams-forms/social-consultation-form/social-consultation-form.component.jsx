@@ -206,9 +206,19 @@ const SocialConsultationForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">Social Media Strategy Development</option>
+            <option value="service2">Content Creation and Curation</option>
+            <option value="service3">
+              Social Media Posting and Scheduling
+            </option>
+            <option value="service4">Community Management</option>
+            <option value="service5">Analytics and Reporting</option>
+            <option value="service6">Social Media Advertising</option>
+            <option value="service7">Influencer Marketing</option>
+            <option value="service8">Audience Growth and Engagement</option>
+            <option value="service9">
+              Social Media Account Setup and Optimization
+            </option>
           </select>
         </div>
         <div>
@@ -242,9 +252,8 @@ const SocialConsultationForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">Yes</option>
+            <option value="service2">No</option>
           </select>
         </div>
         <div>
@@ -276,9 +285,11 @@ const SocialConsultationForm = () => {
               <option value="" disabled className="">
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="google">Google search</option>
+              <option value="referral">From a friend</option>
+              <option value="social">LinkedIn</option>
+              <option value="social">Instagram</option>
+              <option value="social">Youtube</option>
             </select>
           </div>
           <div>

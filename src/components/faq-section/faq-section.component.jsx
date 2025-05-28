@@ -12,6 +12,8 @@ const FaqSection = () => {
     setActiveId(activeId === id ? null : id); // Toggle active answer visibility
   };
 
+  const activeFaq = FaqData.find((faq) => faq.id === activeId);
+
   return (
     <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 lg:my-15 lg:p-10">
       <div>
@@ -30,12 +32,20 @@ const FaqSection = () => {
                   {faq.question}{" "}
                   {activeId === faq.id && (
                     <span>
-                      <SunIcon className="md:hidden inline align-middle h-[18px] w-[18px] text-[#ffc501]" />
+                      <img
+                        src="https://i.ibb.co/SDCPTNfc/STAR-FOOTER-YELLOW.png"
+                        alt="sun icon"
+                        className="md:hidden inline align-middle h-[18px] w-[18px]"
+                      />
                     </span>
                   )}
                 </p>
                 {activeId === faq.id && (
-                  <SunIcon className="hidden md:block md:w-3 md:h-3 lg:h-6 lg:w-6  text-[#ffc501]" />
+                  <img
+                    src="https://i.ibb.co/SDCPTNfc/STAR-FOOTER-YELLOW.png"
+                    alt="sun icon"
+                    className="hidden md:block md:w-3 md:h-3 lg:h-6 lg:w-6"
+                  />
                 )}
                 {activeId === faq.id ? (
                   <MinusIcon className="h-6 w-6 font-bold md:hidden" />
@@ -51,12 +61,28 @@ const FaqSection = () => {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="md:hidden bg-[#1342ff] text-[#fff] rounded-xl p-4"
+                    className="md:hidden bg-[#1342ff]  text-[#fff] rounded-xl p-4"
                   >
-                    <p className="text-[14px]">
-                      <SunIcon className="block h-[18px] w-[18px] mb-2 " />
-                      {faq.answer}
-                    </p>
+                    <div className="text-[14px]">
+                      <img
+                        src="https://i.ibb.co/ddcVBds/STAR-FOOTER-WHITE.png"
+                        alt="sun icon"
+                        className="block h-[18px] w-[18px] mb-2 "
+                      />
+                      <p>{faq.answer}</p>
+
+                      {faq.options && faq.additionalText ? (
+                        <div>
+                          <ul className="list-disc pl-5 my-4">
+                            {faq.options.map((option, index) => (
+                              <li key={index}>{option}</li>
+                            ))}
+                          </ul>
+
+                          <p className="mt-3">{faq.additionalText}</p>
+                        </div>
+                      ) : null}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -70,12 +96,32 @@ const FaqSection = () => {
         </p>
         <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] lg:h-[470px] overflow-auto">
           {activeId !== null ? (
-            <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
+            <div className="md:text-[12px] lg:text-[24px] lg:font-semibold">
               <span className="mb-2 block">
-                <SunIcon className="md:w-3 md:h-3 lg:h-6 lg:w-6 " />
+                <img
+                  src="https://i.ibb.co/ddcVBds/STAR-FOOTER-WHITE.png"
+                  alt="sun icon"
+                  className="md:w-3 md:h-3 lg:h-6 lg:w-6 "
+                />
               </span>
-              {FaqData.find((faq) => faq.id === activeId)?.answer}
-            </p>
+              {activeFaq && (
+                <div>
+                  <p>{activeFaq.answer}</p>
+
+                  {activeFaq.options && (
+                    <ul className="list-disc pl-5 my-4">
+                      {activeFaq.options.map((option, index) => (
+                        <li key={index}>{option}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {activeFaq.additionalText && (
+                    <p className=" mt-3">{activeFaq.additionalText}</p>
+                  )}
+                </div>
+              )}
+            </div>
           ) : (
             <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
               Select a question to view the answer.

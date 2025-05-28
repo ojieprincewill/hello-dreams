@@ -1,26 +1,45 @@
 import React from "react";
 import Logo2 from "../logo-2/logo-2.component";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="bg-[#010413] text-[#fff] px-5 pt-5 md:px-10 md:pt-20 pb-4">
       <div className="grid grid-cols-1 md:grid-cols-[30%_70%] md:border-t-1 border-[#ffffff20]">
-        <div className="md:border-r-1 border-[#ffffff20] py-5 md:py-15">
-          <div>
+        <div className="relative md:border-r-1 border-[#ffffff20] py-5 md:py-15">
+          <Link
+            to="/"
+            onClick={handleOrigins}
+            className="absolute top-0 md:top-15 w-[32.99px] h-[24.23px] md:w-[67px] md:h-[46.75px] lg:w-[111.32px] lg:h-[77.67px] "
+          >
             <Logo2 />
-          </div>
-          <p className="text-[10px] md:text-[10px] lg:text-[14px] text-[#ffffff91] lg:font-bold pt-5 md:pt-10 md:pb-32">
+          </Link>
+          <p className="text-[10px] md:text-[10px] lg:text-[14px] text-[#ffffff91] lg:font-bold md:mt-15 pt-5 md:pt-10">
             Hello Dreams is a multidisciplinary company dedicated to empowering
             individuals and businesses through a comprehensive suite of
             professional services. Our core focus is on delivering exceptional
             design, social media management, educational...{" "}
-            <span className="font-bold lg:font-extrabold">read more</span>
+            <Link
+              to="/about"
+              onClick={handleOrigins}
+              className="font-bold lg:font-extrabold hover:text-[#d4d4d491] transition-colors duration-300 cursor-pointer"
+            >
+              read more
+            </Link>
           </p>
-          <div className="hidden md:block">
+          <Link
+            to="/"
+            onClick={handleOrigins}
+            className="absolute bottom-0 hidden md:block md:w-[67px] md:h-[46.75px] lg:w-[111.32px] lg:h-[77.67px] "
+          >
             <Logo2 />
-          </div>
+          </Link>
         </div>
         <div className="flex flex-row md:flex-col">
           <div className="flex flex-col md:flex-row justify-between items-start">

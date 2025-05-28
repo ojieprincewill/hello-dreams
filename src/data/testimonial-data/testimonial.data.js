@@ -34,3 +34,122 @@ export const PrintingTestimonialData = [
     rating: 4,
   },
 ];
+
+export const UiTestimonialData = [
+  {
+    id: 1,
+    logo: "https://i.ibb.co/4ZqxDjC7/fcd0b7d5d1d3f49b47fc386d510cf24cd14b8b06.png",
+    client: "Blessing Eneobong",
+    service: "UI/UX Course",
+    text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results",
+    rating: 5,
+  },
+  {
+    id: 2,
+    logo: "https://i.ibb.co/m5TVtFtv/f6766763f9352068eb4d104e004263679af87088.png",
+    client: "Blessing Eneobong",
+    service: "UI/UX Course",
+    text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results ",
+    rating: 5,
+  },
+  {
+    id: 3,
+    logo: "https://i.ibb.co/4ZLBH7xW/4ff4a269bca15de4942ef5d8a568b7ebdb16923a.png",
+    client: "Blessing Eneobong",
+    service: "UI/UX Course",
+    text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tai",
+    rating: 4,
+  },
+  {
+    id: 4,
+    logo: "https://i.ibb.co/27B5dwZx/d9884be0c670d1d37aca0d3085435ee23473eb52.png",
+    client: "Lilian Ohaeri",
+    service: "UI/UX Course",
+    text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results ",
+    rating: 4,
+  },
+];
+
+export const CvTestimonialData = [
+  {
+    id: 1,
+    image:
+      "https://i.ibb.co/mFN14GhL/94ed47b9081e1f49e8f060761d6abb7ebed6fd3b.png",
+    client: "Jennifer Obatta",
+    service: "Website Design",
+    text: "I have worked with people but you are exceptional, you delivered exactly what i asked for, You really deserve international jobs and recognition. Thank you",
+    rating: 5,
+  },
+  {
+    id: 2,
+    image:
+      "https://i.ibb.co/Z635dKdt/c6196caadadb27559c0df49d61e3969d419db19e.png",
+    client: "David",
+    service: "CV Writing",
+    text: "In less than 30 mins of sending out my CV,  i already got an interview booking, thank you very  much",
+    images: [
+      "https://i.ibb.co/3mv5y25J/6bfa9a5b7dfa480cd0e8fece0e10076973fa6f6c.png",
+      "https://i.ibb.co/Z67SGCrN/c4408edec4455909e7439272733a1528f4fff576.png",
+    ],
+    rating: 5,
+  },
+  {
+    id: 3,
+    image:
+      "https://i.ibb.co/d0kY4rZw/c478c8e8357e13a26f27fa69249a3d7983abb563.png",
+    client: "Evamena Ekelemu",
+    service: "UI/UX Course",
+    question1: "Tell us about your experience in the UX Design training?",
+    answer1:
+      "I began the training with no prior experience in UX/UI design or Figma. Through the training I learned how to use Figma, and quickly progressed. I learned design principals of UI/UX and could practice using them in my own designs. As the training went on, my designs became more complex and I began using Figma more efficiently.",
+    question2:
+      "How would you rate the instructor's effectiveness in delivering the course material and providing guidance/support?",
+    answer2:
+      "I would rate it 10/10, the course was thorough and instructions were given when needed. There was also lots of support along the way.",
+    rating: 5,
+  },
+  {
+    id: 4,
+    image:
+      "https://i.ibb.co/27B5dwZx/d9884be0c670d1d37aca0d3085435ee23473eb52.png",
+    client: "Blessing Eneobong",
+    service: "UI/UX Course",
+    question1: "Tell us about your experience in the UX Design training?",
+    answer1:
+      "Very educating, i enjoyed every bit of the 30 days UI design, am on my project currently and i have learnt a lot from my journey so far. All thanks to Pamela, hello dreams and Nigeria girl in stem",
+    question2:
+      "How would you rate the instructor's effectiveness in delivering the course material and providing guidance/support?",
+    answer2:
+      "How would you rate the instructor's effectiveness in delivering the course material and providing guidance/support?",
+    rating: 5,
+  },
+  {
+    id: 5,
+    image:
+      "https://i.ibb.co/S79KtXvD/77bcb5047add18675ca0eb33f6137f5dcfe77eae.png",
+    client: "Onyeji Success",
+    service: "UI/UX Course",
+    question1: "Tell us about your experience in the UX Design training?",
+    answer1:
+      "It was really good. Learnt so much even as someone that already got started on UIUX Design prior to the training.",
+    question2:
+      "How would you rate the instructor's effectiveness in delivering the course material and providing guidance/support?",
+    answer2:
+      "A solid 10.. it was actually the consistency in checking in on our learning that kept me showing up for the training",
+    rating: 5,
+  },
+  {
+    id: 6,
+    image:
+      "https://i.ibb.co/4gm8FGTG/9fe64742875578dd09194f4d8bd17ac86b7ef937.png",
+    client: "Blessing Eneobong",
+    service: "UI/UX Course",
+    question1: "Tell us about your experience in the UX Design training?",
+    answer1:
+      "The ui/ux design class with pam was amazing, I love how she took time to explain every section and her availability whenever we need her is too much , God bless you pam and keep doing more.",
+    question2:
+      "How would you rate the instructor's effectiveness in delivering the course material and providing guidance/support?",
+    answer2: "10/10 ( excellent )",
+    rating: 5,
+  },
+];

@@ -50,13 +50,13 @@ const Section2 = () => {
         <button className="bg-gradient-to-b from-[#f7f7f7] to-[#90c0e26b] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
           View
         </button>
-        {/* <div className="absolute bottom-[-110px] right-[-180px] w-[775px] h-[775px]">
+        <div className="absolute bottom-[-20px] right-[-50px] w-[448.31px] h-[622.41px]">
           <img
-            src=""
-            alt="dashboard design"
+            src="https://i.ibb.co/DfmLvmch/sisenow-image.png"
+            alt="mock up design"
             className="w-full h-full object-contain"
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );

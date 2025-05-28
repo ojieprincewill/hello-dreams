@@ -208,9 +208,13 @@ const GraphicsConsultationForm = () => {
               <option value="" disabled>
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">UI/UX Design</option>
+              <option value="service2">Logo Design</option>
+              <option value="service3">Branding</option>
+              <option value="service4">User Research</option>
+              <option value="service5">Redesign</option>
+              <option value="service6">Development</option>
+              <option value="service7">Printing</option>
             </select>
             {errors.service && (
               <p className="text-red-500 text-sm mt-1">{errors.service}</p>
@@ -230,9 +234,16 @@ const GraphicsConsultationForm = () => {
               <option value="" disabled>
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">Logo Design</option>
+              <option value="service2">Full Business branding</option>
+              <option value="service3">Business Cards</option>
+              <option value="service4">Flyers and Brochures</option>
+              <option value="service5">Posters and Banners</option>
+              <option value="service6">Company Souvenirs</option>
+              <option value="service7">Menus</option>
+              <option value="service8">Labels and Stickers</option>
+              <option value="service9">Notepads and Stationery</option>
+              <option value="service10">Others</option>
             </select>
             {errors.accompanyingService && (
               <p className="text-red-500 text-sm mt-1">
@@ -254,9 +265,11 @@ const GraphicsConsultationForm = () => {
             <option value="" disabled>
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="google">Google search</option>
+            <option value="referral">From a friend</option>
+            <option value="social">LinkedIn</option>
+            <option value="social">Instagram</option>
+            <option value="social">Youtube</option>
           </select>
         </div>
         <div>

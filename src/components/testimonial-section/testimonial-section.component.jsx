@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TestimonialData } from "../../data/choose-us-data/choose-us.data";
-import { StarIcon } from "@heroicons/react/24/solid";
+
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -60,11 +60,31 @@ const TestimonialSection = () => {
             />
             <div className="absolute bottom-3 left-[2%] w-[96%] h-[246px] bg-white/30 backdrop-blur-sm p-4 border border-[#ffffff63] overflow-hidden">
               <div className="flex space-x-1 text-[#fff] pb-2">
-                <StarIcon className="w-4 h-4" />
-                <StarIcon className="w-4 h-4" />
-                <StarIcon className="w-4 h-4" />
-                <StarIcon className="w-4 h-4" />
-                <StarIcon className="w-4 h-4" />
+                <img
+                  src="https://i.ibb.co/3m5mScmb/Star-icon.png"
+                  alt="star icon"
+                  className="w-4 h-4 object-cover"
+                />
+                <img
+                  src="https://i.ibb.co/3m5mScmb/Star-icon.png"
+                  alt="star icon"
+                  className="w-4 h-4 object-cover"
+                />
+                <img
+                  src="https://i.ibb.co/3m5mScmb/Star-icon.png"
+                  alt="star icon"
+                  className="w-4 h-4 object-cover"
+                />
+                <img
+                  src="https://i.ibb.co/3m5mScmb/Star-icon.png"
+                  alt="star icon"
+                  className="w-4 h-4 object-cover"
+                />
+                <img
+                  src="https://i.ibb.co/3m5mScmb/Star-icon.png"
+                  alt="star icon"
+                  className="w-4 h-4 object-cover"
+                />
               </div>
               <p className="text-[24px] md:text-[30px] text-[#fff] font-semibold mb-2 ">
                 {data.name}

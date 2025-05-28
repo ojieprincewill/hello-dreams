@@ -23,8 +23,8 @@ const OurPackages = () => {
         Each package comes with a design lead.
       </p>
 
-      <div className="flex flex-row justify-center items-center">
-        <div className="bg-[#fff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-tl-2xl rounded-bl-2xl overflow-hidden md:w-[230px] lg:w-[411px]">
+      <div className="flex flex-col space-y-3 md:flex-row justify-center items-center">
+        <div className="bg-[#fff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl md:rounded-none md:rounded-tl-2xl md:rounded-bl-2xl overflow-hidden w-full md:w-[230px] lg:w-[411px]">
           <p className="text-[#010413] text-[12.41px] lg:text-[20px] font-bold mb-4 lg:mb-6 uppercase">
             one-time projects
           </p>

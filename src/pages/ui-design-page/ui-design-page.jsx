@@ -9,11 +9,12 @@ import WeGetHired from "../../components/we-get-hired/we-get-hired.component";
 import CheckOutGallery from "../../components/project-gallery/check-out-gallery.component";
 import PeopleAndCompanies from "../../components/people-and-companies/people-and-companies.component";
 import OurPackages from "../../components/our-packages/our-packages.component";
-import TestimonialSection from "../../components/testimonial-section/testimonial-section.component";
+// import TestimonialSection from "../../components/testimonial-section/testimonial-section.component";
 import FaqSection from "../../components/faq-section/faq-section.component";
 import ConsultationCall from "../../components/Consultation-CTA/consultation-cta.component";
 import NewsletterSection from "../../components/newsletter-section/newsletter-section.component";
 import FooterSection from "../../components/footer-section/footer-section.component";
+import UiTestimonial from "../../components/ui-testimonial/ui-testimonial.component";
 const UiDesignPage = () => {
   return (
     <>
@@ -26,7 +27,7 @@ const UiDesignPage = () => {
       <CheckOutGallery />
       <PeopleAndCompanies />
       <OurPackages />
-      <TestimonialSection />
+      <UiTestimonial />
       <div className="px-[5%] py-10">
         <FaqSection />
       </div>

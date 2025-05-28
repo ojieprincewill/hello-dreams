@@ -23,7 +23,7 @@ const BrandsTrust = () => {
             className="w-[98px] h-[72.11px] object-cover"
           />
           <img
-            src=""
+            src="https://i.ibb.co/fPR3sBR/BRANDS-TRUST-US-LOGO.png"
             alt="grouped logo"
             className="w-[111px] h-[74px] object-cover"
           />

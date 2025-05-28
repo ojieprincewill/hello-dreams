@@ -20,11 +20,11 @@ const CvProcess = () => {
             className="bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl"
           >
             <div className="w-[54.64px] md:w-[60px] h-[54.64px] md:h-[60px] bg-[#1342ff] rounded-lg">
-              {/* <img
-                src=""
+              <img
+                src="https://i.ibb.co/bq876B9/OUR-PROCESS-ICON.png"
                 alt="svg icon"
-                className="w-[35px] h-[35px] object-contain"
-              /> */}
+                className="w-full h-full object-contain"
+              />
             </div>
             <p
               className="text-[19px] md:text-[20px] text-[#30364d] text-center my-4 "

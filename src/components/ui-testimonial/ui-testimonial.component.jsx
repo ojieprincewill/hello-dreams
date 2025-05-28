@@ -1,8 +1,8 @@
 import React from "react";
-import { PrintingTestimonialData } from "../../data/testimonial-data/testimonial.data";
+import { UiTestimonialData } from "../../data/testimonial-data/testimonial.data";
 import { StarIcon } from "@heroicons/react/24/solid";
 
-const PrintingTestimonial = () => {
+const UiTestimonial = () => {
   return (
     <div className="w-full px-[5%] py-10">
       <p
@@ -18,7 +18,7 @@ const PrintingTestimonial = () => {
         Hear what our clients have to say
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-15">
-        {PrintingTestimonialData.map((data) => (
+        {UiTestimonialData.map((data) => (
           <div
             key={data.id}
             className="border border-[#cccccc] rounded-2xl p-3 md:p-5"
@@ -83,4 +83,4 @@ const PrintingTestimonial = () => {
   );
 };
 
-export default PrintingTestimonial;
+export default UiTestimonial;

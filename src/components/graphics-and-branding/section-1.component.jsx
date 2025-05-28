@@ -47,13 +47,17 @@ const SectionOne = () => {
           </div>
 
           <Link to="/services/graphics-consultation" onClick={HandleOrigins}>
-            <button className="bg-[#0c4bf6] text-[#fff] text-center border border-[#0c4bf6] rounded-3xl px-6 py-2 hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <button className="bg-[#010413] text-[#fff] text-center border border-[#010413] rounded-md px-6 py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
               Get free consultation
             </button>
           </Link>
         </div>
       </div>
-      <img src="" alt="outline-svg-1" className="absolute" />
+      <img
+        src="https://i.ibb.co/YTdTfzvW/humaaan-11.png"
+        alt="outline-svg-1"
+        className="absolute bottom-0 left-[170px] w-[560.23px] h-[921.22px] object-cover"
+      />
     </div>
   );
 };

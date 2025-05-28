@@ -5,12 +5,6 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   ArrowRightIcon,
-  Cog6ToothIcon,
-  UserGroupIcon,
-  FolderIcon,
-  ArrowPathIcon,
-  CursorArrowRaysIcon,
-  AcademicCapIcon,
 } from "@heroicons/react/24/solid";
 import Logo from "../../logo/logo.component";
 import { ServicesData } from "../../../data/services-data/services.data";
@@ -62,7 +56,12 @@ const SidebarNav = ({ closeSidebar }) => {
             onClick={(event) => toggleDropdown(event)}
           >
             <p className="flex flex-row p-4">
-              <Cog6ToothIcon className="h-5 w-5 mr-2" /> Services
+              <img
+                src="https://i.ibb.co/m5ztYKCD/icons8-services.png"
+                alt="service icon"
+                className="h-5 w-5 mr-2 object-contain"
+              />
+              Services
             </p>
             {dropDownOpen ? (
               <ChevronUpIcon className="h-5 w-5" />
@@ -111,7 +110,11 @@ const SidebarNav = ({ closeSidebar }) => {
             to="/academy"
             onClick={handleOrigins}
           >
-            <AcademicCapIcon className="h-5 w-5 mr-2" />
+            <img
+              src="https://i.ibb.co/8gdV3VLk/material-symbols-light-mouse-1.png"
+              alt="academy icon"
+              className="h-5 w-5 mr-2 object-contain"
+            />
             Academy
           </Link>
           <Link
@@ -119,7 +122,11 @@ const SidebarNav = ({ closeSidebar }) => {
             to="/portfolio"
             onClick={handleOrigins}
           >
-            <FolderIcon className="h-5 w-5 mr-2" />
+            <img
+              src="https://i.ibb.co/4ZZth002/dashicons-portfolio.png"
+              alt="portfolio icon"
+              className="h-5 w-5 mr-2 object-contain"
+            />
             Our Portfolio
           </Link>
 
@@ -128,7 +135,11 @@ const SidebarNav = ({ closeSidebar }) => {
             to="/about"
             onClick={handleOrigins}
           >
-            <UserGroupIcon className="h-5 w-5 mr-2" />
+            <img
+              src="https://i.ibb.co/fYLL0gGk/gridicons-multiple-users.png"
+              alt="about icon"
+              className="h-5 w-5 mr-2 object-contain"
+            />
             About Us
           </Link>
           <Link
@@ -136,7 +147,11 @@ const SidebarNav = ({ closeSidebar }) => {
             className="flex flex-row bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
-            <ArrowPathIcon className="h-5 w-5 mr-2" />
+            <img
+              src="https://i.ibb.co/tNrS5W2/exchange-541340-1.png"
+              alt="exchange icon"
+              className="h-5 w-5 mr-2 object-contain"
+            />
             Refer & Earn
           </Link>
         </div>

@@ -20,11 +20,11 @@ const WeGetHired = () => {
             className="h-[380px] shadow-lg shadow-[#0000003c] rounded-xl overflow-hidden"
           >
             <div className="w-full h-[261px] bg-[#f7f7f8]">
-              {/* <img
-                src=""
-                alt="svg icon"
-                className="w-[35px] h-[35px] object-contain"
-              /> */}
+              <img
+                src={data.image}
+                alt={data.text}
+                className="w-full h-full object-center"
+              />
             </div>
             <p
               className="text-[15.88px] pt-10 md:text-[21px] text-[#30364d] text-center capitalize font-bold"

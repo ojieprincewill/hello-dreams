@@ -17,7 +17,13 @@ const WebDevCta = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center mb-6 md:mb-0">
-          <div className="bg-[#ffadd9] w-[64px] h-[64px] md:w-[71.82px] md:h-[71.82px] lg:w-[124px] lg:h-[124px] mb-10 rounded-tr-[50%] rounded-tl-[50%] overflow-hidden"></div>
+          <div className="flex justify-center items-center bg-[#ffadd9] w-[64px] h-[64px] md:w-[71.82px] md:h-[71.82px] lg:w-[124px] lg:h-[124px] mb-10 rounded-tr-[50%] rounded-tl-[50%] overflow-hidden">
+            <img
+              src="https://i.ibb.co/k2nGFzHL/Arrow-iconsvg.png"
+              alt="arrow"
+              className="w-[73.14px] h-auto object-contain"
+            />
+          </div>
           <p
             className="text-[#fff] text-[25px] lg:text-[48px] text-center mb-6"
             style={{ fontFamily: "'DM Sans', sans-serif" }}

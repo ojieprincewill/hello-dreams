@@ -188,9 +188,12 @@ const ProfileOptimizationForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">CV Writing alone</option>
+            <option value="service2">CV Writing & LinkedIn Optimisation</option>
+            <option value="service3">
+              LinkedIn Optimisation for individuals{" "}
+            </option>
+            <option value="service4">LinkedIn Optimisation for Business</option>
           </select>
         </div>
         <div>
@@ -206,9 +209,12 @@ const ProfileOptimizationForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">Student </option>
+            <option value="service2">Entry-Level </option>
+            <option value="service3">Internship resume</option>
+            <option value="service4">Mid - Senior level </option>
+            <option value="service5">Career change</option>
+            <option value="service6">Executive Level</option>
           </select>
         </div>
         <div>

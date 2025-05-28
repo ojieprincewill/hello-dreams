@@ -35,8 +35,12 @@ const PeopleAndCompanies = () => {
             designs consistently break launch records and receive stellar
             ratings. Partner with us for exceptional results.
           </p>
-          <div className="flex justify-center items-center w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#f7f7f8] rounded-2xl overflow-hidden absolute bottom-4 lg:bottom-6">
-            Image grid goes here...
+          <div className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#f7f7f8] rounded-xl overflow-hidden absolute bottom-4 lg:bottom-6">
+            <img
+              src="https://i.ibb.co/DfPx94sL/STARTUPS-CARD-IMAGE.png"
+              alt="startup image"
+              className="w-full h-full object-contain"
+            />
           </div>
         </div>
         <div className="bg-[#f7f7f7] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[429.3px] lg:h-[800px] relative">
@@ -56,8 +60,12 @@ const PeopleAndCompanies = () => {
             SEO and design agencies seeking collaborative partnerships for web
             development projects using Webflow, Framer, and WordPress.
           </p>
-          <div className="flex justify-center items-center w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#efece9] rounded-2xl overflow-hidden absolute bottom-4 lg:bottom-6">
-            Image grid goes here...
+          <div className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#efece9] rounded-[20px] overflow-hidden absolute bottom-4 lg:bottom-6">
+            <img
+              src="https://i.ibb.co/tTgr9s1C/Established-Enterprises-CARD-IMAGE.png"
+              alt="established image"
+              className="w-full h-full object-center"
+            />
           </div>
         </div>
       </div>

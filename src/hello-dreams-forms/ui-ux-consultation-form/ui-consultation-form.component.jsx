@@ -172,10 +172,14 @@ const UiConsultationForm = () => {
             onChange={handleChange}
             className="w-full text-[#b2b2b2] p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
-            <option value="">Select an option</option>
-            <option value="google">Google</option>
-            <option value="referral">Referral</option>
-            <option value="social">Social Media</option>
+            <option value="" disabled>
+              Select an option
+            </option>
+            <option value="google">Google search</option>
+            <option value="referral">From a friend</option>
+            <option value="social">LinkedIn</option>
+            <option value="social">Instagram</option>
+            <option value="social">Youtube</option>
           </select>
 
           <button

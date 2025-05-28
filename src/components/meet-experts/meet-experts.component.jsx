@@ -48,7 +48,8 @@ const MeetExperts = () => {
               className="text-[#7f8090] text-[11px] lg:text-[15.5px] leading-[1.5] mb-3"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              {data.text}
+              {data.text}{" "}
+              <span className="font-bold cursor-pointer">read more</span>
             </p>
           </div>
         ))}

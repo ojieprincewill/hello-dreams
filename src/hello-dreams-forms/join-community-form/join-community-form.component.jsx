@@ -85,9 +85,11 @@ const JoinCommunityForm = () => {
               <option value="" disabled className="">
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="google">Google search</option>
+              <option value="referral">From a friend</option>
+              <option value="social">LinkedIn</option>
+              <option value="social">Instagram</option>
+              <option value="social">Youtube</option>
             </select>
           </div>
           <div>

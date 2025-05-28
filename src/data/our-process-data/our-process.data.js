@@ -121,12 +121,12 @@ export const WebDevProcessData = [
 export const GetHiredData = [
   {
     id: 1,
-    image: null,
+    image: "https://i.ibb.co/HTSYw9PW/website-designs.png",
     text: "website designs",
   },
   {
     id: 2,
-    image: null,
+    image: "https://i.ibb.co/MkWDjYXy/Group-55521.png",
     text: "mobile app designs",
   },
 ];

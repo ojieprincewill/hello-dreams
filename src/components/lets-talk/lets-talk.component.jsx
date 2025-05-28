@@ -96,9 +96,13 @@ const LetsTalk = () => {
             <option value="" disabled className="">
               Select project type
             </option>
-            <option value="service1">Service 1</option>
-            <option value="service2">Service 2</option>
-            <option value="service3">Service 3</option>
+            <option value="service1">UI/UX Design</option>
+            <option value="service2">Logo Design</option>
+            <option value="service3">Branding</option>
+            <option value="service4">User Research</option>
+            <option value="service5">Redesign</option>
+            <option value="service6">Development</option>
+            <option value="service7">Printing</option>
           </select>
         </div>
         <div>

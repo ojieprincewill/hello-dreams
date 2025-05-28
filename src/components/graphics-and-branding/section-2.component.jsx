@@ -7,7 +7,7 @@ const SectionTwo = () => {
   };
 
   return (
-    <div className="relative bg-[#008080]/12 h-[1082px] px-[5%] py-5">
+    <div className="relative bg-[#008080]/12 h-[982px] px-[5%] py-5">
       <div className="grid grid-cols-2 w-full h-[800px] bg-[#fff] overflow-hidden rounded-2xl mt-8">
         <div className="px-3 py-10 rounded-tr-2xl rounded-br-2xl ">
           <p className="text-[#101828] text-[22.31px] mb-5">
@@ -41,7 +41,7 @@ const SectionTwo = () => {
           </div>
 
           <Link to="/services/graphics-consultation" onClick={HandleOrigins}>
-            <button className="bg-[#0c4bf6] text-[#fff] text-center border border-[#0c4bf6] rounded-3xl px-6 py-2 hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <button className="bg-[#010413] text-[#fff] text-center border border-[#010413] rounded-md px-6 py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
               Get free consultation
             </button>
           </Link>
@@ -52,7 +52,11 @@ const SectionTwo = () => {
           </span>
         </div>
       </div>
-      <img src="" alt="outline-svg-2" className="absolute" />
+      <img
+        src="https://i.ibb.co/fV5QQRsJ/sitting-1.png"
+        alt="outline-svg-2"
+        className="absolute bottom-0 right-[80px] w-[747.31px] h-[890px] object-cover"
+      />
     </div>
   );
 };

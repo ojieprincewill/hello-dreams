@@ -103,11 +103,9 @@ const MentorshipForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Instagram</option>
-            <option value="service2">Tiktok</option>
-            <option value="service3">LinkedIn</option>
-            <option value="service3">X (Former Twitter)</option>
-            <option value="service3">Facebook</option>
+            <option value="service1">1:1 sessions</option>
+            <option value="service2">Group sessions</option>
+            <option value="service3">Chat-based</option>
           </select>
         </div>
         <div>
@@ -123,9 +121,9 @@ const MentorshipForm = () => {
             <option value="" disabled className="">
               Select an option
             </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
+            <option value="service1">1 Month</option>
+            <option value="service2">2 Months</option>
+            <option value="service3">3 Months</option>
           </select>
         </div>
         <div>
@@ -157,9 +155,7 @@ const MentorshipForm = () => {
               <option value="" disabled className="">
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">UI/UX Design</option>
             </select>
           </div>
           <div>
