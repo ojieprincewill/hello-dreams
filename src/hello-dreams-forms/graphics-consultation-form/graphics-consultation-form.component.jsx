@@ -281,7 +281,12 @@ const GraphicsConsultationForm = () => {
             {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
           </button>
 
-          {errors && <p className="text-red-600 mt-4">{errors}</p>}
+          {/* The 'errors' object is being rendered directly as a React child, 
+              which causes an error because React cannot display objects. 
+              Convert it to a string or display individual error messages instead. 
+              Suggested fix: Object.values(errors).join(", ") or map through error fields. */}
+
+          {/* {errors && <p className="text-red-600 mt-4">{errors}</p>} */}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
       </form>

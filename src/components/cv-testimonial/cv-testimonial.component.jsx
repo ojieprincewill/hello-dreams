@@ -17,7 +17,7 @@ const CvTestimonial = () => {
       >
         Hear what our clients have to say
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-15">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-15">
         {CvTestimonialData.map((data) => (
           <div
             key={data.id}
@@ -25,7 +25,7 @@ const CvTestimonial = () => {
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row space-x-3 items-center">
-                <div className="w-[45.77px] h-[45.77px] md:w-[43.83px] md:h-[43.83px] lg:w-[77px] lg:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
+                <div className="w-[32px] h-[32px] md:w-[43.83px] md:h-[43.83px] lg:w-[77px] lg:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
                   <img
                     src={data.image}
                     alt={data.client}
@@ -45,7 +45,7 @@ const CvTestimonial = () => {
                 </div>
               </div>
               <div className="flex flex-row space-x-3 items-center">
-                <div className="flex space-x-1">
+                <div className="hidden lg:flex space-x-1">
                   {[...Array(5)].map((_, index) => (
                     <StarIcon
                       key={index}
@@ -119,6 +119,16 @@ const CvTestimonial = () => {
                   </p>
                 </div>
               ) : null}
+            </div>
+            <div className="flex space-x-1 md:hidden">
+              {[...Array(5)].map((_, index) => (
+                <StarIcon
+                  key={index}
+                  className={`w-5 h-5 md:w-7 md:h-7 ${
+                    index < data.rating ? "text-[#ff9d2b]" : "text-[#aeaeae]"
+                  }`}
+                />
+              ))}
             </div>
           </div>
         ))}

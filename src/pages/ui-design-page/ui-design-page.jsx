@@ -28,7 +28,7 @@ const UiDesignPage = () => {
       <PeopleAndCompanies />
       <OurPackages />
       <UiTestimonial />
-      <div className="px-[5%] py-10">
+      <div className="px-[2%] py-5">
         <FaqSection />
       </div>
       <ConsultationCall />

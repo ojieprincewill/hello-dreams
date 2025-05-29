@@ -13,7 +13,7 @@ const WeGetHired = () => {
       >
         The below
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20">
         {GetHiredData.map((data) => (
           <div
             key={data.id}
@@ -34,7 +34,7 @@ const WeGetHired = () => {
             </p>
           </div>
         ))}
-        <div className="h-[380px] shadow-lg shadow-[#0000003c] rounded-xl overflow-hidden">
+        <div className="md:col-span-2 h-[380px] shadow-lg shadow-[#0000003c] rounded-xl overflow-hidden">
           <div className="w-full h-[261px] bg-[#f7f7f8] grid grid-cols-1 gap-1 p-2">
             <div className="bg-[#000000]/18 rounded-xl overflow-hidden">
               <img

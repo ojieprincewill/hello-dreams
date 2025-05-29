@@ -9,9 +9,9 @@ const JobHeader = () => {
 
   return (
     <>
-      <div className="relative pt-[15px] w-full h-[435px] md:h-[904px] bg-[url('https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png')] bg-cover bg-center">
+      <div className="relative pt-[15px] w-full h-[435px] md:h-[640px] lg:h-[904px] bg-[url('https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png')] bg-cover bg-center">
         <NavBar />
-        <div className="hidden absolute top-[263px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]">
+        <div className="hidden absolute top-[263px] left-[7%] lg:flex flex-col items-start justify-start text-[#fff]">
           <h1 className="text-[64px] w-[630px] leading-[1.1] font-extrabold">
             Your Dream Job Starts Here
           </h1>
@@ -31,18 +31,18 @@ const JobHeader = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-[5%] py-5 md:hidden">
-        <h1 className="text-[20px] w-full leading-[1.1] font-extrabold">
+      <div className="w-full px-[5%] py-10 lg:hidden">
+        <h1 className="text-[20px] md:text-[40px] w-full leading-[1.1] font-extrabold mb-3 md:mb-5">
           Your dream job starts here
         </h1>
-        <p className="mt-2 text-[#667085] text-[12px] w-full leading-[tight]">
+        <p className="mt-2 text-[#667085] text-[12px] md:text-[24px] w-full leading-[1.7] mb-3 md:mb-5">
           Explore curated jobs, internships, and freelance gigs that match your
           skills. We connect passionate dreamers with companies that value
           growth, creativity, and impact
         </p>
         <Link to="/post-a-job">
           <button
-            className="bg-[#010413] w-full mt-5 text-[#fff] font-semibold border border-[#010413] text-[14px] px-4 py-3 rounded-lg transition-colors duration-300 cursor-pointer"
+            className="bg-[#010413] w-full md:w-[284px] mt-5 text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-4 py-3 rounded-lg transition-colors duration-300 cursor-pointer"
             onClick={handleOrigins}
           >
             Post a Job

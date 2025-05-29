@@ -1,12 +1,12 @@
 import { React, useState } from "react";
-import supabase from "../../supabase/client"
+import supabase from "../../supabase/client";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
     service: "",
     name: "",
     email: "",
-    data:{
+    data: {
       referralName: "",
       referralEmail: "",
     },
@@ -20,8 +20,9 @@ const ReferForm = () => {
   const [generatedCode, setGeneratedCode] = useState("");
 
   const generateReferralCode = (length = 6) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -46,8 +47,16 @@ const ReferForm = () => {
     console.log("Form Data on Submit:", formData);
 
     const { service, name, email, data, referralCode } = formData;
-    if (!service || !name || !email || !data.referralName || !data.referralEmail) {
-      setError("Please fill in all required fields, including referral details.");
+    if (
+      !service ||
+      !name ||
+      !email ||
+      !data.referralName ||
+      !data.referralEmail
+    ) {
+      setError(
+        "Please fill in all required fields, including referral details."
+      );
       setLoading(false);
       return;
     }
@@ -66,9 +75,12 @@ const ReferForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke("referral-handler", {
-        body: payload,
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "referral-handler",
+        {
+          body: payload,
+        }
+      );
 
       if (error) {
         const supabaseError = error.message || error;
@@ -118,62 +130,71 @@ const ReferForm = () => {
   };
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(generatedCode)
+    navigator.clipboard
+      .writeText(generatedCode)
       .then(() => {
         alert("Referral code copied to clipboard!");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Failed to copy code: ", err);
         alert("Failed to copy code. Please try manually.");
       });
   };
 
   return (
-    <div className="px-[10%] py-10">
+    <div className="px-[5%] md:px-[10%] py-10">
       <p
-        className="text-[#667085] text-[24px] text-center font-bold w-[480px] mx-auto mb-5"
+        className="text-[#667085] text-[12px] md:text-[19.54px] lg:text-[24px] text-center font-bold md:w-[480px] mx-auto mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Earn Rewards with Our Refer and Earn Program
       </p>
       <p
-        className="text-[#010413] text-[48px] text-center w-[840px] mx-auto mb-5"
+        className="text-[#010413] text-[24px] md:text-[39.09px] lg:text-[48px] text-center lg:w-[840px] mx-auto mb-5"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Share the Benefits and Get Rewarded for Every Referral
       </p>
       <p
-        className="text-[#667085] text-[16px] text-center mb-5"
+        className="text-[#667085] text-[12px] md:text-[13.1px] lg:text-[16px] text-center mb-5"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Make up to 10% on commission for every referral of any of our services.
       </p>
       <p
-        className="text-[#000000] text-[40px] text-center font-bold mt-6"
+        className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold mt-6"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Step 1: Generate Your Code
       </p>
-      <div className="w-[401.75px] mx-auto flex flex-col items-center space-y-4 mt-3">
+      <div className="w-full md:w-[401.75px] mx-auto flex flex-col items-center space-y-4 mt-3">
         <button
           type="button"
           onClick={handleGenerateAndShowCode}
-          className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
         >
-          {formData.referralCode ? "Re-generate Code" : "Generate My Referral Code"}
+          {formData.referralCode
+            ? "Re-generate Code"
+            : "Generate My Referral Code"}
         </button>
         {formData.referralCode && (
-          <p className="text-sm text-gray-600">Your current code: {formData.referralCode} (Click above to re-generate and copy)</p>
+          <p className="text-sm text-gray-600">
+            Your current code: {formData.referralCode} (Click above to
+            re-generate and copy)
+          </p>
         )}
       </div>
 
       <p
-        className="text-[#000000] text-[40px] text-center font-bold mt-10"
+        className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold mt-10"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Step 2: Enter Referral Details
       </p>
-      <form onSubmit={handleSubmit} className="w-[401.75px] mx-auto space-y-8 md:p-6 mt-3 ">
+      <form
+        onSubmit={handleSubmit}
+        className="md:w-[401.75px] mx-auto space-y-8 md:p-6 mt-3 "
+      >
         <div>
           <label
             className="block text-[#475569] text-[12px] text-center md:text-[16px] font-medium mb-3 md:mb-4"
@@ -276,8 +297,10 @@ const ReferForm = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
-            <h3 className="text-xl font-bold mb-4 text-[#010413]">Your Referral Code</h3>
-            <p 
+            <h3 className="text-xl font-bold mb-4 text-[#010413]">
+              Your Referral Code
+            </h3>
+            <p
               className="text-center text-2xl font-mono bg-gray-100 p-3 rounded my-4 break-all"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >

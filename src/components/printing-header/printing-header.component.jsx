@@ -26,7 +26,7 @@ const PrintingHeader = () => {
           every step of the process, providing you with products that
           effectively represent your brand and communicate your message.
         </p>
-        <div className="absolute top-[-30px] left-[484px] w-[54px] h-[54px] ">
+        <div className="absolute top-[270px] md:top-[10px] left-[270px] lg:top-[-30px] lg:left-[484px] w-[30.7px] h-[30.7px] lg:w-[54px] lg:h-[54px] ">
           <img
             src="https://i.ibb.co/ycmTsNT0/caf76bbf69e13f18aa187a597538509b2ec8680b.png"
             alt="pink arrow"

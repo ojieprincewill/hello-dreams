@@ -10,7 +10,7 @@ const JobBoard = () => {
   };
 
   return (
-    <div className="px-[5%] lg:px-[10%] py-10 md:py-15 relative">
+    <div className="px-[5%] lg:px-[10%] py-5 md:py-15 relative">
       <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold flex items-center justify-center gap-2 mb-3">
         Jobs Available
         <span className="ml-1">

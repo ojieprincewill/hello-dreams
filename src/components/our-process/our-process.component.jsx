@@ -8,7 +8,7 @@ const OurProcess = () => {
   };
 
   return (
-    <div className="w-full px-[5%] lg:px-[10%] py-15">
+    <div className="w-full px-[5%] lg:px-[10%] py-10 md:py-15">
       <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
         Our Process
       </p>
@@ -18,11 +18,15 @@ const OurProcess = () => {
       >
         User experience design services
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20">
-        {ProcessData.map((data) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 md:mt-10 lg:mt-20">
+        {ProcessData.map((data, index) => (
           <div
             key={data.id}
-            className="bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl"
+            className={`bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl ${
+              index === ProcessData.length - 1 && ProcessData.length % 2 !== 0
+                ? "md:col-span-2 lg:col-span-1"
+                : ""
+            }`}
           >
             <div className="w-[54.64px] md:w-[60px] h-[54.64px] md:h-[60px] bg-[#1342ff] rounded-lg">
               <img
@@ -37,7 +41,7 @@ const OurProcess = () => {
             >
               {data.title}
             </p>
-            <p className="text-[15px] md:text-[16px] text-[#000000] lg:font-bold text-center leading-[1.5] ">
+            <p className="text-[15px] md:text-[16px] text-[#000000] text-center leading-[1.5] ">
               {data.text}
             </p>
           </div>

@@ -9,15 +9,14 @@ const Development = () => {
 
   return (
     <div className="w-full px-[5%] py-10">
-      <p className="text-[#101828] text-center text-[48px] font-bold mb-3 ">
+      <p className="text-[#101828] text-center text-[20px] md:text-[23.98px] lg:text-[48px] font-bold mb-3 ">
         Development
       </p>
       <p
-        className="text-[#667085] text-center text-[17.44px] mb-7 "
+        className="text-[#667085] text-center text-[12px] md:text-[10px] lg:text-[17.44px] mb-7 w-full md:w-[598px] md:mx-auto"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Professional web and mobile app development services tailored to your
-        <br />
         business needs
       </p>
       <Link
@@ -30,10 +29,10 @@ const Development = () => {
         </button>
       </Link>
 
-      <div className="grid grid-cols-4 gap-5 my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10">
         {DevData.map((data, index) => (
           <div key={data.id} className="border border-[#dfdfe2] rounded-xl p-2">
-            <div className="w-full h-[360px] rounded-xl overflow-hidden ">
+            <div className="w-full h-[280px] lg:h-[360px] rounded-xl overflow-hidden ">
               <img
                 src={data.image}
                 alt={data.title}
@@ -43,13 +42,13 @@ const Development = () => {
               />
             </div>
             <p
-              className="text-[#26262b] text-[18px] font-medium my-2"
+              className="text-[#26262b] text-[16px] md:text-[12px] lg:text-[18px] font-medium my-2"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {data.title}
             </p>
             <p
-              className="text-[#7f8090] text-[15.5px]  "
+              className="text-[#7f8090] text-[14px] md:text-[10px] lg:text-[15.5px]  "
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {data.text}

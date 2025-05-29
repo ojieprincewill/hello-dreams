@@ -21,7 +21,7 @@ const WebDevCta = () => {
             <img
               src="https://i.ibb.co/k2nGFzHL/Arrow-iconsvg.png"
               alt="arrow"
-              className="w-[73.14px] h-auto object-contain"
+              className="w-[37.75px] md:w-[42.36px] lg:w-[73.14px] h-auto object-contain"
             />
           </div>
           <p

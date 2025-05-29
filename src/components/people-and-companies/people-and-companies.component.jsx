@@ -2,7 +2,7 @@ import React from "react";
 
 const PeopleAndCompanies = () => {
   return (
-    <div className="w-full px-[5%] py-15">
+    <div className="w-full px-[5%] py-10">
       <p
         className="text-[#010413] text-[26px] lg:text-[48px] text-center mb-4"
         style={{ fontFamily: "'DM Serif Display', serif" }}
@@ -43,7 +43,7 @@ const PeopleAndCompanies = () => {
             />
           </div>
         </div>
-        <div className="bg-[#f7f7f7] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[429.3px] lg:h-[800px] relative">
+        <div className="bg-[#f7f7f7] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[450px] md:h-[429.3px] lg:h-[800px] relative">
           <div className="bg-[#ff6250] w-[66.54px] h-[66.54px] lg:w-[124px] lg:h-[124px] mb-4 rounded-tr-[100%] overflow-hidden"></div>
           <p
             className="text-[#333333] text-[26px] lg:text-[48px] mb-3"

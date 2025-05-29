@@ -2,7 +2,7 @@ import React from "react";
 import { SetApartData } from "../../data/set-apart-data/set-apart-data";
 const WhatSetsUsApart = () => {
   return (
-    <div className="w-full px-[5%] lg:px-[10%] py-10 md:py-20">
+    <div className="w-full px-[5%] lg:px-[10%] py-10">
       <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
         What Sets Us Apart
       </p>
@@ -13,9 +13,16 @@ const WhatSetsUsApart = () => {
         innovative solutions, user-centric designs, and cutting-edge
         technologies
       </p>
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-7">
-        {SetApartData.map((data) => (
-          <div key={data.id} className="p-3 border border-[#ccc] rounded-2xl">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
+        {SetApartData.map((data, index) => (
+          <div
+            key={data.id}
+            className={`p-3 border border-[#dfdfe2] rounded-2xl ${
+              index === SetApartData.length - 1
+                ? "md:col-span-2 lg:col-span-1"
+                : ""
+            }`}
+          >
             <div className="bg-[#efece9] flex justify-center items-center p-3 rounded-xl">
               <img
                 src={data.image}

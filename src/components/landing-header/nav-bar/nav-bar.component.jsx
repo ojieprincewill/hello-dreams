@@ -118,7 +118,7 @@ const NavBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-[100px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-14 z-80 rounded-xl"
+            className="fixed top-[100px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-12 z-80 rounded-xl"
           >
             {ServicesData.map((data) => (
               <Link
@@ -136,17 +136,17 @@ const NavBar = () => {
                   />
                 </div>
                 <div>
-                  <div className="flex flex-row justify-between items-center">
+                  <div className="relative flex flex-row justify-between items-center">
                     <p className=" text-[#353535] max-w-[200px] text-[18px] font-bold mb-1">
                       {data.title}
                     </p>
-                    <span>
+                    <div className=" absolute right-[15px] w-[17.87px] h-[13.8px]">
                       <img
                         src="https://i.ibb.co/B2tvMj9t/Button-SVG.png"
                         alt="blue arrow"
-                        className="w-[17.87px] h-[13.8px] object-cover"
+                        className="w-full h-full object-cover"
                       />
-                    </span>
+                    </div>
                   </div>
                   <p className="text-[#353535] max-w-[200px] text-[14px] font-bold">
                     {data.text}

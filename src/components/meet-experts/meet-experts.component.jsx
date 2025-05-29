@@ -8,7 +8,7 @@ const MeetExperts = () => {
   };
 
   return (
-    <div className="w-full px-[5%] py-10 md:py-20">
+    <div className="w-full px-[5%] py-10">
       <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
         Meet Our Team of Experts
       </p>
@@ -29,8 +29,16 @@ const MeetExperts = () => {
         </button>
       </Link>
       <div className="w-full mt-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-        {MeetExpertsData.map((data) => (
-          <div key={data.id} className="p-3 border border-[#dfdfe2] rounded-xl">
+        {MeetExpertsData.map((data, index) => (
+          <div
+            key={data.id}
+            className={`p-3 border border-[#dfdfe2] rounded-xl ${
+              index === MeetExpertsData.length - 1 &&
+              MeetExpertsData.length % 2 !== 0
+                ? "md:col-span-2"
+                : ""
+            }`}
+          >
             <div className="w-full h-[221.35px] md:h-[286.65px] lg:h-[360px] mb-5">
               <img
                 src={data.image}

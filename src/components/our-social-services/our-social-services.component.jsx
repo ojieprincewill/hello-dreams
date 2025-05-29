@@ -14,10 +14,15 @@ const OurSocialServices = () => {
         Social Media Management
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-10 md:mt-20 ">
-        {SocialProcessData.map((data) => (
+        {SocialProcessData.map((data, index) => (
           <div
             key={data.id}
-            className="bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl md:mb-20"
+            className={`bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl ${
+              index === SocialProcessData.length - 1 &&
+              SocialProcessData.length % 2 !== 0
+                ? "md:col-span-2 lg:col-span-1"
+                : ""
+            }`}
           >
             <div className="w-[54.64px] md:w-[60px] h-[54.64px] md:h-[60px] bg-[#1342ff] rounded-lg">
               <img
