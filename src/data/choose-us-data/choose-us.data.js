@@ -100,7 +100,8 @@ export const MeetExpertsData = [
   },
   {
     id: 4,
-    image: "https://i.ibb.co/n8NY0rmv/IMG-7419.jpg",
+    image:
+      "https://i.ibb.co/4wsqsRX5/2df0a4ea796e5398d4b722280a1e7e08c0404d17.jpg",
     name: "Lilian Chinonye",
     text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch. ",
     role: "Petrophysicist",
@@ -108,9 +109,17 @@ export const MeetExpertsData = [
   {
     id: 5,
     image:
-      "https://i.ibb.co/C3Wsqvj2/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d.jpg",
+      "https://i.ibb.co/7xxnvq4p/59889901474710ef1bcd3aa9b3ca78aa7c16443a.jpg",
     name: "Jennifer Obatta",
     text: "Jennifer content goes here...",
     role: "Quality Assurance",
+  },
+  {
+    id: 6,
+    image:
+      "https://i.ibb.co/C3Wsqvj2/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d.jpg",
+    name: "Fourth Person",
+    text: "Content goes here... Everything here is a placeholder",
+    role: "Role goes here...",
   },
 ];

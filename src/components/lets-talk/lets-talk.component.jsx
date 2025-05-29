@@ -91,18 +91,32 @@ const LetsTalk = () => {
           <select
             value={selectedService}
             onChange={(e) => setSelectedService(e.target.value)}
-            className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-bold p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            className="w-full text-[#444] text-[10px] md:text-[14px] p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
-            <option value="" disabled className="">
+            <option value="" disabled className="text-[#b2b2b2]">
               Select project type
             </option>
-            <option value="service1">UI/UX Design</option>
-            <option value="service2">Logo Design</option>
-            <option value="service3">Branding</option>
-            <option value="service4">User Research</option>
-            <option value="service5">Redesign</option>
-            <option value="service6">Development</option>
-            <option value="service7">Printing</option>
+            <option value="service1" className="text-[#444]">
+              UI/UX Design
+            </option>
+            <option value="service2" className="text-[#444]">
+              Logo Design
+            </option>
+            <option value="service3" className="text-[#444]">
+              Branding
+            </option>
+            <option value="service4" className="text-[#444]">
+              User Research
+            </option>
+            <option value="service5" className="text-[#444]">
+              Redesign
+            </option>
+            <option value="service6" className="text-[#444]">
+              Development
+            </option>
+            <option value="service7" className="text-[#444]">
+              Printing
+            </option>
           </select>
         </div>
         <div>

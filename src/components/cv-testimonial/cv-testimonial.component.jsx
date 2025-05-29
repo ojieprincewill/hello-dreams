@@ -25,7 +25,7 @@ const CvTestimonial = () => {
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row space-x-3 items-center">
-                <div className="w-[32px] h-[32px] md:w-[43.83px] md:h-[43.83px] lg:w-[77px] lg:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
+                <div className="w-[43.83px] h-[43.83px] lg:w-[77px] lg:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
                   <img
                     src={data.image}
                     alt={data.client}
@@ -77,7 +77,10 @@ const CvTestimonial = () => {
               {data.images && (
                 <div className="flex justify-center items-center space-x-5">
                   {data.images.map((image, index) => (
-                    <div key={index} className="w-[206px] h-[206px] ">
+                    <div
+                      key={index}
+                      className="w-[150px] h-[150px] md:w-[206px] md:h-[206px] "
+                    >
                       <img
                         src={image}
                         alt="testimonial image"
@@ -120,7 +123,7 @@ const CvTestimonial = () => {
                 </div>
               ) : null}
             </div>
-            <div className="flex space-x-1 md:hidden">
+            <div className="flex space-x-1 lg:hidden">
               {[...Array(5)].map((_, index) => (
                 <StarIcon
                   key={index}

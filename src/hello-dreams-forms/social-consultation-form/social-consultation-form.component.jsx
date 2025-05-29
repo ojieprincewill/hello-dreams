@@ -225,19 +225,13 @@ const SocialConsultationForm = () => {
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
             Any Competitors or Pages You Admire?
           </label>
-          <select
-            name="competitors"
+          <input
+            type="text"
+            className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            name="socialMediaLink"
             value={formData.competitors}
             onChange={handleChange}
-            className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
-          >
-            <option value="" disabled className="">
-              Select an option
-            </option>
-            <option value="service1">Option 1</option>
-            <option value="service2">Option 2</option>
-            <option value="service3">Option 3</option>
-          </select>
+          />
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
