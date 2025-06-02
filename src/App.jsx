@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/homepage/homepage";
-import ServicesPage from "./pages/services-page/servicespage";
 import PortfolioPage from "./pages/portfolio-page/portfolio-page";
 import AcademyPage from "./pages/academy-page/academy-page";
 import AboutPage from "./pages/about-page/about-page";
@@ -34,7 +33,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/ui-design" element={<UiDesignPage />} />
         <Route
           path="/services/ui-design-consultation"
