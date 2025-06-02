@@ -51,22 +51,24 @@ const FooterSection = () => {
                 <Link
                   to="academy"
                   onClick={handleOrigins}
-                  className="cursor-pointer"
+                  className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >
                   Academy
                 </Link>
-                <div className="cursor-pointer">Services</div>
+                <div className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer">
+                  Services
+                </div>
                 <Link
                   to="/portfolio"
                   onClick={handleOrigins}
-                  className="cursor-pointer"
+                  className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >
                   Portfolio
                 </Link>
                 <Link
                   to="/about"
                   onClick={handleOrigins}
-                  className="cursor-pointer"
+                  className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >
                   About us
                 </Link>
@@ -78,9 +80,24 @@ const FooterSection = () => {
                   Follow
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                  <span>Youtube</span>
-                  <span>Instagram</span>
-                  <span>LinkedIn</span>
+                  <Link
+                    to=""
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    Youtube
+                  </Link>
+                  <Link
+                    to=""
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    Instagram
+                  </Link>
+                  <Link
+                    to=""
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    LinkedIn
+                  </Link>
                 </div>
               </div>
               <div>
@@ -88,8 +105,20 @@ const FooterSection = () => {
                   Legal
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                  <span>Privacy Policy</span>
-                  <span>Terms of Service</span>
+                  <Link
+                    to=""
+                    onClick={handleOrigins}
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    Privacy Policy
+                  </Link>
+                  <Link
+                    to=""
+                    onClick={handleOrigins}
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    Terms of Service
+                  </Link>
                 </div>
               </div>
             </div>
@@ -100,15 +129,21 @@ const FooterSection = () => {
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
                   <span className="w-[100px] md:w-full">
-                    Email:support@myhellodreams.com
+                    Email:{" "}
+                    <a
+                      href="mailto:support@myhellodreams.com"
+                      className="hover:text-[#99c8ff] transition-colors duration-300"
+                    >
+                      support@myhellodreams.com
+                    </a>
                   </span>
-                  <span>Phone:07016773420</span>
+                  <span>Phone: 07016773420</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="w-full h-max grid grid-cols-2 text-[#fff] text-[11px] md:text-[12px] lg:text-[20px] font-bold border-t border-b border-[#ffffff20]">
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-[#ffffff20] w-full h-full">
+            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-[#ffffff20] w-full h-full hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer">
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/fYPXmXPX/SVG.png"
@@ -118,7 +153,7 @@ const FooterSection = () => {
               </span>
               Twitter
             </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-l border-[#ffffff20] w-full h-full">
+            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-l border-[#ffffff20] w-full h-full hover:text-[#ffb3ce] transition-colors duration-300 cursor-pointer">
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/27nrzGhc/SVG-2.png"
@@ -128,7 +163,7 @@ const FooterSection = () => {
               </span>
               Instagram
             </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-[#ffffff20] w-full h-full">
+            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-[#ffffff20] w-full h-full hover:text-[#8c77ec] transition-colors duration-300 cursor-pointer">
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/xKdJ3Tgx/Vector.png"
@@ -138,7 +173,7 @@ const FooterSection = () => {
               </span>
               Facebook
             </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-l border-[#ffffff20] w-full h-full">
+            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-l border-[#ffffff20] w-full h-full hover:text-[#ff884d] transition-colors duration-300 cursor-pointer">
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/KxBB6mx2/Background-Border.png"
