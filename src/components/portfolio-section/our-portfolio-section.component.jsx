@@ -7,7 +7,7 @@ const OurPortfolioSection = () => {
   };
 
   return (
-    <div className="w-full px-[5%] py-10 md:py-20">
+    <div className="w-full px-[5%] py-10">
       <div className="w-full text-center flex flex-col justify-center items-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Our Team's Portfolio
@@ -17,7 +17,7 @@ const OurPortfolioSection = () => {
           <br />
           Achievements and Creativity
         </p>
-        <div className="mt-6 flex flex-col justify-center w-full space-y-4 md:flex-row md:space-x-4">
+        <div className="mt-6 flex flex-col justify-center w-full md:w-[431px] lg:w-full space-y-4 lg:flex-row lg:space-x-4">
           <Link
             to="/portfolio"
             onClick={handleOrigins}
@@ -27,8 +27,8 @@ const OurPortfolioSection = () => {
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative bg-[#1a212a] p-5 w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="relative bg-[#1a212a] p-5 w-full h-[478px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
           <p className="text-[16px] md:text-[24px] md:font-bold md:uppercase text-[#fff]">
             Sisenow
           </p>
@@ -41,7 +41,7 @@ const OurPortfolioSection = () => {
           <button className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
             View Website
           </button>
-          <div className="absolute bottom-0 right-[-160px] md:bottom-[-10px] md:right-[-350px] w-[406px] h-[265.61px] md:w-[856px] md:h-[560px]">
+          <div className="absolute bottom-0 right-[-160px] md:bottom-[-10px] md:right-[-300px] lg:right-[-350px] w-[406px] h-[265.61px] md:w-[856px] md:h-[560px]">
             <img
               src="https://i.ibb.co/0VqZxNHd/f123697aa370f082191412d5dc38d04629b4621e.png"
               alt="website screenshot"
@@ -49,7 +49,7 @@ const OurPortfolioSection = () => {
             />
           </div>
         </div>
-        <div className="relative bg-[#ff7f50] p-5 w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+        <div className="relative bg-[#ff7f50] p-5 w-full h-[478px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
           <p className="text-[16px] md:text-[24px] md:font-bold md:uppercase text-[#fff]">
             UI Designs
           </p>

@@ -11,8 +11,8 @@ const JobHeader = () => {
     <>
       <div className="relative pt-[15px] w-full h-[435px] md:h-[640px] lg:h-[904px] bg-[url('https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png')] bg-cover bg-center">
         <NavBar />
-        <div className="hidden absolute top-[263px] left-[7%] lg:flex flex-col items-start justify-start text-[#fff]">
-          <h1 className="text-[64px] w-[630px] leading-[1.1] font-extrabold">
+        <div className="hidden absolute md:top-[200px] lg:top-[263px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]">
+          <h1 className="md:text-[48px] lg:text-[64px] w-[630px] leading-[1.1] font-extrabold">
             Your Dream Job Starts Here
           </h1>
           <p className="mt-8 text-[20px] w-[556px] leading-[1.4]">
@@ -31,7 +31,7 @@ const JobHeader = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-[5%] py-10 lg:hidden">
+      <div className="w-full px-[5%] py-10 md:hidden">
         <h1 className="text-[20px] md:text-[40px] w-full leading-[1.1] font-extrabold mb-3 md:mb-5">
           Your dream job starts here
         </h1>

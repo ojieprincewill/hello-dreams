@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/landing-header/nav-bar/nav-bar.component";
+
 import PrintingHeader from "../../components/printing-header/printing-header.component";
 import PrintingServicesWeOffer from "../../components/printing-services-we-offer/printing-services-we-offer.component";
 import PrintingProcess from "../../components/printing-process/printing-process.component";
@@ -14,7 +14,6 @@ import FooterSection from "../../components/footer-section/footer-section.compon
 const PrintingPage = () => {
   return (
     <>
-      <NavBar />
       <PrintingHeader />
       <PrintingServicesWeOffer />
       <PrintingProcess />

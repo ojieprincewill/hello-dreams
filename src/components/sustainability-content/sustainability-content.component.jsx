@@ -9,12 +9,12 @@ const SustainabilityContent = () => {
   };
 
   return (
-    <div className="w-full px-[5%] py-20 grid grid-cols-3 gap-x-5 gap-y-10">
+    <div className="w-full px-[5%] py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
       {blogData.map((data, index) => (
         <div
           key={data.id}
           className={`relative w-full h-[448px] p-1 ${
-            index === blogData.length - 1 ? "col-span-3" : ""
+            index === blogData.length - 1 ? "lg:col-span-3" : ""
           }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >

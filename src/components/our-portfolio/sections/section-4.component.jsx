@@ -34,15 +34,35 @@ const Section4 = () => {
           />
         </div>
       </div>
-      <div className="relative bg-[#010413] w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
-        <img
-          src="https://i.ibb.co/CpZXnSc2/d991a2d98e88a7e68b3d91a8549e64883a616502.png"
-          alt="branded hoodie"
-          className="w-full h-full object-contain"
-        />
-        <button className="absolute top-[200px] left-[34px] bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
+      <div className="relative bg-[#010413] p-5 w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+        <p
+          className="text-[16px] md:text-[24px] text-[#f7f7f7]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          Roberta's Luxe
+        </p>
+        <p
+          className="text-[20px] md:text-[32px] text-[#f7f7f7] mb-3"
+          style={{ fontFamily: "'DM Serif Display', serif" }}
+        >
+          Logo Design
+        </p>
+        <p
+          className="text-[12px] md:text-[18px] text-[#f7f7f7] mb-4"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          Graphics & Branding
+        </p>
+        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
           View Details
         </button>
+        <div className="absolute right-0 bottom-[-150px] w-[450.6px] h-[800px]">
+          <img
+            src="https://i.ibb.co/ds26zxvv/a3bd5d78364b1d07f2aaa1c8ff1156d1bf6ba7ba.png"
+            alt="branded hoodie"
+            className="w-full h-full object-contain"
+          />
+        </div>
       </div>
     </div>
   );

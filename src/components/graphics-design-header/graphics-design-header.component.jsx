@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../landing-header/nav-bar/nav-bar.component";
 
 const GraphicsDesignHeader = () => {
   const HandleOrigins = () => {
@@ -7,7 +8,8 @@ const GraphicsDesignHeader = () => {
   };
 
   return (
-    <div className="relative bg-[#ffc501] pl-30 py-15 h-[904px] overflow-hidden">
+    <div className="relative bg-[#ffc501] pl-30 py-15 h-[1024px] overflow-hidden">
+      <NavBar />
       <p
         className="text-[#101828] text-[56px] font-bold w-[353px] leading-[1.2] mb-6 "
         // style={{ fontFamily: "Georgia, serif" }}
@@ -16,7 +18,7 @@ const GraphicsDesignHeader = () => {
         We are your creative Design
       </p>
       <div
-        className="absolute top-[150px] left-[378px] bg-[#ff7f50] text-[#f7f7f7] text-[56px] text-center rounded-[50px] w-[207px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-24.79deg]"
+        className="absolute top-[270px] left-[378px] bg-[#ff7f50] text-[#f7f7f7] text-[56px] text-center rounded-[50px] w-[207px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-24.79deg]"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Studio

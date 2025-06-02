@@ -4,10 +4,10 @@ import NavBar from "../../landing-header/nav-bar/nav-bar.component";
 const CollectionsHeader = () => {
   return (
     <>
-      <div className=" bg-[#eef2fe]">
+      <div className=" bg-[#eef2fe] pt-3 md:pt-0">
         <NavBar />
         <div className="w-full h-max lg:h-[900px] flex flex-col-reverse lg:grid lg:grid-cols-2 lg:place-items-center">
-          <div className="flex flex-col items-start justify-start text-[#010413] px-5">
+          <div className="flex flex-col items-start justify-start text-[#010413] px-5 py-5">
             <h1
               className="text-[22px] md:text-[56px] lg:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
               style={{ fontFamily: "'Inter', sans-serif" }}

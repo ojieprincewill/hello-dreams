@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/landing-header/nav-bar/nav-bar.component";
+
 import GraphicsDesignHeader from "../../components/graphics-design-header/graphics-design-header.component";
 import GraphicsAndBranding from "../../components/graphics-and-branding/graphics-and-branding.component";
 import OurPrintingPortfolio from "../../components/our-printing-portfolio/our-printing-portfolio.component";
@@ -12,7 +12,6 @@ import FooterSection from "../../components/footer-section/footer-section.compon
 const GraphicsDesignPage = () => {
   return (
     <>
-      <NavBar />
       <GraphicsDesignHeader />
       <GraphicsAndBranding />
       <OurPrintingPortfolio />

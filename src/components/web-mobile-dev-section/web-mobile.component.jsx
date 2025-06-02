@@ -19,7 +19,7 @@ const WebMobile = () => {
           <br />→ <span className="text-[#1342ff]">Build fast.</span> Scale
           faster.
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
           <Link
             to="/services/app-dev-consultation"
             onClick={handleOrigins}
@@ -36,15 +36,15 @@ const WebMobile = () => {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col md:grid md:grid-cols-[45%_55%] w-full">
-        <div className="bg-[#0c0c0c] w-full h-[386px] md:h-[845px] p-6 md:p-0 md:rounded-tl-2xl">
+      <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] w-full">
+        <div className="bg-[#0c0c0c] w-full h-[386px] md:h-[845px] p-6 md:p-0 lg:rounded-tl-2xl">
           <img
             src="https://i.ibb.co/TDBYBXPq/web-mobile-image-1.jpg"
             alt="woman using phone"
-            className="w-full h-full object-cover rounded-2xl md:rounded-tr-2xl md:rounded-bl-none md:rounded-none scale-x-[-1]"
+            className="w-full h-full object-cover rounded-2xl lg:rounded-tr-2xl md:rounded-bl-none md:rounded-none scale-x-[-1]"
           />
         </div>
-        <div className="relative w-full h-[549px] md:h-[845px] p-6 md:p-0 overflow-hidden bg-[#0c0c0c] md:rounded-tr-2xl">
+        <div className="relative w-full h-[549px] lg:h-[845px] p-6 md:p-0 overflow-hidden bg-[#0c0c0c] lg:rounded-tr-2xl">
           <img
             src="https://i.ibb.co/BHKSC8T7/web-mobile-image-2.png"
             alt="abstract glob"

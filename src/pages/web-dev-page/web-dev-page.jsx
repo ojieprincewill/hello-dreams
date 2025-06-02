@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/landing-header/nav-bar/nav-bar.component";
+
 import WebMobileDevHeader from "../../components/web-and-mobile-dev-header/web-and-mobile-dev-header.component";
 import WebDevBanner from "../../components/web-dev-banner/web-dev-banner.component";
 import Development from "../../components/development-section/development.component";
@@ -13,7 +13,6 @@ import FooterSection from "../../components/footer-section/footer-section.compon
 const WebDevPage = () => {
   return (
     <>
-      <NavBar />
       <WebMobileDevHeader />
       <WebDevBanner />
       <Development />

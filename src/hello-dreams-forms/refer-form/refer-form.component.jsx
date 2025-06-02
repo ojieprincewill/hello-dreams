@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import supabase from "../../supabase/client";
+import Step2 from "./step-2.component";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
@@ -292,6 +293,7 @@ const ReferForm = () => {
           </button>
         </div> */}
       </form>
+      <Step2 />
       {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
       {success && <p className="text-green-600 mt-4 text-center">{success}</p>}
 

@@ -48,11 +48,28 @@ const FooterSection = () => {
                 company
               </h1>
               <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                <span>Academy</span>
-                <span>Our work</span>
-                <span>Services</span>
-                <span>Portfolio</span>
-                <span>About us</span>
+                <Link
+                  to="academy"
+                  onClick={handleOrigins}
+                  className="cursor-pointer"
+                >
+                  Academy
+                </Link>
+                <div className="cursor-pointer">Services</div>
+                <Link
+                  to="/portfolio"
+                  onClick={handleOrigins}
+                  className="cursor-pointer"
+                >
+                  Portfolio
+                </Link>
+                <Link
+                  to="/about"
+                  onClick={handleOrigins}
+                  className="cursor-pointer"
+                >
+                  About us
+                </Link>
               </div>
             </div>
             <div className="border-r-1 border-l-1 border-[#ffffff20] flex flex-col pl-3 pr-3 md:pr-10 lg:pr-32 py-5 md:py-15">

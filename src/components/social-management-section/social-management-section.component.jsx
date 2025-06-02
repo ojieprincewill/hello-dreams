@@ -8,7 +8,7 @@ const SocialManagementSection = () => {
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-3">
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] flex items-center justify-center">
           <img
             src="https://i.ibb.co/ZpwnD6HV/SOCIAL-MEDIA-ICONS.png"
@@ -22,7 +22,7 @@ const SocialManagementSection = () => {
             <br />
             Management
           </h1>
-          <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
             <Link
               to="/services/social-consultation"
               onClick={handleOrigins}
@@ -40,14 +40,14 @@ const SocialManagementSection = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col-reverse md:grid md:grid-cols-2 w-full gap-3">
+      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 w-full gap-3">
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] text-center flex flex-col justify-center items-center p-5 md:p-0">
           <h1 className="text-[#010413] text-[24px] md:text-[64px] leading-[1.1] font-semibold md:font-bold">
             Graphic Design &
             <br />
             Branding
           </h1>
-          <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+          <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
             <Link
               to="/services/graphics-consultation"
               onClick={handleOrigins}

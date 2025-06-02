@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../landing-header/nav-bar/nav-bar.component";
 
 const CvOptimizationHeader = () => {
   const HandleOrigins = () => {
@@ -8,7 +9,8 @@ const CvOptimizationHeader = () => {
 
   return (
     <>
-      <div className="relative bg-[#7f7def] w-full h-[520.67px] lg:h-[899px] overflow-hidden">
+      <div className="relative bg-[#7f7def] w-full pt-3 md:pt-0 h-[640.67px] lg:h-[1019px] overflow-hidden">
+        <NavBar />
         <p
           className="text-[#fff] text-[16px] md:text-[24.02px] mt-20 md:mt-10 lg:hidden text-center"
           style={{ fontFamily: "'DM Serif Display', serif" }}

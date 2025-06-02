@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../components/landing-header/nav-bar/nav-bar.component";
+
 import SocialManagementHeader from "../../components/social-management-header/social-management-header.component";
 import OurSocialServices from "../../components/our-social-services/our-social-services.component";
 import SocialSetApart from "../../components/social-set-apart/social-set-apart.component";
@@ -10,7 +10,6 @@ import FooterSection from "../../components/footer-section/footer-section.compon
 const SocialManagementPage = () => {
   return (
     <>
-      <NavBar />
       <SocialManagementHeader />
       <OurSocialServices />
       <SocialSetApart />

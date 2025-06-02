@@ -3,8 +3,9 @@ import { CommunityChallengeData } from "../../data/community-challenge-data/chal
 import {
   XMarkIcon,
   ArrowTopRightOnSquareIcon,
-  ClipboardDocumentIcon,
+  DocumentDuplicateIcon,
 } from "@heroicons/react/24/solid";
+import NavBar from "../landing-header/nav-bar/nav-bar.component";
 
 const CommunityChallenge = () => {
   const [activeOption, setActiveOption] = useState(null);
@@ -37,8 +38,10 @@ const CommunityChallenge = () => {
 
   return (
     <>
-      <div className="w-full h-[208.33px] md:h-[463.33px] lg:h-[800px] bg-[url('https://i.ibb.co/8nrStGvY/ad662eef6d63161aa45a54bcb30d5cc4dea4d128.jpg')] bg-cover bg-center "></div>
-      <div className="px-[5%] lg:px-[10%] py-10 mb-10 space-y-15">
+      <div className="w-full h-[435px] md:h-[865px] lg:h-[1015px] pt-3 md:pt-0 bg-[url('https://i.ibb.co/8nrStGvY/ad662eef6d63161aa45a54bcb30d5cc4dea4d128.jpg')] bg-cover bg-center ">
+        <NavBar />
+      </div>
+      <div className="px-[5%] lg:px-[10%] py-5 mb-10 space-y-15">
         {CommunityChallengeData.map((data) => (
           <div key={data.id}>
             <p
@@ -58,7 +61,7 @@ const CommunityChallenge = () => {
                       : ""
                   }`}
                 >
-                  <div className="w-full h-[150px] md:h-[180px] lg:h-[220px] rounded-xl overflow-hidden">
+                  <div className="w-full h-[261px] rounded-xl overflow-hidden">
                     <img
                       src={option.image}
                       alt={option.title}
@@ -136,7 +139,7 @@ const CommunityChallenge = () => {
                       className="bg-[#fff] text-[#1b212c] font-semibold border border-[#1a212a] text-[10.91px] md:text-[13.46px] lg:text-[16px] px-3 py-2 rounded-xl hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                     >
                       <span>
-                        <ClipboardDocumentIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
+                        <DocumentDuplicateIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
                       </span>
                       {copied ? "Copied!" : "Copy"}
                     </button>

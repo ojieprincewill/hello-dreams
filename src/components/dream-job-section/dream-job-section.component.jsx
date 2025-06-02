@@ -7,8 +7,8 @@ const DreamJobSection = () => {
   };
 
   return (
-    <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
-      <div className="w-full  text-center flex flex-col justify-center datas-center p-5 md:pb-10">
+    <div className="bg-[#f6f6f8] px-[5%] py-10">
+      <div className="w-full text-center flex flex-col justify-center items-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Your Dream Job Starts Here
         </h1>
@@ -16,7 +16,7 @@ const DreamJobSection = () => {
           Explore curated jobs, internships and freelance gigs that match your
           skills
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
           <Link
             to="/post-a-job"
             onClick={handleOrigins}
@@ -33,7 +33,7 @@ const DreamJobSection = () => {
           </Link>
         </div>
       </div>
-      <div className=" w-full h-[326px] md:h-[712px] rounded-2xl">
+      <div className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-xl">
         <img
           src="https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png"
           alt="lady image"

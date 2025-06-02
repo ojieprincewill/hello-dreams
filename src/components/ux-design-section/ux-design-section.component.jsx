@@ -17,7 +17,7 @@ const UxDesignSection = () => {
           <br />→ Just <span className="text-[#1342ff]">seamless</span>{" "}
           experiences.
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full space-y-4 md:inline md:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
           <Link
             to="/services/ui-design-consultation"
             onClick={handleOrigins}
@@ -34,7 +34,7 @@ const UxDesignSection = () => {
           </Link>
         </div>
       </div>
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[845px] pl-6 md:pl-20 py-5 md:py-25">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[875px] lg:h-[845px] pl-6 md:pl-10 lg:pl-20 py-5 md:py-15 lg:py-25">
         <div className="w-[220px] md:w-[540px]">
           <p className="text-[16px] md:text-[40px] leading-[1.1] font-extrabold">
             Effortless Design.
@@ -47,7 +47,7 @@ const UxDesignSection = () => {
             users stay engaged and satisfied.
           </p>
         </div>
-        <div className=" absolute w-[285px] h-auto md:w-[955px] md:h-[600px] bottom-0 right-[-105px]">
+        <div className=" absolute w-[290px] h-auto md:w-[640px] lg:w-[955px] lg:h-[600px] bottom-0 right-[-100px] md:right-[-105px]">
           <img
             src="https://i.ibb.co/SXypMCYw/be2fcc5390cdc081ed0b94431ff02178db711b6e.png"
             alt=""

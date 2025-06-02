@@ -81,6 +81,10 @@ export const MeetExpertsData = [
     name: "Pamela Ohaeri",
     text: "Pamela is the founder of Hello Dreams. She started from law and moved to Tech.",
     role: "Product Designer",
+    bgColor: "#ffc501",
+    modalPosition: "right",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 2,
@@ -89,6 +93,10 @@ export const MeetExpertsData = [
     name: "Arinze Mbonu",
     text: "Arinze is the co-founder of Hello Dreams, he is the head of Graphics and branding. ",
     role: "Graphic Designer",
+    bgColor: "#ff7f50",
+    modalPosition: "right",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 3,
@@ -97,6 +105,10 @@ export const MeetExpertsData = [
     name: "Cynthia Ohaeri",
     text: "Cynthia is a petrophysicist who is works at Hello Dreams as the Project Delivery Manager.",
     role: "Petrophysicist",
+    bgColor: "#008080",
+    modalPosition: "left",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 4,
@@ -105,6 +117,10 @@ export const MeetExpertsData = [
     name: "Lilian Chinonye",
     text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch. ",
     role: "Petrophysicist",
+    bgColor: "#008080",
+    modalPosition: "left",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 5,
@@ -113,6 +129,10 @@ export const MeetExpertsData = [
     name: "Jennifer Obatta",
     text: "Jennifer content goes here...",
     role: "Quality Assurance",
+    bgColor: "#ff7f50",
+    modalPosition: "right",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 6,
@@ -121,5 +141,9 @@ export const MeetExpertsData = [
     name: "Fourth Person",
     text: "Content goes here... Everything here is a placeholder",
     role: "Role goes here...",
+    bgColor: "#ffc501",
+    modalPosition: "left",
+    details:
+      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
 ];

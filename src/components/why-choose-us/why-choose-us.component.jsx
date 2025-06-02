@@ -4,7 +4,7 @@ import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const WhyChooseUs = () => {
   return (
-    <div className="w-full px-[5%] py-10 md:py-20">
+    <div className="w-full px-[5%] py-10 lg:py-20">
       <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
         Why Choose Us
         <span className="ml-1">
@@ -15,9 +15,16 @@ const WhyChooseUs = () => {
           />
         </span>
       </h1>
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-7">
-        {ChooseData.map((data) => (
-          <div key={data.id} className="p-3 border border-[#ccc] rounded-2xl">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        {ChooseData.map((data, index) => (
+          <div
+            key={data.id}
+            className={`p-3 border border-[#ccc] rounded-2xl ${
+              index === ChooseData.length - 1
+                ? "md:col-span-2 lg:col-span-1"
+                : ""
+            }`}
+          >
             <div className="bg-[#f6f6f8] flex justify-center items-center p-3 rounded-xl">
               <img
                 src={data.image}

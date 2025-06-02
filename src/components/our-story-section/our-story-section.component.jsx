@@ -2,8 +2,8 @@ import React from "react";
 
 const OurStorySection = () => {
   return (
-    <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
-      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-10 md:pb-20 flex items-center justify-center gap-2">
+    <div className="bg-[#f6f6f8] px-[5%] py-10">
+      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-10 flex items-center justify-center gap-2">
         Our Story
         <span className="ml-1">
           <img
@@ -13,7 +13,7 @@ const OurStorySection = () => {
           />
         </span>
       </h1>
-      <div className="w-full h-[221px] md:h-[800px] rounded-2xl bg-[#008080]">
+      <div className="w-full h-[221px] md:h-[462.2px] lg:h-[800px] rounded-2xl bg-[#008080]">
         <video
           className="w-full h-full object-cover rounded-2xl shadow-lg"
           controls
