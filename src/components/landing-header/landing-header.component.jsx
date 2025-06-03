@@ -9,7 +9,7 @@ const LandingHeader = () => {
 
   return (
     <>
-      <div className="relative pt-[15px] md:pt-0 w-full h-[435px] md:h-[875px] lg:h-[904px] bg-[url('https://i.ibb.co/HfKwMMQv/landing-image.jpg')] bg-cover bg-center">
+      <div className="relative pt-[15px] md:pt-0 w-full h-[435px] md:h-[875px] lg:h-[904px] bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1748983691/landing_image_aimen1.jpg')] bg-cover bg-center">
         <NavBar />
         <div className="hidden absolute md:bottom-[130px] lg:bottom-[230px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]">
           <h1 className="md:text-[40px] lg:text-[52px] w-[630px] leading-[1.1] font-extrabold">

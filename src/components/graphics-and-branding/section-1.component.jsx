@@ -63,7 +63,7 @@ const SectionOne = () => {
       <img
         src="https://i.ibb.co/YTdTfzvW/humaaan-11.png"
         alt="outline-svg-1"
-        className="hidden lg:block absolute bottom-0 left-[170px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
+        className="hidden lg:block absolute bottom-0 left-[120px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
       />
     </div>
   );

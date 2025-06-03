@@ -60,7 +60,7 @@ const SectionFour = () => {
       <img
         src="https://i.ibb.co/tT09B7WS/standing-111.png"
         alt="outline-svg-1"
-        className="hidden lg:block absolute bottom-0 left-[150px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
+        className="hidden lg:block absolute bottom-0 left-[110px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
       />
     </div>
   );

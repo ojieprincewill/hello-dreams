@@ -7,7 +7,7 @@ const SectionTwo = () => {
   };
 
   return (
-    <div className="relative bg-[#008080]/12 h-max md:h-[526.66px] lg:h-[982px] px-[5%] py-5">
+    <div className="relative bg-[#008080]/12 h-max md:h-[526.66px] lg:h-[982px] px-[5%] py-5 overflow-hidden">
       <div className="flex flex-col-reverse md:grid md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8">
         <div className="px-3 py-10 rounded-tr-2xl rounded-br-2xl ">
           <p className="text-[#101828] text-[12px] lg:text-[22.31px] mb-5">
@@ -60,7 +60,7 @@ const SectionTwo = () => {
       <img
         src="https://i.ibb.co/fV5QQRsJ/sitting-1.png"
         alt="outline-svg-2"
-        className="hidden lg:block absolute bottom-0 right-[80px] lg:w-[747.31px] lg:h-[890px] object-cover"
+        className="hidden lg:block absolute bottom-[-10px] right-[80px] lg:w-[747.31px] lg:h-[890px] object-cover"
       />
     </div>
   );
