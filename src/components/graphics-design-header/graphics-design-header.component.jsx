@@ -48,19 +48,19 @@ const GraphicsDesignHeader = () => {
       </div>
 
       <div
-        className="absolute bottom-[370px] left-[80px]  md:bottom-[120px] md:left-[50px] lg:left-[70px] bg-[#008080] text-[#f7f7f7] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[65.32px] md:w-[160.8px] lg:w-[277px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-46.03deg]"
+        className="absolute bottom-[370px] left-[80px] md:bottom-[120px] md:left-[50px] lg:bottom-[190px] lg:left-[70px] bg-[#008080] text-[#f7f7f7] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[65.32px] md:w-[160.8px] lg:w-[277px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-46.03deg]"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Branding
       </div>
       <div
-        className="absolute bottom-[360px] left-[120px] md:bottom-[100px] md:left-[150px] lg:left-[255px] bg-[#1342ff] text-[#f7f7f7] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[59.42px] md:w-[145.8px] lg:w-[251px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-24.79deg]"
+        className="absolute bottom-[360px] left-[120px] md:bottom-[100px] md:left-[150px] lg:bottom-[180px] lg:left-[255px] bg-[#1342ff] text-[#f7f7f7] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[59.42px] md:w-[145.8px] lg:w-[251px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-24.79deg]"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Printing
       </div>
       <div
-        className="absolute bottom-[340px] left-[140px] md:bottom-[50px] md:left-[180px] lg:bottom-[70px] lg:left-[300px] bg-[#eef2fe] text-[#010413] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[82.03px] md:w-[201.8px] lg:w-[348px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-14.01deg]"
+        className="absolute bottom-[340px] left-[140px] md:bottom-[50px] md:left-[180px] lg:bottom-[90px] lg:left-[300px] bg-[#eef2fe] text-[#010413] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[82.03px] md:w-[201.8px] lg:w-[348px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-14.01deg]"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Logo Design
