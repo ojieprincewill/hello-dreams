@@ -30,7 +30,15 @@ const WebDevConsultationForm = () => {
     setSuccess(null);
     setError(null);
 
-    const { name, email, phone, company, message, accompanyingServices, howDidYouHear } = formData;
+    const {
+      name,
+      email,
+      phone,
+      company,
+      message,
+      accompanyingServices,
+      howDidYouHear,
+    } = formData;
     if (!name || !email || !phone || !message) {
       setError("Please fill in all required fields.");
       setLoading(false);
@@ -51,9 +59,12 @@ const WebDevConsultationForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke("handle-service-enquiries", {
-        body: payload,
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "handle-service-enquiries",
+        {
+          body: payload,
+        }
+      );
 
       if (error) {
         const supabaseError = error.message || error;
@@ -61,7 +72,6 @@ const WebDevConsultationForm = () => {
         setError("Submission failed. Please try again later.");
         return;
       }
-    
 
       setSuccess("Your enquiry has been submitted!");
       setFormData({
@@ -96,7 +106,72 @@ const WebDevConsultationForm = () => {
       >
         Please complete the details below
       </p>
-      <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <div>
+        <p
+          className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:w-[793px] mx-auto leading-[1.5]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          Choose a service
+        </p>
+        <div
+          className="w-full md:w-[450px] lg:w-[576px] space-y-5 md:mx-auto mt-5"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          <label className="flex items-center bg-[#eef2fe] border border-[#eaecf0] px-4 py-5 rounded-md cursor-pointer space-x-3">
+            <input
+              type="checkbox"
+              className="w-4 h-4 md:w-5 md:h-5 rounded-sm accent-[#1342ff] bg-[#fff] border border-[#eaecf0] appearance-none checked:bg-[#1342ff] checked:border-[#1342ff] checked:after:content-['✔'] checked:after:text-white checked:after:text-[13px] checked:after:flex checked:after:justify-center checked:after:items-center"
+            />
+            <span className="text-[#010413] text-[14px] md:text-[16px] text-center font-bold">
+              Mobile App
+            </span>
+          </label>
+          <label className="flex items-center bg-[#eef2fe] border border-[#eaecf0] px-4 py-5 rounded-md cursor-pointer space-x-3">
+            <input
+              type="checkbox"
+              className="w-4 h-4 md:w-5 md:h-5 rounded-sm accent-[#1342ff] bg-[#fff] border border-[#eaecf0] appearance-none checked:bg-[#1342ff] checked:border-[#1342ff] checked:after:content-['✔'] checked:after:text-white checked:after:text-[13px] checked:after:flex checked:after:justify-center checked:after:items-center"
+            />
+            <span className="text-[#010413] text-[14px] md:text-[16px] text-center font-bold">
+              Website
+            </span>
+          </label>
+        </div>
+        <div>
+          <p
+            className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:w-[793px] mx-auto leading-[1.5]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Choose a service
+          </p>
+          <div
+            className="w-full md:w-[450px] lg:w-[576px] space-y-5 md:mx-auto"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            <label className="flex items-center bg-[#eef2fe] border border-[#eaecf0] px-4 py-5 rounded-md cursor-pointer space-x-3">
+              <input
+                type="checkbox"
+                className="w-4 h-4 md:w-5 md:h-5 rounded-sm accent-[#1342ff] bg-[#fff] border border-[#eaecf0] appearance-none checked:bg-[#1342ff] checked:border-[#1342ff] checked:after:content-['✔'] checked:after:text-white checked:after:text-[13px] checked:after:flex checked:after:justify-center checked:after:items-center"
+              />
+              <span className="text-[#010413] text-[14px] md:text-[16px] text-center font-bold">
+                Business
+              </span>
+            </label>
+            <label className="flex items-center bg-[#eef2fe] border border-[#eaecf0] px-4 py-5 rounded-md cursor-pointer space-x-3">
+              <input
+                type="checkbox"
+                className="w-4 h-4 md:w-5 md:h-5 rounded-sm accent-[#1342ff] bg-[#fff] border border-[#eaecf0] appearance-none checked:bg-[#1342ff] checked:border-[#1342ff] checked:after:content-['✔'] checked:after:text-white checked:after:text-[13px] checked:after:flex checked:after:justify-center checked:after:items-center"
+              />
+              <span className="text-[#010413] text-[14px] md:text-[16px] text-center font-bold">
+                Personal
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
+      >
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"

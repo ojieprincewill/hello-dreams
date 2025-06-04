@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SocialConsultationSuccess = () => {
+const PostJobSuccess = () => {
   return (
     <div className="flex flex-col justify-center items-center px-[5%] py-20">
       <p
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Request Received
+        Request Received!
       </p>
       <div className="w-full h-auto md:w-[401px] md:h-[267.33px] mt-15 mb-10">
         <img
@@ -21,8 +21,8 @@ const SocialConsultationSuccess = () => {
         className="text-[#667085] text-[14px] md:text-[16px] md:text-center lg:text-[24px] mb-10 lg:mb-20 md:w-[80%] lg:w-[757px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Our team will review your request and get back to you within 24 working
-        hours
+        Thank you for submitting your job listing. Once payment is confirmed, it
+        will be reviewed and published on our platform within 24 hours.
       </p>
 
       <a
@@ -44,4 +44,4 @@ const SocialConsultationSuccess = () => {
   );
 };
 
-export default SocialConsultationSuccess;
+export default PostJobSuccess;

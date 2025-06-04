@@ -14,9 +14,9 @@ const PrintingConsultationSuccess = () => {
       >
         Request Received
       </p>
-      <div className="w-full h-auto md:w-[401px] md:h-[267.33px]">
+      <div className="w-full h-auto md:w-[401px] md:h-[267.33px] mt-15 mb-10">
         <img
-          src=""
+          src="https://i.ibb.co/fdJ3p6WJ/11668419-20943563-1.png"
           alt="success illustration"
           className="w-full h-full object-cover"
         />

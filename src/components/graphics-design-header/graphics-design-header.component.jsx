@@ -39,13 +39,29 @@ const GraphicsDesignHeader = () => {
           Get a free consultation
         </button>
       </Link>
-      <div className="flex justify-center items-center mt-[60px] mx-auto md:mt-0 md:mx-0 md:absolute md:bottom-[-78px] md:right-[-90px] lg:bottom-[-150px] lg:right-[-80px] w-[347.88px] h-[425px] md:w-[500.15px] md:h-[626.36px] lg:w-[717px] lg:h-[1060px] ">
+      <div className="flex justify-center items-center mt-[60px] mx-auto md:mt-0 md:mx-0 md:absolute md:bottom-[-78px] md:right-[-90px] lg:bottom-[-150px] lg:right-[-80px] w-[347.88px] h-[425px] md:w-[500.15px] md:h-[626.36px] lg:w-[717px] lg:h-[1060px] z-10 ">
         <img
           src="https://i.ibb.co/zTdDmrmZ/6527a11476dcd5faaa261ff1fed9c452177868b4.png"
           alt="3d-man"
           className="w-full h-full object-cover"
         />
       </div>
+
+      <img
+        src="https://i.ibb.co/XxZGzTJF/graphic-doddles.png"
+        alt="doodle"
+        className="absolute bottom-0 left-0 w-[80px] md:w-[160.57px] lg:w-[260.57px] h-auto md:z-10"
+      />
+      <img
+        src="https://i.ibb.co/1GPDhstT/graphics-doddles-2.png"
+        alt="doodle"
+        className="absolute top-[35%] left-[-30px] md:top-[60px] lg:top-[80px] md:left-[45%] w-[80px] md:w-[130.57px] lg:w-[230.57px] h-auto rotate-[-90deg] md:rotate-0"
+      />
+      <img
+        src="https://i.ibb.co/FbmbkNYJ/graphics-doddles-3.png"
+        alt="doodle"
+        className="absolute bottom-[40%] right-[-35px] md:bottom-0 md:right-[40%] w-[100.57px] lg:w-[200.57px] h-auto rotate-[-90deg] md:rotate-0"
+      />
 
       <div
         className="absolute bottom-[370px] left-[80px] md:bottom-[120px] md:left-[50px] lg:bottom-[190px] lg:left-[70px] bg-[#008080] text-[#f7f7f7] text-[13.11px] md:text-[32px] lg:text-[56px] text-center rounded-[50px] w-[65.32px] md:w-[160.8px] lg:w-[277px] drop-shadow-[7px_11px_7px] drop-shadow-[#ff7f50ca] rotate-[-46.03deg]"

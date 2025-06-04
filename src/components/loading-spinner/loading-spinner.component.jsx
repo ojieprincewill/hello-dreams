@@ -6,11 +6,11 @@ const LoadingSpinner = () => {
     //   <div className="w-10 h-10 border-4 border-t-[#1342ff] border-[#e2e8f0] rounded-full animate-spin"></div>
     // </div>
 
-    <div className="w-12 h-12 animate-spin">
+    <div className="fixed inset-0 bg-[#00000060] flex justify-center items-center h-screen z-60">
       <img
-        src="your-spinner-image-url.png"
+        src="https://i.ibb.co/bgcwKFVV/Loading-Screen.png"
         alt="Loading..."
-        className="w-full h-full object-contain"
+        className="w-14 h-14 md:w-18 md:h-18 object-contain animate-spin"
       />
     </div>
   );

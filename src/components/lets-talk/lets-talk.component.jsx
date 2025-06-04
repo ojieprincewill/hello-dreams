@@ -30,12 +30,18 @@ const LetsTalk = () => {
           >
             Email
           </p>
-          <p className="text-[12px] md:text-[16px] lg:font-bold mb-3">
+          <a
+            href="mailto:support@myhellodreams.com"
+            className="block w-max text-[12px] md:text-[16px] lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Support@myhellodreams.com
-          </p>
-          <p className="text-[12px] md:text-[16px] lg:font-bold mb-3">
+          </a>
+          <a
+            href="mailto:partnership@myhellodreams.com"
+            className="block w-max text-[12px] md:text-[16px] lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Partnership@myhellodreams.com
-          </p>
+          </a>
         </div>
         <div>
           <p
@@ -44,21 +50,54 @@ const LetsTalk = () => {
           >
             Socials
           </p>
-          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
+          <a
+            href="https://www.linkedin.com/company/hello-dreams-limited/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             LinkedIn
-          </p>
-          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
+          </a>
+          <a
+            href="https://www.instagram.com/hellodreamss/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Instagram
-          </p>
-          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
+          </a>
+          <a
+            href="https://www.youtube.com/@HelloDreamsAcademy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Youtube
-          </p>
-          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
+          </a>
+          <a
+            href="https://www.tiktok.com/@myhellodreams?_t=ZM-8wv4XL55NBu&_r=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
+            Tiktok
+          </a>
+          <a
+            href="https://x.com/MyHelloDreams?t=iiEkr0Z3fveby5O8QVEP9A&s=09"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Twitter
-          </p>
-          <p className="text-[12px] md:text-[16px] underline lg:font-bold mb-3 cursor-pointer">
+          </a>
+          <a
+            href="https://web.facebook.com/profile.php?id=61565243428696"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+          >
             Facebook
-          </p>
+          </a>
         </div>
       </div>
 

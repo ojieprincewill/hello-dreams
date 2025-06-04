@@ -80,24 +80,38 @@ const FooterSection = () => {
                   Follow
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                  <Link
-                    to=""
+                  <a
+                    href="https://www.youtube.com/@HelloDreamsAcademy"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     Youtube
-                  </Link>
-                  <Link
-                    to=""
+                  </a>
+                  <a
+                    href="https://www.instagram.com/hellodreamss/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     Instagram
-                  </Link>
-                  <Link
-                    to=""
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/hello-dreams-limited/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     LinkedIn
-                  </Link>
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@myhellodreams?_t=ZM-8wv4XL55NBu&_r=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                  >
+                    Tiktok
+                  </a>
                 </div>
               </div>
               <div>
@@ -106,14 +120,18 @@ const FooterSection = () => {
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
                   <Link
-                    to=""
+                    href="https://web.facebook.com/profile.php?id=61565243428696"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={handleOrigins}
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     Privacy Policy
                   </Link>
                   <Link
-                    to=""
+                    href="https://web.facebook.com/profile.php?id=61565243428696"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={handleOrigins}
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
@@ -137,13 +155,28 @@ const FooterSection = () => {
                       support@myhellodreams.com
                     </a>
                   </span>
-                  <span>Phone: 07016773420</span>
+                  <span>
+                    Phone:{" "}
+                    <a
+                      href="https://wa.me/2347016773420"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#99c8ff] transition-colors duration-300"
+                    >
+                      07016773420
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div className="w-full h-max grid grid-cols-2 text-[#fff] text-[11px] md:text-[12px] lg:text-[20px] font-bold border-t border-b border-[#ffffff20]">
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-[#ffffff20] w-full h-full hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer">
+            <a
+              href="https://web.facebook.com/profile.php?id=61565243428696"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-[#ffffff20] w-full h-full hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+            >
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/fYPXmXPX/SVG.png"
@@ -152,8 +185,13 @@ const FooterSection = () => {
                 />
               </span>
               Twitter
-            </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-l border-[#ffffff20] w-full h-full hover:text-[#ffb3ce] transition-colors duration-300 cursor-pointer">
+            </a>
+            <a
+              href="https://www.instagram.com/hellodreamss/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-b border-l border-[#ffffff20] w-full h-full hover:text-[#ffb3ce] transition-colors duration-300 cursor-pointer"
+            >
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/27nrzGhc/SVG-2.png"
@@ -162,8 +200,13 @@ const FooterSection = () => {
                 />
               </span>
               Instagram
-            </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-[#ffffff20] w-full h-full hover:text-[#8c77ec] transition-colors duration-300 cursor-pointer">
+            </a>
+            <a
+              href="https://web.facebook.com/profile.php?id=61565243428696"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-[#ffffff20] w-full h-full hover:text-[#8c77ec] transition-colors duration-300 cursor-pointer"
+            >
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/xKdJ3Tgx/Vector.png"
@@ -172,8 +215,13 @@ const FooterSection = () => {
                 />
               </span>
               Facebook
-            </p>
-            <p className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-l border-[#ffffff20] w-full h-full hover:text-[#ff884d] transition-colors duration-300 cursor-pointer">
+            </a>
+            <a
+              href="https://www.linkedin.com/company/hello-dreams-limited/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center px-1 py-3 md:px-10 lg:px-20 md:py-10 border-l border-[#ffffff20] w-full h-full hover:text-[#ff884d] transition-colors duration-300 cursor-pointer"
+            >
               <span className="mr-0.5 md:mr-2">
                 <img
                   src="https://i.ibb.co/KxBB6mx2/Background-Border.png"
@@ -182,7 +230,7 @@ const FooterSection = () => {
                 />
               </span>
               LinkedIn
-            </p>
+            </a>
           </div>
         </div>
       </div>

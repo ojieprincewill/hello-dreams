@@ -51,16 +51,16 @@ const SectionThree = () => {
             3
           </span>
           <img
-            src="https://i.ibb.co/wFzqYQt7/sitting-11.png"
+            src="https://i.ibb.co/mCWnVV2C/sitting-11.png"
             alt="outline-svg-2"
             className="justify-self-center md:absolute md:bottom-[30px] md:right-[20px] w-[175.14px] h-full md:w-[300.23px] md:h-auto lg:hidden object-contain md:object-cover"
           />
         </div>
       </div>
       <img
-        src="https://i.ibb.co/wFzqYQt7/sitting-11.png"
+        src="https://i.ibb.co/mCWnVV2C/sitting-11.png"
         alt="outline-svg-2"
-        className="hidden lg:block absolute bottom-0 right-[30px] lg:w-[747.31px] lg:h-[890px] object-cover"
+        className="hidden lg:block absolute bottom-0 right-[70px] lg:w-[700.31px] lg:h-auto object-cover"
       />
     </div>
   );
