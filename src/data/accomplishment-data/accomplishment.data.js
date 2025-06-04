@@ -15,7 +15,7 @@ export const AboutAccomplishmentData = [
   },
   {
     id: 3,
-    title: "Promoting Women in StTEM Movement",
+    title: "Promoting Women in STEM Movement",
     text: "We have partnered with brands like Nigerian Girl in STEM to offer free UI/UX design training, went for empowerment programs where we impacted lives.",
     image:
       "https://i.ibb.co/m5dvwDVj/62b2de863e5c02d1c4d27a7ec3537a08183734bc.jpg",

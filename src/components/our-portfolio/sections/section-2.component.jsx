@@ -3,23 +3,23 @@ import React from "react";
 const Section2 = () => {
   return (
     <div className="grid grid-cols-1 mt-5 md:grid-cols-2 gap-6">
-      <div className="relative bg-[#008080] p-5 w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+      <div className="relative bg-[#008080] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
         <p
-          className="text-[16px] md:text-[24px] text-[#f7f7f7]"
+          className="text-[13.46px] md:text-[11.74px] lg:text-[24px] text-[#f7f7f7]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           ARMONE WEB
         </p>
-        <p className="text-[20px] md:text-[32px] text-[#f7f7f7] font-semibold mb-3 w-[401px]">
+        <p className="text-[17.95px] md:text-[15px] lg:text-[32px] text-[#f7f7f7] w-[201px] lg:w-[401px] mb-3">
           Investment Website
         </p>
         <p
-          className="text-[12px] md:text-[18px] text-[#f7f7f7] mb-4"
+          className="text-[12px] md:text-[10px] lg:text-[18px] text-[#f7f7f7] mb-4"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           UI/UX Design
         </p>
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
+        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
           View
         </button>
         {/* <div className="absolute bottom-[-150px] right-[-292px] w-[1000px] h-[765px]">
@@ -30,27 +30,27 @@ const Section2 = () => {
           />
         </div> */}
       </div>
-      <div className="relative bg-[#0b83d9] p-5 w-full h-[451px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+      <div className="relative bg-[#0b83d9] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
         <p
-          className="text-[16px] md:text-[24px] text-[#f7f7f7]"
+          className="text-[13.46px] md:text-[11.74px] lg:text-[24px] text-[#f7f7f7]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           SISENOW
         </p>
-        <p className="text-[20px] md:text-[24px] font-semibold text-[#f7f7f7] mb-3 w-[307px]">
+        <p className="text-[17.95px] md:text-[15px] lg:text-[32px] text-[#f7f7f7] w-[207px] lg:w-[307px] mb-3">
           JOB MARKETPLACE WEBSITE
         </p>
         <p
-          className="text-[12px] md:text-[18px] text-[#f7f7f7] mb-4"
+          className="text-[12px] md:text-[10px] lg:text-[18px] text-[#f7f7f7] mb-4"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           UI/UX Design
         </p>
 
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#90c0e26b] min-w-[160px] text-[#041856] text-[16px] px-6 py-4 font-bold text-center rounded-4xl cursor-pointer ">
+        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#90c0e26b] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
           View
         </button>
-        <div className="absolute bottom-[-20px] right-[-50px] w-[448.31px] h-[622.41px]">
+        <div className="absolute bottom-[-10px] right-[-70px] lg:bottom-[-20px] lg:right-[-50px] w-[334.31px] h-[311.41px] lg:w-[448.31px] lg:h-[622.41px]">
           <img
             src="https://i.ibb.co/DfmLvmch/sisenow-image.png"
             alt="mock up design"

@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutProblem = () => {
   return (
-    <div className="px-[5%] py-5 ">
+    <div className="px-[5%] py-2 md:py-5 ">
       <p
         className="text-[#505050] text-[14px] uppercase mb-3"
         style={{ fontFamily: "'Roboto', sans-serif" }}
@@ -10,12 +10,12 @@ const AboutProblem = () => {
         the problem
       </p>
       <p
-        className="text-[#000000] text-[32px] font-bold mb-3"
+        className="text-[#000000] text-[12px] md:text-[20px] lg:text-[32px] font-bold mb-3"
         style={{ fontFamily: "'Roboto', sans-serif" }}
       >
         No one deserves to fail severally, be confused and not succeed
       </p>
-      <p className="text-[#667085] text-[16px] leading-[1.5] mb-3">
+      <p className="text-[#667085] text-[10px] md:text-[13px] lg:text-[16px] leading-[2] lg:leading-[1.7] mb-3">
         I've experienced failure countless times, often because I genuinely
         didn't know what I was doing wrong. I was putting in a lot of effort,
         but it was directed at the wrong things. After facing over 100
@@ -32,7 +32,7 @@ const AboutProblem = () => {
         and business brand, i cater for everything that can help you achieve
         your set goals.
       </p>
-      <div className="w-full h-[705px] rounded-2xl overflow-hidden mt-5">
+      <div className="w-full h-[193.34px] md:h-[350px] lg:h-[705px] rounded-2xl overflow-hidden mt-5">
         <img
           src="https://i.ibb.co/wFhYbzrV/882201a45f54dc02fe0ca6e02fe4fcc558afa801.jpg"
           alt="man working late"

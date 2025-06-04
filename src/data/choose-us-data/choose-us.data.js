@@ -138,7 +138,7 @@ export const MeetExpertsData = [
     id: 6,
     image:
       "https://i.ibb.co/C3Wsqvj2/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d.jpg",
-    name: "Fourth Person",
+    name: "Sixth Person",
     text: "Content goes here... Everything here is a placeholder",
     role: "Role goes here...",
     bgColor: "#ffc501",

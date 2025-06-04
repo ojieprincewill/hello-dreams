@@ -32,7 +32,7 @@ const OurPrintingPortfolio = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 mt-5 md:grid-cols-2 gap-6">
-        <div className="relative bg-[#ff7f50] p-5 w-full h-[451px] md:h-[391.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+        <div className="relative bg-[#ff7f50] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
           <p
             className="text-[13.46px] md:text-[11.74px] lg:text-[24px] text-[#f7f7f7]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -63,7 +63,7 @@ const OurPrintingPortfolio = () => {
             />
           </div>
         </div>
-        <div className="relative bg-[#008080] p-5 w-full h-[451px] md:h-[391.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+        <div className="relative bg-[#008080] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
           <p
             className="text-[13.46px] md:text-[11.74px] lg:text-[24px] text-[#f7f7f7]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}

@@ -49,34 +49,41 @@ const ExpertTeam = () => {
               <>
                 {/* Backdrop - Click to Close */}
                 <div
-                  className="fixed inset-0 bg-[#00000060] z-[60]"
+                  className="fixed inset-0 bg-[#00000060] z-60"
                   onClick={handleCloseModal}
                 ></div>
 
-                {/* Modal */}
+                {/* Modal - Responsive Positioning */}
                 <div
-                  className={`absolute w-[373px] bg-[#f7f7f7] shadow-lg p-4 rounded-lg z-[9999] ${
-                    data.modalPosition === "left" ? "right-full" : "left-full"
-                  } top-1/2 -translate-y-1/2`}
+                  className={`absolute bg-[#f7f7f7] shadow-lg rounded-lg z-[9999] 
+                    lg:w-[373px] top-1/2 -translate-y-1/2
+                    ${
+                      data.modalPosition === "left"
+                        ? "lg:right-full"
+                        : "lg:left-full"
+                    } 
+                    w-full md:w-[320px]`}
                 >
-                  {/* Arrow Pointer */}
+                  {/* Arrow Pointer - Hidden on Mobile */}
                   <div
-                    className={`absolute w-4 h-4 bg-[#f7f7f7] rotate-45 ${
+                    className={`absolute lg:block hidden w-4 h-4 bg-[#f7f7f7] rotate-45 ${
                       data.modalPosition === "left" ? "-right-2" : "-left-2"
                     } top-1/2 -translate-y-1/2`}
                   ></div>
 
-                  <p className="text-[#26262b] text-[20px] font-semibold mb-3">
-                    {data.name}
-                  </p>
-                  <p
-                    className={`text-[#26262b] w-max text-[14px] font-semibold px-3 py-1 rounded-md bg-[${data.bgColor}] mb-3`}
-                  >
-                    {data.role}
-                  </p>
-                  <p className="text-[#7f8090] text-[15.5px] leading-[1.5]">
-                    {data.details}
-                  </p>
+                  <div className="h-[444px] md:h-max p-4 overflow-auto">
+                    <p className="text-[#26262b] text-[20px] font-semibold mb-3">
+                      {data.name}
+                    </p>
+                    <p
+                      className={`text-[#26262b] w-max text-[14px] font-semibold px-3 py-1 rounded-md bg-[${data.bgColor}] mb-3`}
+                    >
+                      {data.role}
+                    </p>
+                    <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5]">
+                      {data.details}
+                    </p>
+                  </div>
                 </div>
               </>
             )}

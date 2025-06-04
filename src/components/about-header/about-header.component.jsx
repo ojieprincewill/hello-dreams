@@ -3,7 +3,7 @@ import React from "react";
 const AboutHeader = () => {
   return (
     <>
-      <div className="w-full h-[221px] lg:h-[794px]">
+      <div className="w-full h-[206.77px] md:h-[467px] lg:h-[794px]">
         <video
           className="w-full h-full object-cover"
           controls
@@ -16,7 +16,7 @@ const AboutHeader = () => {
         </video>
       </div>
       <div className="px-[5%] py-10 flex justify-center items-center">
-        <p className="text-[#000000] text-[24px] leading-[64px]">
+        <p className="text-[#000000] text-[16px] md:text-[20px] lg:text-[24px] leading-[2] md:leading-[44px] lg:leading-[64px]">
           Hello Dreams is a multidisciplinary company dedicated to empowering
           individuals and businesses through a comprehensive suite of
           professional services. Our core focus is on delivering exceptional
