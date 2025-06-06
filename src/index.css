@@ -26,3 +26,9 @@
 body {
   margin: 0;
 }
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc #f8f8f8;
+}

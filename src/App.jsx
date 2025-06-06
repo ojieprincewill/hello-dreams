@@ -27,6 +27,8 @@ import SustainabilityPage from "./pages/sustainability-page/sustainability-page"
 import BlogPage from "./pages/sustainability-page/blog-page";
 import MentorshipApplicationPage from "./pages/mentorship-application-page/mentorship-application-page";
 import PostJobPage from "./pages/post-job-page/post-job-page";
+import CartPage from "./pages/cart-page/cart-page";
+import CheckoutPage from "./pages/checkout-page/checkout-page";
 
 function App() {
   return (
@@ -92,6 +94,8 @@ function App() {
         <Route path="/post-a-job" element={<PostJobPage />} />
         <Route path="/sustainability" element={<SustainabilityPage />} />
         <Route path="/sustainability/:blogId" element={<BlogPage />} />
+        <Route path="/cart-summary" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </>
   );
