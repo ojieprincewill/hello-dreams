@@ -2,7 +2,6 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 import { ChooseData } from "../../data/choose-us-data/choose-us.data";
-import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const WhyChooseUs = () => {
   const cardVariants = {
