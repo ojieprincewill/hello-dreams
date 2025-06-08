@@ -1,6 +1,8 @@
 import React from "react";
 import FaqSection from "../faq-section/faq-section.component";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const Sustainability = () => {
   return (
@@ -21,13 +23,19 @@ const Sustainability = () => {
           </Link>
         </div>
       </div>
-      <div className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Starts faded and lower
+        whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-2xl"
+      >
         <img
-          src="https://i.ibb.co/R4spbscs/c319512efcbe5bfb4e9ea0ef67c0e607ea8d5f7b.jpg"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330725/c319512efcbe5bfb4e9ea0ef67c0e607ea8d5f7b_z0eadz.jpg"
           alt="ladies holding up sign"
           className="w-full h-full object-cover object-center rounded-2xl"
         />
-      </div>
+      </motion.div>
       <FaqSection />
     </div>
   );

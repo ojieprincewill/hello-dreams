@@ -2,6 +2,21 @@ import React from "react";
 import { AcademyData } from "../../data/academy-data/academy.data";
 import { ArrowTopRightOnSquareIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2, // Stagger effect per card
+    },
+  }),
+};
 
 const AcademySection = () => {
   return (
@@ -25,7 +40,11 @@ const AcademySection = () => {
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">
         {AcademyData.map((data, index) => (
-          <div
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
             key={data.id}
             className={`w-full h-max md:h-[500px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl ${
               index === AcademyData.length - 1
@@ -58,7 +77,7 @@ const AcademySection = () => {
             <p className="text-[24px] md:text-[27.88px] text-[#010413] font-bold pt-2 ">
               NGN {data.price}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

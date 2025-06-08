@@ -1,4 +1,6 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const PrintingSection = () => {
@@ -33,8 +35,12 @@ const PrintingSection = () => {
         </div>
       </div>
       <div className="bg-[#ffadd9] w-full h-[420px] md:h-[530px] lg:h-[761px] rounded-xl">
-        <img
-          src="https://i.ibb.co/5g545Bcy/fb3b12a1f7966448ea8070205ed1cd33afc5c66c.png"
+        <motion.img
+          initial={{ opacity: 0, y: 50 }} // Starts faded and lower
+          whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330730/fb3b12a1f7966448ea8070205ed1cd33afc5c66c_oeg7ip.png"
           alt="products mock-up"
           className="w-full h-full object-cover object-center"
         />

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const GeneralForm = () => {
   const [selectedService, setSelectedService] = useState("");
@@ -6,24 +8,44 @@ const GeneralForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log({ selectedService, userInput });
   };
 
   return (
     <div className="grid grid-cols-[55%_45%] gap-2 mt-20">
-      <div className="w-full h-full lg:h-[800] bg-[#ffc501] rounded-2xl overflow-hidden">
+      {/* Image Block */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }} // Starts faded and lower
+        whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="w-full h-full lg:h-[800] bg-[#ffc501] rounded-2xl overflow-hidden"
+      >
         <img
-          src="https://i.ibb.co/60TNJtL3/ae3bfa13ccf709991e22a3b74450b625f5b8f7f0.png"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330672/ae3bfa13ccf709991e22a3b74450b625f5b8f7f0_ilrurg.png"
           alt="lady vector image"
           className="w-full h-full object-cover"
         />
-      </div>
-      <div className="lg:mt-25">
+      </motion.div>
+
+      {/* Form Block */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="lg:mt-25"
+      >
         <form
           onSubmit={handleSubmit}
           className="w-full pl-6 pr-4 py-4 rounded-xl shadow-md space-y-6"
         >
-          <div>
+          {/* Service Selection */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          >
             <label className="block md:text-[16px] lg:text-[20px] lg:font-bold text-[#fff]">
               Choose Service
             </label>
@@ -57,9 +79,15 @@ const GeneralForm = () => {
                 Printing
               </option>
             </select>
-          </div>
+          </motion.div>
 
-          <div>
+          {/* User Input */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+          >
             <label className="block md:text-[16px] lg:text-[20px] lg:font-bold text-[#fff]">
               Tell us what you need
             </label>
@@ -69,9 +97,15 @@ const GeneralForm = () => {
               className="mt-2 w-full md:h-[150px] lg:h-[200px] p-3 resize-none border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
               placeholder="Type description here"
             />
-          </div>
+          </motion.div>
 
-          <div>
+          {/* Email Input */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+          >
             <label className="block md:text-[16px] lg:text-[20px] lg:font-bold text-[#fff]">
               Enter your email
             </label>
@@ -81,16 +115,21 @@ const GeneralForm = () => {
               className="mt-2 w-full p-3 border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
               placeholder="email@example.com"
             />
-          </div>
+          </motion.div>
 
-          <button
+          {/* Submit Button */}
+          <motion.button
             type="submit"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
             className="w-full bg-[#1342ff] text-[#fff] text-[16px] lg:text-[24px] font-semibold py-3 mt-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
           >
             Send
-          </button>
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

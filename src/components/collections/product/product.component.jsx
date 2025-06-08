@@ -8,6 +8,7 @@ import { addItem } from "../../../state-slices/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import AddToCart from "../add-to-cart/add-to-cart.component";
 import QuantityControl from "../quantity-control/quantity-control.component";
+import { toast } from "react-toastify";
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Product = ({ product }) => {
 
   const handleAddToCart = () => {
     dispatch(addItem(product));
-    // toast.success(`Product added to cart`);
+    toast.success(`Item added to cart`);
   };
 
   const { image, title, price, name, size, quality } = product;

@@ -27,7 +27,7 @@ const NewsletterSection = () => {
           className="border border-r-0 border-l-0 px-5 md:px-16 lg:px-18 py-[12px] md:py-[16px] lg:py-[18px] border-[#010413] text-center w-max leading-normal"
         >
           <img
-            src="https://i.ibb.co/B2tvMj9t/Button-SVG.png"
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330686/Button_SVG_mmlmot.png"
             alt="blue arrow"
             className="w-4 h-4 md:w-6 md:h-6 lg:w-9 lg:h-9 object-cover"
           />

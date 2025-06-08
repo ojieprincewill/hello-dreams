@@ -1,4 +1,6 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const WebMobile = () => {
@@ -37,26 +39,41 @@ const WebMobile = () => {
         </div>
       </div>
       <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] w-full">
+        {/* First Image Block */}
         <div className="bg-[#0c0c0c] w-full h-[386px] md:h-[845px] p-6 md:p-0 lg:rounded-tl-2xl">
-          <img
-            src="https://i.ibb.co/TDBYBXPq/web-mobile-image-1.jpg"
+          <motion.img
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330699/c17037d015e250057e6b0767ef614397acdd7d02_eigwko.jpg"
             alt="woman using phone"
             className="w-full h-full object-cover rounded-2xl lg:rounded-tr-2xl md:rounded-bl-none md:rounded-none scale-x-[-1]"
           />
         </div>
+
+        {/* Second Image Block */}
         <div className="relative w-full h-[549px] lg:h-[845px] p-6 md:p-0 overflow-hidden bg-[#0c0c0c] lg:rounded-tr-2xl">
-          <img
-            src="https://i.ibb.co/BHKSC8T7/web-mobile-image-2.png"
+          <motion.img
+            initial={{ opacity: 0, y: 50 }} // Starts faded and lower
+            whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330643/363baf51b8410db321c93037a944d36f9995f398_ktfyzq.png"
             alt="abstract glob"
             className="absolute w-[118.5px] h-[79px] md:w-[303px] md:h-[202px] object-contain"
           />
-          <div className="absolute bottom-[150px] right-[-93px] md:bottom-[-120px] md:right-[-300px] w-[399px] h-[266px] md:w-[921px] md:h-[614px]">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="absolute bottom-[150px] right-[-93px] md:bottom-[-120px] md:right-[-300px] w-[399px] h-[266px] md:w-[921px] md:h-[614px]"
+          >
             <img
-              src="https://i.ibb.co/k24bNNbP/web-mobile-image-3.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330665/06110762eee01fd2a39e4804310aace2a6b4cd05_htyuyj.png"
               alt="sign in image"
               className="w-full h-full object-cover rounded-[12px]"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

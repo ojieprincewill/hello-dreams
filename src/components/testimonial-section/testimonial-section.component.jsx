@@ -5,6 +5,19 @@ import { TestimonialData } from "../../data/choose-us-data/choose-us.data";
 import { AnimatePresence, motion } from "motion/react";
 import { Link } from "react-router-dom";
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2, // Staggered effect
+    },
+  }),
+};
+
 const TestimonialSection = () => {
   const [activeId, setActiveId] = useState(null);
 
@@ -52,7 +65,12 @@ const TestimonialSection = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 pt-20">
         {TestimonialData.map((data, index) => (
-          <div
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={cardVariants}
+            custom={index}
             key={data.id}
             className={`relative w-full h-[480px] ${
               index % 3 === 2 ? "md:col-span-2 lg:col-span-1" : ""
@@ -63,7 +81,12 @@ const TestimonialSection = () => {
               alt={data.name}
               className="w-full h-full object-cover object-center rounded-xl"
             />
-            <div className="absolute bottom-3 left-[2%] w-[96%] h-[246px] bg-white/30 backdrop-blur-sm p-4 border border-[#ffffff63] overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="absolute bottom-3 left-[2%] w-[96%] h-[246px] bg-white/30 backdrop-blur-sm p-4 border border-[#ffffff63] overflow-hidden"
+            >
               <div className="flex space-x-1 text-[#fff] pb-2">
                 <img
                   src="https://i.ibb.co/3m5mScmb/Star-icon.png"
@@ -106,7 +129,7 @@ const TestimonialSection = () => {
               >
                 Read more
               </span>
-            </div>
+            </motion.div>
             <AnimatePresence>
               {activeId === data.id && (
                 <>
@@ -132,7 +155,7 @@ const TestimonialSection = () => {
                 </>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

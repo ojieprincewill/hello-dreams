@@ -57,7 +57,7 @@ const SidebarNav = ({ closeSidebar }) => {
           >
             <p className="flex flex-row p-4">
               <img
-                src="https://i.ibb.co/m5ztYKCD/icons8-services.png"
+                src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330737/icons8_services_dfex20.png"
                 alt="service icon"
                 className="h-5 w-5 mr-2 object-contain"
               />
@@ -111,7 +111,7 @@ const SidebarNav = ({ closeSidebar }) => {
             onClick={handleOrigins}
           >
             <img
-              src="https://i.ibb.co/8gdV3VLk/material-symbols-light-mouse-1.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330740/material-symbols-light_mouse-1_jv3xtk.png"
               alt="academy icon"
               className="h-5 w-5 mr-2 object-contain"
             />
@@ -123,7 +123,7 @@ const SidebarNav = ({ closeSidebar }) => {
             onClick={handleOrigins}
           >
             <img
-              src="https://i.ibb.co/4ZZth002/dashicons-portfolio.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330724/dashicons_portfolio_xxoxid.png"
               alt="portfolio icon"
               className="h-5 w-5 mr-2 object-contain"
             />
@@ -136,7 +136,7 @@ const SidebarNav = ({ closeSidebar }) => {
             onClick={handleOrigins}
           >
             <img
-              src="https://i.ibb.co/fYLL0gGk/gridicons-multiple-users.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330733/gridicons_multiple-users_keqkx5.png"
               alt="about icon"
               className="h-5 w-5 mr-2 object-contain"
             />
@@ -148,7 +148,7 @@ const SidebarNav = ({ closeSidebar }) => {
             onClick={handleOrigins}
           >
             <img
-              src="https://i.ibb.co/tNrS5W2/exchange-541340-1.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330726/exchange_541340_1_jsqiaj.png"
               alt="exchange icon"
               className="h-5 w-5 mr-2 object-contain"
             />

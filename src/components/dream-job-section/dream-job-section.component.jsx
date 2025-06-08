@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const DreamJobSection = () => {
   const handleOrigins = () => {
@@ -33,13 +35,19 @@ const DreamJobSection = () => {
           </Link>
         </div>
       </div>
-      <div className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-xl">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }} // Starts faded and lower
+        whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-xl"
+      >
         <img
-          src="https://i.ibb.co/yn27Y34z/2abccb476d3287825cf1236bfc3642ead9bb3741.png"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330651/2abccb476d3287825cf1236bfc3642ead9bb3741_mhb65g.png"
           alt="lady image"
           className="w-full h-full object-cover object-center rounded-2xl"
         />
-      </div>
+      </motion.div>
     </div>
   );
 };

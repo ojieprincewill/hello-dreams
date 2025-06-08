@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ToastContainer, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import HomePage from "./pages/homepage/homepage";
 import PortfolioPage from "./pages/portfolio-page/portfolio-page";
 import AcademyPage from "./pages/academy-page/academy-page";
@@ -33,6 +36,20 @@ import CheckoutPage from "./pages/checkout-page/checkout-page";
 function App() {
   return (
     <>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        stacked
+        role="alert"
+        transition={Zoom}
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services/ui-design" element={<UiDesignPage />} />

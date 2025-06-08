@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { FaqData } from "../../data/faq-data/faq.data";
-import { SunIcon } from "@heroicons/react/24/solid";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
+
+const questionVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const FaqSection = () => {
   const [activeId, setActiveId] = useState(1);
@@ -21,8 +33,16 @@ const FaqSection = () => {
           FAQs.
         </p>
         <div className="flex flex-col space-y-2 md:h-[330px] lg:h-[470px] overflow-auto">
-          {FaqData.map((faq) => (
-            <div key={faq.id} onClick={() => toggleQuestion(faq.id)}>
+          {FaqData.map((faq, index) => (
+            <motion.div
+              key={faq.id}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={questionVariants}
+              custom={index}
+              onClick={() => toggleQuestion(faq.id)}
+            >
               <div
                 className={`w-full flex justify-between items-center text-left text-[#041856] rounded-md px-2 py-4 md:rounded-xl border border-[#e7eeec] hover:bg-[#101828] hover:text-[#fff] transition-all duration-300 cursor-pointer ${
                   activeId === faq.id ? "bg-[#101828] text-[#fff]" : "bg-[#fff]"
@@ -86,7 +106,7 @@ const FaqSection = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

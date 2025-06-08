@@ -1,6 +1,8 @@
 import React from "react";
 import { CommunityData } from "../../data/community-data/community.data";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const OurCommunity = () => {
   const handleOrigins = () => {
@@ -9,7 +11,7 @@ const OurCommunity = () => {
 
   return (
     <div className="bg-[#f6f6f8] px-[5%] py-10">
-      <div className="w-full  text-center flex flex-col justify-center datas-center p-5 md:pb-10">
+      <div className="w-full  text-center flex flex-col justify-center items-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Our Community
         </h1>
@@ -36,9 +38,16 @@ const OurCommunity = () => {
       </div>
       <div className="space-y-1 md:space-y-4 w-[98%]">
         <div className="grid grid-cols-[30%_30%_40%] gap-1 md:gap-4">
-          {CommunityData.slice(0, 3).map((data) => (
-            <div
+          {CommunityData.slice(0, 3).map((data, index) => (
+            <motion.div
               key={data.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: index * 0.2,
+              }}
               className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
             >
               <img
@@ -46,13 +55,20 @@ const OurCommunity = () => {
                 alt={`Bento Grid Image ${data.id}`}
                 className="w-full h-full object-cover rounded-sm"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="grid grid-cols-[40%_30%_30%] gap-1 md:gap-4">
-          {CommunityData.slice(3, 6).map((data) => (
-            <div
+          {CommunityData.slice(3, 6).map((data, index) => (
+            <motion.div
               key={data.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: index * 0.2,
+              }}
               className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
             >
               <img
@@ -60,13 +76,20 @@ const OurCommunity = () => {
                 alt={`Bento Grid Image ${data.id}`}
                 className="w-full h-full object-cover rounded-sm"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="grid grid-cols-[30%_30%_40%] gap-1 md:gap-4">
-          {CommunityData.slice(6, 9).map((data) => (
-            <div
+          {CommunityData.slice(6, 9).map((data, index) => (
+            <motion.div
               key={data.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: index * 0.2,
+              }}
               className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
             >
               <img
@@ -74,7 +97,7 @@ const OurCommunity = () => {
                 alt={`Bento Grid Image ${data.id}`}
                 className="w-full h-full object-cover rounded-sm"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
