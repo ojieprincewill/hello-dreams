@@ -297,7 +297,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                   {section.lessons.map((lesson, index) => (
                     <div
                       key={lesson.id}
-                      className="flex items-center justify-between p-3 bg-white border rounded-lg hover:shadow-sm"
+                      className="flex items-center justify-between p-3 mb-2 bg-white border border-[#eaecf0] rounded-lg hover:shadow-sm"
                     >
                       <div className="flex items-center space-x-3">
                         <span className="text-sm text-gray-500 font-mono w-6">

@@ -87,7 +87,7 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
           </div>
 
           <div className="flex space-x-3">
-            <Button variant="outline" onClick={onClose} className="flex-1">
+            <Button variant="outline" onClick={onClose} className="flex-1 ">
               Cancel
             </Button>
             <Button onClick={handleSave} className="flex-1">

@@ -186,7 +186,21 @@ const ChallengeManagement = () => {
                       {challenge.status}
                     </span>
                   </div>
-                  <p className="text-gray-600">{challenge.challenge}</p>
+
+                  <div className="mb-4">
+                    <h4 className="font-medium text-gray-900 mb-2">
+                      Challenge:
+                    </h4>
+                    <p className="text-gray-600">{challenge.challenge}</p>
+                  </div>
+
+                  <div className="mb-4">
+                    <h4 className="font-medium text-gray-900 mb-2">
+                      Deliverables:
+                    </h4>
+                    <p className="text-gray-600">{challenge.deliverables}</p>
+                  </div>
+
                   <div className="flex items-center space-x-6 text-sm text-gray-500">
                     <span>{challenge.participants} participants</span>
                     <span>Deadline: {challenge.deadline}</span>

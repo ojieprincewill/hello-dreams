@@ -137,6 +137,7 @@ const BlogManagement = () => {
                   placeholder="Enter article title"
                 />
               </div>
+
               <div>
                 <Label htmlFor="publisher-name">Publisher Name</Label>
                 <Input
@@ -151,10 +152,147 @@ const BlogManagement = () => {
                   placeholder="Enter publisher name"
                 />
               </div>
+
+              <div>
+                <Label htmlFor="publisher-image">Publisher Image</Label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  <User size={48} className="mx-auto text-gray-400 mb-4" />
+                  <p className="text-gray-600">
+                    Click to upload publisher image
+                  </p>
+                  <Input
+                    type="file"
+                    className="hidden"
+                    id="publisher-image"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="article-content">Article Content</Label>
+                <Textarea
+                  id="article-content"
+                  value={newArticle.content}
+                  onChange={(e) =>
+                    setNewArticle({ ...newArticle, content: e.target.value })
+                  }
+                  placeholder="Write your article content here..."
+                  rows={15}
+                  className="min-h-[300px]"
+                />
+              </div>
+
+              <div className="flex space-x-3">
+                <Button variant="outline" className="flex-1">
+                  Save as Draft
+                </Button>
+                <Button className="flex-1">Publish Article</Button>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
       </div>
+
+      <div className="space-y-4">
+        {articles.map((article) => (
+          <Card
+            key={article.id}
+            className="hover:shadow-lg transition-shadow duration-200"
+          >
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <h3 className="font-semibold text-xl text-gray-900">
+                      {article.title}
+                    </h3>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        article.status === "Published"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {article.status}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center space-x-2 mb-3">
+                    <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                      <User size={14} className="text-gray-600" />
+                    </div>
+                    <span className="text-sm text-gray-600">
+                      By {article.publisherName}
+                    </span>
+                  </div>
+
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {article.content}
+                  </p>
+
+                  <div className="flex items-center space-x-6 text-sm text-gray-500">
+                    <div className="flex items-center space-x-1">
+                      <Calendar size={16} />
+                      <span>{article.publishDate}</span>
+                    </div>
+                    <span>{article.views} views</span>
+                  </div>
+                </div>
+
+                <div className="flex space-x-2 ml-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleView(article)}
+                  >
+                    <Eye size={16} className="mr-1" />
+                    Preview
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(article)}
+                  >
+                    <Edit size={16} className="mr-1" />
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 hover:text-red-700"
+                    onClick={() => handleDelete(article)}
+                  >
+                    <Trash2 size={16} className="mr-1" />
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <BlogViewModal
+        article={selectedArticle}
+        isOpen={viewModalOpen}
+        onClose={() => setViewModalOpen(false)}
+      />
+
+      <BlogEditModal
+        article={selectedArticle}
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onSave={handleSave}
+      />
+
+      <DeleteConfirmModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={confirmDelete}
+        title={`Delete "${selectedArticle?.title}"`}
+        message="Are you sure you want to delete this article? This action cannot be undone."
+      />
     </div>
   );
 };

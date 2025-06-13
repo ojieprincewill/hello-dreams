@@ -111,12 +111,12 @@ const CourseManagement = () => {
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="bg-blue-600 hover:bg-blue-700 text-[#fff] cursor-pointer">
               <Plus size={20} className="mr-2" />
               Create Course
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl bg-[#f7f7f7]">
             <DialogHeader>
               <DialogTitle>Create New Course</DialogTitle>
             </DialogHeader>
@@ -146,7 +146,23 @@ const CourseManagement = () => {
                 />
               </div>
 
-              <Button className="w-full">Create Course</Button>
+              <div>
+                <Label htmlFor="course-cover">Cover Image</Label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  <Upload size={48} className="mx-auto text-gray-400 mb-4" />
+                  <p className="text-gray-600">Click to upload cover image</p>
+                  <Input
+                    type="file"
+                    className="hidden"
+                    id="course-cover"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+
+              <Button className="w-full bg-[#010413] text-[#fff]">
+                Create Course
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -191,7 +207,7 @@ const CourseManagement = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1"
+                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] cursor-pointer"
                       onClick={() => handleView(course)}
                     >
                       <Eye size={16} className="mr-1" />
@@ -200,7 +216,7 @@ const CourseManagement = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1"
+                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] cursor-pointer"
                       onClick={() => handleEdit(course)}
                     >
                       <Edit size={16} className="mr-1" />
@@ -210,7 +226,7 @@ const CourseManagement = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(course)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 border-[#eaecf0] hover:bg-[#f0f5f7] cursor-pointer"
                     >
                       <Trash2 size={16} />
                     </Button>
@@ -219,7 +235,7 @@ const CourseManagement = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
+                    className="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 hover:text-[#010413] cursor-pointer"
                     onClick={() => handleManageContent(course)}
                   >
                     <BookOpen size={16} className="mr-2" />
@@ -248,7 +264,7 @@ const CourseManagement = () => {
         onClose={() => setDeleteModalOpen(false)}
         onConfirm={confirmDelete}
         title={`Delete "${selectedCourse?.title}"`}
-        message="Are you sure you want to delete this course?"
+        message="Are you sure you want to delete this course? This action cannot be undone and will affect all enrolled students."
       />
       <CourseSectionModal
         courseId={selectedCourse?.id || null}

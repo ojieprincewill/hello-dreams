@@ -36,7 +36,7 @@ const AdminSidebar = ({ activeSection, setActiveSection }) => {
               key={item.id}
               onClick={() => setActiveSection(item.id)}
               className={cn(
-                "w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200",
+                "w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 cursor-pointer",
                 activeSection === item.id
                   ? "bg-blue-50 text-blue-700 border-l-4 border-blue-700"
                   : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"

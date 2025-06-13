@@ -133,26 +133,26 @@ const DashboardOverview = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <button className="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-left">
+              <button className="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-left cursor-pointer">
                 <BookOpen className="text-blue-600 mb-2" size={24} />
                 <p className="font-medium text-blue-900">Create Course</p>
                 <p className="text-xs text-blue-600">
                   Add new learning content
                 </p>
               </button>
-              <button className="p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-left">
+              <button className="p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-left cursor-pointer">
                 <Briefcase className="text-green-600 mb-2" size={24} />
                 <p className="font-medium text-green-900">Post Job</p>
                 <p className="text-xs text-green-600">Add job opportunity</p>
               </button>
-              <button className="p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-left">
+              <button className="p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-left cursor-pointer">
                 <Users className="text-purple-600 mb-2" size={24} />
                 <p className="font-medium text-purple-900">New Challenge</p>
                 <p className="text-xs text-purple-600">
                   Create UI/UX challenge
                 </p>
               </button>
-              <button className="p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-left">
+              <button className="p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-left cursor-pointer">
                 <FileText className="text-orange-600 mb-2" size={24} />
                 <p className="font-medium text-orange-900">Write Article</p>
                 <p className="text-xs text-orange-600">Publish blog content</p>
