@@ -8,7 +8,7 @@ const OurProcess = () => {
   };
 
   return (
-    <div className="w-full px-[5%] lg:px-[10%] py-10 md:py-15">
+    <div className="w-full px-[5%] lg:px-[10%] py-10">
       <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
         Our Process
       </p>

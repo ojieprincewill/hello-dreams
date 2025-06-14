@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const DevConsultationSuccess = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const handleOrigins = () => {
     window.scrollTo(0, 0);
   };
@@ -16,7 +20,7 @@ const DevConsultationSuccess = () => {
       </p>
       <div className="w-full h-auto md:w-[401px] md:h-[267.33px] mt-15 mb-10">
         <img
-          src="https://i.ibb.co/fdJ3p6WJ/11668419-20943563-1.png"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749909160/forms/11668419_20943563_1_slt2vr.png"
           alt="success illustration"
           className="w-full h-full object-cover"
         />
@@ -34,14 +38,6 @@ const DevConsultationSuccess = () => {
           className="text-[#1342ff] underline "
         >
           portfolio
-        </Link>{" "}
-        and{" "}
-        <Link
-          to="/"
-          onClick={handleOrigins}
-          className="text-[#1342ff] underline "
-        >
-          testimonials
         </Link>{" "}
         to see how we've helped other clients.
       </p>

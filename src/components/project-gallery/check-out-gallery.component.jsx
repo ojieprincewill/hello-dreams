@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckOutGallery = () => {
   return (
-    <div className="w-full px-[5%] lg:px-[10%] py-10 md:py-15">
+    <div className="w-full px-[5%] lg:px-[10%] py-10">
       <p
         className="text-[#000000] text-[16px] lg:text-[32px] lg:font-bold text-center mb-5 "
         style={{ fontFamily: "'Inter', sans-serif" }}

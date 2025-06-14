@@ -4,11 +4,25 @@ import { motion } from "motion/react";
 
 const GeneralForm = () => {
   const [selectedService, setSelectedService] = useState("");
-  const [userInput, setUserInput] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    message: "",
+    email: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    setUserDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const { message, email } = userDetails;
 
   return (
     <div className="grid grid-cols-[55%_45%] gap-2 mt-20">
@@ -92,8 +106,9 @@ const GeneralForm = () => {
               Tell us what you need
             </label>
             <textarea
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
+              name="message"
+              value={message}
+              onChange={handleChange}
               className="mt-2 w-full md:h-[150px] lg:h-[200px] p-3 resize-none border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
               placeholder="Type description here"
             />
@@ -110,8 +125,10 @@ const GeneralForm = () => {
               Enter your email
             </label>
             <input
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
               className="mt-2 w-full p-3 border placeholder-[#667085] border-[#eaecf0] bg-transparent focus:outline-none rounded-sm"
               placeholder="email@example.com"
             />

@@ -1,7 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 
 const SocialConsultationSuccess = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center px-[5%] py-20">
       <p
@@ -12,7 +15,7 @@ const SocialConsultationSuccess = () => {
       </p>
       <div className="w-full h-auto md:w-[401px] md:h-[267.33px] mt-15 mb-10">
         <img
-          src="https://i.ibb.co/fdJ3p6WJ/11668419-20943563-1.png"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749909160/forms/11668419_20943563_1_slt2vr.png"
           alt="success illustration"
           className="w-full h-full object-cover"
         />
@@ -33,7 +36,7 @@ const SocialConsultationSuccess = () => {
       >
         <button className="bg-[#008080] w-full md:w-[369px] text-[#f7f7f7] text-[12px] md:text-[14px] lg:text-[16px] text-center px-6 py-3 md:py-4 rounded-3xl hover:bg-[#008080de] hover:text-[#fff] transition-colors duration-300 cursor-pointer">
           <img
-            src="https://i.ibb.co/XZ7kX9r1/logos-whatsapp-icon.png"
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749909159/forms/logos_whatsapp-icon_npjg1n.png"
             alt="whatsapp logo"
             className="inline mr-2 md:mr-3 w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 object-contain"
           />

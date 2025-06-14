@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import supabase from "../../supabase/client";
+import GraphicsConsultationSuccess from "./graphics-consultation-success.component";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 
 const GraphicsConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -70,6 +72,7 @@ const GraphicsConsultationForm = () => {
       }
 
       toast.success("Your enquiry has been submitted!");
+      setSuccess(true);
       setFormData({
         name: "",
         email: "",
@@ -89,8 +92,11 @@ const GraphicsConsultationForm = () => {
     }
   };
 
-  return (
+  return success ? (
+    <GraphicsConsultationSuccess />
+  ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+      {isSubmitting && <LoadingSpinner />}
       <p
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}

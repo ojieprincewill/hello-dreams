@@ -20,7 +20,7 @@ const cardVariants = {
 
 const AcademySection = () => {
   return (
-    <div className="bg-[#f6f6f8] px-[5%] py-10 md:py-20">
+    <div className="bg-[#f6f6f8] px-[5%] py-10">
       <div className="w-full  text-center flex flex-col justify-center items-center p-5 md:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Acade<span className="text-[#1342ff]">m</span>y

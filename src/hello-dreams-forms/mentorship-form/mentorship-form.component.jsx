@@ -131,7 +131,7 @@ const MentorshipForm = () => {
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
             aria-required
           >
-            Their top 1-3 goals for mentorship{" "}
+            What are your top 1-3 goals for mentorship?{" "}
             <span class="text-red-500">*</span>
           </label>
           <textarea

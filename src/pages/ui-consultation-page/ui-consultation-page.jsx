@@ -10,7 +10,6 @@ const UiConsultationPage = () => {
     <>
       <NavBar />
       <UiConsultationForm />
-      <UiConsultationSuccess />
       <FooterSection />
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
+import UiConsultationSuccess from "./ui-consultation-success.component";
 
 const UiConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -81,7 +82,9 @@ const UiConsultationForm = () => {
     }
   };
 
-  return (
+  return success ? (
+    <UiConsultationSuccess />
+  ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] py-15 md:py-25">
       {loading && <LoadingSpinner />}
       <p

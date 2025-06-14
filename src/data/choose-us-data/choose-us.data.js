@@ -103,7 +103,7 @@ export const MeetExpertsData = [
     image:
       "https://i.ibb.co/zVj9mTLt/0403d085380ae5044431065acc5f41ea08b08b7c.jpg",
     name: "Cynthia Ohaeri",
-    text: "Cynthia is a petrophysicist who is works at Hello Dreams as the Project Delivery Manager.",
+    text: "Cynthia is a petrophysicist who works at Hello Dreams as the Project Delivery Manager.",
     role: "Petrophysicist",
     bgColor: "#008080",
     modalPosition: "left",

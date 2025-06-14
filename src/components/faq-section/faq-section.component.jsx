@@ -27,7 +27,7 @@ const FaqSection = () => {
   const activeFaq = FaqData.find((faq) => faq.id === activeId);
 
   return (
-    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 lg:my-15 lg:p-10">
+    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 lg:my-10 lg:p-10">
       <div>
         <p className="text-[15.05px] md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
           FAQs.

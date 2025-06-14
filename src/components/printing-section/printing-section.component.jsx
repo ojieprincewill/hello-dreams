@@ -9,7 +9,7 @@ const PrintingSection = () => {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-col py-10 lg:py-22">
+    <div className="flex flex-col-reverse lg:flex-col py-10">
       <div className="w-full  text-center flex flex-col justify-center items-center py-10 px-5 lg:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Printing
@@ -36,8 +36,8 @@ const PrintingSection = () => {
       </div>
       <div className="bg-[#ffadd9] w-full h-[420px] md:h-[530px] lg:h-[761px] rounded-xl">
         <motion.img
-          initial={{ opacity: 0, y: 50 }} // Starts faded and lower
-          whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330730/fb3b12a1f7966448ea8070205ed1cd33afc5c66c_oeg7ip.png"

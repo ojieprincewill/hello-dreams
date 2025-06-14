@@ -7,7 +7,7 @@ import MarqueeSection from "../../components/marquee-section/marquee-section.com
 import SocialManagementSection from "../../components/social-management-section/social-management-section.component";
 import PrintingSection from "../../components/printing-section/printing-section.component";
 import WhyChooseUs from "../../components/why-choose-us/why-choose-us.component";
-import AcademySection from "../../components/academy -section/academy-section.component";
+import AcademySection from "../../components/academy-section/academy-section.component";
 import OurStorySection from "../../components/our-story-section/our-story-section.component";
 import OurCommunity from "../../components/our-community-section/our-community.component";
 import DreamJobSection from "../../components/dream-job-section/dream-job-section.component";

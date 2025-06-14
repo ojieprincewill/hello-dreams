@@ -7,7 +7,7 @@ const MarqueeSection = () => {
   const marqueeData = MARQUEE_DATA;
 
   return (
-    <div className="py-10 md:py-20 w-full overflow-hidden whitespace-nowrap">
+    <div className="py-10 w-full overflow-hidden whitespace-nowrap">
       <div className="inline-block">
         <Marquee speed={120} direction="left">
           {marqueeData.map((data) => (

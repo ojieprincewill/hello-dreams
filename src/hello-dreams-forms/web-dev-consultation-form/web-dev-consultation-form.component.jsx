@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import supabase from "../../supabase/client";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
+import DevConsultationSuccess from "./dev-consultation-success.component";
 
 const WebDevConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -92,8 +94,11 @@ const WebDevConsultationForm = () => {
     }
   };
 
-  return (
+  return success ? (
+    <DevConsultationSuccess />
+  ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+      {loading && <LoadingSpinner />}
       <p
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -260,9 +265,16 @@ const WebDevConsultationForm = () => {
               <option value="" disabled className="">
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="service1">Business Cards</option>
+              <option value="service2">Flyers and Brochures</option>
+              <option value="service3">Posters and Banners</option>
+              <option value="service4">Company Souvenirs</option>
+              <option value="service5">Custom Prints</option>
+              <option value="service6">Brochures</option>
+              <option value="service7">Menus</option>
+              <option value="service8">Labels and Stickers</option>
+              <option value="service9">Notepads and Stationery</option>
+              <option value="service10">Others</option>
             </select>
           </div>
           <div>
@@ -275,12 +287,14 @@ const WebDevConsultationForm = () => {
               onChange={handleChange}
               className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             >
-              <option value="" disabled className="">
+              <option value="" disabled>
                 Select an option
               </option>
-              <option value="service1">Option 1</option>
-              <option value="service2">Option 2</option>
-              <option value="service3">Option 3</option>
+              <option value="google">Google search</option>
+              <option value="referral">From a friend</option>
+              <option value="social">LinkedIn</option>
+              <option value="social">Instagram</option>
+              <option value="social">Youtube</option>
             </select>
           </div>
         </div>

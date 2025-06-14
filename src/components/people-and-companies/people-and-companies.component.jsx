@@ -16,7 +16,7 @@ const PeopleAndCompanies = () => {
         Explore Our Work: A Showcase of Projects, Achievements, and Creativity
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mt-5 md:mt-10 lg:mt-20 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mt-5 md:mt-10 ">
         <div className="bg-[#efece9] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[429.3px] lg:h-[800px] relative">
           <div className="bg-[#009379] w-[66.54px] h-[66.54px] lg:w-[124px] lg:h-[124px] mb-4 rounded-tr-[40%] rounded-bl-[40%] overflow-hidden"></div>
           <p

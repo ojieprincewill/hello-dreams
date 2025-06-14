@@ -9,7 +9,6 @@ const PrintingConsultationPage = () => {
     <>
       <NavBar />
       <PrintingConsultationForm />
-      <PrintingConsultationSuccess />
       <FooterSection />
     </>
   );

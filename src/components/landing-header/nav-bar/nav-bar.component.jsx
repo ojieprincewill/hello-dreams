@@ -39,7 +39,7 @@ const NavBar = () => {
           onClick={() => setServicesOpen(false)}
         ></div>
       )}
-      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[120px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
+      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[100px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
         {/* Logo Section */}
         <Link
           to="/"
@@ -110,7 +110,7 @@ const NavBar = () => {
           </button>
         </div>
       </nav>
-      <div className="hidden md:block md:h-[80px] lg:h-[120px]"></div>
+      <div className="hidden md:block md:h-[80px] lg:h-[100px]"></div>
       <AnimatePresence>
         {servicesOpen && (
           <motion.div
@@ -118,7 +118,7 @@ const NavBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-[100px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-12 z-80 rounded-xl"
+            className="fixed top-[80px] left-[235px] bg-[#fff] p-5 w-[662px] h-[457px] grid grid-cols-2 gap-y-4 gap-x-12 z-80 rounded-xl"
           >
             {ServicesData.map((data) => (
               <Link

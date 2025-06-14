@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from "react";
 import supabase from "../../supabase/client";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
+import SocialConsultationSuccess from "./social-consultation-success.component";
 
 const SocialConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -94,8 +96,11 @@ const SocialConsultationForm = () => {
     }
   };
 
-  return (
+  return success ? (
+    <SocialConsultationSuccess />
+  ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+      {loading && <LoadingSpinner />}
       <p
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
