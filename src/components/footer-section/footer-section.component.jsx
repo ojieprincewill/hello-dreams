@@ -49,15 +49,12 @@ const FooterSection = () => {
               </h1>
               <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
                 <Link
-                  to="academy"
+                  to="/academy"
                   onClick={handleOrigins}
                   className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >
                   Academy
                 </Link>
-                <div className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer">
-                  Services
-                </div>
                 <Link
                   to="/portfolio"
                   onClick={handleOrigins}
@@ -71,6 +68,13 @@ const FooterSection = () => {
                   className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >
                   About us
+                </Link>
+                <Link
+                  to="/refer-and-earn"
+                  onClick={handleOrigins}
+                  className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                >
+                  Refer & Earn
                 </Link>
               </div>
             </div>

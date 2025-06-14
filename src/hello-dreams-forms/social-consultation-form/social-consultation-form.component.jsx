@@ -233,10 +233,13 @@ const SocialConsultationForm = () => {
           <input
             type="text"
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
-            name="socialMediaLink"
+            name="competitors"
             value={formData.competitors}
             onChange={handleChange}
           />
+          <span className="mt-2 text-[#161616] text-[11px]">
+            Paste a link or input the business/company name
+          </span>
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
