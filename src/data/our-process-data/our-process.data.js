@@ -121,12 +121,14 @@ export const WebDevProcessData = [
 export const GetHiredData = [
   {
     id: 1,
-    image: "https://i.ibb.co/HTSYw9PW/website-designs.png",
+    image:
+      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750066143/UI%20page/website_designs_gb6dom.png",
     text: "website designs",
   },
   {
     id: 2,
-    image: "https://i.ibb.co/MkWDjYXy/Group-55521.png",
+    image:
+      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065867/UI%20page/Group_55521_o6e83e.png",
     text: "mobile app designs",
   },
 ];

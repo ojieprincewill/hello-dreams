@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const OurPackages = () => {
   const handleOrigins = () => {
@@ -24,7 +26,12 @@ const OurPackages = () => {
       </p>
 
       <div className="flex flex-col space-y-3 md:flex-row justify-center items-center">
-        <div className="bg-[#fff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl md:rounded-none md:rounded-tl-2xl md:rounded-bl-2xl overflow-hidden w-full md:w-[230px] lg:w-[411px]">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="bg-[#fff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl md:rounded-none md:rounded-tl-2xl md:rounded-bl-2xl overflow-hidden w-full md:w-[230px] lg:w-[411px]"
+        >
           <p className="text-[#010413] text-[12.41px] lg:text-[20px] font-bold mb-4 lg:mb-6 uppercase">
             one-time projects
           </p>
@@ -50,12 +57,22 @@ const OurPackages = () => {
             className="flex justify-center items-center mt-5"
             onClick={handleOrigins}
           >
-            <button className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            >
               Book a free Consultation
-            </button>
+            </motion.button>
           </Link>
-        </div>
-        <div className="bg-[#1342ff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl overflow-hidden md:w-[230px] lg:w-[411px]">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="bg-[#1342ff] p-2 md:p-3 lg:py-5 lg:px-10 rounded-2xl overflow-hidden md:w-[230px] lg:w-[411px]"
+        >
           <p className="text-[#f7f7f7] text-[12.41px] lg:text-[20px] font-bold mb-4 lg:mb-6 uppercase">
             monthly retainers
           </p>
@@ -85,11 +102,16 @@ const OurPackages = () => {
             className="flex justify-center items-center mt-5"
             onClick={handleOrigins}
           >
-            <button className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer"
+            >
               Book a free Consultation
-            </button>
+            </motion.button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

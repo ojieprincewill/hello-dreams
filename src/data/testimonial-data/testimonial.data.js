@@ -38,7 +38,7 @@ export const PrintingTestimonialData = [
 export const UiTestimonialData = [
   {
     id: 1,
-    logo: "https://i.ibb.co/4ZqxDjC7/fcd0b7d5d1d3f49b47fc386d510cf24cd14b8b06.png",
+    logo: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065866/UI%20page/fcd0b7d5d1d3f49b47fc386d510cf24cd14b8b06_l8xukf.png",
     client: "Blessing Eneobong",
     service: "UI/UX Course",
     text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results",
@@ -46,7 +46,7 @@ export const UiTestimonialData = [
   },
   {
     id: 2,
-    logo: "https://i.ibb.co/m5TVtFtv/f6766763f9352068eb4d104e004263679af87088.png",
+    logo: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065867/UI%20page/f6766763f9352068eb4d104e004263679af87088_tom6gs.png",
     client: "Blessing Eneobong",
     service: "UI/UX Course",
     text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results ",
@@ -54,7 +54,7 @@ export const UiTestimonialData = [
   },
   {
     id: 3,
-    logo: "https://i.ibb.co/4ZLBH7xW/4ff4a269bca15de4942ef5d8a568b7ebdb16923a.png",
+    logo: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065867/UI%20page/4ff4a269bca15de4942ef5d8a568b7ebdb16923a_taw3ec.png",
     client: "Blessing Eneobong",
     service: "UI/UX Course",
     text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tai",
@@ -62,7 +62,7 @@ export const UiTestimonialData = [
   },
   {
     id: 4,
-    logo: "https://i.ibb.co/27B5dwZx/d9884be0c670d1d37aca0d3085435ee23473eb52.png",
+    logo: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065864/UI%20page/d9884be0c670d1d37aca0d3085435ee23473eb52_qwgpud.png",
     client: "Lilian Ohaeri",
     service: "UI/UX Course",
     text: "Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results Intuitive interfaces tailored to elevate user engagement and drive results ",

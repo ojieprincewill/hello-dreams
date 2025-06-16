@@ -60,12 +60,12 @@ const LandingHeader = () => {
         <div className="mt-5 flex flex-col space-y-3">
           <Link
             to="/workwithus"
-            className="bg-[#010413] text-[#fff] font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
+            className="bg-[#010413] text-[#fff] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
             onClick={handleOrigins}
           >
             Book a free career call
           </Link>
-          <button className="bg-transparent text-[#010413] font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer">
+          <button className="bg-transparent text-[#010413] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer">
             Explore our courses
           </button>
         </div>

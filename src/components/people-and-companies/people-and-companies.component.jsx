@@ -1,4 +1,6 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const PeopleAndCompanies = () => {
   return (
@@ -17,7 +19,12 @@ const PeopleAndCompanies = () => {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mt-5 md:mt-10 ">
-        <div className="bg-[#efece9] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[429.3px] lg:h-[800px] relative">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="bg-[#efece9] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[429.3px] lg:h-[800px] relative"
+        >
           <div className="bg-[#009379] w-[66.54px] h-[66.54px] lg:w-[124px] lg:h-[124px] mb-4 rounded-tr-[40%] rounded-bl-[40%] overflow-hidden"></div>
           <p
             className="text-[#333333] text-[26px] lg:text-[48px] mb-3"
@@ -35,15 +42,25 @@ const PeopleAndCompanies = () => {
             designs consistently break launch records and receive stellar
             ratings. Partner with us for exceptional results.
           </p>
-          <div className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#f7f7f8] rounded-xl overflow-hidden absolute bottom-4 lg:bottom-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#f7f7f8] rounded-xl overflow-hidden absolute bottom-4 lg:bottom-6"
+          >
             <img
-              src="https://i.ibb.co/DfPx94sL/STARTUPS-CARD-IMAGE.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750066141/UI%20page/STARTUPS_CARD_IMAGE_hng6bf.png"
               alt="startup image"
               className="w-full h-full object-contain"
             />
-          </div>
-        </div>
-        <div className="bg-[#f7f7f7] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[450px] md:h-[429.3px] lg:h-[800px] relative">
+          </motion.div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="bg-[#f7f7f7] px-4 py-4 lg:py-6 rounded-xl overflow-hidden h-[450px] md:h-[429.3px] lg:h-[800px] relative"
+        >
           <div className="bg-[#ff6250] w-[66.54px] h-[66.54px] lg:w-[124px] lg:h-[124px] mb-4 rounded-tr-[100%] overflow-hidden"></div>
           <p
             className="text-[#333333] text-[26px] lg:text-[48px] mb-3"
@@ -60,14 +77,19 @@ const PeopleAndCompanies = () => {
             SEO and design agencies seeking collaborative partnerships for web
             development projects using Webflow, Framer, and WordPress.
           </p>
-          <div className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#efece9] rounded-[20px] overflow-hidden absolute bottom-4 lg:bottom-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-[90%] lg:w-[94%] h-[194.79px] lg:h-[363px] bg-[#efece9] rounded-[20px] overflow-hidden absolute bottom-4 lg:bottom-6"
+          >
             <img
-              src="https://i.ibb.co/tTgr9s1C/Established-Enterprises-CARD-IMAGE.png"
+              src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750065860/UI%20page/Established_Enterprises_CARD_IMAGE_h4l7ga.png"
               alt="established image"
               className="w-full h-full object-center"
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
