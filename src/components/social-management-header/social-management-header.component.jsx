@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../landing-header/nav-bar/nav-bar.component";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const SocialManagementHeader = () => {
   const HandleOrigins = () => {
@@ -11,7 +13,12 @@ const SocialManagementHeader = () => {
     <div className="bg-[#ff7f50] md:bg-[#eef2fe] pt-3 md:pt-0">
       <NavBar />
       <div className="lg:grid flex flex-col-reverse lg:grid-cols-2 w-full h-full lg:h-[800px] lg:place-items-center">
-        <div className="bg-[#eef2fe] md:bg-none px-3 py-6 md:px-10">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="bg-[#eef2fe] md:bg-none px-3 py-6 md:px-10"
+        >
           <p
             className="text-[#010413] text-[31.06px] md:text-[27.8px] lg:text-[56px] lg:w-[530px] mb-5 md:mb-7 font-medium"
             style={{ fontFamily: "'inter', sans-serif" }}
@@ -29,15 +36,23 @@ const SocialManagementHeader = () => {
           </p>
 
           <Link to="/services/social-consultation" onClick={HandleOrigins}>
-            <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 md:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 md:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            >
               Get a free consultation
-            </button>
+            </motion.button>
           </Link>
-        </div>
+        </motion.div>
 
         <div className="relative bg-[#ff7f50] w-full h-[350px] md:h-[500px] lg:h-full flex items-center justify-center">
-          <img
-            src="https://i.ibb.co/ZpwnD6HV/SOCIAL-MEDIA-ICONS.png"
+          <motion.img
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330742/SOCIAL_MEDIA_ICONS_rjb9fo.png"
             alt="social management image"
             className="w-full h-full md:w-[550px] md:h-[550px] object-contain"
           />

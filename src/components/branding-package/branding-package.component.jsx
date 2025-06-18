@@ -2,6 +2,21 @@ import React from "react";
 import { CvPricingData } from "../../data/pricing-data/pricing-data";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: (index) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const BrandingPackage = () => {
   const handleOrigins = () => {
@@ -26,10 +41,19 @@ const BrandingPackage = () => {
       </p>
 
       <div className="flex flex-column md:flex-row justify-center items-center mt-10 lg:mt-20">
-        <div className="md:relative w-full h-max md:w-[642.68px] md:h-[295px] lg:w-[937px] lg:h-[467px] rounded-xl md:rounded-3xl md:bg-[#fff] p-1 md:p-5 lg:px-10 lg:py-7 flex flex-col space-y-4 md:flex-row">
-          {CvPricingData.slice(0, 2).map((data) => (
-            <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="md:relative w-full h-max md:w-[642.68px] md:h-[295px] lg:w-[937px] lg:h-[467px] rounded-xl md:rounded-3xl md:bg-[#fff] p-1 md:p-5 lg:px-10 lg:py-7 flex flex-col space-y-4 md:flex-row"
+        >
+          {CvPricingData.slice(0, 2).map((data, index) => (
+            <motion.div
               key={data.id}
+              initial="hidden"
+              whileInView="visible"
+              variants={cardVariants}
+              custom={index}
               className="md:mr-5 lg:mr-10 p-5 md:p-0 relative bg-[#fff] rounded-xl md:bg-none md:rounded-none"
             >
               <p className="text-[#010413] text-[20.85px] lg:text-[36px] font-bold mb-3">
@@ -70,11 +94,14 @@ const BrandingPackage = () => {
                   Order now
                 </button>
               </Link>
-            </div>
+            </motion.div>
           ))}
           {CvPricingData.slice(2).map((data) => (
-            <div
+            <motion.div
               key={data.id}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
               className="md:absolute md:top-[-20px] md:right-[6px] bg-[#1342ff] w-full h-max md:w-[200.12px] lg:w-[292px] lg:h-[504px] rounded-xl md:rounded-3xl p-5 overflow-hidden drop-shadow-2xl drop-shadow-[#5243c253] "
             >
               <div className="flex justify-end">
@@ -108,15 +135,14 @@ const BrandingPackage = () => {
               <Link
                 to="/services/printing-consultation"
                 onClick={handleOrigins}
-                className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
               >
-                <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.91px] lg:text-[15px] mt-5 px-6 py-2 lg:py-3 rounded-3xl hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
+                <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.91px] lg:text-[15px] px-6 py-2 lg:py-3 rounded-3xl hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
                   Order now
                 </button>
               </Link>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

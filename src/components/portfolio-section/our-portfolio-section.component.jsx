@@ -30,8 +30,8 @@ const OurPortfolioSection = () => {
         </div>
       </div>
       <motion.div
-        initial={{ opacity: 0, y: 50 }} // Starts faded and lower
-        whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
         className="grid grid-cols-1 lg:grid-cols-2 gap-6"

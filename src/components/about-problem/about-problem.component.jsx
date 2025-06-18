@@ -1,4 +1,6 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const AboutProblem = () => {
   return (
@@ -15,7 +17,12 @@ const AboutProblem = () => {
       >
         No one deserves to fail severally, be confused and not succeed
       </p>
-      <p className="text-[#667085] text-[10px] md:text-[13px] lg:text-[16px] leading-[2] lg:leading-[1.7] mb-3">
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="text-[#667085] text-[10px] md:text-[13px] lg:text-[16px] leading-[2] lg:leading-[1.7] mb-3"
+      >
         I've experienced failure countless times, often because I genuinely
         didn't know what I was doing wrong. I was putting in a lot of effort,
         but it was directed at the wrong things. After facing over 100
@@ -31,14 +38,19 @@ const AboutProblem = () => {
         is here to do for you. Change you story, help yoy build your personal
         and business brand, i cater for everything that can help you achieve
         your set goals.
-      </p>
-      <div className="w-full h-[193.34px] md:h-[350px] lg:h-[705px] rounded-2xl overflow-hidden mt-5">
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="w-full h-[193.34px] md:h-[350px] lg:h-[705px] rounded-2xl overflow-hidden mt-5"
+      >
         <img
-          src="https://i.ibb.co/wFhYbzrV/882201a45f54dc02fe0ca6e02fe4fcc558afa801.jpg"
+          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248921/About%20page/882201a45f54dc02fe0ca6e02fe4fcc558afa801_tklxa6.jpg"
           alt="man working late"
           className="w-full h-full object-cover"
         />
-      </div>
+      </motion.div>
     </div>
   );
 };

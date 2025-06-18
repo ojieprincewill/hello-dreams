@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 import { MeetExpertsData } from "../../data/choose-us-data/choose-us.data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const ExpertTeam = () => {
   const [activeModal, setActiveModal] = useState(null);
@@ -10,8 +25,12 @@ const ExpertTeam = () => {
   return (
     <div className="w-full mt-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
       {MeetExpertsData.map((data, index) => (
-        <div
+        <motion.div
           key={data.id}
+          initial="hidden"
+          whileInView="visible"
+          variants={cardVariants}
+          custom={index}
           className={`relative p-3 border border-[#dfdfe2] rounded-xl ${
             index >= MeetExpertsData.length - 2 ? "lg:col-span-2" : ""
           }`}
@@ -88,7 +107,7 @@ const ExpertTeam = () => {
               </>
             )}
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

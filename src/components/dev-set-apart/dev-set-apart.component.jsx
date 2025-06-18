@@ -1,5 +1,20 @@
 import React from "react";
 import { DevSetApartData } from "../../data/set-apart-data/set-apart-data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 const DevSetApart = () => {
   return (
     <div className="w-full px-[5%] lg:px-[10%] py-10">
@@ -15,8 +30,12 @@ const DevSetApart = () => {
       </p>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
         {DevSetApartData.map((data, index) => (
-          <div
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
             className={`p-3 border border-[#ccc] rounded-2xl ${
               index === DevSetApartData.length - 1 &&
               DevSetApartData.length % 2 !== 0
@@ -43,12 +62,12 @@ const DevSetApart = () => {
             >
               {data.text}
             </p>
-            <div className="mt-3">
+            {/* <div className="mt-3">
               <button className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-2 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                 Learn more
               </button>
-            </div>
-          </div>
+            </div> */}
+          </motion.div>
         ))}
       </div>
     </div>

@@ -2,6 +2,8 @@ import React from "react";
 import { BrandingSmeData } from "../../data/pricing-data/pricing-data";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const BrandingPackageSme = () => {
   const HandleOrigins = () => {
@@ -23,7 +25,12 @@ const BrandingPackageSme = () => {
         Hurry now while offer lasts
       </p>
 
-      <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center md:relative py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center md:relative py-10"
+      >
         {BrandingSmeData.slice(0, 1).map((data) => (
           <div
             key={data.id}
@@ -79,8 +86,11 @@ const BrandingPackageSme = () => {
           </div>
         ))}
         {BrandingSmeData.slice(1, 2).map((data) => (
-          <div
+          <motion.div
             key={data.id}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
             className="md:absolute md:left-[10px] lg:left-[50px] bottom-[122px] border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263]"
           >
             <div className="bg-[#fff] text-[#323232] px-5 py-7 space-y-3">
@@ -121,11 +131,14 @@ const BrandingPackageSme = () => {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         ))}
         {BrandingSmeData.slice(2).map((data) => (
-          <div
+          <motion.div
             key={data.id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
             className="md:absolute md:right-[10px] lg:right-[50px] border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263]"
           >
             <div className="bg-[#fff] text-[#323232] px-5 py-7 space-y-3">
@@ -166,9 +179,9 @@ const BrandingPackageSme = () => {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

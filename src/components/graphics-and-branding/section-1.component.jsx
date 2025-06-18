@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const SectionOne = () => {
   const HandleOrigins = () => {
@@ -11,7 +13,12 @@ const SectionOne = () => {
       <p className="text-[#101828] text-[20px] md:text-[25.57px] lg:text-[48px] font-bold text-center py-4 lg:py-7">
         Graphics & Branding
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="grid grid-cols-1 md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8"
+      >
         <div className="relative bg-[#efece9] w-full h-[332px] md:w-full md:h-full rounded-2xl overflow-hidden">
           <span
             className="absolute top-[-15px] left-[-16px] w-[58.07px] h-[54.62px] md:w-[107.35px] md:h-[107.35px] flex justify-center items-center rounded-full bg-[#eef2fe] text-[#1342ff] text-[21.85px] md:text-[28.49px]"
@@ -19,8 +26,11 @@ const SectionOne = () => {
           >
             1
           </span>
-          <img
-            src="https://i.ibb.co/YTdTfzvW/humaaan-11.png"
+          <motion.img
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071713/Graphics%20page/humaaan-11_pyox5q.png"
             alt="outline-svg-1"
             className="justify-self-center md:absolute md:top-[15px] md:right-0 w-[175.14px] h-full md:w-[250.23px] md:h-[410.26px] lg:hidden object-contain md:object-cover"
           />
@@ -54,14 +64,22 @@ const SectionOne = () => {
           </div>
 
           <Link to="/services/graphics-consultation" onClick={HandleOrigins}>
-            <button className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] lg:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 lg:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] lg:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 lg:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            >
               Get free consultation
-            </button>
+            </motion.button>
           </Link>
         </div>
-      </div>
-      <img
-        src="https://i.ibb.co/YTdTfzvW/humaaan-11.png"
+      </motion.div>
+      <motion.img
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071713/Graphics%20page/humaaan-11_pyox5q.png"
         alt="outline-svg-1"
         className="hidden lg:block absolute bottom-0 left-[120px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
       />

@@ -1,6 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DevData } from "../../data/development-data/development.data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const Development = () => {
   const handleOrigins = () => {
@@ -31,7 +46,14 @@ const Development = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10">
         {DevData.map((data, index) => (
-          <div key={data.id} className="border border-[#dfdfe2] rounded-xl p-2">
+          <motion.div
+            key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
+            className="border border-[#dfdfe2] rounded-xl p-2"
+          >
             <div className="w-full h-[280px] lg:h-[360px] rounded-xl overflow-hidden ">
               <img
                 src={data.image}
@@ -53,7 +75,7 @@ const Development = () => {
             >
               {data.text}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

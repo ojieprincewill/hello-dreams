@@ -24,7 +24,7 @@ const NewsletterSection = () => {
         />
         <button
           type="submit"
-          className="border border-r-0 border-l-0 px-5 md:px-16 lg:px-18 py-[12px] md:py-[16px] lg:py-[18px] border-[#010413] text-center w-max leading-normal"
+          className="border border-r-0 border-l-0 px-5 md:px-16 lg:px-18 py-[12px] md:py-[16px] lg:py-[18px] border-[#010413] text-center w-max leading-normal hover:bg-[#99c8ff] transition-colors duration-300 cursor-pointer"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330686/Button_SVG_mmlmot.png"

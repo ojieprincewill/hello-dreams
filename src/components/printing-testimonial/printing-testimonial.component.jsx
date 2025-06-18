@@ -1,6 +1,21 @@
 import React from "react";
 import { PrintingTestimonialData } from "../../data/testimonial-data/testimonial.data";
 import { StarIcon } from "@heroicons/react/24/solid";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const PrintingTestimonial = () => {
   return (
@@ -18,9 +33,13 @@ const PrintingTestimonial = () => {
         Hear what our clients have to say
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-15">
-        {PrintingTestimonialData.map((data) => (
-          <div
+        {PrintingTestimonialData.map((data, index) => (
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
             className="border border-[#cccccc] rounded-2xl p-3 md:p-5"
           >
             <div className="flex flex-row justify-between items-center">
@@ -46,7 +65,7 @@ const PrintingTestimonial = () => {
               </div>
               <div className="w-[27.35px] h-[24.19px] lg:w-[46px] lg:h-[39.03px]">
                 <img
-                  src="https://i.ibb.co/fY5HPXYb/quote-icon.png"
+                  src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750070959/UI%20page/quote_icon_flyun2.png"
                   alt="quote icon"
                   className="w-full h-full object-contain"
                 />
@@ -76,7 +95,7 @@ const PrintingTestimonial = () => {
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

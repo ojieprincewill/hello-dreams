@@ -1,5 +1,20 @@
 import React from "react";
 import { AboutAccomplishmentData } from "../../data/accomplishment-data/accomplishment.data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const successVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const AboutAccomplishments = () => {
   return (
@@ -10,24 +25,34 @@ const AboutAccomplishments = () => {
       >
         what we have accomplished so far
       </p>
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-[#000000] text-[12px] md:text-[20px] lg:text-[32px] font-bold mb-3"
         style={{ fontFamily: "'Roboto', sans-serif" }}
       >
         We could not have done it without you
-      </p>
-      <p
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
         className="text-[#667085] text-[10px] md:text-[13px] lg:text-[16px] leading-[2] lg:leading-[1.7] mb-3 w-[95%] lg:w-[671.12px]"
         style={{ fontFamily: "'Roboto', sans-serif" }}
       >
         Hello Dreams started in 2023 and we have built this community through
         hard work, dedication and beautiful people like you.
-      </p>
+      </motion.p>
 
       <div className="space-y-6 my-6">
-        {AboutAccomplishmentData.map((data) => (
-          <div
+        {AboutAccomplishmentData.map((data, index) => (
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={successVariants}
+            custom={index}
             className="flex justify-between items-center px-1 md:px-5 py-2 border border-[#eaecf0] rounded-xl"
           >
             <div className="flex space-x-1 md:space-x-3 items-start">
@@ -55,7 +80,7 @@ const AboutAccomplishments = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

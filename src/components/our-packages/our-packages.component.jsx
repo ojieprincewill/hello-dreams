@@ -103,7 +103,7 @@ const OurPackages = () => {
             onClick={handleOrigins}
           >
             <motion.button
-              initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="bg-[#efece9] text-[#101828] font-bold border border-[#efece9] text-[10px] lg:text-[15px] px-6 py-3 lg:py-4 rounded-3xl lg:rounded-lg hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer"

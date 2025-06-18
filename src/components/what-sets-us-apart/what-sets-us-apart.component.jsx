@@ -1,5 +1,20 @@
 import React from "react";
 import { SetApartData } from "../../data/set-apart-data/set-apart-data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 const WhatSetsUsApart = () => {
   return (
     <div className="w-full px-[5%] lg:px-[10%] py-10">
@@ -15,8 +30,12 @@ const WhatSetsUsApart = () => {
       </p>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
         {SetApartData.map((data, index) => (
-          <div
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
             className={`p-3 border border-[#dfdfe2] rounded-2xl ${
               index === SetApartData.length - 1
                 ? "md:col-span-2 lg:col-span-1"
@@ -41,7 +60,7 @@ const WhatSetsUsApart = () => {
                 Learn more
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

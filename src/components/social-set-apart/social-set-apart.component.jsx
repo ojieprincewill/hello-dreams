@@ -1,5 +1,20 @@
 import React from "react";
 import { SocialSetApartData } from "../../data/set-apart-data/set-apart-data";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const SocialSetApart = () => {
   return (
@@ -17,8 +32,12 @@ const SocialSetApart = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10">
         {SocialSetApartData.map((data, index) => (
-          <div
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={cardVariants}
+            custom={index}
             className={`p-3 border border-[#dfdfe2] rounded-2xl ${
               index === SocialSetApartData.length - 1
                 ? "md:col-span-2 lg:col-span-1"
@@ -38,7 +57,7 @@ const SocialSetApart = () => {
             <p className="text-[#667085] text-[14px] md:text-[16px] leading-[1.5] mb-3">
               {data.text}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

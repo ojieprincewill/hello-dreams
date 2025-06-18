@@ -1,6 +1,21 @@
 import React from "react";
 import { PrintingData } from "../../data/printing-data/printing.data";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 function PrintingServicesWeOffer() {
   return (
@@ -23,8 +38,12 @@ function PrintingServicesWeOffer() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
               {data.options.map((option, index) => (
-                <div
+                <motion.div
                   key={option.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={cardVariants}
+                  custom={index}
                   className={`w-full lg:h-[450px] border border-[#dfdfe2] rounded-xl p-3 lg:p-4 ${
                     index === data.options.length - 1 &&
                     data.options.length % 2 !== 0
@@ -61,7 +80,7 @@ function PrintingServicesWeOffer() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

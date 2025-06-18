@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const SectionThree = () => {
   const HandleOrigins = () => {
@@ -8,7 +10,12 @@ const SectionThree = () => {
 
   return (
     <div className="relative bg-[#ff7f50]/12 h-max md:h-[526.66px] lg:h-[982px] px-[5%] py-5">
-      <div className="flex flex-col-reverse md:grid md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="flex flex-col-reverse md:grid md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8"
+      >
         <div className="px-3 py-10 rounded-tr-2xl rounded-br-2xl ">
           <p className="text-[#101828] text-[12px] lg:text-[22.31px] mb-5">
             Marketing Collateral Design
@@ -38,9 +45,14 @@ const SectionThree = () => {
           </div>
 
           <Link to="/services/graphics-consultation" onClick={HandleOrigins}>
-            <button className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] lg:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 lg:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+            <motion.button
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] lg:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 lg:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            >
               Get free consultation
-            </button>
+            </motion.button>
           </Link>
         </div>
         <div className="relative bg-[#efece9] rounded-2xl overflow-hidden">
@@ -50,15 +62,21 @@ const SectionThree = () => {
           >
             3
           </span>
-          <img
-            src="https://i.ibb.co/mCWnVV2C/sitting-11.png"
+          <motion.img
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071815/Graphics%20page/sitting-11_q8ghbu.png"
             alt="outline-svg-2"
             className="justify-self-center md:absolute md:bottom-[30px] md:right-[20px] w-[175.14px] h-full md:w-[300.23px] md:h-auto lg:hidden object-contain md:object-cover"
           />
         </div>
-      </div>
-      <img
-        src="https://i.ibb.co/mCWnVV2C/sitting-11.png"
+      </motion.div>
+      <motion.img
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071815/Graphics%20page/sitting-11_q8ghbu.png"
         alt="outline-svg-2"
         className="hidden lg:block absolute bottom-0 right-[70px] lg:w-[700.31px] lg:h-auto object-cover"
       />
