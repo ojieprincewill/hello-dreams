@@ -6,6 +6,8 @@ import { resetCart } from "../../../state-slices/cart/cartSlice";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 const CartContent = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -31,7 +33,12 @@ const CartContent = () => {
 
   return (
     <div className="bg-[#f7f7f7] px-[5%] lg:px-[10%] py-10 md:py-20 lg:py-30 ">
-      <div className="bg-[#ffffff] px-5 py-10 md:px-10 md:py-15 rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="bg-[#ffffff] px-5 py-10 md:px-10 md:py-15 rounded-2xl"
+      >
         <p className="text-[#010413] text-[20px] md:text-[26px] lg:text-[32px] font-bold pb-5 border-b border-b-[#eaecf0] capitalize">
           your shopping cart
         </p>
@@ -68,7 +75,7 @@ const CartContent = () => {
             </Link>
           </div>
         )}
-      </div>
+      </motion.div>
       {!cartItems.length < 1 && (
         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between md:items-center mt-6">
           <Link to="/services/our-collection" onClick={handleOrigins}>

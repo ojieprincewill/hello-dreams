@@ -1,16 +1,26 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const JoinCommunityForm = () => {
   return (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Join Community
-      </p>
+      </motion.p>
 
-      <form className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 ">
+      <motion.form
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
+      >
         <div>
           <label
             className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
@@ -101,7 +111,7 @@ const JoinCommunityForm = () => {
             </button>
           </div>
         </div>
-      </form>
+      </motion.form>
     </div>
   );
 };

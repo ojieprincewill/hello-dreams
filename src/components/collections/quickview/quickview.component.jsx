@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { closeQuickview } from "../../../state-slices/quickview/quickviewSlice";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const Quickview = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,11 @@ const Quickview = () => {
       onClick={handleCloseQuickview}
       className="fixed inset-0 bg-[#20202069] z-60 flex justify-center items-center"
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         key={id}
         className="bg-[#fff] w-[90%] md:w-[427px] h-max md:h-[90vh] lg:h-[564.09px] p-2 rounded-sm overflow-auto"
       >
@@ -60,7 +66,7 @@ const Quickview = () => {
             Pay &#8358;{price}
           </button>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 };

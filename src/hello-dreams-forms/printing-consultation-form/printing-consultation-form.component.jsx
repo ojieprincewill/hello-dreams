@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import PrintingConsultationSuccess from "./printing-consultation-success.component";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const PrintingConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -96,19 +98,28 @@ const PrintingConsultationForm = () => {
   ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       {loading && <LoadingSpinner />}
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Get a free consultation
-      </p>
-      <p
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Please provide the details below
-      </p>
-      <form
+      </motion.p>
+      <motion.form
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         onSubmit={handleSubmit}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
       >
@@ -265,7 +276,7 @@ const PrintingConsultationForm = () => {
           {error && <p className="text-red-600 mt-4">{error}</p>}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
-      </form>
+      </motion.form>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import UiConsultationSuccess from "./ui-consultation-success.component";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const UiConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -87,14 +89,20 @@ const UiConsultationForm = () => {
   ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] py-15 md:py-25">
       {loading && <LoadingSpinner />}
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-10 md:mb-20"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Get a Free Consultation with Our Expert UI/UX Designers
-      </p>
+      </motion.p>
 
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         onSubmit={handleSubmit}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20 space-y-8 text-[#000000] md:p-6"
       >
@@ -196,7 +204,7 @@ const UiConsultationForm = () => {
           {error && <p className="text-red-600 mt-4">{error}</p>}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
-      </form>
+      </motion.form>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import DevConsultationSuccess from "./dev-consultation-success.component";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const WebDevConsultationForm = () => {
   const [step, setStep] = useState(1);
@@ -112,23 +114,32 @@ const WebDevConsultationForm = () => {
   ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
       {loading && <LoadingSpinner />}
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Get a Quote
-      </p>
-      <p
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {step === 1 || step === 2
           ? "Choose a service"
           : "Please complete the details below"}
-      </p>
+      </motion.p>
 
       {step === 1 && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="w-full md:w-[450px] lg:w-[576px] space-y-5 md:mx-auto mt-5 mb-30"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
@@ -156,11 +167,14 @@ const WebDevConsultationForm = () => {
               Website
             </span>
           </label>
-        </div>
+        </motion.div>
       )}
 
       {step === 2 && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="w-full md:w-[450px] lg:w-[576px] space-y-5 md:mx-auto mt-5 mb-30"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
@@ -188,11 +202,14 @@ const WebDevConsultationForm = () => {
               Personal
             </span>
           </label>
-        </div>
+        </motion.div>
       )}
 
       {step === 3 && (
-        <form
+        <motion.form
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           onSubmit={handleSubmit}
           className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
         >
@@ -327,7 +344,7 @@ const WebDevConsultationForm = () => {
             {error && <p className="text-red-600 mt-4">{error}</p>}
             {success && <p className="text-green-600 mt-4">{success}</p>}
           </div>
-        </form>
+        </motion.form>
       )}
     </div>
   );

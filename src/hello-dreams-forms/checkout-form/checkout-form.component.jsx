@@ -1,6 +1,8 @@
 import React from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const CheckoutForm = () => {
   const handleOrigins = () => {
@@ -15,11 +17,21 @@ const CheckoutForm = () => {
             <ArrowLeftIcon className="w-4 h-4 md:h-5 md:w-5 " />
           </button>
         </Link>
-        <p className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5">
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5"
+        >
           Customer Shipping Information
-        </p>
+        </motion.p>
 
-        <form className="w-full space-y-6 md:space-y-8 text-[#667085]">
+        <motion.form
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="w-full space-y-6 md:space-y-8 text-[#667085]"
+        >
           <div>
             <label
               className="block text-[12px] md:text-[14px] font-medium mb-2 md:mb-3"
@@ -127,14 +139,19 @@ const CheckoutForm = () => {
               Place Order
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
-      <div className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] ">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] "
+      >
         Note: our customer service representative will contact you once your
         payment has been received to further confirm order. Delivery takes 2 to
         3 days within lagos, and 4 to 5 days outside Lagos. For orders outside
         the country, we will communicate delivery timelines to you.
-      </div>
+      </motion.div>
     </div>
   );
 };

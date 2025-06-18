@@ -5,7 +5,7 @@ import Product from "../product/product.component";
 import { useSelector } from "react-redux";
 import Quickview from "../quickview/quickview.component";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -56,6 +56,8 @@ const CollectionsList = () => {
       </div>
 
       {!quickviewHidden && <Quickview />}
+
+      <AnimatePresence></AnimatePresence>
     </div>
   );
 };
