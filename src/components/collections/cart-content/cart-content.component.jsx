@@ -37,6 +37,7 @@ const CartContent = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
         className="bg-[#ffffff] px-5 py-10 md:px-10 md:py-15 rounded-2xl"
       >
         <p className="text-[#010413] text-[20px] md:text-[26px] lg:text-[32px] font-bold pb-5 border-b border-b-[#eaecf0] capitalize">

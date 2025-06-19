@@ -45,19 +45,18 @@ const CollectionsList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-15 mt-10">
         {products.map((product, index) => (
           <motion.div
+            key={product.id}
             initial="hidden"
             whileInView="visible"
             variants={cardVariants}
             custom={index}
           >
-            <Product key={product.id} product={product} />
+            <Product product={product} />
           </motion.div>
         ))}
       </div>
 
-      {!quickviewHidden && <Quickview />}
-
-      <AnimatePresence></AnimatePresence>
+      <AnimatePresence>{!quickviewHidden && <Quickview />}</AnimatePresence>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const OurStorySection = () => {
         Our Story
         <span className="ml-1">
           <img
-            src="https://i.ibb.co/dhxXhPY/arrow-block-down.png"
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330672/arrow-block-down_vsasxf.png"
             alt="arrow-block"
             className="w-[36.67px] h-[36.67px] md:w-[64px] md:h-[64px] lg:w-[128px] lg:h-[128px] object-cover"
           />

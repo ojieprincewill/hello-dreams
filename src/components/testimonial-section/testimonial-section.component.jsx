@@ -54,7 +54,7 @@ const TestimonialSection = () => {
             Apply for mentorship
           </Link>
           <Link
-            to=""
+            to="/academy"
             onClick={handleOrigins}
             className="bg-[#1b212c] text-[#fff] text-center font-semibold border border-[#1b212c] text-[14px] md:text-[16px] px-4 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >

@@ -36,7 +36,7 @@ const LandingHeader = () => {
             className="mt-10 space-x-4"
           >
             <Link
-              to="/workwithus"
+              to="/work-with-us"
               className="bg-white text-[#010413] font-semibold border border-[#010413] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
               onClick={handleOrigins}
             >
@@ -48,7 +48,12 @@ const LandingHeader = () => {
           </motion.div>
         </motion.div>
       </div>
-      <div className="px-5 py-10 md:hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="px-5 py-10 md:hidden"
+      >
         <h1 className="text-[20px] w-full leading-[1.1] font-extrabold">
           Unlock your potential. Build skills. Transform your future.
         </h1>
@@ -69,7 +74,7 @@ const LandingHeader = () => {
             Explore our courses
           </button>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

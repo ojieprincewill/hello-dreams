@@ -23,6 +23,7 @@ const Checkout = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        viewport={{ once: true }}
         className="bg-[#ffffff] rounded-2xl p-5 md:p-10 h-max mb-5"
       >
         <p className="text-[#010413] text-[20px] md:text-[24px] font-bold pb-5 border-b border-b-[#eaecf0] capitalize">

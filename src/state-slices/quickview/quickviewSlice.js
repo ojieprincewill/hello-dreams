@@ -17,11 +17,17 @@ export const quickviewSlice = createSlice({
     },
     closeQuickview: (state) => {
       state.hidden = true;
+    },
+    clearSelectedProduct: (state) => {
       state.selectedProduct = null;
     },
   },
 });
 
-export const { openQuickview, closeQuickview, selectProduct } =
-  quickviewSlice.actions;
+export const {
+  openQuickview,
+  closeQuickview,
+  selectProduct,
+  clearSelectedProduct,
+} = quickviewSlice.actions;
 export default quickviewSlice.reducer;

@@ -2,6 +2,21 @@ import React from "react";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import { blogData } from "../../data/sustainability-data/sustainability.data";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+
+const imageVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const SustainabilityContent = () => {
   const handleOrigins = () => {
@@ -11,7 +26,11 @@ const SustainabilityContent = () => {
   return (
     <div className="w-full px-[5%] py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
       {blogData.map((data, index) => (
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={imageVariants}
+          custom={index}
           key={data.id}
           className={`relative w-full h-[448px] p-1 ${
             index === blogData.length - 1 ? "lg:col-span-3" : ""
@@ -51,7 +70,7 @@ const SustainabilityContent = () => {
               <p className="text-[#667085] text-[14px]">{data.date}</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
