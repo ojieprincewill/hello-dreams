@@ -42,9 +42,12 @@ const LandingHeader = () => {
             >
               Book a free career call
             </Link>
-            <button className="bg-transparent text-white font-semibold border border-[#fff] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer">
+            <Link
+              to="/academy"
+              className="bg-transparent text-white font-semibold border border-[#fff] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
+            >
               Explore our courses
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -64,15 +67,18 @@ const LandingHeader = () => {
         </p>
         <div className="mt-5 flex flex-col space-y-3">
           <Link
-            to="/workwithus"
+            to="/work-with-us"
             className="bg-[#010413] text-[#fff] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
             onClick={handleOrigins}
           >
             Book a free career call
           </Link>
-          <button className="bg-transparent text-[#010413] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer">
+          <Link
+            to="/academy"
+            className="bg-transparent text-[#010413] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
+          >
             Explore our courses
-          </button>
+          </Link>
         </div>
       </motion.div>
     </>

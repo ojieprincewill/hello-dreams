@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <div className="w-full px-[5%] py-15 ">
+    <div className="w-full px-[5%] py-10 ">
       {/* Header Animation */}
       <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-15 flex items-center justify-center gap-2">
         Why Choose Us

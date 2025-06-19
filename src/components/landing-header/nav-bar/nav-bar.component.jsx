@@ -96,7 +96,7 @@ const NavBar = () => {
           </Link>
 
           <Link
-            to="/workwithus"
+            to="/work-with-us"
             className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[16px] lg:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
             onClick={handleOrigins}
           >
