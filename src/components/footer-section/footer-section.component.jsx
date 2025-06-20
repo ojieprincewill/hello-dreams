@@ -82,6 +82,12 @@ const FooterSection = () => {
                 >
                   Refer & Earn
                 </Link>
+                <span
+                  onClick={() => handleNavigate("/admin")}
+                  className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+                >
+                  Admin
+                </span>
               </div>
             </div>
             <div className="border-r-1 border-l-1 border-[#ffffff20] flex flex-col pl-3 pr-3 md:pr-10 lg:pr-32 py-5 md:py-15">
