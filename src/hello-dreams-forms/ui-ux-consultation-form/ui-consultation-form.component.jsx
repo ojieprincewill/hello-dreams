@@ -4,8 +4,10 @@ import LoadingSpinner from "../../components/loading-spinner/loading-spinner.com
 import UiConsultationSuccess from "./ui-consultation-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { useSelector } from "react-redux";
 
 const UiConsultationForm = () => {
+  const consultationType = useSelector((state) => state.consultation.type);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,6 +50,7 @@ const UiConsultationForm = () => {
       name,
       email,
       phone,
+      projectModel: consultationType,
       data: rest, // includes company, message, howDidYouHear, etc.
     };
 
@@ -97,6 +100,10 @@ const UiConsultationForm = () => {
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Get a Free Consultation with Our Expert UI/UX Designers
+        <br />
+        {consultationType === "one-time project"
+          ? "(One-Time Project)"
+          : "(Monthly Retainer)"}
       </motion.p>
 
       <motion.form
