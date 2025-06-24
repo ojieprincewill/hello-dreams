@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import supabase from '../../supabase/client';
 import PaystackPop from '@paystack/inline-js';
 import PostJobSuccess from './post-job-success.component';
+import { React, useState } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'motion/react';
 
 const PostJobForm = () => {
   const [loading, setLoading] = useState(false);
@@ -125,96 +128,220 @@ const PostJobForm = () => {
     <PostJobSuccess />
   ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
-      <p className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5">
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        style={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
         Post a Job
-      </p>
-      <p className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]">
+      </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+        className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]"
+        style={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
         Post your job in front of top-tier creative talent. A one-time fee of{' '}
         <span className="font-bold">₦50,000</span> is required to submit your
         listing. Once your job is submitted and payment is confirmed, it will be
         reviewed and published on our platform within{' '}
         <span className="font-bold">24 hours</span>.
-      </p>
+      </motion.p>
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {success && <p className="text-green-600 mb-4">{success}</p>}
-
-      <form
-        onSubmit={handleSubmit}
-        className="w-full space-y-8 text-[#000000] md:p-6"
+      <motion.form
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+        className="w-full space-y-8 text-[#000000] md:p-6 "
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <InputField
-            label="Job Title"
-            name="jobTitle"
-            value={formData.jobTitle}
-            onChange={handleChange}
-            required
-          />
-          <InputField
-            label="Experience Level"
-            name="experienceLevel"
-            value={formData.experienceLevel}
-            onChange={handleChange}
-            required
-          />
-          <InputField
-            label="Work Hours"
-            name="workHours"
-            value={formData.workHours}
-            onChange={handleChange}
-            required
-          />
-          <InputField
-            label="Pay Type"
-            name="payType"
-            value={formData.payType}
-            onChange={handleChange}
-            required
-          />
+        <div className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8">
+          <div>
+            <label
+              className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+              aria-required
+            >
+              Job Title <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="E.g., Graphic designer"
+              className="w-full placeholder:text-[#667085] placeholder:text-[14px] p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+              name=""
+              value=""
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label
+              className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+              aria-required
+            >
+              Experience Level <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+              name=""
+              value=""
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label
+              className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+              aria-required
+            >
+              Work Hours <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+              name=""
+              value=""
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label
+              className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+              aria-required
+            >
+              Pay Type <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+              name=""
+              value=""
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
-        <TextAreaField
-          label="Job Description"
-          name="jobDescription"
-          value={formData.jobDescription}
-          onChange={handleChange}
-          required
-        />
-        <TextAreaField
-          label="Application Instructions"
-          name="applicationInstructions"
-          value={formData.applicationInstructions}
-          onChange={handleChange}
-          required
-          hint="(e.g., Send your portfolio to email@example.com or apply via website.)"
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <InputField
-            label="Company Name"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-            required
-          />
-          <InputField
-            label="Company Email"
-            name="companyEmail"
-            value={formData.companyEmail}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-[#010413] text-white font-semibold border border-[#010413] mt-7 text-[14px] px-6 py-3 rounded-lg hover:bg-[#1342ff] transition-colors duration-300"
+        <form
+          onSubmit={handleSubmit}
+          className="w-full space-y-8 text-[#000000] md:p-6"
         >
-          {loading ? 'Posting...' : 'Post Job'}
-        </button>
-      </form>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <InputField
+              label="Job Title"
+              name="jobTitle"
+              value={formData.jobTitle}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Experience Level"
+              name="experienceLevel"
+              value={formData.experienceLevel}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Work Hours"
+              name="workHours"
+              value={formData.workHours}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Pay Type"
+              name="payType"
+              value={formData.payType}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <TextAreaField
+            label="Job Description"
+            name="jobDescription"
+            value={formData.jobDescription}
+            onChange={handleChange}
+            required
+          />
+          <TextAreaField
+            label="Application Instructions"
+            name="applicationInstructions"
+            value={formData.applicationInstructions}
+            onChange={handleChange}
+            required
+            hint="(e.g., Send your portfolio to email@example.com or apply via website.)"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <InputField
+              label="Company Name"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              required
+            />
+            <InputField
+              label="Company Email"
+              name="companyEmail"
+              value={formData.companyEmail}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#010413] text-white font-semibold border border-[#010413] mt-7 text-[14px] px-6 py-3 rounded-lg hover:bg-[#1342ff] transition-colors duration-300"
+          >
+            {loading ? 'Posting...' : 'Post Job'}
+          </button>
+        </form>
+        <div className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8">
+          <div>
+            <label
+              className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+              aria-required
+            >
+              Company Name <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+              name=""
+              value=""
+              onChange={handleChange}
+            />
+          </div>
+          <div className="space-y-5 md:space-y-10">
+            <div>
+              <label
+                className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+                aria-required
+              >
+                Company Email <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+                name=""
+                value=""
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+              >
+                Post job
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.form>
     </div>
   );
 };

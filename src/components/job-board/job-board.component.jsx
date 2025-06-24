@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import { JobData } from "../../data/job-data/job.data";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "motion/react";
+
+const jobVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const JobBoard = () => {
   const [activeJob, setActiveJob] = useState(null);
@@ -15,7 +30,7 @@ const JobBoard = () => {
         Jobs Available
         <span className="ml-1">
           <img
-            src="https://i.ibb.co/dhxXhPY/arrow-block-down.png"
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330672/arrow-block-down_vsasxf.png"
             alt="arrow-block"
             className="w-[36.67px] h-[36.67px] md:w-[64px] md:h-[64px] lg:w-[128px] lg:h-[128px] object-cover"
           />
@@ -27,9 +42,13 @@ const JobBoard = () => {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-6 lg:my-10">
-        {JobData.map((data) => (
-          <div
+        {JobData.map((data, index) => (
+          <motion.div
             key={data.id}
+            initial="hidden"
+            whileInView="visible"
+            variants={jobVariants}
+            custom={index}
             className="w-full px-3 lg:px-6 py-4 lg:py-10 border border-[#eaecf0] rounded-md"
           >
             <p className="text-[#010413] text-[20px] lg:text-[32px] font-extrabold mb-3 lg:mb-5">
@@ -72,36 +91,47 @@ const JobBoard = () => {
                 See more
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      {activeJob && (
-        <div
-          onClick={() => setActiveJob(null)}
-          className="fixed inset-0 bg-[#20202069] z-60"
-        >
-          {JobData.filter((job) => job.id === activeJob).map((job) => (
-            <div
-              key={job.id}
-              className="absolute right-0 bg-[#fff] w-[300px] lg:w-[508px] h-full p-5 rounded-xl overflow-auto"
-            >
-              <div className="flex justify-between items-center mb-5 text-[#1b212c]">
-                <h2 className=" text-[18px] lg:text-[30px] font-extrabold  ">
-                  {job.detailTitle}
-                </h2>
-                <XMarkIcon
-                  onClick={() => setActiveJob(null)}
-                  className="md:hidden w-6 h-6 cursor-pointer"
-                />
-              </div>
-              <p className="text-[#667085] text-[10px] lg:text-[16px] leading-[1.5]">
-                {job.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {activeJob && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            onClick={() => setActiveJob(null)}
+            className="fixed inset-0 bg-[#20202069] z-60"
+          >
+            {JobData.filter((job) => job.id === activeJob).map((job) => (
+              <motion.div
+                initial={{ opacity: 0.8, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 30 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                onClick={(e) => e.stopPropagation()}
+                key={job.id}
+                className="absolute right-0 bg-[#fff] w-[300px] lg:w-[508px] h-full p-5 rounded-xl overflow-auto"
+              >
+                <div className="flex justify-between items-center mb-5 text-[#1b212c]">
+                  <h2 className=" text-[18px] lg:text-[30px] font-extrabold  ">
+                    {job.detailTitle}
+                  </h2>
+                  <XMarkIcon
+                    onClick={() => setActiveJob(null)}
+                    className="md:hidden w-6 h-6 cursor-pointer"
+                  />
+                </div>
+                <p className="text-[#667085] text-[10px] lg:text-[16px] leading-[1.5]">
+                  {job.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

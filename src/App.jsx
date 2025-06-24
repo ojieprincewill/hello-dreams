@@ -39,6 +39,8 @@ import CartPage from "./pages/cart-page/cart-page";
 import CheckoutPage from "./pages/checkout-page/checkout-page";
 import AdminDashboardPage from "./pages/admin-dashboard-page/admin-dashboard-page";
 import NotFound from "./pages/admin-dashboard-page/NotFound";
+import TermsPage from "./pages/terms-page/terms-page";
+import PrivacyPage from "./pages/privacy-policy-page/privacy-page";
 
 const queryClient = new QueryClient();
 
@@ -120,7 +122,7 @@ function App() {
             <Route path="/academy" element={<AcademyPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
-            <Route path="/workwithus" element={<BookCallPage />} />
+            <Route path="/work-with-us" element={<BookCallPage />} />
             <Route
               path="/community-challenge"
               element={<CommunityChallengePage />}
@@ -132,7 +134,9 @@ function App() {
             <Route path="/sustainability/:blogId" element={<BlogPage />} />
             <Route path="/cart-summary" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/helloadmin1212" element={<AdminDashboardPage />} />
+            <Route path="/terms-of-service" element={<TermsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

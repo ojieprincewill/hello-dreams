@@ -6,6 +6,21 @@ import {
   DocumentDuplicateIcon,
 } from "@heroicons/react/24/solid";
 import NavBar from "../landing-header/nav-bar/nav-bar.component";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "motion/react";
+
+const imageVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: index * 0.2,
+    },
+  }),
+};
 
 const CommunityChallenge = () => {
   const [activeOption, setActiveOption] = useState(null);
@@ -38,7 +53,7 @@ const CommunityChallenge = () => {
 
   return (
     <>
-      <div className="w-full h-[435px] md:h-[865px] lg:h-[1015px] pt-3 md:pt-0 bg-[url('https://i.ibb.co/8nrStGvY/ad662eef6d63161aa45a54bcb30d5cc4dea4d128.jpg')] bg-cover bg-center ">
+      <div className="w-full h-[435px] md:h-[865px] lg:h-[1015px] pt-3 md:pt-0 bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331234/community%20page/ad662eef6d63161aa45a54bcb30d5cc4dea4d128_ouljqz.jpg')] bg-cover bg-center ">
         <NavBar />
       </div>
       <div className="px-[5%] lg:px-[10%] py-5 mb-10 space-y-15">
@@ -52,8 +67,12 @@ const CommunityChallenge = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {data.options.map((option, index) => (
-                <div
+                <motion.div
                   key={option.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={imageVariants}
+                  custom={index}
                   className={`w-full h-max md:h-[380px] lg:h-[466px] border border-[#dfdfe2] rounded-xl p-4 ${
                     index === data.options.length - 1 &&
                     data.options.length % 2 !== 0
@@ -79,74 +98,90 @@ const CommunityChallenge = () => {
                       <ArrowTopRightOnSquareIcon className="w-[23px] h-[23px] md:w-[28px] md:h-[28px]" />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            {activeOption && (
-              <div
-                onClick={closeModal}
-                className="fixed inset-0 flex items-center justify-center bg-[#20202069] z-60"
-              >
-                <div className="bg-[#fff] p-6 rounded-lg w-[90%] md:w-[483px]">
-                  <div ref={textRef}>
-                    {CommunityChallengeData.filter((data) =>
-                      data.options.some((option) => option.id === activeOption)
-                    ).map((data) => (
-                      <div key={data.id}>
-                        <div className="flex justify-between items-center text-[#0d111c] mb-3">
-                          <h2 className="text-[16px] md:text-[20px] lg:text-[24px] font-extrabold">
-                            {data.header}
-                          </h2>
-                          <XMarkIcon
-                            onClick={closeModal}
-                            className="w-5 h-5 md:w-[24px] md:h-[24px] cursor-pointer"
-                          />
-                        </div>
+            <AnimatePresence>
+              {activeOption && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  onClick={closeModal}
+                  className="fixed inset-0 flex items-center justify-center bg-[#20202069] z-60"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.7 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-[#fff] p-6 rounded-lg w-[90%] md:w-[483px]"
+                  >
+                    <div ref={textRef}>
+                      {CommunityChallengeData.filter((data) =>
+                        data.options.some(
+                          (option) => option.id === activeOption
+                        )
+                      ).map((data) => (
+                        <div key={data.id}>
+                          <div className="flex justify-between items-center text-[#0d111c] mb-3">
+                            <h2 className="text-[16px] md:text-[20px] lg:text-[24px] font-extrabold">
+                              {data.header}
+                            </h2>
+                            <XMarkIcon
+                              onClick={closeModal}
+                              className="w-5 h-5 md:w-[24px] md:h-[24px] cursor-pointer"
+                            />
+                          </div>
 
-                        {data.options
-                          .filter((option) => option.id === activeOption)
-                          .map((option) => (
-                            <div key={option.id}>
-                              <p className="text-[#0d111c] text-[12px] md:text-[16px] lg:text-[20px] font-semibold mb-3">
-                                {option.title}
-                              </p>
-                              <div
-                                className="space-y-4"
-                                style={{
-                                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                                }}
-                              >
-                                <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
-                                  {option.text1}
+                          {data.options
+                            .filter((option) => option.id === activeOption)
+                            .map((option) => (
+                              <div key={option.id}>
+                                <p className="text-[#0d111c] text-[12px] md:text-[16px] lg:text-[20px] font-semibold mb-3">
+                                  {option.title}
                                 </p>
-                                <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
-                                  {option.text2}
-                                </p>
-                                <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
-                                  {option.tag}
-                                </p>
+                                <div
+                                  className="space-y-4"
+                                  style={{
+                                    fontFamily:
+                                      "'Plus Jakarta Sans', sans-serif",
+                                  }}
+                                >
+                                  <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
+                                    {option.text1}
+                                  </p>
+                                  <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
+                                    {option.text2}
+                                  </p>
+                                  <p className="text-[#8d9da8] text-[10px] md:text-[12px] lg:text-[14px] font-medium">
+                                    {option.tag}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                      </div>
-                    ))}
-                  </div>
+                            ))}
+                        </div>
+                      ))}
+                    </div>
 
-                  <div className="mt-5">
-                    <button
-                      onClick={handleCopy}
-                      className="bg-[#fff] text-[#1b212c] font-semibold border border-[#1a212a] text-[10.91px] md:text-[13.46px] lg:text-[16px] px-3 py-2 rounded-xl hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
-                    >
-                      <span>
-                        <DocumentDuplicateIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
-                      </span>
-                      {copied ? "Copied!" : "Copy"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+                    <div className="mt-5">
+                      <button
+                        onClick={handleCopy}
+                        className="bg-[#fff] text-[#1b212c] font-semibold border border-[#1a212a] text-[10.91px] md:text-[13.46px] lg:text-[16px] px-3 py-2 rounded-xl hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                      >
+                        <span>
+                          <DocumentDuplicateIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
+                        </span>
+                        {copied ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>

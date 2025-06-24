@@ -1,6 +1,9 @@
 import { React, useState } from 'react';
 import supabase from '../../supabase/client';
 import MentorshipSuccess from './mentorship-success.component';
+import { React, useState } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'motion/react';
 
 const MentorshipForm = () => {
   const [loading, setLoading] = useState(false);
@@ -101,12 +104,15 @@ const MentorshipForm = () => {
     <MentorshipSuccess />
   ) : (
     <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Hello Dreams Mentorship
-      </p>
+      </motion.p>
 
       {/* Error Message */}
       {error && (
@@ -115,8 +121,11 @@ const MentorshipForm = () => {
         </div>
       )}
 
-      <form
+      <motion.form
         onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
       >
         <div>
@@ -260,7 +269,7 @@ const MentorshipForm = () => {
             </button>
           </div>
         </div>
-      </form>
+      </motion.form>
     </div>
   );
 };

@@ -9,8 +9,8 @@ const PrintingSection = () => {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-col py-10">
-      <div className="w-full  text-center flex flex-col justify-center items-center py-10 px-5 lg:pb-10">
+    <div className="flex flex-col-reverse lg:flex-col py-5">
+      <div className="w-full  text-center flex flex-col justify-center items-center py-5 px-5 lg:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Printing
         </h1>

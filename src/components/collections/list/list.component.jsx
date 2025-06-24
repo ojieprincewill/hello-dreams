@@ -5,7 +5,7 @@ import Product from "../product/product.component";
 import { useSelector } from "react-redux";
 import Quickview from "../quickview/quickview.component";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -45,17 +45,18 @@ const CollectionsList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10 lg:gap-y-15 mt-10">
         {products.map((product, index) => (
           <motion.div
+            key={product.id}
             initial="hidden"
             whileInView="visible"
             variants={cardVariants}
             custom={index}
           >
-            <Product key={product.id} product={product} />
+            <Product product={product} />
           </motion.div>
         ))}
       </div>
 
-      {!quickviewHidden && <Quickview />}
+      <AnimatePresence>{!quickviewHidden && <Quickview />}</AnimatePresence>
     </div>
   );
 };

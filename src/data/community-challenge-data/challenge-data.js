@@ -6,7 +6,7 @@ export const CommunityChallengeData = [
       {
         id: 101,
         image:
-          "https://i.ibb.co/yng0H1cM/ee4f8a9ba3213309f1a0780c219cb0d9a5c0ae0b.jpg",
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331233/community%20page/ee4f8a9ba3213309f1a0780c219cb0d9a5c0ae0b_tewtdw.jpg",
         title: "Design a Daily Habit Tracker App (Mobile)",
         text1:
           "Challenge: Design a mobile interface for a daily habit tracker where users can add, edit, and complete tasks like drinking water, journaling, or exercising.",
@@ -17,7 +17,7 @@ export const CommunityChallengeData = [
       {
         id: 102,
         image:
-          "https://i.ibb.co/DJn9Lq4/97066ceb0c086054fffa03e26fa66baac0f0921f.jpg",
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331228/community%20page/97066ceb0c086054fffa03e26fa66baac0f0921f_umigw5.jpg",
         title: "Redesign the Login Page of Your Favorite App",
         text1:
           "Challenge: Choose any app you use daily and redesign its login/signup page. Keep accessibility and responsiveness in mind.",
@@ -28,7 +28,7 @@ export const CommunityChallengeData = [
       {
         id: 103,
         image:
-          "https://i.ibb.co/xqVH9CfX/1448f11095bef42e135c99d511675ecafb31fad1.jpg",
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331232/community%20page/1448f11095bef42e135c99d511675ecafb31fad1_wahxlg.jpg",
         title: "Create a Food Delivery App Landing Page (Web)",
         text1:
           "Challenge: Design a landing page for a fictional food delivery brand targeting millennials in Africa. Focus on visuals, CTA, and trust-building elements.",
@@ -45,7 +45,7 @@ export const CommunityChallengeData = [
       {
         id: 201,
         image:
-          "https://i.ibb.co/ZpmjW6rV/cdacd7b075abfa9341aa4999e5ea2edd3651856b.jpg",
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331232/community%20page/cdacd7b075abfa9341aa4999e5ea2edd3651856b_vfcrpp.jpg",
         title: "Conduct a Usability Test on a Government Website",
         text1:
           "Challenge: Choose a Nigerian government or state website and perform a mini usability test. Identify 3 major usability issues and suggest improvements.",
@@ -67,7 +67,7 @@ export const CommunityChallengeData = [
       {
         id: 203,
         image:
-          "https://i.ibb.co/YBh1KknM/1f99a5012b50e7b5d9b792831e3d8828aaa27a01.jpg",
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750331233/community%20page/1f99a5012b50e7b5d9b792831e3d8828aaa27a01_txpyja.jpg",
         title: "Redesign the UX of an ATM Machine (Africa-focused)",
         text1:
           "Challenge: Think about the UX experience of using an ATM in Africa. How would you redesign the interface and flow to make it faster, safer, and more user-friendly?",

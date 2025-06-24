@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import supabase from "../../supabase/client";
 import Step2 from "./step-2.component";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
@@ -154,13 +156,19 @@ const ReferForm = () => {
         Make up to 10% on commission for every referral of any of our services.
       </p>
 
-      <p
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold mt-10"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Step 1
-      </p>
-      <form
+      </motion.p>
+      <motion.form
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         onSubmit={handleSubmit}
         className="md:w-[401.75px] mx-auto space-y-8 md:p-6 mt-3 "
       >
@@ -292,7 +300,7 @@ const ReferForm = () => {
             {loading ? "Submitting..." : "Send Referral"}
           </button>
         </div> */}
-      </form>
+      </motion.form>
       <Step2 />
       {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
       {success && <p className="text-green-600 mt-4 text-center">{success}</p>}

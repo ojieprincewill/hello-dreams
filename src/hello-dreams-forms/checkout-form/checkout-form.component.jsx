@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import supabase from '../../supabase/client';
+=======
+import React from "react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
+>>>>>>> 053434a7e132a66c7a7d356116ff8c48f4958f49
 
 const CheckoutForm = () => {
   const handleOrigins = () => {
@@ -142,54 +150,21 @@ const CheckoutForm = () => {
             <ArrowLeftIcon className="w-4 h-4 md:h-5 md:w-5 " />
           </button>
         </Link>
-        <p className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5">
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5"
+        >
           Customer Shipping Information
-        </p>
+        </motion.p>
 
-        {/* Display cart summary */}
-        {cartItems.length > 0 && (
-          <div className="bg-[#f8f9fa] p-4 rounded-lg mb-6">
-            <p className="text-[#010413] text-[16px] font-semibold mb-2">
-              Order Summary ({totalItems} items)
-            </p>
-            <div className="space-y-1">
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between text-[#667085] text-[14px]"
-                >
-                  <span>
-                    {item.title} x {item.quantity}
-                  </span>
-                  <span>
-                    &#8358;{(item.price * item.quantity).toLocaleString()}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-[#eaecf0] mt-2 pt-2">
-              <div className="flex justify-between text-[#010413] font-semibold">
-                <span>Total:</span>
-                <span>&#8358;{cartTotal.toLocaleString()}</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            {error}
-          </div>
-        )}
-
-        {success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-            {success}
-          </div>
-        )}
-
-        <form
-          onSubmit={handleSubmit}
+        <motion.form
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
           className="w-full space-y-6 md:space-y-8 text-[#667085]"
         >
           <div>
@@ -335,14 +310,20 @@ const CheckoutForm = () => {
               {isLoading ? 'Processing...' : 'Place Order'}
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
-      <div className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] ">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] "
+      >
         Note: our customer service representative will contact you once your
         payment has been received to further confirm order. Delivery takes 2 to
         3 days within lagos, and 4 to 5 days outside Lagos. For orders outside
         the country, we will communicate delivery timelines to you.
-      </div>
+      </motion.div>
     </div>
   );
 };

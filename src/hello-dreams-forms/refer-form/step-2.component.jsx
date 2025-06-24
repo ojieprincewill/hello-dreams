@@ -1,9 +1,14 @@
 import React from "react";
 import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const Step2 = () => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className="md:w-max mx-auto space-y-8 md:p-6 mt-3 "
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
@@ -40,7 +45,7 @@ const Step2 = () => {
           Submit
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

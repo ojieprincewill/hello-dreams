@@ -1,11 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { useDispatch } from "react-redux";
+import { setConsultationType } from "../../state-slices/ui-consultation/consultationSlice";
 
 const OurPackages = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleOrigins = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleClick = (type) => {
+    dispatch(setConsultationType(type));
+    navigate("/services/ui-design-consultation");
+    handleOrigins();
   };
 
   return (
@@ -52,10 +63,9 @@ const OurPackages = () => {
               2-3 Specialised design professionals with a design lead
             </p>
           </div>
-          <Link
-            to="/services/ui-design-consultation"
+          <div
             className="flex justify-center items-center mt-5"
-            onClick={handleOrigins}
+            onClick={() => handleClick("one-time project")}
           >
             <motion.button
               initial={{ opacity: 0, scale: 0.9 }} // ✅ Image pops in
@@ -65,7 +75,7 @@ const OurPackages = () => {
             >
               Book a free Consultation
             </motion.button>
-          </Link>
+          </div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -97,10 +107,9 @@ const OurPackages = () => {
               Pause and resume work anytime within a 30-day window
             </p>
           </div>
-          <Link
-            to="/services/ui-design-consultation"
+          <div
             className="flex justify-center items-center mt-5"
-            onClick={handleOrigins}
+            onClick={() => handleClick("monthly retainer")}
           >
             <motion.button
               initial={{ opacity: 0, scale: 0.9 }}
@@ -110,7 +119,7 @@ const OurPackages = () => {
             >
               Book a free Consultation
             </motion.button>
-          </Link>
+          </div>
         </motion.div>
       </div>
     </div>

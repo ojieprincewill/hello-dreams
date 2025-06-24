@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 const LetsTalk = () => {
   const [selectedService, setSelectedService] = useState("");
@@ -10,7 +12,12 @@ const LetsTalk = () => {
 
   return (
     <div className="bg-[#f8f8f8] md:bg-[#fff] grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20 px-[5%] py-15 md:py-25">
-      <div className="text-[#000000] space-y-6 md:space-y-10 ">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="text-[#000000] space-y-6 md:space-y-10 "
+      >
         <div>
           <p
             className="text-[20px] md:text-[32px] lg:text-[64px] font-bold mb-2 md:mb-4"
@@ -99,9 +106,12 @@ const LetsTalk = () => {
             Facebook
           </a>
         </div>
-      </div>
+      </motion.div>
 
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         onSubmit={handleSubmit}
         className="w-full space-y-6 md:space-y-10 text-[#000000] lg:p-6"
       >
@@ -181,11 +191,11 @@ const LetsTalk = () => {
 
         <button
           type="submit"
-          className="w-full bg-[#eef2fe] text-[#667085] text-[14px] md:text-[16px] font-semibold py-3 rounded-4xl hover:bg-blue-700 hover:text-[#fff] transition-colors duration-300 cursor-pointer"
+          className="w-full bg-[#010413] text-[#fff] text-[14px] md:text-[16px] font-semibold py-3 rounded-4xl hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer"
         >
           Submit
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };

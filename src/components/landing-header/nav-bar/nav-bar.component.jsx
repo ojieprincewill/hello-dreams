@@ -8,7 +8,6 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   Bars3BottomLeftIcon,
-  ArrowRightIcon,
 } from "@heroicons/react/24/solid";
 import { ServicesData } from "../../../data/services-data/services.data";
 import SidebarNav from "./sidebar-nav.component";
@@ -96,7 +95,7 @@ const NavBar = () => {
           </Link>
 
           <Link
-            to="/workwithus"
+            to="/work-with-us"
             className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[16px] lg:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
             onClick={handleOrigins}
           >
@@ -142,7 +141,7 @@ const NavBar = () => {
                     </p>
                     <div className=" absolute right-[15px] w-[17.87px] h-[13.8px]">
                       <img
-                        src="https://i.ibb.co/B2tvMj9t/Button-SVG.png"
+                        src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330686/Button_SVG_mmlmot.png"
                         alt="blue arrow"
                         className="w-full h-full object-cover"
                       />

@@ -29,7 +29,7 @@ const WebMobileDevHeader = () => {
           <motion.img
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750251213/Web%20dev%20page/20ba4270e4326bd6aa535fea66f3bbbbb7fcfdc5_ub92gh.png"
             alt="phone mock-up"
             className="w-full h-full object-cover"

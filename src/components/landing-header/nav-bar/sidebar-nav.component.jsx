@@ -52,7 +52,6 @@ const SidebarNav = ({ closeSidebar }) => {
         <div className="flex flex-col space-y-2 w-full">
           <div
             className="bg-transparent pr-4 text-[#010413] text-[16px] hover:bg-[#010413] hover:text-[#fff] transition-colors duration-300 flex justify-between items-center"
-            to="/services"
             onClick={(event) => toggleDropdown(event)}
           >
             <p className="flex flex-row p-4">

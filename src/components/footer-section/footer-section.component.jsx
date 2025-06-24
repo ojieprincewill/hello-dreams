@@ -1,12 +1,18 @@
 import React from "react";
 import Logo2 from "../logo-2/logo-2.component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FooterSection = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
 
   const handleOrigins = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleOrigins();
   };
 
   return (
@@ -123,24 +129,18 @@ const FooterSection = () => {
                   Legal
                 </h1>
                 <div className="text-[11px] md:text-[10px] lg:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                  <Link
-                    href="https://web.facebook.com/profile.php?id=61565243428696"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleOrigins}
+                  <span
+                    onClick={() => handleNavigate("/privacy-policy")}
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     Privacy Policy
-                  </Link>
-                  <Link
-                    href="https://web.facebook.com/profile.php?id=61565243428696"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleOrigins}
+                  </span>
+                  <span
+                    onClick={() => handleNavigate("/terms-of-service")}
                     className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                   >
                     Terms of Service
-                  </Link>
+                  </span>
                 </div>
               </div>
             </div>
