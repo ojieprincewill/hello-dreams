@@ -109,7 +109,7 @@ const NavBar = () => {
           </button>
         </div>
       </nav>
-      <div className="hidden md:block md:h-[80px] lg:h-[100px]"></div>
+      <div className="h-[56px] md:h-[80px] lg:h-[100px]"></div>
       <AnimatePresence>
         {servicesOpen && (
           <motion.div
