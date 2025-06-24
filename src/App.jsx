@@ -134,7 +134,7 @@ function App() {
             <Route path="/sustainability/:blogId" element={<BlogPage />} />
             <Route path="/cart-summary" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/helloadmin1212" element={<AdminDashboardPage />} />
             <Route path="/terms-of-service" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
