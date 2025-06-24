@@ -144,7 +144,6 @@ const AcademyNavbar = () => {
             className="fixed top-[80px] left-[235px]  z-80 "
           >
             <div className="bg-[#fff] p-5 w-[717px] h-[388px] grid grid-cols-2 gap-y-4 gap-x-12 rounded-xl">
-              <div className="absolute -top-[10px] left-[190px] w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-[#fff] z-[81]" />
               {CourseOptions.map((data) => (
                 <Link
                   to={data.target}

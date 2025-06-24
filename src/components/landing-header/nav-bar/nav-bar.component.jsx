@@ -38,7 +38,7 @@ const NavBar = () => {
           onClick={() => setServicesOpen(false)}
         ></div>
       )}
-      <nav className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[100px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
+      <nav className="bg-white w-[90%] mx-[5%] md:mx-0 rounded-2xl px-[3%] py-3 fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[100px] md:rounded-none md:mt-0 md:px-[7%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630]">
         {/* Logo Section */}
         <Link
           to="/"
@@ -109,7 +109,7 @@ const NavBar = () => {
           </button>
         </div>
       </nav>
-      <div className="hidden md:block md:h-[80px] lg:h-[100px]"></div>
+      <div className="h-[56px] md:h-[80px] lg:h-[100px]"></div>
       <AnimatePresence>
         {servicesOpen && (
           <motion.div
