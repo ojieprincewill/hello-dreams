@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import supabase from "../../supabase/client";
-import GraphicsConsultationSuccess from "./graphics-consultation-success.component";
-import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import supabase from '../../supabase/client';
+import GraphicsConsultationSuccess from './graphics-consultation-success.component';
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner.component';
 
 const GraphicsConsultationForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    type: "Graphics Design",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-    service: "",
-    accompanyingService: "",
-    howDidYouHear: "",
+    name: '',
+    type: 'Graphics Design',
+    email: '',
+    phone: '',
+    company: '',
+    message: '',
+    service: '',
+    accompanyingService: '',
+    howDidYouHear: '',
   });
   const [success, setSuccess] = useState(null);
   const [errors, setErrors] = useState({});
@@ -28,14 +28,13 @@ const GraphicsConsultationForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
-    if (!formData.message) newErrors.message = "Message is required";
-    if (!formData.service) newErrors.service = "Service selection is required";
+    if (!formData.name) newErrors.name = 'Name is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.phone) newErrors.phone = 'Phone number is required';
+    if (!formData.message) newErrors.message = 'Message is required';
+    if (!formData.service) newErrors.service = 'Service selection is required';
     if (!formData.accompanyingService)
-      newErrors.accompanyingService =
-        "Accompanying service selection is required";
+      newErrors.accompanyingService = 'Accompanying service is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -59,34 +58,34 @@ const GraphicsConsultationForm = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke(
-        "handle-service-enquiries",
+        'handle-service-enquiries',
         {
           body: payload,
-        }
+        },
       );
 
       if (error) {
-        console.error("Supabase Error:", error.message || error);
-        toast.error("Submission failed. Please try again.");
+        console.error('Supabase Error:', error.message || error);
+        toast.error('Submission failed. Please try again.');
         return;
       }
 
-      toast.success("Your enquiry has been submitted!");
+      toast.success('Your enquiry has been submitted!');
       setSuccess(true);
       setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        message: "",
-        service: "",
-        accompanyingService: "",
-        howDidYouHear: "",
-        type: "Graphics Design",
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        message: '',
+        service: '',
+        accompanyingService: '',
+        howDidYouHear: '',
+        type: 'Graphics Design',
       });
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to submit form. Please try again.");
+      console.error('Error submitting form:', error);
+      toast.error('Failed to submit form. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -228,7 +227,7 @@ const GraphicsConsultationForm = () => {
           </div>
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-              Choose accompanying services{" "}
+              Choose accompanying services{' '}
               <span className="text-red-500">*</span>
             </label>
             <select
@@ -284,7 +283,7 @@ const GraphicsConsultationForm = () => {
             disabled={isSubmitting}
             className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
-            {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
+            {isSubmitting ? 'Submitting...' : 'Schedule My Free Consultation'}
           </button>
 
           {/* {errors && <p className="text-red-600 mt-4"></p>} */}
