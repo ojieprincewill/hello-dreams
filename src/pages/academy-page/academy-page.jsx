@@ -16,7 +16,7 @@ const AcademyPage = () => {
       <AcademyNavbar />
       <AcademyHeader />
       <LandingPreviews />
-      {/* <FooterSection /> */}
+      <FooterSection />
     </>
   ) : (
     <>
