@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import supabase from '../../supabase/client';
-=======
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
->>>>>>> 053434a7e132a66c7a7d356116ff8c48f4958f49
+import { useSelector } from "react-redux";
+import supabase from "../../supabase/client";
 
 const CheckoutForm = () => {
   const handleOrigins = () => {
@@ -26,27 +18,27 @@ const CheckoutForm = () => {
       .reduce(
         (accumulatedQuantity, cartItem) =>
           accumulatedQuantity + cartItem.quantity * cartItem.price,
-        0,
+        0
       )
-      .toFixed(2),
+      .toFixed(2)
   );
 
   // Calculate total items count
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
-    0,
+    0
   );
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    deliveryAddress: '',
-    city: '',
-    state: '',
-    phone: '',
+    fullName: "",
+    email: "",
+    deliveryAddress: "",
+    city: "",
+    state: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -65,7 +57,7 @@ const CheckoutForm = () => {
     const orderData = {
       name: formData.name,
       totalItems,
-      orderStatus: 'pending',
+      orderStatus: "pending",
       orderTotal: cartTotal,
       orderItems: cartItems,
       orderEmail: email,
@@ -85,28 +77,28 @@ const CheckoutForm = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke(
-        'paystack-payment-initiation',
+        "paystack-payment-initiation",
         {
           body: paymentData,
-        },
+        }
       );
       console.log(data);
       console.log(initError);
       if (initError || !data?.access_code || !data?.reference) {
-        setError('Payment initiation failed.');
+        setError("Payment initiation failed.");
         setLoading(false);
         return;
       }
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_test_xxxxxx', // Optional: You can omit if set in backend
+        key: "pk_test_xxxxxx", // Optional: You can omit if set in backend
         reference: data.reference,
         email: email,
         amount: cartTotal * 100,
         onSuccess: async (response) => {
           // STEP 2: On success, verify the payment and update the order status
           const { data: verifyData, error: verifyError } =
-            await supabase.functions.invoke('collections-checkout-handler', {
+            await supabase.functions.invoke("collections-checkout-handler", {
               body: {
                 reference: response.reference,
                 ...formData,
@@ -114,30 +106,30 @@ const CheckoutForm = () => {
             });
 
           if (verifyError || verifyData?.error) {
-            setError('Verification failed. Payment may not be confirmed.');
+            setError("Verification failed. Payment may not be confirmed.");
           } else {
-            setSuccess('Job posted successfully!');
+            setSuccess("Job posted successfully!");
             setFormData({
-              jobTitle: '',
-              experienceLevel: '',
-              workHours: '',
-              payType: '',
-              jobDescription: '',
-              applicationInstructions: '',
-              companyName: '',
-              companyEmail: '',
+              jobTitle: "",
+              experienceLevel: "",
+              workHours: "",
+              payType: "",
+              jobDescription: "",
+              applicationInstructions: "",
+              companyName: "",
+              companyEmail: "",
             });
           }
           setLoading(false);
         },
         onCancel: () => {
-          setError('Payment was cancelled.');
+          setError("Payment was cancelled.");
           setLoading(false);
         },
       });
     } catch (err) {
-      console.error('Submission Error:', err);
-      setError('An unexpected error occurred.');
+      console.error("Submission Error:", err);
+      setError("An unexpected error occurred.");
       setLoading(false);
     }
   };
@@ -307,7 +299,7 @@ const CheckoutForm = () => {
               disabled={isLoading}
               className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-2 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Processing...' : 'Place Order'}
+              {isLoading ? "Processing..." : "Place Order"}
             </button>
           </div>
         </motion.form>
