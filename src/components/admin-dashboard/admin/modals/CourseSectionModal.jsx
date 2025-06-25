@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '../../ui/dialog';
-import { Button } from '../../ui/button';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
-import { Label } from '../../ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
-import { Plus, Edit, Trash2, Upload, Video, Loader2 } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
+import { Label } from "../../ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
+import { Plus, Edit, Trash2, Upload, Video, Loader2 } from "lucide-react";
+import { useToast } from "../../hooks/use-toast";
 import {
   useLessons,
   useCreateLesson,
   useDeleteLesson,
-} from '@/hooks/useLessons';
-import { uploadLessonToMux } from 'src/services/';
+} from "@/hooks/useLessons";
+import { uploadLessonToMux } from "../../../../services/uploadLessonToMux.js";
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const { toast } = useToast();
   const [newLesson, setNewLesson] = useState({
-    title: '',
-    duration: '',
-    videoUrl: '',
-    description: '',
+    title: "",
+    duration: "",
+    videoUrl: "",
+    description: "",
   });
   const [editingLesson, setEditingLesson] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -42,9 +42,9 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       !newLesson.videoUrl.trim()
     ) {
       toast({
-        title: 'Missing information',
-        description: 'Please provide title, duration, and video link.',
-        variant: 'destructive',
+        title: "Missing information",
+        description: "Please provide title, duration, and video link.",
+        variant: "destructive",
       });
       return;
     }
@@ -57,8 +57,8 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
         duration: newLesson.duration,
         description: newLesson.description,
         video_url: newLesson.videoUrl,
-        asset_id: '',
-        playback_id: '',
+        asset_id: "",
+        playback_id: "",
       };
 
       // 1. Save lesson to DB
@@ -71,23 +71,23 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       });
 
       toast({
-        title: 'Lesson added',
+        title: "Lesson added",
         description:
-          'Mux is processing your video. This may take a few minutes.',
+          "Mux is processing your video. This may take a few minutes.",
       });
 
       setNewLesson({
-        title: '',
-        duration: '',
-        videoUrl: '',
-        description: '',
+        title: "",
+        duration: "",
+        videoUrl: "",
+        description: "",
       });
       setShowAddLesson(false);
     } catch (error) {
       toast({
-        title: 'Error',
+        title: "Error",
         description: error.message,
-        variant: 'destructive',
+        variant: "destructive",
       });
     } finally {
       setUploading(false);
@@ -98,14 +98,14 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
     try {
       await deleteLesson.mutateAsync({ id: lessonId, courseId });
       toast({
-        title: 'Lesson deleted',
-        description: 'The lesson has been removed.',
+        title: "Lesson deleted",
+        description: "The lesson has been removed.",
       });
     } catch (error) {
       toast({
-        title: 'Error',
+        title: "Error",
         description: error.message,
-        variant: 'destructive',
+        variant: "destructive",
       });
     }
   };
@@ -137,10 +137,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
               onClick={() => {
                 setShowAddLesson(true);
                 setNewLesson({
-                  title: '',
-                  duration: '',
-                  videoUrl: '',
-                  description: '',
+                  title: "",
+                  duration: "",
+                  videoUrl: "",
+                  description: "",
                 });
                 setEditingLesson(null);
               }}
@@ -155,7 +155,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {editingLesson ? 'Edit Lesson' : 'New Lesson'}
+                  {editingLesson ? "Edit Lesson" : "New Lesson"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -213,9 +213,9 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                         Uploading...
                       </>
                     ) : editingLesson ? (
-                      'Save Changes'
+                      "Save Changes"
                     ) : (
-                      'Add Lesson'
+                      "Add Lesson"
                     )}
                   </Button>
                   <Button
@@ -251,8 +251,8 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                         </p>
                         <p className="text-xs text-gray-400">
                           {lesson.playback_id
-                            ? '✔️ Mux Ready'
-                            : '⏳ Processing...'}
+                            ? "✔️ Mux Ready"
+                            : "⏳ Processing..."}
                         </p>
                       </div>
                     </div>
