@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import supabase from '../../supabase/client';
 import GraphicsConsultationSuccess from './graphics-consultation-success.component';
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner.component';
-
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 

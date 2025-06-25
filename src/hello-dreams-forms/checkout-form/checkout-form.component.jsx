@@ -3,10 +3,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import supabase from '../../supabase/client';
-
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
-
 const CheckoutForm = () => {
   const handleOrigins = () => {
     window.scrollTo(0, 0);
@@ -94,7 +91,7 @@ const CheckoutForm = () => {
       }
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_test_xxxxxx', // Optional: You can omit if set in backend
+        key: import.meta.env.VITE_PAYSTACK_LIVE_PUBLIC_KEY, // Optional: You can omit if set in backend
         reference: data.reference,
         email: email,
         amount: cartTotal * 100,
