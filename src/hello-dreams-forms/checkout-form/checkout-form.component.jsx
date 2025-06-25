@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import supabase from '../../supabase/client';
-=======
-import React from "react";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+
 // eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
->>>>>>> 053434a7e132a66c7a7d356116ff8c48f4958f49
+import { motion } from 'motion/react';
 
 const CheckoutForm = () => {
   const handleOrigins = () => {
@@ -153,7 +148,7 @@ const CheckoutForm = () => {
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5"
         >
@@ -163,7 +158,7 @@ const CheckoutForm = () => {
         <motion.form
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="w-full space-y-6 md:space-y-8 text-[#667085]"
         >
@@ -315,7 +310,7 @@ const CheckoutForm = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
         className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] "
       >

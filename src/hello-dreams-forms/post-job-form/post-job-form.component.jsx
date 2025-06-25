@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import supabase from '../../supabase/client';
 import PaystackPop from '@paystack/inline-js';
 import PostJobSuccess from './post-job-success.component';
-import { React, useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 

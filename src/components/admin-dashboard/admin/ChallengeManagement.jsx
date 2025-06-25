@@ -1,262 +1,328 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
+import React, { useState } from 'react';
+import { Card, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Label } from '../ui/label';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Plus, Edit, Trash2, Eye, Target } from "lucide-react";
-import ChallengeViewModal from "./modals/ChallengeViewModal";
-import ChallengeEditModal from "./modals/ChallengeEditModal";
-import DeleteConfirmModal from "./modals/DeleteConfirmModal";
-import { useToast } from "../hooks/use-toast";
+} from '../ui/dialog';
+import { Plus, Edit, Trash2, Eye, Target } from 'lucide-react';
+import { Badge } from '../ui/badge';
+import { useToast } from '../hooks/use-toast';
+
+import {
+  useChallenges,
+  useCreateChallenge,
+  useUpdateChallenge,
+  useDeleteChallenge,
+} from '@/hooks/useChallenges';
 
 const ChallengeManagement = () => {
   const { toast } = useToast();
-  const [challenges, setChallenges] = useState([
-    {
-      id: 1,
-      title: "Mobile App Redesign",
-      challenge:
-        "Redesign a popular mobile app to improve user experience and modern aesthetics.",
-      deliverables:
-        "User research, wireframes, high-fidelity mockups, prototype",
-      participants: 45,
-      deadline: "2024-02-15",
-      status: "Active",
-    },
-    {
-      id: 2,
-      title: "E-commerce Dashboard",
-      challenge:
-        "Create an intuitive dashboard for e-commerce store owners to track their business metrics.",
-      deliverables:
-        "Information architecture, UI designs, interactive prototype",
-      participants: 32,
-      deadline: "2024-02-28",
-      status: "Active",
-    },
-  ]);
+  const { data: challenges = [], isLoading } = useChallenges();
+  const createCh = useCreateChallenge();
+  const updateCh = useUpdateChallenge();
+  const deleteCh = useDeleteChallenge();
 
-  const [selectedChallenge, setSelectedChallenge] = useState(null);
-  const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [viewOpen, setViewOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const [newChallenge, setNewChallenge] = useState({
-    title: "",
-    challenge: "",
-    deliverables: "",
+  const [formData, setFormData] = useState({
+    type: 'ui',
+    title: '',
+    challenge: '',
+    deliverables: '',
   });
 
-  const handleView = (challenge) => {
-    setSelectedChallenge(challenge);
-    setViewModalOpen(true);
-  };
+  const resetForm = () =>
+    setFormData({
+      type: 'ui',
+      title: '',
+      challenge: '',
+      deliverables: '',
+    });
 
-  const handleEdit = (challenge) => {
-    setSelectedChallenge(challenge);
-    setEditModalOpen(true);
-  };
-
-  const handleDelete = (challenge) => {
-    setSelectedChallenge(challenge);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = () => {
-    if (selectedChallenge) {
-      setChallenges(challenges.filter((c) => c.id !== selectedChallenge.id));
-      toast({
-        title: "Challenge deleted",
-        description: `${selectedChallenge.title} has been successfully deleted.`,
-      });
-      setDeleteModalOpen(false);
-      setSelectedChallenge(null);
+  const handleCreate = async () => {
+    try {
+      await createCh.mutateAsync(formData);
+      toast({ title: 'Challenge created' });
+      resetForm();
+      setViewOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
     }
   };
 
-  const handleSave = (updatedChallenge) => {
-    setChallenges(
-      challenges.map((c) =>
-        c.id === updatedChallenge.id ? updatedChallenge : c
-      )
-    );
-    toast({
-      title: "Challenge updated",
-      description: `${updatedChallenge.title} has been successfully updated.`,
+  const openEdit = (c) => {
+    setSelected(c);
+    setFormData({
+      type: c.type,
+      title: c.title,
+      challenge: c.challenge,
+      deliverables: c.deliverables,
     });
+    setEditOpen(true);
   };
+
+  const handleUpdate = async () => {
+    try {
+      await updateCh.mutateAsync({ ...selected, ...formData });
+      toast({ title: 'Challenge updated' });
+      setEditOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteCh.mutateAsync(selected);
+      toast({ title: 'Challenge deleted' });
+      setDeleteOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
+    }
+  };
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="space-y-8">
+      {/* Create */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">UI/UX Challenges</h1>
-          <p className="text-gray-600 mt-2">
-            Create design challenges to engage the community
+          <h1 className="text-3xl font-bold">UI/UX Challenges</h1>
+          <p className="text-gray-600">
+            Create design challenges for the community
           </p>
         </div>
-
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-purple-600 hover:bg-purple-700">
-              <Plus size={20} className="mr-2" />
-              Create Challenge
+              <Plus size={20} className="mr-2" /> Create Challenge
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Create New UI/UX Challenge</DialogTitle>
+              <DialogTitle>New Challenge</DialogTitle>
             </DialogHeader>
-            <div className="space-y-6">
+            <div className="space-y-4">
+              {/* type, title, challenge, deliverables Inputs */}
               <div>
-                <Label htmlFor="challenge-title">Challenge Title</Label>
+                <Label>Type</Label>
+                <select
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({ ...formData, type: e.target.value })
+                  }
+                  className="w-full border rounded px-3 py-2"
+                >
+                  <option value="ui">UI Challenge</option>
+                  <option value="ux">UX Challenge</option>
+                </select>
+              </div>
+              <div>
+                <Label>Title</Label>
                 <Input
-                  id="challenge-title"
-                  value={newChallenge.title}
+                  value={formData.title}
                   onChange={(e) =>
-                    setNewChallenge({ ...newChallenge, title: e.target.value })
+                    setFormData({ ...formData, title: e.target.value })
                   }
-                  placeholder="Enter challenge title"
                 />
               </div>
-
               <div>
-                <Label htmlFor="challenge-description">
-                  Challenge Description
-                </Label>
+                <Label>Challenge</Label>
                 <Textarea
-                  id="challenge-description"
-                  value={newChallenge.challenge}
+                  value={formData.challenge}
                   onChange={(e) =>
-                    setNewChallenge({
-                      ...newChallenge,
-                      challenge: e.target.value,
-                    })
+                    setFormData({ ...formData, challenge: e.target.value })
                   }
-                  placeholder="Describe the design challenge in detail"
-                  rows={6}
+                  rows={4}
                 />
               </div>
-
               <div>
-                <Label htmlFor="challenge-deliverables">Deliverables</Label>
+                <Label>Deliverables</Label>
                 <Textarea
-                  id="challenge-deliverables"
-                  value={newChallenge.deliverables}
+                  value={formData.deliverables}
                   onChange={(e) =>
-                    setNewChallenge({
-                      ...newChallenge,
-                      deliverables: e.target.value,
-                    })
+                    setFormData({ ...formData, deliverables: e.target.value })
                   }
-                  placeholder="List what participants should deliver"
                   rows={3}
                 />
               </div>
-
-              <Button className="w-full">Create Challenge</Button>
+              <Button onClick={handleCreate} className="w-full">
+                Create
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
       </div>
 
+      {/* List */}
       <div className="space-y-6">
-        {challenges.map((challenge) => (
-          <Card
-            key={challenge.id}
-            className="hover:shadow-lg transition-shadow duration-200"
-          >
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Target className="text-purple-600" size={24} />
-                    <h3 className="font-semibold text-xl text-gray-900">
-                      {challenge.title}
-                    </h3>
-                    <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
-                      {challenge.status}
-                    </span>
-                  </div>
-
-                  <div className="mb-4">
-                    <h4 className="font-medium text-gray-900 mb-2">
-                      Challenge:
-                    </h4>
-                    <p className="text-gray-600">{challenge.challenge}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <h4 className="font-medium text-gray-900 mb-2">
-                      Deliverables:
-                    </h4>
-                    <p className="text-gray-600">{challenge.deliverables}</p>
-                  </div>
-
-                  <div className="flex items-center space-x-6 text-sm text-gray-500">
-                    <span>{challenge.participants} participants</span>
-                    <span>Deadline: {challenge.deadline}</span>
-                  </div>
+        {challenges.map((c) => (
+          <Card key={`${c.type}-${c.id}`}>
+            <CardContent className="flex justify-between items-center pt-6">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <Target size={20} />
+                  <h3 className="text-lg font-semibold">{c.title}</h3>
+                  <Badge
+                    className={
+                      c.type === 'ui'
+                        ? 'bg-indigo-100 text-indigo-700'
+                        : 'bg-green-100 text-green-700'
+                    }
+                  >
+                    {c.type.toUpperCase()}
+                  </Badge>
                 </div>
-                <div className="flex space-x-2 ml-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleView(challenge)}
-                  >
-                    <Eye size={16} className="mr-1" />
-                    View
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleEdit(challenge)}
-                  >
-                    <Edit size={16} className="mr-1" />
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-red-600 hover:text-red-700"
-                    onClick={() => handleDelete(challenge)}
-                  >
-                    <Trash2 size={16} className="mr-1" />
-                    Delete
-                  </Button>
-                </div>
+                <p className="mt-2 text-gray-600 max-w-[45ch]">{c.challenge}</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  <strong>Deliverables:</strong> {c.deliverables}
+                </p>
+              </div>
+              <div className="space-x-2 ml-4">
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setSelected(c);
+                    setViewOpen(true);
+                  }}
+                >
+                  <Eye size={16} />
+                </Button>
+                <Button size="sm" onClick={() => openEdit(c)}>
+                  <Edit size={16} />
+                </Button>
+                <Button
+                  size="sm"
+                  className="text-red-600"
+                  onClick={() => {
+                    setSelected(c);
+                    setDeleteOpen(true);
+                  }}
+                >
+                  <Trash2 size={16} />
+                </Button>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <ChallengeViewModal
-        challenge={selectedChallenge}
-        isOpen={viewModalOpen}
-        onClose={() => setViewModalOpen(false)}
-      />
-      <ChallengeEditModal
-        challenge={selectedChallenge}
-        isOpen={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        onSave={handleSave}
-      />
-      <DeleteConfirmModal
-        isOpen={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-        onConfirm={confirmDelete}
-        title={`Delete "${selectedChallenge?.title}"`}
-        message="Are you sure you want to delete this challenge? This action cannot be undone."
-      />
+      {/* View Modal */}
+      <Dialog open={viewOpen} onOpenChange={() => setViewOpen(false)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>View Challenge</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p>
+              <strong>Type:</strong> {selected?.type.toUpperCase()}
+            </p>
+            <p>
+              <strong>Title:</strong> {selected?.title}
+            </p>
+            <p>
+              <strong>Description:</strong> {selected?.challenge}
+            </p>
+            <p>
+              <strong>Deliverables:</strong> {selected?.deliverables}
+            </p>
+            <Button className="mt-4 w-full" onClick={() => setViewOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Modal */}
+      <Dialog open={editOpen} onOpenChange={() => setEditOpen(false)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Edit Challenge</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label>Type</Label>
+              <select
+                value={formData.type}
+                onChange={(e) =>
+                  setFormData({ ...formData, type: e.target.value })
+                }
+                className="w-full border rounded px-3 py-2"
+              >
+                <option value="ui">UI Challenge</option>
+                <option value="ux">UX Challenge</option>
+              </select>
+            </div>
+            <div>
+              <Label>Title</Label>
+              <Input
+                value={formData.title}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
+              />
+            </div>
+            <div>
+              <Label>Challenge</Label>
+              <Textarea
+                value={formData.challenge}
+                onChange={(e) =>
+                  setFormData({ ...formData, challenge: e.target.value })
+                }
+                rows={4}
+              />
+            </div>
+            <div>
+              <Label>Deliverables</Label>
+              <Textarea
+                value={formData.deliverables}
+                onChange={(e) =>
+                  setFormData({ ...formData, deliverables: e.target.value })
+                }
+                rows={3}
+              />
+            </div>
+            <Button onClick={handleUpdate} className="w-full">
+              Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Modal */}
+      <Dialog open={deleteOpen} onOpenChange={() => setDeleteOpen(false)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Delete Challenge</DialogTitle>
+          </DialogHeader>
+          <p>
+            Are you sure you want to delete "{selected?.title}"? This cannot be
+            undone.
+          </p>
+          <div className="mt-4 flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setDeleteOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              className="bg-red-600 hover:bg-red-700"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Card, CardContent } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+// components/CollectionsManagement.jsx
+import React, { useState } from 'react';
+import { Card, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from '../ui/select';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from '../ui/dialog';
 import {
   Plus,
   Edit,
@@ -25,60 +26,38 @@ import {
   Upload,
   ShoppingBag,
   Star,
-} from "lucide-react";
-import CollectionViewModal from "./modals/CollectionViewModal";
-import CollectionEditModal from "./modals/CollectionEditModal";
-import DeleteConfirmModal from "./modals/DeleteConfirmModal";
-import { useToast } from "../hooks/use-toast";
+} from 'lucide-react';
+import CollectionViewModal from './modals/CollectionViewModal';
+import CollectionEditModal from './modals/CollectionEditModal';
+import DeleteConfirmModal from './modals/DeleteConfirmModal';
+import { useToast } from '../hooks/use-toast';
+import { useCollections } from '../../../hooks/useCollections';
 
 const CollectionsManagement = () => {
   const { toast } = useToast();
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Yellow Hoodie Unisex",
-      price: 25000,
-      image: "/placeholder-product.jpg",
-      sizes: ["S", "M", "L", "XL"],
-      quality: "High-quality",
-      category: "Hoodies",
-      inStock: true,
-    },
-    {
-      id: 2,
-      name: "T-Shirt Mockup",
-      price: 15000,
-      image: "/placeholder-product.jpg",
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      quality: "Regular",
-      category: "T-Shirts",
-      inStock: true,
-    },
-    {
-      id: 3,
-      name: "Design Notebook",
-      price: 8000,
-      image: "/placeholder-product.jpg",
-      sizes: ["A5"],
-      quality: "Premium",
-      category: "Accessories",
-      inStock: false,
-    },
-  ]);
-
   const [selectedItem, setSelectedItem] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
   const [newItem, setNewItem] = useState({
-    name: "",
+    name: '',
     price: 0,
-    image: "",
-    sizes: [""],
-    quality: "Regular",
-    category: "T-Shirts",
+    image: '',
+    sizes: [''],
+    quality: 'Regular',
+    category: 'T-Shirts',
+    inStock: true,
+    user_id: 1, // Replace with actual user_id if available
   });
+
+  const {
+    collectionsQuery: { data, fetchNextPage, hasNextPage, isFetchingNextPage },
+    createCollection,
+    updateCollection,
+    deleteCollection,
+  } = useCollections();
+
+  const collections = data?.pages.flat() || [];
 
   const handleView = (item) => {
     setSelectedItem(item);
@@ -95,24 +74,55 @@ const CollectionsManagement = () => {
     setDeleteModalOpen(true);
   };
 
-  const confirmDelete = () => {
-    if (selectedItem) {
-      setItems(items.filter((i) => i.id !== selectedItem.id));
+  const confirmDelete = async () => {
+    if (!selectedItem) return;
+    try {
+      await deleteCollection.mutateAsync(selectedItem.id);
       toast({
-        title: "Item deleted",
-        description: `${selectedItem.name} has been successfully deleted.`,
+        title: 'Collection Deleted',
+        description: `${selectedItem.name} was successfully removed.`,
       });
       setDeleteModalOpen(false);
       setSelectedItem(null);
+    } catch (err) {
+      toast({
+        title: 'Error deleting collection',
+        description: err.message,
+      });
     }
   };
 
-  const handleSave = (updatedItem) => {
-    setItems(items.map((i) => (i.id === updatedItem.id ? updatedItem : i)));
-    toast({
-      title: "Item updated",
-      description: `${updatedItem.name} has been successfully updated.`,
-    });
+  const handleSave = async (updatedItem) => {
+    try {
+      await updateCollection.mutateAsync(updatedItem);
+      toast({
+        title: 'Collection Updated',
+        description: `${updatedItem.name} was successfully updated.`,
+      });
+    } catch (err) {
+      toast({ title: 'Error updating collection', description: err.message });
+    }
+  };
+
+  const handleCreate = async () => {
+    try {
+      await createCollection.mutateAsync(newItem);
+      toast({
+        title: 'Collection Created',
+        description: `${newItem.name} was successfully added.`,
+      });
+      setNewItem({
+        name: '',
+        price: 0,
+        image: '',
+        sizes: [''],
+        quality: '',
+        category: '',
+        inStock: true,
+      });
+    } catch (err) {
+      toast({ title: 'Error creating collection', description: err.message });
+    }
   };
 
   return (
@@ -147,7 +157,6 @@ const CollectionsManagement = () => {
                   onChange={(e) =>
                     setNewItem({ ...newItem, name: e.target.value })
                   }
-                  placeholder="Enter item name"
                 />
               </div>
 
@@ -164,7 +173,6 @@ const CollectionsManagement = () => {
                         price: parseFloat(e.target.value),
                       })
                     }
-                    placeholder="0"
                   />
                 </div>
 
@@ -210,78 +218,56 @@ const CollectionsManagement = () => {
               </div>
 
               <div>
-                <Label htmlFor="item-sizes">
-                  Available Sizes (comma separated)
-                </Label>
+                <Label htmlFor="item-sizes">Sizes (comma separated)</Label>
                 <Input
                   id="item-sizes"
-                  value={newItem.sizes.join(", ")}
+                  value={newItem.sizes.join(', ')}
                   onChange={(e) =>
                     setNewItem({
                       ...newItem,
-                      sizes: e.target.value.split(", ").filter((s) => s.trim()),
+                      sizes: e.target.value.split(',').map((s) => s.trim()),
                     })
                   }
-                  placeholder="S, M, L, XL"
                 />
               </div>
 
-              <div>
-                <Label htmlFor="item-image">Product Image</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                  <Upload size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600">Click to upload product image</p>
-                  <Input
-                    type="file"
-                    className="hidden"
-                    id="item-image"
-                    accept="image/*"
-                  />
-                </div>
-              </div>
-
-              <Button className="w-full">Add Item</Button>
+              <Button onClick={handleCreate} className="w-full">
+                Add Item
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
-          <Card
-            key={item.id}
-            className="hover:shadow-lg transition-shadow duration-200"
-          >
+        {collections.map((item) => (
+          <Card key={item.id} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
-              <div className="aspect-square bg-gray-200 rounded-t-lg flex items-center justify-center">
+              <div className="aspect-square bg-gray-200 flex items-center justify-center">
                 <ShoppingBag size={48} className="text-gray-400" />
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-lg text-gray-900">
-                    {item.name}
-                  </h3>
+                  <h3 className="font-semibold text-lg">{item.name}</h3>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
                       item.inStock
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
                     }`}
                   >
-                    {item.inStock ? "In Stock" : "Out of Stock"}
+                    {item.inStock ? 'In Stock' : 'Out of Stock'}
                   </span>
                 </div>
 
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Price:</span>
-                    <span className="font-semibold">
-                      ₦{item.price.toLocaleString()}
-                    </span>
+                  <div className="flex justify-between text-sm">
+                    <span>Price:</span>
+                    <span className="font-semibold">₦{item.price}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Category:</span>
-                    <span className="text-sm">{item.category}</span>
+                  <div className="flex justify-between text-sm">
+                    <span>Category:</span>
+                    <span>{item.category}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Star size={14} className="text-yellow-500" />
@@ -301,41 +287,45 @@ const CollectionsManagement = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                      onClick={() => handleView(item)}
-                    >
-                      <Eye size={16} className="mr-1" />
-                      View
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                      onClick={() => handleEdit(item)}
-                    >
-                      <Edit size={16} className="mr-1" />
-                      Edit
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDelete(item)}
-                      className="text-red-600 hover:text-red-700"
-                    >
-                      <Trash2 size={16} />
-                    </Button>
-                  </div>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleView(item)}
+                    className="flex-1"
+                  >
+                    <Eye size={16} className="mr-1" /> View
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(item)}
+                    className="flex-1"
+                  >
+                    <Edit size={16} className="mr-1" /> Edit
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleDelete(item)}
+                    className="text-red-600"
+                  >
+                    <Trash2 size={16} />
+                  </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
+
+      {hasNextPage && (
+        <div className="text-center mt-6">
+          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+            {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+          </Button>
+        </div>
+      )}
 
       <CollectionViewModal
         item={selectedItem}

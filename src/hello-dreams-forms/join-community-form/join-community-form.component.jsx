@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import supabase from '../../supabase/client';
 import JoinCommunitySuccess from './join-community-success.component';
-import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 
