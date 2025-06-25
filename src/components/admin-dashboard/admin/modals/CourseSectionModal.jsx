@@ -1,167 +1,229 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-import { Textarea } from "../../ui/textarea";
-import { Label } from "../../ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
-import { Plus, Edit, Trash2, Upload, Video } from "lucide-react";
-import { useToast } from "../../hooks/use-toast";
+} from '../../ui/dialog';
+import { Button } from '../../ui/button';
+import { Input } from '../../ui/input';
+import { Textarea } from '../../ui/textarea';
+import { Label } from '../../ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
+import { Plus, Edit, Trash2, Upload, Video, Loader2 } from 'lucide-react';
+import { useToast } from '../../hooks/use-toast';
+import {
+  useLessons,
+  useCreateLesson,
+  useDeleteLesson,
+} from '@/hooks/useLessons';
+import { uploadLessonToMux } from 'src/services/';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const { toast } = useToast();
-  const [sections, setSections] = useState([
-    {
-      id: 1,
-      title: "Section & Div Block",
-      lessons: [
-        {
-          id: 1,
-          title: "Read-only version of chat app",
-          duration: "4min",
-          videoUrl: "",
-        },
-        { id: 2, title: "Site Settings", duration: "4min", videoUrl: "" },
-      ],
-    },
-  ]);
-
-  const [newSection, setNewSection] = useState({ title: "" });
   const [newLesson, setNewLesson] = useState({
-    title: "",
-    duration: "",
-    videoUrl: "",
-    description: "",
-    sectionId: 0,
+    title: '',
+    duration: '',
+    videoUrl: '',
+    description: '',
   });
-  const [editingSection, setEditingSection] = useState(null);
   const [editingLesson, setEditingLesson] = useState(null);
-  const [showAddSection, setShowAddSection] = useState(false);
-  const [showAddLesson, setShowAddLesson] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [showAddLesson, setShowAddLesson] = useState(false);
 
-  const addSection = () => {
-    if (newSection.title.trim()) {
-      const section = {
-        id: Date.now(),
-        title: newSection.title,
-        lessons: [],
-      };
-      setSections([...sections, section]);
-      setNewSection({ title: "" });
-      setShowAddSection(false);
+  const { data: lessons = [], isLoading } = useLessons(courseId);
+  const createLesson = useCreateLesson();
+  const deleteLesson = useDeleteLesson();
+
+  const handleAddLesson = async () => {
+    if (
+      !newLesson.title.trim() ||
+      !newLesson.duration.trim() ||
+      !newLesson.videoUrl.trim()
+    ) {
       toast({
-        title: "Section added",
-        description: `${section.title} has been added to the course.`,
+        title: 'Missing information',
+        description: 'Please provide title, duration, and video link.',
+        variant: 'destructive',
       });
+      return;
     }
-  };
 
-  const addLesson = (sectionId) => {
-    if (newLesson.title.trim() && newLesson.duration.trim()) {
+    try {
+      setUploading(true);
       const lesson = {
-        id: Date.now(),
+        course_id: courseId,
         title: newLesson.title,
         duration: newLesson.duration,
-        videoUrl: newLesson.videoUrl,
         description: newLesson.description,
+        video_url: newLesson.videoUrl,
+        asset_id: '',
+        playback_id: '',
       };
 
-      setSections(
-        sections.map((section) =>
-          section.id === sectionId
-            ? { ...section, lessons: [...section.lessons, lesson] }
-            : section
-        )
-      );
+      // 1. Save lesson to DB
+      const savedLesson = await createLesson.mutateAsync(lesson);
+
+      // 2. Call edge function to upload to Mux
+      await uploadLessonToMux({
+        videoUrl: savedLesson.video_url,
+        lessonId: savedLesson.id,
+      });
+
+      toast({
+        title: 'Lesson added',
+        description:
+          'Mux is processing your video. This may take a few minutes.',
+      });
 
       setNewLesson({
-        title: "",
-        duration: "",
-        videoUrl: "",
-        description: "",
-        sectionId: 0,
+        title: '',
+        duration: '',
+        videoUrl: '',
+        description: '',
       });
-      setShowAddLesson(null);
+      setShowAddLesson(false);
+    } catch (error) {
       toast({
-        title: "Lesson added",
-        description: `${lesson.title} has been added to the section.`,
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = async (lessonId) => {
+    try {
+      await deleteLesson.mutateAsync({ id: lessonId, courseId });
+      toast({
+        title: 'Lesson deleted',
+        description: 'The lesson has been removed.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
       });
     }
   };
 
-  const deleteSection = (sectionId) => {
-    setSections(sections.filter((s) => s.id !== sectionId));
-    toast({
-      title: "Section deleted",
-      description: "Section has been removed from the course.",
+  const handleEdit = (lesson) => {
+    setEditingLesson(lesson);
+    setNewLesson({
+      title: lesson.title,
+      duration: lesson.duration,
+      videoUrl: lesson.video_url,
+      description: lesson.description,
     });
-  };
-
-  const deleteLesson = (sectionId, lessonId) => {
-    setSections(
-      sections.map((section) =>
-        section.id === sectionId
-          ? {
-              ...section,
-              lessons: section.lessons.filter((l) => l.id !== lessonId),
-            }
-          : section
-      )
-    );
-    toast({
-      title: "Lesson deleted",
-      description: "Lesson has been removed from the section.",
-    });
+    setShowAddLesson(true);
   };
 
   if (!courseId) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Course Content - {courseTitle}</DialogTitle>
+          <DialogTitle>Manage Lessons for {courseTitle}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Course Sections</h3>
+            <h3 className="text-lg font-semibold">Lessons</h3>
             <Button
-              onClick={() => setShowAddSection(true)}
+              onClick={() => {
+                setShowAddLesson(true);
+                setNewLesson({
+                  title: '',
+                  duration: '',
+                  videoUrl: '',
+                  description: '',
+                });
+                setEditingLesson(null);
+              }}
               className="bg-blue-600 hover:bg-blue-700"
             >
               <Plus size={16} className="mr-2" />
-              Add Section
+              Add Lesson
             </Button>
           </div>
 
-          {showAddSection && (
+          {showAddLesson && (
             <Card>
               <CardHeader>
-                <CardTitle>Add New Section</CardTitle>
+                <CardTitle>
+                  {editingLesson ? 'Edit Lesson' : 'New Lesson'}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Lesson Title</Label>
+                    <Input
+                      value={newLesson.title}
+                      onChange={(e) =>
+                        setNewLesson({ ...newLesson, title: e.target.value })
+                      }
+                      placeholder="Enter title"
+                    />
+                  </div>
+                  <div>
+                    <Label>Duration</Label>
+                    <Input
+                      value={newLesson.duration}
+                      onChange={(e) =>
+                        setNewLesson({ ...newLesson, duration: e.target.value })
+                      }
+                      placeholder="e.g., 4min"
+                    />
+                  </div>
+                </div>
                 <div>
-                  <Label htmlFor="section-title">Section Title</Label>
+                  <Label>Google Drive Video URL</Label>
                   <Input
-                    id="section-title"
-                    value={newSection.title}
+                    value={newLesson.videoUrl}
                     onChange={(e) =>
-                      setNewSection({ ...newSection, title: e.target.value })
+                      setNewLesson({ ...newLesson, videoUrl: e.target.value })
                     }
-                    placeholder="Enter section title"
+                    placeholder="Paste Drive link here"
+                  />
+                </div>
+                <div>
+                  <Label>Description (optional)</Label>
+                  <Textarea
+                    value={newLesson.description}
+                    onChange={(e) =>
+                      setNewLesson({
+                        ...newLesson,
+                        description: e.target.value,
+                      })
+                    }
+                    placeholder="Write a brief description..."
+                    rows={3}
                   />
                 </div>
                 <div className="flex space-x-2">
-                  <Button onClick={addSection}>Add Section</Button>
+                  <Button onClick={handleAddLesson} disabled={uploading}>
+                    {uploading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : editingLesson ? (
+                      'Save Changes'
+                    ) : (
+                      'Add Lesson'
+                    )}
+                  </Button>
                   <Button
                     variant="outline"
-                    onClick={() => setShowAddSection(false)}
+                    onClick={() => {
+                      setShowAddLesson(false);
+                      setEditingLesson(null);
+                    }}
                   >
                     Cancel
                   </Button>
@@ -170,170 +232,52 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
             </Card>
           )}
 
-          <div className="space-y-4">
-            {sections.map((section) => (
-              <Card key={section.id} className="border-l-4 border-l-blue-500">
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-lg">{section.title}</CardTitle>
+          {isLoading ? (
+            <p className="text-sm text-gray-500">Loading lessons...</p>
+          ) : (
+            <div className="space-y-3">
+              {lessons.map((lesson, index) => (
+                <Card key={lesson.id} className="bg-white border">
+                  <CardContent className="p-4 flex justify-between items-center">
+                    <div className="flex items-center space-x-4">
+                      <span className="text-sm text-gray-500 w-6">
+                        {index + 1}.
+                      </span>
+                      <Video className="text-blue-500" size={18} />
+                      <div>
+                        <p className="font-medium">{lesson.title}</p>
+                        <p className="text-sm text-gray-500">
+                          {lesson.duration}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {lesson.playback_id
+                            ? '✔️ Mux Ready'
+                            : '⏳ Processing...'}
+                        </p>
+                      </div>
+                    </div>
                     <div className="flex space-x-2">
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => setShowAddLesson(section.id)}
+                        onClick={() => handleEdit(lesson)}
                       >
-                        <Plus size={16} className="mr-1" />
-                        Add Lesson
+                        <Edit size={14} />
                       </Button>
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => deleteSection(section.id)}
-                        className="text-red-600 hover:text-red-700"
+                        className="text-red-600"
+                        onClick={() => handleDelete(lesson.id)}
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={14} />
                       </Button>
                     </div>
-                  </div>
-                </CardHeader>
-
-                <CardContent>
-                  {showAddLesson === section.id && (
-                    <Card className="mb-4 bg-gray-50">
-                      <CardContent className="p-4 space-y-4">
-                        <h4 className="font-semibold">Add New Lesson</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor={`lesson-title-${section.id}`}>
-                              Lesson Title
-                            </Label>
-                            <Input
-                              id={`lesson-title-${section.id}`}
-                              value={newLesson.title}
-                              onChange={(e) =>
-                                setNewLesson({
-                                  ...newLesson,
-                                  title: e.target.value,
-                                })
-                              }
-                              placeholder="Enter lesson title"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor={`lesson-duration-${section.id}`}>
-                              Duration
-                            </Label>
-                            <Input
-                              id={`lesson-duration-${section.id}`}
-                              value={newLesson.duration}
-                              onChange={(e) =>
-                                setNewLesson({
-                                  ...newLesson,
-                                  duration: e.target.value,
-                                })
-                              }
-                              placeholder="e.g., 4min"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <Label htmlFor={`lesson-video-${section.id}`}>
-                            Video Upload
-                          </Label>
-                          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                            <Upload
-                              size={32}
-                              className="mx-auto text-gray-400 mb-2"
-                            />
-                            <p className="text-gray-600 text-sm">
-                              Click to upload video file
-                            </p>
-                            <Input
-                              type="file"
-                              className="hidden"
-                              id={`lesson-video-${section.id}`}
-                              accept="video/*"
-                              onChange={(e) =>
-                                setNewLesson({
-                                  ...newLesson,
-                                  videoUrl: e.target.files?.[0]?.name || "",
-                                })
-                              }
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <Label htmlFor={`lesson-description-${section.id}`}>
-                            Description (Optional)
-                          </Label>
-                          <Textarea
-                            id={`lesson-description-${section.id}`}
-                            value={newLesson.description}
-                            onChange={(e) =>
-                              setNewLesson({
-                                ...newLesson,
-                                description: e.target.value,
-                              })
-                            }
-                            placeholder="Enter lesson description"
-                            rows={3}
-                          />
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button onClick={() => addLesson(section.id)}>
-                            Add Lesson
-                          </Button>
-                          <Button
-                            variant="outline"
-                            onClick={() => setShowAddLesson(null)}
-                          >
-                            Cancel
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
-
-                  {section.lessons.map((lesson, index) => (
-                    <div
-                      key={lesson.id}
-                      className="flex items-center justify-between p-3 mb-2 bg-white border border-[#eaecf0] rounded-lg hover:shadow-sm"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <span className="text-sm text-gray-500 font-mono w-6">
-                          {index + 1}.
-                        </span>
-                        <Video size={16} className="text-blue-500" />
-                        <div>
-                          <p className="font-medium">{lesson.title}</p>
-                          <p className="text-sm text-gray-500">
-                            {lesson.duration}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setEditingLesson(lesson)}
-                        >
-                          <Edit size={14} />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => deleteLesson(section.id, lesson.id)}
-                          className="text-red-600 hover:text-red-700"
-                        >
-                          <Trash2 size={14} />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

@@ -1,297 +1,259 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Label } from '../ui/label';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Plus, Edit, Trash2, Eye, Calendar, Upload, User } from "lucide-react";
-import BlogViewModal from "./modals/BlogViewModal";
-import BlogEditModal from "./modals/BlogEditModal";
-import DeleteConfirmModal from "./modals/DeleteConfirmModal";
-import { useToast } from "../hooks/use-toast";
+} from '../ui/dialog';
+import { Plus, Edit, Trash2, Eye, Calendar } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
+import BlogViewModal from './modals/BlogViewModal';
+import BlogEditModal from './modals/BlogEditModal';
+import DeleteConfirmModal from './modals/DeleteConfirmModal';
+
+import {
+  useBlogs,
+  useCreateBlog,
+  useUpdateBlog,
+  useDeleteBlog,
+} from '@/hooks/useBlogs';
+import supabase from '@/supabase/client';
 
 const BlogManagement = () => {
   const { toast } = useToast();
-  const [articles, setArticles] = useState([
-    {
-      id: 1,
-      title: "The Future of UI Design",
-      content:
-        "Exploring upcoming trends and technologies that will shape the future of user interface design...",
-      publishDate: "2024-01-20",
-      status: "Published",
-      views: 1250,
-      publisherName: "John Doe",
-      publisherImage: "/placeholder-author.jpg",
-    },
-    {
-      id: 2,
-      title: "UX Research Best Practices",
-      content:
-        "A comprehensive guide to conducting effective user experience research that drives design decisions...",
-      publishDate: "2024-01-18",
-      status: "Published",
-      views: 980,
-      publisherName: "Jane Smith",
-      publisherImage: "/placeholder-author.jpg",
-    },
-    {
-      id: 3,
-      title: "Design Systems 101",
-      content:
-        "Learn how to create and maintain effective design systems for your organization...",
-      publishDate: "2024-01-22",
-      status: "Draft",
-      views: 0,
-      publisherName: "Alex Johnson",
-      publisherImage: "/placeholder-author.jpg",
-    },
-  ]);
+  const blogsQuery = useBlogs();
+  const createBlog = useCreateBlog();
+  const updateBlog = useUpdateBlog();
+  const deleteBlog = useDeleteBlog();
 
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [viewOpen, setViewOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const [newArticle, setNewArticle] = useState({
-    title: "",
-    content: "",
-    publisherName: "",
-    publisherImage: "",
+  const [form, setForm] = useState({
+    title: '',
+    content: '',
+    published: false,
   });
 
-  const handleView = (article) => {
-    setSelectedArticle(article);
-    setViewModalOpen(true);
-  };
+  useEffect(() => {
+    supabase.auth.getUser().then((res) => {
+      if (res.data.user) setCurrentUser(res.data.user.id);
+    });
+  }, []);
 
-  const handleEdit = (article) => {
-    setSelectedArticle(article);
-    setEditModalOpen(true);
-  };
+  const resetForm = () =>
+    setForm({
+      title: '',
+      content: '',
+      published: false,
+    });
 
-  const handleDelete = (article) => {
-    setSelectedArticle(article);
-    setDeleteModalOpen(true);
-  };
-
-  const confirmDelete = () => {
-    if (selectedArticle) {
-      setArticles(articles.filter((a) => a.id !== selectedArticle.id));
+  const handleCreate = async () => {
+    if (!currentUser) {
       toast({
-        title: "Article deleted",
-        description: `${selectedArticle.title} has been successfully deleted.`,
+        title: 'Error',
+        description: 'Not authenticated',
+        variant: 'destructive',
       });
-      setDeleteModalOpen(false);
-      setSelectedArticle(null);
+      return;
+    }
+    try {
+      await createBlog.mutateAsync({
+        ...form,
+        author_id: currentUser,
+      });
+      toast({ title: 'Article created' });
+      resetForm();
+      setViewOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
     }
   };
 
-  const handleSave = (updatedArticle) => {
-    setArticles(
-      articles.map((a) => (a.id === updatedArticle.id ? updatedArticle : a))
-    );
-    toast({
-      title: "Article updated",
-      description: `${updatedArticle.title} has been successfully updated.`,
+  const openEdit = (a) => {
+    setSelected(a);
+    setForm({
+      title: a.title,
+      content: a.content,
+      published: a.published,
     });
+    setEditOpen(true);
   };
+
+  const handleUpdate = async () => {
+    try {
+      await updateBlog.mutateAsync({ ...selected, ...form });
+      toast({ title: 'Article updated' });
+      setEditOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteBlog.mutateAsync(selected.id);
+      toast({ title: 'Article deleted' });
+      setDeleteOpen(false);
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
+    }
+  };
+
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    blogsQuery;
+
+  if (isLoading) return <p>Loading...</p>;
+
+  const allBlogs = data?.pages.flatMap((page) => page.items) || [];
 
   return (
     <div className="space-y-8">
+      {/* CREATE */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
-          <p className="text-gray-600 mt-2">
-            Create and manage educational articles and insights
-          </p>
+          <h1 className="text-3xl font-bold">Blog Management</h1>
+          <p className="text-gray-600">Create and manage articles</p>
         </div>
-
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-orange-600 hover:bg-orange-700">
-              <Plus size={20} className="mr-2" />
-              Write Article
+              <Plus size={20} className="mr-2" /> Write Article
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Write New Article</DialogTitle>
+              <DialogTitle>New Article</DialogTitle>
             </DialogHeader>
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div>
-                <Label htmlFor="article-title">Article Title</Label>
+                <Label>Title</Label>
                 <Input
-                  id="article-title"
-                  value={newArticle.title}
-                  onChange={(e) =>
-                    setNewArticle({ ...newArticle, title: e.target.value })
-                  }
-                  placeholder="Enter article title"
+                  value={form.title}
+                  onChange={(e) => setForm({ ...form, title: e.target.value })}
                 />
               </div>
-
               <div>
-                <Label htmlFor="publisher-name">Publisher Name</Label>
-                <Input
-                  id="publisher-name"
-                  value={newArticle.publisherName}
-                  onChange={(e) =>
-                    setNewArticle({
-                      ...newArticle,
-                      publisherName: e.target.value,
-                    })
-                  }
-                  placeholder="Enter publisher name"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="publisher-image">Publisher Image</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                  <User size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600">
-                    Click to upload publisher image
-                  </p>
-                  <Input
-                    type="file"
-                    className="hidden"
-                    id="publisher-image"
-                    accept="image/*"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="article-content">Article Content</Label>
+                <Label>Content</Label>
                 <Textarea
-                  id="article-content"
-                  value={newArticle.content}
+                  value={form.content}
                   onChange={(e) =>
-                    setNewArticle({ ...newArticle, content: e.target.value })
+                    setForm({ ...form, content: e.target.value })
                   }
-                  placeholder="Write your article content here..."
-                  rows={15}
-                  className="min-h-[300px]"
+                  rows={10}
                 />
               </div>
-
-              <div className="flex space-x-3">
-                <Button variant="outline" className="flex-1">
-                  Save as Draft
-                </Button>
-                <Button className="flex-1">Publish Article</Button>
+              <div className="flex items-center space-x-4">
+                <Input
+                  type="checkbox"
+                  checked={form.published}
+                  onChange={(e) =>
+                    setForm({ ...form, published: e.target.checked })
+                  }
+                />{' '}
+                <Label>Published?</Label>
               </div>
+              <Button onClick={handleCreate} className="w-full">
+                Create Article
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
       </div>
 
+      {/* LIST */}
       <div className="space-y-4">
-        {articles.map((article) => (
-          <Card
-            key={article.id}
-            className="hover:shadow-lg transition-shadow duration-200"
-          >
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <h3 className="font-semibold text-xl text-gray-900">
-                      {article.title}
-                    </h3>
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        article.status === "Published"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}
-                    >
-                      {article.status}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center space-x-2 mb-3">
-                    <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
-                      <User size={14} className="text-gray-600" />
-                    </div>
-                    <span className="text-sm text-gray-600">
-                      By {article.publisherName}
-                    </span>
-                  </div>
-
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    {article.content}
-                  </p>
-
-                  <div className="flex items-center space-x-6 text-sm text-gray-500">
-                    <div className="flex items-center space-x-1">
-                      <Calendar size={16} />
-                      <span>{article.publishDate}</span>
-                    </div>
-                    <span>{article.views} views</span>
-                  </div>
+        {allBlogs.map((a) => (
+          <Card key={a.id}>
+            <CardContent className="p-6 flex justify-between">
+              <div>
+                <div className="flex items-center space-x-3">
+                  <h3 className="text-xl font-semibold">{a.title}</h3>
+                  <span
+                    className={`px-2 py-1 rounded-full text-sm font-medium ${
+                      a.published
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
+                    {a.published ? 'Published' : 'Draft'}
+                  </span>
                 </div>
-
-                <div className="flex space-x-2 ml-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleView(article)}
-                  >
-                    <Eye size={16} className="mr-1" />
-                    Preview
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleEdit(article)}
-                  >
-                    <Edit size={16} className="mr-1" />
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-red-600 hover:text-red-700"
-                    onClick={() => handleDelete(article)}
-                  >
-                    <Trash2 size={16} className="mr-1" />
-                    Delete
-                  </Button>
+                <div className="flex items-center space-x-2 mt-2 text-sm text-gray-600">
+                  <Calendar size={16} />
+                  <span>{new Date(a.created_at).toLocaleDateString()}</span>
                 </div>
+                <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+                  {a.content}
+                </p>
+              </div>
+              <div className="flex space-x-2">
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setSelected(a);
+                    setViewOpen(true);
+                  }}
+                >
+                  <Eye size={16} />
+                </Button>
+                <Button size="sm" onClick={() => openEdit(a)}>
+                  <Edit size={16} />
+                </Button>
+                <Button
+                  size="sm"
+                  className="text-red-600"
+                  onClick={() => {
+                    setSelected(a);
+                    setDeleteOpen(true);
+                  }}
+                >
+                  <Trash2 size={16} />
+                </Button>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
+      {/* LOAD MORE */}
+      {hasNextPage && (
+        <div className="text-center">
+          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+            {isFetchingNextPage ? 'Loading...' : 'Load More'}
+          </Button>
+        </div>
+      )}
+
+      {/* MODALS */}
       <BlogViewModal
-        article={selectedArticle}
-        isOpen={viewModalOpen}
-        onClose={() => setViewModalOpen(false)}
+        article={selected}
+        isOpen={viewOpen}
+        onClose={() => setViewOpen(false)}
       />
-
       <BlogEditModal
-        article={selectedArticle}
-        isOpen={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        onSave={handleSave}
+        form={form}
+        setForm={setForm}
+        article={selected}
+        isOpen={editOpen}
+        onClose={() => setEditOpen(false)}
+        onSave={handleUpdate}
       />
-
       <DeleteConfirmModal
-        isOpen={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-        onConfirm={confirmDelete}
-        title={`Delete "${selectedArticle?.title}"`}
-        message="Are you sure you want to delete this article? This action cannot be undone."
+        isOpen={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        onConfirm={handleDelete}
+        title={`Delete "${selected?.title}"`}
+        message="This can't be undone."
       />
     </div>
   );

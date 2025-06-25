@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import supabase from "../../supabase/client";
-import JoinCommunitySuccess from "./join-community-success.component";
+import React, { useState } from 'react';
+import supabase from '../../supabase/client';
+import JoinCommunitySuccess from './join-community-success.component';
 // eslint-disable-next-line no-unused-vars
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
 
 const JoinCommunityForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    linkedin: "",
-    message: "",
-    source: "",
+    name: '',
+    email: '',
+    phone: '',
+    linkedin: '',
+    message: '',
+    source: '',
   });
 
   const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ const JoinCommunityForm = () => {
 
     // Validate required fields
     if (!name || !email || !phone || !message) {
-      setError("Please fill in all required fields");
+      setError('Please fill in all required fields');
       setLoading(false);
       return;
     }
@@ -35,17 +35,17 @@ const JoinCommunityForm = () => {
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address");
+      setError('Please enter a valid email address');
       setLoading(false);
       return;
     }
 
     try {
       const { data, error } = await supabase.functions.invoke(
-        "join-community-form-handler",
+        'join-community-form-handler',
         {
           body: formData,
-        }
+        },
       );
 
       if (error) {
@@ -53,20 +53,20 @@ const JoinCommunityForm = () => {
       }
 
       setSuccess(
-        "Thank you! Your application has been submitted successfully."
+        'Thank you! Your application has been submitted successfully.',
       );
       setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        linkedin: "",
-        message: "",
-        source: "",
+        name: '',
+        email: '',
+        phone: '',
+        linkedin: '',
+        message: '',
+        source: '',
       });
       setLoading(false);
     } catch (err) {
-      console.error("Error: ", err);
-      setError("An unexpected error occurred. Please try again.");
+      console.error('Error: ', err);
+      setError('An unexpected error occurred. Please try again.');
       setLoading(false);
     }
   };
@@ -86,7 +86,7 @@ const JoinCommunityForm = () => {
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
@@ -96,13 +96,13 @@ const JoinCommunityForm = () => {
       {/* Error Message */}
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-          {error}{" "}
+          {error}{' '}
         </div>
       )}
       <motion.form
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
       >
         <div>
@@ -235,7 +235,7 @@ const JoinCommunityForm = () => {
                     disabled={loading}
                     className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Submitting..." : "Join Community"}
+                    {loading ? 'Submitting...' : 'Join Community'}
                   </button>
                 </div>
               </div>
