@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
           Privacy Policy for Hello Dreams
         </p>
         <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px] ">
-          Effective Date: 18th June 2025
+          18th June, 2025
         </p>
         <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px] py-4 md:py-7">
           At Hello Dreams, your privacy is very important to us. This Privacy

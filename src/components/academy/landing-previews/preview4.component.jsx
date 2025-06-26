@@ -32,8 +32,10 @@ const Preview4 = () => {
         className="flex justify-between items-center mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        <p className="text-[#010413] text-[40px] font-bold">Free Classes</p>
-        <span className="text-[#ff7f50] text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <p className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold">
+          Free Classes
+        </p>
+        <span className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
           View all
         </span>
       </div>
@@ -45,7 +47,7 @@ const Preview4 = () => {
             variants={cardVariants}
             custom={index}
             key={data.id}
-            className={`relative w-full h-max md:h-[500px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl ${
+            className={`md:relative w-full h-max md:h-[450px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl ${
               index === PreviewData4.length - 1
                 ? "md:col-span-2 lg:col-span-1"
                 : ""
@@ -62,7 +64,7 @@ const Preview4 = () => {
               <BookmarkIcon className="w-[16px] h-[20.57px] text-[#41414150] " />
             </div>
 
-            <div className="w-full h-[221px] bg-[#efece9] rounded-2xl mb-4">
+            <div className="w-full h-[221px] bg-[#efece9] rounded-xl mb-4">
               <img
                 src={data.image}
                 alt={data.title}
@@ -80,19 +82,15 @@ const Preview4 = () => {
 
             <div className="flex items-center space-x-2 my-3">
               <span className="text-[14px] text-[#667085] ">{data.rating}</span>
-              <div className="flex flex-row space-x-3 items-center">
-                <div className="hidden lg:flex">
-                  {[...Array(5)].map((_, index) => (
-                    <StarIcon
-                      key={index}
-                      className={`w-5 h-5 md:w-7 md:h-7 ${
-                        index < data.rating
-                          ? "text-[#ff9d2b]"
-                          : "text-[#aeaeae]"
-                      }`}
-                    />
-                  ))}
-                </div>
+              <div className="flex flex-row items-center">
+                {[...Array(5)].map((_, index) => (
+                  <StarIcon
+                    key={index}
+                    className={`w-5 h-5 md:w-7 md:h-7 ${
+                      index < data.rating ? "text-[#ff9d2b]" : "text-[#aeaeae]"
+                    }`}
+                  />
+                ))}
               </div>
               <span className="text-[14px] text-[#667085] ">
                 ({data.numberOfRatings})
@@ -100,7 +98,7 @@ const Preview4 = () => {
             </div>
 
             <div
-              className="absolute bottom-4 left-4 right-4 flex justify-between items-center"
+              className="md:absolute md:bottom-4 md:left-4 md:right-4 flex justify-between items-center mt-5"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               <p className="text-[10px] w-max text-[#667085] flex items-center ">
@@ -116,6 +114,11 @@ const Preview4 = () => {
             </div>
           </motion.div>
         ))}
+        <div className="md:hidden flex justify-end">
+          <span className=" text-[#ff7f50] text-[14px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+            View all
+          </span>
+        </div>
       </div>
     </>
   );
