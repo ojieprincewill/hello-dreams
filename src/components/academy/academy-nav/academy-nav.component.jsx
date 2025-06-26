@@ -118,7 +118,7 @@ const AcademyNavbar = () => {
 
           <Link
             to=""
-            className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] lg:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff cursor-pointer transition-colors duration-300"
+            className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] lg:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
             onClick={handleOrigins}
           >
             Sign up $10/m

@@ -17,7 +17,7 @@ import {
   useCreateLesson,
   useDeleteLesson,
 } from '@/hooks/useLessons';
-import { uploadLessonToMux } from '../../../../services/uploadLessonToMux';
+import { uploadLessonToMux } from '../../../../services/uploadLessonToMux.js';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const { toast } = useToast();
@@ -26,7 +26,6 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
     duration: '',
     videoUrl: '',
     description: '',
-    course_id: courseId,
   });
   const [editingLesson, setEditingLesson] = useState(null);
   const [uploading, setUploading] = useState(false);
