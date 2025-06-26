@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import AdminSidebar from "./AdminSidebar";
-import DashboardOverview from "./DashboardOverview";
-import CourseManagement from "./CourseManagement";
-import JobManagement from "./JobManagement";
-import ChallengeManagement from "./ChallengeManagement";
-import BlogManagement from "./BlogManagement";
-import CollectionsManagement from "./CollectionsManagement";
+import React, { useState } from 'react';
+import AdminSidebar from './AdminSidebar';
+import DashboardOverview from './DashboardOverview';
+import CourseManagement from './CourseManagement';
+import JobManagement from './JobManagement';
+import ChallengeManagement from './ChallengeManagement';
+import BlogManagement from './BlogManagement';
+import CollectionsManagement from './CollectionsManagement';
 
 const AdminDashboard = () => {
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const [activeSection, setActiveSection] = useState('dashboard');
 
   const renderActiveSection = () => {
     switch (activeSection) {
-      case "dashboard":
-        return <DashboardOverview />;
-      case "courses":
+      case 'dashboard':
+        return <DashboardOverview setActiveSection={setActiveSection} />;
+      case 'courses':
         return <CourseManagement />;
-      case "jobs":
+      case 'jobs':
         return <JobManagement />;
-      case "challenges":
+      case 'challenges':
         return <ChallengeManagement />;
-      case "blog":
+      case 'blog':
         return <BlogManagement />;
-      case "collections":
+      case 'collections':
         return <CollectionsManagement />;
       default:
-        return <DashboardOverview />;
+        return <DashboardOverview setActiveSection={setActiveSection} />;
     }
   };
 

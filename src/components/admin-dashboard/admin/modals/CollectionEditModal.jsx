@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-import { Label } from "../../ui/label";
+} from '../../ui/dialog';
+import { Button } from '../../ui/button';
+import { Input } from '../../ui/input';
+import { Label } from '../../ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
-import { Switch } from "../../ui/switch";
-import { Upload } from "lucide-react";
+} from '../../ui/select';
+import { Switch } from '../../ui/switch';
+import { Upload } from 'lucide-react';
 
 const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
   const [editedItem, setEditedItem] = useState(null);
 
   useEffect(() => {
     if (item) {
-      setEditedItem({ ...item });
+      setEditedItem({
+        ...item,
+        sizes: Array.isArray(item.sizes) ? item.sizes : [],
+      });
     }
   }, [item]);
 
@@ -47,7 +50,7 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
             <Label htmlFor="edit-item-name">Item Name</Label>
             <Input
               id="edit-item-name"
-              value={editedItem.name}
+              value={editedItem.name || ''}
               onChange={(e) =>
                 setEditedItem({ ...editedItem, name: e.target.value })
               }
@@ -60,7 +63,7 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
               <Input
                 id="edit-item-price"
                 type="number"
-                value={editedItem.price}
+                value={editedItem.price || 0}
                 onChange={(e) =>
                   setEditedItem({
                     ...editedItem,
@@ -73,13 +76,13 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
             <div>
               <Label htmlFor="edit-item-category">Category</Label>
               <Select
-                value={editedItem.category}
+                value={editedItem.category || ''}
                 onValueChange={(value) =>
                   setEditedItem({ ...editedItem, category: value })
                 }
               >
                 <SelectTrigger>
-                  <SelectValue />
+                  <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="T-Shirts">T-Shirts</SelectItem>
@@ -95,13 +98,13 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
           <div>
             <Label htmlFor="edit-item-quality">Quality</Label>
             <Select
-              value={editedItem.quality}
+              value={editedItem.quality || ''}
               onValueChange={(value) =>
                 setEditedItem({ ...editedItem, quality: value })
               }
             >
               <SelectTrigger>
-                <SelectValue />
+                <SelectValue placeholder="Select quality" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Regular">Regular</SelectItem>
@@ -117,11 +120,14 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
             </Label>
             <Input
               id="edit-item-sizes"
-              value={editedItem.sizes.join(", ")}
+              value={(editedItem.sizes || []).join(', ')}
               onChange={(e) =>
                 setEditedItem({
                   ...editedItem,
-                  sizes: e.target.value.split(", ").filter((s) => s.trim()),
+                  sizes: e.target.value
+                    .split(',')
+                    .map((s) => s.trim())
+                    .filter((s) => s),
                 })
               }
             />
@@ -130,7 +136,7 @@ const CollectionEditModal = ({ item, isOpen, onClose, onSave }) => {
           <div className="flex items-center space-x-2">
             <Switch
               id="edit-in-stock"
-              checked={editedItem.inStock}
+              checked={editedItem.inStock ?? true}
               onCheckedChange={(checked) =>
                 setEditedItem({ ...editedItem, inStock: checked })
               }

@@ -17,7 +17,7 @@ import {
   useCreateLesson,
   useDeleteLesson,
 } from '@/hooks/useLessons';
-import { uploadLessonToMux } from 'src/services/';
+import { uploadLessonToMux } from '../../../../services/uploadLessonToMux';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const { toast } = useToast();
@@ -26,6 +26,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
     duration: '',
     videoUrl: '',
     description: '',
+    course_id: courseId,
   });
   const [editingLesson, setEditingLesson] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -62,12 +63,16 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       };
 
       // 1. Save lesson to DB
-      const savedLesson = await createLesson.mutateAsync(lesson);
+      // const savedLesson = await createLesson.mutateAsync(lesson);
 
       // 2. Call edge function to upload to Mux
       await uploadLessonToMux({
-        videoUrl: savedLesson.video_url,
-        lessonId: savedLesson.id,
+        videoUrl: newLesson.videoUrl,
+        courseId: courseId,
+        title: newLesson.title,
+        duration: newLesson.duration,
+        description: newLesson.description,
+        video_url: newLesson.videoUrl,
       });
 
       toast({

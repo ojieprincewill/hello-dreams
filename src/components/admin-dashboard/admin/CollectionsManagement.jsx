@@ -4,6 +4,7 @@ import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
+import { Checkbox } from '../ui/checkbox';
 import {
   Select,
   SelectContent,
@@ -39,6 +40,7 @@ const CollectionsManagement = () => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const [newItem, setNewItem] = useState({
     name: '',
     price: 0,
@@ -47,8 +49,10 @@ const CollectionsManagement = () => {
     quality: 'Regular',
     category: 'T-Shirts',
     inStock: true,
-    user_id: 1, // Replace with actual user_id if available
   });
+
+  // Define the available sizes
+  const allSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   const {
     collectionsQuery: { data, fetchNextPage, hasNextPage, isFetchingNextPage },
@@ -57,7 +61,7 @@ const CollectionsManagement = () => {
     deleteCollection,
   } = useCollections();
 
-  const collections = data?.pages.flat() || [];
+  const collections = data?.pages.flatMap((page) => page.data) || [];
 
   const handleView = (item) => {
     setSelectedItem(item);
@@ -116,8 +120,8 @@ const CollectionsManagement = () => {
         price: 0,
         image: '',
         sizes: [''],
-        quality: '',
-        category: '',
+        quality: 'Regular',
+        category: 'T-Shirts',
         inStock: true,
       });
     } catch (err) {
@@ -170,7 +174,7 @@ const CollectionsManagement = () => {
                     onChange={(e) =>
                       setNewItem({
                         ...newItem,
-                        price: parseFloat(e.target.value),
+                        price: parseFloat(e.target.value) || 0,
                       })
                     }
                   />
@@ -218,16 +222,78 @@ const CollectionsManagement = () => {
               </div>
 
               <div>
-                <Label htmlFor="item-sizes">Sizes (comma separated)</Label>
+                <Label>Sizes</Label>
+                <Select
+                  value=""
+                  onValueChange={(value) => {
+                    if (newItem.sizes.includes(value)) {
+                      setNewItem({
+                        ...newItem,
+                        sizes: newItem.sizes.filter((s) => s !== value),
+                      });
+                    } else {
+                      setNewItem({
+                        ...newItem,
+                        sizes: [...newItem.sizes, value],
+                      });
+                    }
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select sizes" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allSizes.map((size) => (
+                      <SelectItem key={size} value={size}>
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`checkbox-${size}`}
+                            checked={newItem.sizes.includes(size)}
+                            onCheckedChange={() => {
+                              if (newItem.sizes.includes(size)) {
+                                setNewItem({
+                                  ...newItem,
+                                  sizes: newItem.sizes.filter(
+                                    (s) => s !== size,
+                                  ),
+                                });
+                              } else {
+                                setNewItem({
+                                  ...newItem,
+                                  sizes: [...newItem.sizes, size],
+                                });
+                              }
+                            }}
+                          />
+                          <label htmlFor={`checkbox-${size}`}>{size}</label>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {newItem.sizes.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {newItem.sizes.map((s, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="item-image">Image URL</Label>
                 <Input
-                  id="item-sizes"
-                  value={newItem.sizes.join(', ')}
+                  id="item-image"
+                  value={newItem.image}
                   onChange={(e) =>
-                    setNewItem({
-                      ...newItem,
-                      sizes: e.target.value.split(',').map((s) => s.trim()),
-                    })
+                    setNewItem({ ...newItem, image: e.target.value })
                   }
+                  placeholder="https://your-image-url"
                 />
               </div>
 
@@ -243,42 +309,56 @@ const CollectionsManagement = () => {
         {collections.map((item) => (
           <Card key={item.id} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
-              <div className="aspect-square bg-gray-200 flex items-center justify-center">
-                <ShoppingBag size={48} className="text-gray-400" />
+              <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden">
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <ShoppingBag size={48} />
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-semibold text-lg">{item.name}</h3>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      item.inStock
+                      item.instock
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                     }`}
                   >
-                    {item.inStock ? 'In Stock' : 'Out of Stock'}
+                    {item.instock ? 'In Stock' : 'Out of Stock'}
                   </span>
                 </div>
 
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Price:</span>
-                    <span className="font-semibold">₦{item.price}</span>
+                <div className="space-y-2 mb-4 text-sm">
+                  <div className="flex justify-between">
+                    <span>Name:</span>
+                    <span className="font-semibold">{item.title}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between">
+                    <span>Price:</span>
+                    <span className="font-semibold">
+                      ₦{item.price.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
                     <span>Category:</span>
                     <span>{item.category}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Star size={14} className="text-yellow-500" />
-                    <span className="text-sm text-gray-600">
-                      {item.quality}
-                    </span>
+                    <span>{item.quality}</span>
                   </div>
                   <div className="flex flex-wrap gap-1">
-                    {item.sizes.map((size, index) => (
+                    {(item.sizes || []).map((size, i) => (
                       <span
-                        key={index}
+                        key={i}
                         className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
                       >
                         {size}

@@ -80,7 +80,7 @@ const PostJobForm = () => {
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_test_414916414abee3089f4da16c7f1b38b9992bac0c', // Optional: You can omit if set in backend
+        key: import.meta.env.PAYSTACK_LIVE_PUBLIC_KEY, // Optional: You can omit if set in backend
         reference: data.reference,
         email: companyEmail,
         amount: 50000 * 100,

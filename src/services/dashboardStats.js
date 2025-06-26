@@ -31,8 +31,8 @@ function calculateChange(current, previous) {
 
 export async function fetchDashboardStats() {
   const [studentsThisMonth, studentsLastMonth] = await Promise.all([
-    getCount('students'),
-    getCount('students', 'created_at', -1),
+    getCount('users'),
+    getCount('users', 'created_at', -1),
   ]);
 
   const [coursesThisMonth, coursesLastMonth] = await Promise.all([
@@ -46,7 +46,7 @@ export async function fetchDashboardStats() {
   ]);
 
   const { data: payments, error } = await supabase
-    .from('payments')
+    .from('transactions')
     .select('amount, created_at');
 
   if (error) throw error;

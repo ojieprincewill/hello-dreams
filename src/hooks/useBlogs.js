@@ -12,7 +12,7 @@ export const useBlogs = () => {
       const { data, error } = await supabase
         .from('blogs')
         .select(
-          'id, title, published, created_at, content, profiles(full_name, avatar_url)'
+          'id, title, published, created_at, content'
         )
         .order('created_at', { ascending: false })
         .range(from, to);

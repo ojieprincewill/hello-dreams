@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { useDashboardData } from '../../../hooks/useDashboardData';
 
-const DashboardOverview = () => {
+const DashboardOverview = ({ setActiveSection }) => {
   const { stats, activity } = useDashboardData();
 
   const loading = stats.isLoading || activity.isLoading;
@@ -49,6 +49,51 @@ const DashboardOverview = () => {
       bgColor: 'bg-orange-50',
     },
   ];
+
+  const quickActions = [
+    {
+      title: 'Create Course',
+      description: 'Add new learning content',
+      icon: BookOpen,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50',
+      hoverColor: 'hover:bg-blue-100',
+      section: 'courses',
+    },
+    {
+      title: 'Post Job',
+      description: 'Add job opportunity',
+      icon: Briefcase,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50',
+      hoverColor: 'hover:bg-green-100',
+      section: 'jobs',
+    },
+    {
+      title: 'New Challenge',
+      description: 'Create UI/UX challenge',
+      icon: Users,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50',
+      hoverColor: 'hover:bg-purple-100',
+      section: 'challenges',
+    },
+    {
+      title: 'Write Article',
+      description: 'Publish blog content',
+      icon: FileText,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50',
+      hoverColor: 'hover:bg-orange-100',
+      section: 'blog',
+    },
+  ];
+
+  const handleQuickAction = (section) => {
+    if (setActiveSection) {
+      setActiveSection(section);
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -141,14 +186,34 @@ const DashboardOverview = () => {
           </CardContent>
         </Card>
 
-        {/* Quick Actions stay unchanged */}
         <Card>
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              {/* Buttons here as before */}
+              {quickActions.map((action, index) => {
+                const Icon = action.icon;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleQuickAction(action.section)}
+                    className={`p-4 ${action.bgColor} ${action.hoverColor} rounded-lg transition-colors text-left cursor-pointer`}
+                  >
+                    <Icon className={`${action.color} mb-2`} size={24} />
+                    <p
+                      className={`font-medium ${action.color
+                        .replace('text-', 'text-')
+                        .replace('-600', '-900')}`}
+                    >
+                      {action.title}
+                    </p>
+                    <p className={`text-xs ${action.color}`}>
+                      {action.description}
+                    </p>
+                  </button>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
