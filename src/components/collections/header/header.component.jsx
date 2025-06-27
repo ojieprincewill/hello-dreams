@@ -23,13 +23,13 @@ const CollectionsHeader = () => {
             className="flex flex-col items-start justify-start text-[#010413] px-5 py-5"
           >
             <h1
-              className="text-[22px] md:text-[56px] lg:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
+              className="text-[22px] md:text-[32px] lg:text-[56px] lg:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Hello Dreams Collections
             </h1>
             <p
-              className="mt-8 text-[24px] lg:text-[16px] text-[#667085] lg:text-[#010413] lg:w-[530px] leading-[1.6]"
+              className="mt-8 text-[16px] md:text-[20px] lg:text-[24px]  text-[#667085] lg:text-[#010413] lg:w-[530px] leading-[1.6]"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               Shop from our collection of quality T-shirts, hoodies, and custom
@@ -41,11 +41,11 @@ const CollectionsHeader = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               viewport={{ once: true }}
-              className="mt-8 md:mt-15 w-[164px] md:w-[273px]"
+              className="mt-8 md:mt-10 w-[164px] md:w-[273px]"
             >
               <button
                 onClick={scrollToShop}
-                className="bg-[#010413] w-full text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[24px] text-center px-4 py-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                className="bg-[#010413] w-full text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[20px] text-center px-4 py-3 rounded-sm hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
               >
                 Shop now
               </button>

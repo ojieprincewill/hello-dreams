@@ -7,7 +7,7 @@ import JoinCohort from "./join-cohort.component";
 
 const LandingPreviews = () => {
   return (
-    <div className="px-[5%] py-10">
+    <div className="px-[5%] py-15">
       <Preview1 />
       <Preview2 />
       <Preview3 />

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 
-const Checkout = () => {
+const Checkout = ({ onPaymentSuccess }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartTotal = parseFloat(
     cartItems
@@ -18,7 +18,7 @@ const Checkout = () => {
 
   return (
     <div className="bg-[#f7f7f7] flex flex-col-reverse lg:space-y-0 lg:grid lg:grid-cols-[60%_40%] lg:gap-7 px-[5%] md:px-[10%] lg:px-[5%] py-10 md:py-20 lg:py-30 ">
-      <CheckoutForm />
+      <CheckoutForm onSuccess={onPaymentSuccess} />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
