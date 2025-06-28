@@ -65,14 +65,15 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       // const savedLesson = await createLesson.mutateAsync(lesson);
 
       // 2. Call edge function to upload to Mux
-      await uploadLessonToMux({
+      const res = await uploadLessonToMux({
         videoUrl: newLesson.videoUrl,
-        courseId: courseId,
+        course_id: courseId, // <-- renamed here
         title: newLesson.title,
         duration: newLesson.duration,
         description: newLesson.description,
-        video_url: newLesson.videoUrl,
       });
+
+      console.log(res);
 
       toast({
         title: 'Lesson added',
