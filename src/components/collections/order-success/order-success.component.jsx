@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const OrderSuccess = () => {
   const navigate = useNavigate();
+  const orderInfo = useSelector((state) => state.order.orderInfo);
 
   const handleClose = () => {
     navigate("/services/our-collection");
@@ -39,26 +41,28 @@ const OrderSuccess = () => {
                 Order number
               </span>
               <span className="text-[#010413] text-[12px] md:text-[14px] font-bold ">
-                123456789
+                {orderInfo.orderId}
               </span>
             </div>
             <p className="text-[#667085] text-[12px] md:text-[14px] font-medium py-2 border-b border-b-[#eaecf0]">
               Item(s) Ordered
             </p>
             <div className="py-3 space-y-2 border-b border-b-[#eaecf0]">
-              <p className="text-[#010413] text-[12px] md:text-[14px] font-bold ">
-                Item 1
-              </p>
-              <p className="text-[#010413] text-[12px] md:text-[14px] font-bold ">
-                Item 2
-              </p>
+              {orderInfo.products.map((item, index) => (
+                <p
+                  key={index}
+                  className="text-[#010413] text-[12px] md:text-[14px] font-bold "
+                >
+                  {item.title}
+                </p>
+              ))}
             </div>
             <div className="flex justify-between items-center py-2 ">
               <span className="text-[#667085] text-[12px] md:text-[14px] font-medium">
                 Total
               </span>
               <span className="text-[#010413] text-[12px] md:text-[14px] font-bold ">
-                &#8358;12000
+                &#8358;{orderInfo.total}
               </span>
             </div>
           </div>

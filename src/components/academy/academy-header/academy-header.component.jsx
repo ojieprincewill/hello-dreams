@@ -64,7 +64,7 @@ const AcademyHeader = () => {
   };
 
   return (
-    <div className="relative h-[732px] overflow-hidden">
+    <div className="relative h-[320px] md:h-[463px] lg:h-[732px] overflow-hidden">
       {/* Slides */}
       <div className="relative h-full">
         {slides.map((slide, index) => (
@@ -86,7 +86,7 @@ const AcademyHeader = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute top-1/2 left-4 lg:left-8 transform -translate-y-1/2 z-10">
+      <div className="hidden md:block absolute top-1/2 left-4 lg:left-8 transform -translate-y-1/2 z-10">
         <button
           onClick={prevSlide}
           className="bg-white hover:bg-gray-50 text-gray-800 p-3 lg:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -108,7 +108,7 @@ const AcademyHeader = () => {
         </button>
       </div>
 
-      <div className="absolute top-1/2 right-4 lg:right-8 transform -translate-y-1/2 z-10">
+      <div className="hidden md:block absolute top-1/2 right-4 lg:right-8 transform -translate-y-1/2 z-10">
         <button
           onClick={nextSlide}
           className="bg-white hover:bg-gray-50 text-gray-800 p-3 lg:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -134,10 +134,10 @@ const AcademyHeader = () => {
       <div
         className={`absolute ${getTextPositionClasses(
           slides[currentSlide].textPosition
-        )} z-20 bg-white rounded-lg shadow-xl p-6 lg:p-8 max-w-md lg:max-w-lg`}
+        )} z-20 bg-white rounded-lg shadow-xl p-3 lg:p-8 max-w-md lg:max-w-lg`}
       >
         <div className="text-left">
-          <h1 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-3 lg:mb-4">
+          <h1 className="text-xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-1 md:mb-3 lg:mb-4">
             {slides[currentSlide].title}
           </h1>
           <p

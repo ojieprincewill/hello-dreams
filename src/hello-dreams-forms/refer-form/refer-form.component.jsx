@@ -1,8 +1,10 @@
 import { React, useState } from "react";
 import supabase from "../../supabase/client";
-import Step2 from "./step-2.component";
+import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { toast } from "react-toastify";
+import ReferSuccess from "./refer-success.component";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,8 @@ const ReferForm = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [generatedCode, setGeneratedCode] = useState("");
+  const [step, setStep] = useState(1);
+  const [codeSeen, setCodeSeen] = useState(false);
 
   const generateReferralCode = (length = 6) => {
     const characters =
@@ -78,17 +82,15 @@ const ReferForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "referral-handler",
-        {
+      const { data: responseData, error: supabaseError } =
+        await supabase.functions.invoke("referral-handler", {
           body: payload,
-        }
-      );
+        });
 
-      if (error) {
-        const supabaseError = error.message || error;
+      if (supabaseError) {
         console.error("Supabase Error:", supabaseError);
         setError("Submission failed. Please try again.");
+        setLoading(false);
         return;
       }
 
@@ -103,6 +105,8 @@ const ReferForm = () => {
         },
         referralCode: "",
       });
+      setGeneratedCode("");
+      setShowModal(false);
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again later.");
@@ -129,6 +133,7 @@ const ReferForm = () => {
       ...prev,
       referralCode: code,
     }));
+    setCodeSeen(true);
     setShowModal(true);
   };
 
@@ -136,12 +141,27 @@ const ReferForm = () => {
     navigator.clipboard
       .writeText(generatedCode)
       .then(() => {
-        alert("Referral code copied to clipboard!");
+        toast.success("Referral code copied to clipboard!");
       })
       .catch((err) => {
         console.error("Failed to copy code: ", err);
-        alert("Failed to copy code. Please try manually.");
+        toast.error("Failed to copy code. Please try manually.");
       });
+  };
+
+  const handleStepOneComplete = () => {
+    const { service, name, email, data } = formData;
+    if (
+      !service ||
+      !name ||
+      !email ||
+      !data.referralName ||
+      !data.referralEmail
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+    setStep(2);
   };
 
   return (
@@ -156,157 +176,209 @@ const ReferForm = () => {
         Make up to 10% on commission for every referral of any of our services.
       </p>
 
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold mt-10"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
-      >
-        Step 1
-      </motion.p>
-      <motion.form
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        onSubmit={handleSubmit}
-        className="md:w-[401.75px] mx-auto space-y-8 md:p-6 mt-3 "
-      >
-        <div>
-          <label
-            className="block text-[#475569] text-[12px] text-center md:text-[16px] font-medium mb-3 md:mb-4"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Select Service <span class="text-red-500">*</span>
-          </label>
-          <select
-            name="service"
-            value={formData.service}
-            onChange={handleChange}
-            className="w-full text-[#444] text-[10px] md:text-[14px] font-medium p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
-          >
-            <option value="" disabled className="text-[#b2b2b2]">
-              Select a service you are referring
-            </option>
+      {success ? (
+        <ReferSuccess />
+      ) : (
+        <motion.form
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          onSubmit={handleSubmit}
+          className="md:w-[450.75px] mx-auto md:p-6 mt-3 "
+        >
+          {/* step 1 */}
+          {step === 1 && (
+            <div className="space-y-8">
+              <p
+                className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold "
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Step 1
+              </p>
+              <div>
+                <label
+                  className="block text-[#475569] text-[12px] text-center md:text-[16px] font-medium mb-3 md:mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  Select Service <span class="text-red-500">*</span>
+                </label>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="w-full text-[#444] text-[10px] md:text-[14px] font-medium p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
+                >
+                  <option value="" disabled hidden className="text-[#b2b2b2]">
+                    Select a service you are referring
+                  </option>
 
-            <option value="service1" className="text-[#444]">
-              UI/UX Design
-            </option>
-            <option value="service2" className="text-[#444]">
-              Logo Design
-            </option>
-            <option value="service3" className="text-[#444]">
-              Branding
-            </option>
-            <option value="service4" className="text-[#444]">
-              User Research
-            </option>
-            <option value="service5" className="text-[#444]">
-              Redesign
-            </option>
-            <option value="service6" className="text-[#444]">
-              Development
-            </option>
-            <option value="service7" className="text-[#444]">
-              Printing
-            </option>
-          </select>
-        </div>
-        <div>
-          <label
-            className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Referral Name (Business or Personal){" "}
-            <span class="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            name="referralName"
-            value={formData.data.referralName}
-            onChange={handleReferralDataChange}
-            className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
-          />
-        </div>
-        <div>
-          <label
-            className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-            aria-required
-          >
-            Your Full Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
-          />
-        </div>
-        <div>
-          <label
-            className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-            aria-required
-          >
-            Your Email <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
-          />
-        </div>
-        <div>
-          <label
-            className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-            aria-required
-          >
-            Referral Email <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="email"
-            name="referralEmail"
-            value={formData.data.referralEmail}
-            onChange={handleReferralDataChange}
-            className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
-          />
-        </div>
+                  <option value="service1" className="text-[#444]">
+                    UI/UX Design
+                  </option>
+                  <option value="service2" className="text-[#444]">
+                    Logo Design
+                  </option>
+                  <option value="service3" className="text-[#444]">
+                    Branding
+                  </option>
+                  <option value="service4" className="text-[#444]">
+                    User Research
+                  </option>
+                  <option value="service5" className="text-[#444]">
+                    Redesign
+                  </option>
+                  <option value="service6" className="text-[#444]">
+                    Development
+                  </option>
+                  <option value="service7" className="text-[#444]">
+                    Printing
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label
+                  className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  Referral Name (Business or Personal){" "}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="referralName"
+                  value={formData.data.referralName}
+                  onChange={handleReferralDataChange}
+                  className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  aria-required
+                >
+                  Your Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  aria-required
+                >
+                  Your Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  aria-required
+                >
+                  Referral Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="referralEmail"
+                  value={formData.data.referralEmail}
+                  onChange={handleReferralDataChange}
+                  className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
+                />
+              </div>
 
-        <div className="w-full md:w-[401.75px] mx-auto flex flex-col items-center space-y-4 mt-3">
-          <button
-            type="button"
-            onClick={handleGenerateAndShowCode}
-            className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
-          >
-            {formData.referralCode ? "Resave" : "Save & Continue"}
-          </button>
-          {formData.referralCode && (
-            <p className="text-sm text-gray-600">
-              Your current code: {formData.referralCode} (Click above to
-              re-generate and copy)
-            </p>
+              <div className="w-full md:w-[401.75px] mx-auto flex flex-col items-center space-y-4 mt-3">
+                <button
+                  type="button"
+                  onClick={handleStepOneComplete}
+                  className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                >
+                  {formData.referralCode ? "Resave" : "Save & Continue"}
+                </button>
+              </div>
+            </div>
           )}
-        </div>
-        {/* <div className="flex justify-center items-center">
-          <button
-            type="submit"
-            className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-3 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
-          >
-            {loading ? "Submitting..." : "Send Referral"}
-          </button>
-        </div> */}
-      </motion.form>
-      <Step2 />
+
+          {/* step 2 */}
+          {step === 2 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="md:w-max mx-auto space-y-8 md:p-6 mt-3 "
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              <p
+                className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold "
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Step 2
+              </p>
+              <div className="flex justify-center items-center">
+                <button
+                  type="button"
+                  onClick={handleGenerateAndShowCode}
+                  className="bg-[#ffffff] border border-[#00000015] text-[#010413] text-[12px] md:text-[14px] px-6 md:px-8 py-3 font-medium text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90] cursor-pointer"
+                >
+                  <DocumentDuplicateIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
+                  Copy Your Referral Id
+                </button>
+              </div>
+              <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                Share our “Get a quote” link with your referral
+              </p>
+              <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                Ensure your referral submits a quote request
+              </p>
+              <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                Assist the company to ensure the deal is closed
+              </p>
+              <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                When successful, you will get 10%
+              </p>
+              <div className="flex justify-center items-center">
+                <button
+                  type="submit"
+                  disabled={!codeSeen || loading}
+                  className={`bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg transition-colors duration-300 cursor-pointer ${
+                    !codeSeen || loading
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-[#1342ff] hover:border-[#1342ff]"
+                  }`}
+                >
+                  {loading ? "Submitting..." : "Submit"}
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </motion.form>
+      )}
+
       {error && <p className="text-red-600 mt-4 text-center">{error}</p>}
       {success && <p className="text-green-600 mt-4 text-center">{success}</p>}
 
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div
+          className="fixed inset-0 bg-[#00000050] flex items-center justify-center p-4 z-50"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
           <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
             <h3 className="text-xl font-bold mb-4 text-[#010413]">
               Your Referral Code
@@ -320,13 +392,13 @@ const ReferForm = () => {
             <div className="flex justify-between space-x-3 mt-6">
               <button
                 onClick={handleCopyCode}
-                className="flex-1 bg-[#1342ff] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                className="flex-1 bg-[#1342ff] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
               >
                 Copy Code
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
+                className="flex-1 bg-[#eaecf0] text-[#010413] px-4 py-2 rounded-md hover:bg-[#c0c1c3] transition-colors duration-300 cursor-pointer"
               >
                 Close
               </button>

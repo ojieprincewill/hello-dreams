@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import supabase from '../../supabase/client';
-import { motion } from 'motion/react';
-const CheckoutForm = () => {
+import React, { useState } from "react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import supabase from "../../supabase/client";
+import { motion } from "motion/react";
+import { useDispatch } from "react-redux";
+import { resetCart } from "@/state-slices/cart/cartSlice";
+const CheckoutForm = ({ onSuccess }) => {
   const handleOrigins = () => {
     window.scrollTo(0, 0);
   };
+  const dispatch = useDispatch();
 
   // Access cart data from Redux store
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -18,27 +21,27 @@ const CheckoutForm = () => {
       .reduce(
         (accumulatedQuantity, cartItem) =>
           accumulatedQuantity + cartItem.quantity * cartItem.price,
-        0,
+        0
       )
-      .toFixed(2),
+      .toFixed(2)
   );
 
   // Calculate total items count
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
-    0,
+    0
   );
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    deliveryAddress: '',
-    city: '',
-    state: '',
-    phone: '',
+    fullName: "",
+    email: "",
+    deliveryAddress: "",
+    city: "",
+    state: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -54,20 +57,6 @@ const CheckoutForm = () => {
     const { title, image, price } = cartItems;
 
     const { email } = formData;
-    const orderData = {
-      name: formData.name,
-      totalItems,
-      orderStatus: 'pending',
-      orderTotal: cartTotal,
-      orderItems: cartItems,
-      orderEmail: email,
-      orderPhone: formData.phone,
-      orderAddress: formData.deliveryAddress,
-      orderCity: formData.city,
-      orderState: formData.state,
-      orderCountry: formData.country,
-      orderPaymentReference: data.reference,
-    };
 
     // Include cart data in the submission
     const paymentData = {
@@ -76,19 +65,36 @@ const CheckoutForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke(
-        'paystack-payment-initiation',
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
         {
           body: paymentData,
-        },
+        }
       );
       console.log(data);
       console.log(initError);
+
       if (initError || !data?.access_code || !data?.reference) {
-        setError('Payment initiation failed.');
-        setLoading(false);
+        setError("Payment initiation failed.");
+        setIsLoading(false);
         return;
       }
+
+      const orderData = {
+        name: formData.name,
+        totalItems,
+        orderStatus: "pending",
+        orderTotal: cartTotal,
+        orderItems: cartItems,
+        orderEmail: email,
+        orderPhone: formData.phone,
+        orderAddress: formData.deliveryAddress,
+        orderCity: formData.city,
+        orderState: formData.state,
+        orderCountry: formData.country,
+        orderPaymentReference: data.reference,
+      };
+
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: import.meta.env.VITE_PAYSTACK_LIVE_PUBLIC_KEY, // Optional: You can omit if set in backend
@@ -98,7 +104,7 @@ const CheckoutForm = () => {
         onSuccess: async (response) => {
           // STEP 2: On success, verify the payment and update the order status
           const { data: verifyData, error: verifyError } =
-            await supabase.functions.invoke('collections-checkout-handler', {
+            await supabase.functions.invoke("collections-checkout-handler", {
               body: {
                 reference: response.reference,
                 ...formData,
@@ -106,31 +112,37 @@ const CheckoutForm = () => {
             });
 
           if (verifyError || verifyData?.error) {
-            setError('Verification failed. Payment may not be confirmed.');
+            setError("Verification failed. Payment may not be confirmed.");
           } else {
-            setSuccess('Job posted successfully!');
+            onSuccess({
+              orderId: response.reference,
+              products: cartItems,
+              total: cartTotal,
+            });
+
+            dispatch(resetCart());
+
+            setSuccess("Payment Successful!");
             setFormData({
-              jobTitle: '',
-              experienceLevel: '',
-              workHours: '',
-              payType: '',
-              jobDescription: '',
-              applicationInstructions: '',
-              companyName: '',
-              companyEmail: '',
+              fullName: "",
+              email: "",
+              deliveryAddress: "",
+              city: "",
+              state: "",
+              phone: "",
             });
           }
-          setLoading(false);
+          setIsLoading(false);
         },
         onCancel: () => {
-          setError('Payment was cancelled.');
-          setLoading(false);
+          setError("Payment was cancelled.");
+          setIsLoading(false);
         },
       });
     } catch (err) {
-      console.error('Submission Error:', err);
-      setError('An unexpected error occurred.');
-      setLoading(false);
+      console.error("Submission Error:", err);
+      setError("An unexpected error occurred.");
+      setIsLoading(false);
     }
   };
 
@@ -145,7 +157,7 @@ const CheckoutForm = () => {
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5"
         >
@@ -155,9 +167,10 @@ const CheckoutForm = () => {
         <motion.form
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="w-full space-y-6 md:space-y-8 text-[#667085]"
+          onSubmit={handleSubmit}
         >
           <div>
             <label
@@ -299,7 +312,7 @@ const CheckoutForm = () => {
               disabled={isLoading}
               className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-2 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Processing...' : 'Place Order'}
+              {isLoading ? "Processing..." : "Place Order"}
             </button>
           </div>
         </motion.form>
@@ -307,7 +320,7 @@ const CheckoutForm = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
         className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] "
       >

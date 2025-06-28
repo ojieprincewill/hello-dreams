@@ -19,7 +19,7 @@ const CartIcon = () => {
   };
 
   return (
-    <div className="relative mt-5 p-2 rounded-md bg-[#fff] border border-[#eaecf0] text-[#010413] hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+    <div className="relative mt-2 p-2 rounded-md bg-[#fff] border border-[#eaecf0] text-[#010413] hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
       <Link to="/cart-summary" onClick={handleOrigins}>
         <ShoppingCartIcon className="w-4 h-4 md:h-6 md:w-6 " />
       </Link>
