@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
-import { Badge } from "../../ui/badge";
-import { Calendar, Eye } from "lucide-react";
+} from '../../ui/dialog';
+import { Badge } from '../../ui/badge';
+import { Calendar, User } from 'lucide-react';
 
 const BlogViewModal = ({ article, isOpen, onClose }) => {
   if (!article) return null;
@@ -21,23 +21,37 @@ const BlogViewModal = ({ article, isOpen, onClose }) => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold">{article.title}</h1>
-              <Badge
-                variant={
-                  article.status === "Published" ? "default" : "secondary"
-                }
-              >
-                {article.status}
+              <Badge variant={article.published ? 'default' : 'secondary'}>
+                {article.published ? 'Published' : 'Draft'}
               </Badge>
             </div>
 
+            {article.image_url && (
+              <div className="w-full">
+                <img
+                  src={article.image_url}
+                  alt={article.title}
+                  className="w-full max-h-64 object-cover rounded-lg"
+                />
+              </div>
+            )}
+
             <div className="flex items-center space-x-6 text-sm text-gray-500 pb-4 border-b">
-              <div className="flex items-center space-x-1">
-                <Calendar size={16} />
-                <span>{article.publishDate}</span>
+              <div className="flex items-center space-x-3">
+                {article.author_image_url ? (
+                  <img
+                    src={article.author_image_url}
+                    alt={article.author || 'Author'}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                ) : (
+                  <User size={16} />
+                )}
+                <span>{article.author || 'Unknown Author'}</span>
               </div>
               <div className="flex items-center space-x-1">
-                <Eye size={16} />
-                <span>{article.views} views</span>
+                <Calendar size={16} />
+                <span>{new Date(article.created_at).toLocaleDateString()}</span>
               </div>
             </div>
 

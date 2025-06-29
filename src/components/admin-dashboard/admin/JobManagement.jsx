@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Label } from '../ui/label';
+import { Switch } from '../ui/switch';
 import {
   Select,
   SelectTrigger,
@@ -26,6 +27,9 @@ import {
   DollarSign,
   Clock,
   Award,
+  Building,
+  Mail,
+  Calendar,
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import JobViewModal from './modals/JobViewModal';
@@ -62,7 +66,13 @@ const JobManagement = () => {
     applicationInstructions: '',
     companyName: '',
     companyEmail: '',
+    published: false,
   });
+
+  // Generate work hours options
+  const workHoursOptions = Array.from({ length: 36 }, (_, i) =>
+    (i + 5).toString(),
+  );
 
   const generateTransactionRef = () =>
     setNewJob((prev) => ({
@@ -104,6 +114,7 @@ const JobManagement = () => {
         applicationInstructions: '',
         companyName: '',
         companyEmail: '',
+        published: false,
       });
       setViewModalOpen(false);
     } catch (e) {
@@ -138,26 +149,48 @@ const JobManagement = () => {
     }
   };
 
+  const handleTogglePublished = async (job) => {
+    try {
+      const newPublishedState = !job.published;
+
+      await updateJob.mutateAsync({
+        ...job,
+        published: newPublishedState,
+      });
+
+      toast({
+        title: newPublishedState ? 'Job published' : 'Job unpublished',
+        description: `${job.title} is now ${
+          newPublishedState ? 'published' : 'unpublished'
+        }.`,
+      });
+    } catch (e) {
+      toast({ title: 'Error', description: e.message, variant: 'destructive' });
+    }
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 lg:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Job Postings</h1>
-          <p className="text-gray-600">Manage job opportunities</p>
+          <h1 className="text-2xl lg:text-3xl font-bold">Job Postings</h1>
+          <p className="text-sm lg:text-base text-gray-600">
+            Manage job opportunities
+          </p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-green-600 hover:bg-green-700">
-              <Plus size={20} className="mr-2" /> Post New Job
+            <Button className="bg-green-600 hover:bg-green-700 w-full sm:w-auto">
+              <Plus size={18} className="mr-2 lg:w-5 lg:h-5" /> Post New Job
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
             <DialogHeader>
               <DialogTitle>Create Job Posting</DialogTitle>
             </DialogHeader>
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               <div>
                 <Label>Job Title</Label>
                 <Input
@@ -180,7 +213,7 @@ const JobManagement = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Experience Level</Label>
                   <Select
@@ -203,24 +236,54 @@ const JobManagement = () => {
 
                 <div>
                   <Label>Work Hours</Label>
-                  <Input
+                  <Select
                     value={newJob.hoursNeeded}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, hoursNeeded: e.target.value })
+                    onValueChange={(val) =>
+                      setNewJob({ ...newJob, hoursNeeded: val })
                     }
-                    placeholder="e.g., 40 hours/week"
-                  />
+                    disabled={newJob.payType === 'contract'}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select hours" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {workHoursOptions.map((hours) => (
+                        <SelectItem key={hours} value={hours}>
+                          {hours} hours/week
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {newJob.payType === 'contract' && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      Work hours are not applicable for contract positions
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Pay Type</Label>
                   <Select
                     value={newJob.payType}
-                    onValueChange={(val) =>
-                      setNewJob({ ...newJob, payType: val })
-                    }
+                    onValueChange={(val) => {
+                      setNewJob({ ...newJob, payType: val });
+                      // Reset hours if switching to contract
+                      if (val === 'contract') {
+                        setNewJob((prev) => ({
+                          ...prev,
+                          payType: val,
+                          hoursNeeded: '',
+                        }));
+                      } else if (newJob.hoursNeeded === '') {
+                        setNewJob((prev) => ({
+                          ...prev,
+                          payType: val,
+                          hoursNeeded: '40',
+                        }));
+                      }
+                    }}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select pay type" />
@@ -263,7 +326,7 @@ const JobManagement = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Company Name</Label>
                   <Input
@@ -316,44 +379,163 @@ const JobManagement = () => {
 
       <div className="space-y-4">
         {jobs.map((job) => (
-          <Card key={job.id} className="pt-6">
+          <Card key={job.id} className="pt-4 lg:pt-6">
             <CardContent>
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-semibold">{job.title}</h3>
-                  <span className="text-sm text-gray-500">
-                    {job.experience_level}
-                  </span>
+              <div className="space-y-4">
+                {/* Header with title and actions */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-base lg:text-lg text-gray-900 mb-1">
+                      {job.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-xs lg:text-sm text-gray-600 mb-2">
+                      <Building size={14} className="lg:w-4 lg:h-4" />
+                      <span className="truncate">
+                        {job.company_name || 'Company not specified'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs lg:text-sm"
+                      onClick={() => {
+                        setSelectedJob(job);
+                        setViewModalOpen(true);
+                      }}
+                    >
+                      <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">View</span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs lg:text-sm"
+                      onClick={() => {
+                        setSelectedJob(job);
+                        setEditModalOpen(true);
+                      }}
+                    >
+                      <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">Edit</span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-red-600 hover:text-red-700 text-xs lg:text-sm"
+                      onClick={() => {
+                        setSelectedJob(job);
+                        setDeleteModalOpen(true);
+                      }}
+                    >
+                      <Trash2 size={14} className="lg:w-4 lg:h-4" />
+                    </Button>
+                  </div>
                 </div>
-                <div className="space-x-2">
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      setSelectedJob(job);
-                      setViewModalOpen(true);
-                    }}
-                  >
-                    <Eye size={16} /> View
-                  </Button>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      setSelectedJob(job);
-                      setEditModalOpen(true);
-                    }}
-                  >
-                    <Edit size={16} /> Edit
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="text-red-600"
-                    onClick={() => {
-                      setSelectedJob(job);
-                      setDeleteModalOpen(true);
-                    }}
-                  >
-                    <Trash2 size={16} /> Delete
-                  </Button>
+
+                {/* Job details grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+                  <div className="flex items-center gap-2 text-xs lg:text-sm">
+                    <Award
+                      size={14}
+                      className="text-blue-600 lg:w-4 lg:h-4 flex-shrink-0"
+                    />
+                    <div>
+                      <span className="text-gray-500">Experience:</span>
+                      <span className="ml-1 font-medium">
+                        {job.experience_level}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs lg:text-sm">
+                    <Clock
+                      size={14}
+                      className="text-green-600 lg:w-4 lg:h-4 flex-shrink-0"
+                    />
+                    <div>
+                      <span className="text-gray-500">Hours:</span>
+                      <span className="ml-1 font-medium">
+                        {job.pay_type === 'contract'
+                          ? 'Contract'
+                          : `${job.work_hours || 'N/A'} hrs/week`}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs lg:text-sm">
+                    <DollarSign
+                      size={14}
+                      className="text-purple-600 lg:w-4 lg:h-4 flex-shrink-0"
+                    />
+                    <div>
+                      <span className="text-gray-500">Pay:</span>
+                      <span className="ml-1 font-medium">
+                        {job.pay_type === 'contract'
+                          ? 'Contract'
+                          : `${job.pay_type} rate`}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs lg:text-sm">
+                    <Calendar
+                      size={14}
+                      className="text-orange-600 lg:w-4 lg:h-4 flex-shrink-0"
+                    />
+                    <div>
+                      <span className="text-gray-500">Posted:</span>
+                      <span className="ml-1 font-medium">
+                        {new Date(job.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description preview */}
+                {job.description && (
+                  <div className="text-xs lg:text-sm text-gray-600 line-clamp-2">
+                    {job.description}
+                  </div>
+                )}
+
+                {/* Company contact info */}
+                {job.company_email && (
+                  <div className="flex items-center gap-2 text-xs lg:text-sm text-gray-500">
+                    <Mail size={14} className="lg:w-4 lg:h-4" />
+                    <span className="truncate">{job.company_email}</span>
+                  </div>
+                )}
+
+                {/* Published toggle switch */}
+                <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs lg:text-sm font-medium text-gray-700">
+                      Published Status:
+                    </span>
+                    <span
+                      className={`text-xs lg:text-sm font-medium ${
+                        job.published ? 'text-green-600' : 'text-red-600'
+                      }`}
+                    >
+                      {job.published ? 'Published' : 'Unpublished'}
+                    </span>
+                  </div>
+                  {/* <div className="flex items-center gap-2 ">
+                    <Switch
+                      checked={job.published}
+                      onCheckedChange={() => handleTogglePublished(job)}
+                      className={`${
+                        job.published
+                          ? 'bg-green-600 hover:bg-green-700'
+                          : 'bg-red-600 hover:bg-red-700'
+                      }`}
+                    />
+                    <span className="text-xs text-green-500">
+                      {job.published ? 'Live' : 'Draft'}
+                    </span>
+                  </div> */}
                 </div>
               </div>
             </CardContent>

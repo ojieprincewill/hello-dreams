@@ -17,6 +17,7 @@ import CourseEditModal from './modals/CourseEditModal';
 import DeleteConfirmModal from './modals/DeleteConfirmModal';
 import CourseSectionModal from './modals/CourseSectionModal';
 import { useToast } from '../hooks/use-toast';
+import supabase from '@/supabase/client';
 
 import {
   useCourses,
@@ -37,12 +38,59 @@ const CourseManagement = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [sectionModalOpen, setSectionModalOpen] = useState(false);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const [newCourse, setNewCourse] = useState({
     title: '',
     description: '',
     coverImage: '',
   });
+
+  const resetForm = () => {
+    setNewCourse({
+      title: '',
+      description: '',
+      coverImage: '',
+    });
+    setImageFile(null);
+    setImagePreview(null);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async (file) => {
+    if (!file) return null;
+
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `course-images/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('course-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw new Error('Failed to upload image');
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from('course-images').getPublicUrl(filePath);
+
+    return publicUrl;
+  };
 
   const handleView = (course) => {
     setSelectedCourse(course);
@@ -65,13 +113,28 @@ const CourseManagement = () => {
   };
 
   const handleCreateCourse = async () => {
+    if (!newCourse.title || !newCourse.description) {
+      toast({
+        title: 'Error',
+        description: 'Please fill in all required fields',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
+      let imageUrl = null;
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile);
+      }
+
       await createCourse.mutateAsync({
         title: newCourse.title,
         description: newCourse.description,
-        cover_image: newCourse.coverImage || '',
+        cover_image: imageUrl || '',
       });
-      setNewCourse({ title: '', description: '', coverImage: '' });
+      resetForm();
+      setCreateModalOpen(false);
       toast({
         title: 'Course created',
         description: 'The course has been successfully added.',
@@ -80,6 +143,7 @@ const CourseManagement = () => {
       toast({
         title: 'Error',
         description: error.message,
+        variant: 'destructive',
       });
     }
   };
@@ -96,6 +160,7 @@ const CourseManagement = () => {
       toast({
         title: 'Update failed',
         description: error.message,
+        variant: 'destructive',
       });
     }
   };
@@ -113,34 +178,35 @@ const CourseManagement = () => {
       toast({
         title: 'Delete failed',
         description: error.message,
+        variant: 'destructive',
       });
     }
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 lg:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
             Course Management
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-sm lg:text-base text-gray-600 mt-1 lg:mt-2">
             Create and manage your educational content
           </p>
         </div>
 
-        <Dialog>
+        <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              <Plus size={20} className="mr-2" />
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto">
+              <Plus size={18} className="mr-2 lg:w-5 lg:h-5" />
               Create Course
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl bg-[#f7f7f7]">
+          <DialogContent className="max-w-2xl bg-[#f7f7f7] mx-4">
             <DialogHeader>
               <DialogTitle>Create New Course</DialogTitle>
             </DialogHeader>
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               <div>
                 <Label htmlFor="course-title">Course Title</Label>
                 <Input
@@ -168,15 +234,45 @@ const CourseManagement = () => {
 
               <div>
                 <Label htmlFor="course-cover">Cover Image</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                  <Upload size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600">Click to upload cover image</p>
-                  <Input
-                    type="file"
-                    className="hidden"
-                    id="course-cover"
-                    accept="image/*"
-                  />
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 lg:p-6 text-center">
+                  {imagePreview ? (
+                    <div className="space-y-4">
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="mx-auto max-h-32 rounded-lg"
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setImageFile(null);
+                          setImagePreview(null);
+                        }}
+                      >
+                        Remove Image
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <Upload
+                        size={40}
+                        className="mx-auto text-gray-400 mb-4 lg:w-12 lg:h-12"
+                      />
+                      <p className="text-sm lg:text-base text-gray-600">
+                        Click to upload cover image
+                      </p>
+                    </>
+                  )}
+                  <div className="mt-4">
+                    <Input
+                      type="file"
+                      id="course-cover"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -191,71 +287,81 @@ const CourseManagement = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         {courses.map((course) => (
           <Card
             key={course.id}
             className="hover:shadow-lg transition-shadow duration-200"
           >
             <CardContent className="p-0">
-              <div className="aspect-video bg-gray-200 rounded-t-lg flex items-center justify-center">
-                <span className="text-gray-500">Course Cover</span>
+              <div className="aspect-video bg-gray-200 rounded-t-lg flex items-center justify-center overflow-hidden">
+                {course.cover_image ? (
+                  <img
+                    src={course.cover_image}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-500 text-sm lg:text-base">
+                    Course Cover
+                  </span>
+                )}
               </div>
-              <div className="p-6">
+              <div className="p-4 lg:p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-lg text-gray-900">
-                    {course.title}
+                  <h3 className="font-semibold text-base lg:text-lg text-gray-900 flex-1 min-w-0">
+                    <span className="truncate block">{course.title}</span>
                   </h3>
-                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2">
                     Published
                   </span>
                 </div>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 text-xs lg:text-sm mb-3 lg:mb-4 line-clamp-2">
                   {course.description}
                 </p>
 
-                <div className="flex justify-between text-sm text-gray-500 mb-4">
+                <div className="flex justify-between text-xs lg:text-sm text-gray-500 mb-3 lg:mb-4">
                   <span>{course.lessons || 0} lessons</span>
                   <span>{course.enrolled || 0} enrolled</span>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-1 lg:space-x-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7]"
+                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
                       onClick={() => handleView(course)}
                     >
-                      <Eye size={16} className="mr-1" />
-                      View
+                      <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">View</span>
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7]"
+                      className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
                       onClick={() => handleEdit(course)}
                     >
-                      <Edit size={16} className="mr-1" />
-                      Edit
+                      <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">Edit</span>
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(course)}
-                      className="text-red-600 hover:text-red-700 border-[#eaecf0] hover:bg-[#f0f5f7]"
+                      className="text-red-600 hover:text-red-700 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
                     >
-                      <Trash2 size={16} />
+                      <Trash2 size={14} className="lg:w-4 lg:h-4" />
                     </Button>
                   </div>
 
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
+                    className="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 text-xs lg:text-sm"
                     onClick={() => handleManageContent(course)}
                   >
-                    <BookOpen size={16} className="mr-2" />
+                    <BookOpen size={14} className="mr-2 lg:w-4 lg:h-4" />
                     Manage Content
                   </Button>
                 </div>

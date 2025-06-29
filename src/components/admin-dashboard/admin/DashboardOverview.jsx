@@ -96,15 +96,17 @@ const DashboardOverview = ({ setActiveSection }) => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+          Dashboard Overview
+        </h1>
+        <p className="text-sm lg:text-base text-gray-600 mt-2">
           Welcome back! Here's what's happening with Hello Dreams today.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
@@ -112,26 +114,29 @@ const DashboardOverview = ({ setActiveSection }) => {
               key={index}
               className="hover:shadow-lg transition-shadow duration-200"
             >
-              <CardContent className="p-6">
+              <CardContent className="p-4 lg:p-6">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs lg:text-sm font-medium text-gray-600 truncate">
                       {stat.title}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900 mt-2">
+                    <p className="text-xl lg:text-2xl font-bold text-gray-900 mt-1 lg:mt-2">
                       {stat.value}
                     </p>
-                    <div className="flex items-center mt-2">
+                    <div className="flex items-center mt-1 lg:mt-2">
                       {parseFloat(stat.change) >= 0 ? (
-                        <TrendingUp size={16} className="text-green-500 mr-1" />
+                        <TrendingUp
+                          size={14}
+                          className="text-green-500 mr-1 lg:w-4 lg:h-4"
+                        />
                       ) : (
                         <TrendingUp
-                          size={16}
-                          className="rotate-180 text-red-500 mr-1"
+                          size={14}
+                          className="rotate-180 text-red-500 mr-1 lg:w-4 lg:h-4"
                         />
                       )}
                       <span
-                        className={`text-sm font-medium ${
+                        className={`text-xs lg:text-sm font-medium ${
                           parseFloat(stat.change) >= 0
                             ? 'text-green-600'
                             : 'text-red-600'
@@ -139,13 +144,15 @@ const DashboardOverview = ({ setActiveSection }) => {
                       >
                         {stat.change}
                       </span>
-                      <span className="text-sm text-gray-500 ml-1">
+                      <span className="text-xs lg:text-sm text-gray-500 ml-1 hidden sm:inline">
                         from last month
                       </span>
                     </div>
                   </div>
-                  <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                    <Icon size={24} className={stat.color} />
+                  <div
+                    className={`p-2 lg:p-3 rounded-full ${stat.bgColor} flex-shrink-0`}
+                  >
+                    <Icon size={20} className={`${stat.color} lg:w-6 lg:h-6`} />
                   </div>
                 </div>
               </CardContent>
@@ -154,27 +161,31 @@ const DashboardOverview = ({ setActiveSection }) => {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Recent Activity */}
         <Card>
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+          <CardHeader className="pb-3 lg:pb-6">
+            <CardTitle className="text-lg lg:text-xl">
+              Recent Activity
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
               <p className="text-sm text-gray-500">Loading...</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 lg:space-y-4">
                 {activity.data?.map((item, index) => (
                   <div
                     key={index}
-                    className={`flex items-center space-x-3 p-3 rounded-lg ${
+                    className={`flex items-center space-x-3 p-2 lg:p-3 rounded-lg ${
                       index % 2 === 0 ? 'bg-blue-50' : 'bg-green-50'
                     }`}
                   >
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                    <div>
-                      <p className="text-sm font-medium">{item.description}</p>
+                    <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs lg:text-sm font-medium truncate">
+                        {item.description}
+                      </p>
                       <p className="text-xs text-gray-500">
                         {new Date(item.created_at).toLocaleString()}
                       </p>
@@ -187,28 +198,31 @@ const DashboardOverview = ({ setActiveSection }) => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+          <CardHeader className="pb-3 lg:pb-6">
+            <CardTitle className="text-lg lg:text-xl">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
               {quickActions.map((action, index) => {
                 const Icon = action.icon;
                 return (
                   <button
                     key={index}
                     onClick={() => handleQuickAction(action.section)}
-                    className={`p-4 ${action.bgColor} ${action.hoverColor} rounded-lg transition-colors text-left cursor-pointer`}
+                    className={`p-3 lg:p-4 ${action.bgColor} ${action.hoverColor} rounded-lg transition-colors text-left cursor-pointer`}
                   >
-                    <Icon className={`${action.color} mb-2`} size={24} />
+                    <Icon
+                      className={`${action.color} mb-2 lg:w-6 lg:h-6`}
+                      size={20}
+                    />
                     <p
-                      className={`font-medium ${action.color
+                      className={`font-medium text-sm lg:text-base ${action.color
                         .replace('text-', 'text-')
                         .replace('-600', '-900')}`}
                     >
                       {action.title}
                     </p>
-                    <p className={`text-xs ${action.color}`}>
+                    <p className={`text-xs lg:text-sm ${action.color}`}>
                       {action.description}
                     </p>
                   </button>

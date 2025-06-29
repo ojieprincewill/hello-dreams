@@ -1,24 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "../../ui/dialog";
-import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-import { Textarea } from "../../ui/textarea";
-import { Label } from "../../ui/label";
+} from '../../ui/dialog';
+import { Button } from '../../ui/button';
+import { Input } from '../../ui/input';
+import { Textarea } from '../../ui/textarea';
+import { Label } from '../../ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
-import { User } from "lucide-react";
+} from '../../ui/select';
+import { Upload, User } from 'lucide-react';
 
-const BlogEditModal = ({ article, isOpen, onClose, onSave }) => {
+const BlogEditModal = ({
+  article,
+  isOpen,
+  onClose,
+  onSave,
+  imageFile,
+  setImageFile,
+  imagePreview,
+  setImagePreview,
+  handleImageChange,
+  authorImageFile,
+  setAuthorImageFile,
+  authorImagePreview,
+  setAuthorImagePreview,
+  handleAuthorImageChange,
+}) => {
   const [editedArticle, setEditedArticle] = useState(null);
 
   useEffect(() => {
@@ -55,30 +70,96 @@ const BlogEditModal = ({ article, isOpen, onClose, onSave }) => {
           </div>
 
           <div>
-            <Label htmlFor="edit-publisher-name">Publisher Name</Label>
+            <Label htmlFor="edit-article-author">Author</Label>
             <Input
-              id="edit-publisher-name"
-              value={editedArticle.publisherName}
+              id="edit-article-author"
+              value={editedArticle.author || ''}
               onChange={(e) =>
                 setEditedArticle({
                   ...editedArticle,
-                  publisherName: e.target.value,
+                  author: e.target.value,
                 })
               }
             />
           </div>
 
           <div>
-            <Label htmlFor="edit-publisher-image">Publisher Image</Label>
+            <Label htmlFor="edit-author-image">Author Avatar</Label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-              <User size={48} className="mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600">Click to upload publisher image</p>
-              <Input
-                type="file"
-                className="hidden"
-                id="edit-publisher-image"
-                accept="image/*"
-              />
+              {authorImagePreview ? (
+                <div className="space-y-4">
+                  <img
+                    src={authorImagePreview}
+                    alt="Author Preview"
+                    className="mx-auto w-20 h-20 rounded-full object-cover"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setAuthorImageFile(null);
+                      setAuthorImagePreview(null);
+                    }}
+                  >
+                    Remove Avatar
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <User size={48} className="mx-auto text-gray-400 mb-4" />
+                  <p className="text-gray-600">Click to upload author avatar</p>
+                </>
+              )}
+              <div className="mt-4">
+                <Input
+                  type="file"
+                  id="edit-author-image"
+                  accept="image/*"
+                  onChange={handleAuthorImageChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="edit-article-image">Featured Image</Label>
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              {imagePreview ? (
+                <div className="space-y-4">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="mx-auto max-h-32 rounded-lg"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setImageFile(null);
+                      setImagePreview(null);
+                    }}
+                  >
+                    Remove Image
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <Upload size={48} className="mx-auto text-gray-400 mb-4" />
+                  <p className="text-gray-600">
+                    Click to upload featured image
+                  </p>
+                </>
+              )}
+              <div className="mt-4">
+                <Input
+                  type="file"
+                  id="edit-article-image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
+                />
+              </div>
             </div>
           </div>
 
@@ -98,9 +179,12 @@ const BlogEditModal = ({ article, isOpen, onClose, onSave }) => {
           <div>
             <Label htmlFor="edit-article-status">Status</Label>
             <Select
-              value={editedArticle.status}
+              value={editedArticle.published ? 'Published' : 'Draft'}
               onValueChange={(value) =>
-                setEditedArticle({ ...editedArticle, status: value })
+                setEditedArticle({
+                  ...editedArticle,
+                  published: value === 'Published',
+                })
               }
             >
               <SelectTrigger>

@@ -1,0 +1,350 @@
+/* CSS utilities for admin dashboard mobile responsiveness */
+
+/* Text truncation */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Line clamping for multi-line text */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Ensure proper flex behavior on mobile */
+.min-w-0 {
+  min-width: 0;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .sm\:hidden {
+    display: none;
+  }
+  
+  .sm\:inline {
+    display: inline;
+  }
+  
+  .sm\:w-auto {
+    width: auto;
+  }
+  
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+  
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+  
+  .sm\:items-center {
+    align-items: center;
+  }
+  
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .sm\:space-x-2 {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+  
+  .sm\:space-y-0 > * + * {
+    margin-top: 0;
+  }
+  
+  .sm\:gap-4 {
+    gap: 1rem;
+  }
+  
+  .sm\:p-6 {
+    padding: 1.5rem;
+  }
+  
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .sm\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .sm\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .sm\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  .sm\:w-4 {
+    width: 1rem;
+  }
+  
+  .sm\:h-4 {
+    height: 1rem;
+  }
+  
+  .sm\:w-5 {
+    width: 1.25rem;
+  }
+  
+  .sm\:h-5 {
+    height: 1.25rem;
+  }
+  
+  .sm\:w-6 {
+    width: 1.5rem;
+  }
+  
+  .sm\:h-6 {
+    height: 1.5rem;
+  }
+  
+  .sm\:w-12 {
+    width: 3rem;
+  }
+  
+  .sm\:h-12 {
+    height: 3rem;
+  }
+  
+  .sm\:pb-6 {
+    padding-bottom: 1.5rem;
+  }
+  
+  .sm\:pt-6 {
+    padding-top: 1.5rem;
+  }
+  
+  .sm\:space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .sm\:gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .sm\:mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .sm\:mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .sm\:ml-4 {
+    margin-left: 1rem;
+  }
+  
+  .sm\:space-x-2 > * + * {
+    margin-left: 0.5rem;
+  }
+  
+  .sm\:mt-6 {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Large screen adjustments */
+@media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none;
+  }
+  
+  .lg\:inline {
+    display: inline;
+  }
+  
+  .lg\:w-auto {
+    width: auto;
+  }
+  
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+  
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+  
+  .lg\:items-center {
+    align-items: center;
+  }
+  
+  .lg\:items-start {
+    align-items: flex-start;
+  }
+  
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  
+  .lg\:space-x-2 {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+  
+  .lg\:space-y-0 > * + * {
+    margin-top: 0;
+  }
+  
+  .lg\:gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .lg\:p-6 {
+    padding: 1.5rem;
+  }
+  
+  .lg\:p-8 {
+    padding: 2rem;
+  }
+  
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .lg\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  .lg\:w-4 {
+    width: 1rem;
+  }
+  
+  .lg\:h-4 {
+    height: 1rem;
+  }
+  
+  .lg\:w-5 {
+    width: 1.25rem;
+  }
+  
+  .lg\:h-5 {
+    height: 1.25rem;
+  }
+  
+  .lg\:w-6 {
+    width: 1.5rem;
+  }
+  
+  .lg\:h-6 {
+    height: 1.5rem;
+  }
+  
+  .lg\:w-12 {
+    width: 3rem;
+  }
+  
+  .lg\:h-12 {
+    height: 3rem;
+  }
+  
+  .lg\:pb-6 {
+    padding-bottom: 1.5rem;
+  }
+  
+  .lg\:pt-6 {
+    padding-top: 1.5rem;
+  }
+  
+  .lg\:space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .lg\:space-y-8 > * + * {
+    margin-top: 2rem;
+  }
+  
+  .lg\:gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .lg\:mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .lg\:mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .lg\:ml-4 {
+    margin-left: 1rem;
+  }
+  
+  .lg\:space-x-2 > * + * {
+    margin-left: 0.5rem;
+  }
+  
+  .lg\:mt-6 {
+    margin-top: 1.5rem;
+  }
+  
+  .lg\:ml-0 {
+    margin-left: 0;
+  }
+}

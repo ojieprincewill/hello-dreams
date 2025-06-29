@@ -94,22 +94,22 @@ const ChallengeManagement = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Create */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold">UI/UX Challenges</h1>
-          <p className="text-gray-600">
+          <h1 className="text-2xl lg:text-3xl font-bold">UI/UX Challenges</h1>
+          <p className="text-sm lg:text-base text-gray-600">
             Create design challenges for the community
           </p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              <Plus size={20} className="mr-2" /> Create Challenge
+            <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+              <Plus size={18} className="mr-2 lg:w-5 lg:h-5" /> Create Challenge
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl mx-4">
             <DialogHeader>
               <DialogTitle>New Challenge</DialogTitle>
             </DialogHeader>
@@ -166,51 +166,67 @@ const ChallengeManagement = () => {
       </div>
 
       {/* List */}
-      <div className="space-y-6">
+      <div className="space-y-4 lg:space-y-6">
         {challenges.map((c) => (
           <Card key={`${c.type}-${c.id}`}>
-            <CardContent className="flex justify-between items-center pt-6">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <Target size={20} />
-                  <h3 className="text-lg font-semibold">{c.title}</h3>
+            <CardContent className="flex flex-col sm:flex-row sm:justify-between sm:items-start pt-4 lg:pt-6 gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                  <div className="flex items-center space-x-2">
+                    <Target size={18} className="lg:w-5 lg:h-5" />
+                    <h3 className="text-base lg:text-lg font-semibold truncate">
+                      {c.title}
+                    </h3>
+                  </div>
                   <Badge
                     className={
                       c.type === 'ui'
-                        ? 'bg-indigo-100 text-indigo-700'
-                        : 'bg-green-100 text-green-700'
+                        ? 'bg-indigo-100 text-indigo-700 text-xs lg:text-sm'
+                        : 'bg-green-100 text-green-700 text-xs lg:text-sm'
                     }
                   >
                     {c.type.toUpperCase()}
                   </Badge>
                 </div>
-                <p className="mt-2 text-gray-600 max-w-[45ch]">{c.challenge}</p>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm lg:text-base text-gray-600 line-clamp-2">
+                  {c.challenge}
+                </p>
+                <p className="text-xs lg:text-sm text-gray-500 mt-1">
                   <strong>Deliverables:</strong> {c.deliverables}
                 </p>
               </div>
-              <div className="space-x-2 ml-4">
+              <div className="flex flex-wrap gap-2 sm:space-x-2 sm:ml-4">
                 <Button
                   size="sm"
+                  variant="outline"
+                  className="text-xs lg:text-sm"
                   onClick={() => {
                     setSelected(c);
                     setViewOpen(true);
                   }}
                 >
-                  <Eye size={16} />
-                </Button>
-                <Button size="sm" onClick={() => openEdit(c)}>
-                  <Edit size={16} />
+                  <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                  <span className="hidden sm:inline">View</span>
                 </Button>
                 <Button
                   size="sm"
-                  className="text-red-600"
+                  variant="outline"
+                  className="text-xs lg:text-sm"
+                  onClick={() => openEdit(c)}
+                >
+                  <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                  <span className="hidden sm:inline">Edit</span>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="text-red-600 hover:text-red-700 text-xs lg:text-sm"
                   onClick={() => {
                     setSelected(c);
                     setDeleteOpen(true);
                   }}
                 >
-                  <Trash2 size={16} />
+                  <Trash2 size={14} className="lg:w-4 lg:h-4" />
                 </Button>
               </div>
             </CardContent>
@@ -220,21 +236,21 @@ const ChallengeManagement = () => {
 
       {/* View Modal */}
       <Dialog open={viewOpen} onOpenChange={() => setViewOpen(false)}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg mx-4">
           <DialogHeader>
             <DialogTitle>View Challenge</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <p>
+            <p className="text-sm lg:text-base">
               <strong>Type:</strong> {selected?.type.toUpperCase()}
             </p>
-            <p>
+            <p className="text-sm lg:text-base">
               <strong>Title:</strong> {selected?.title}
             </p>
-            <p>
+            <p className="text-sm lg:text-base">
               <strong>Description:</strong> {selected?.challenge}
             </p>
-            <p>
+            <p className="text-sm lg:text-base">
               <strong>Deliverables:</strong> {selected?.deliverables}
             </p>
             <Button className="mt-4 w-full" onClick={() => setViewOpen(false)}>
@@ -246,7 +262,7 @@ const ChallengeManagement = () => {
 
       {/* Edit Modal */}
       <Dialog open={editOpen} onOpenChange={() => setEditOpen(false)}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl mx-4">
           <DialogHeader>
             <DialogTitle>Edit Challenge</DialogTitle>
           </DialogHeader>
@@ -302,20 +318,24 @@ const ChallengeManagement = () => {
 
       {/* Delete Modal */}
       <Dialog open={deleteOpen} onOpenChange={() => setDeleteOpen(false)}>
-        <DialogContent className="max-w-sm">
+        <DialogContent className="max-w-sm mx-4">
           <DialogHeader>
             <DialogTitle>Delete Challenge</DialogTitle>
           </DialogHeader>
-          <p>
+          <p className="text-sm lg:text-base">
             Are you sure you want to delete "{selected?.title}"? This cannot be
             undone.
           </p>
-          <div className="mt-4 flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setDeleteOpen(false)}>
+          <div className="mt-4 flex flex-col sm:flex-row justify-end gap-2 sm:space-x-2">
+            <Button
+              variant="outline"
+              onClick={() => setDeleteOpen(false)}
+              className="w-full sm:w-auto"
+            >
               Cancel
             </Button>
             <Button
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-red-600 hover:bg-red-700 w-full sm:w-auto"
               onClick={handleDelete}
             >
               Delete

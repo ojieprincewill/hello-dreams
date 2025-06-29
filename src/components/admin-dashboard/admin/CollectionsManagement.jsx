@@ -130,29 +130,29 @@ const CollectionsManagement = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 lg:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
             Collections Management
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-sm lg:text-base text-gray-600 mt-1 lg:mt-2">
             Manage your merchandise and products for sale
           </p>
         </div>
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              <Plus size={20} className="mr-2" />
+            <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+              <Plus size={18} className="mr-2 lg:w-5 lg:h-5" />
               Add Item
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
             <DialogHeader>
               <DialogTitle>Add New Item</DialogTitle>
             </DialogHeader>
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               <div>
                 <Label htmlFor="item-name">Item Name</Label>
                 <Input
@@ -164,7 +164,7 @@ const CollectionsManagement = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="item-price">Price (₦)</Label>
                   <Input
@@ -202,87 +202,89 @@ const CollectionsManagement = () => {
                 </div>
               </div>
 
-              <div>
-                <Label htmlFor="item-quality">Quality</Label>
-                <Select
-                  value={newItem.quality}
-                  onValueChange={(value) =>
-                    setNewItem({ ...newItem, quality: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Regular">Regular</SelectItem>
-                    <SelectItem value="High-quality">High-quality</SelectItem>
-                    <SelectItem value="Premium">Premium</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Sizes</Label>
-                <Select
-                  value=""
-                  onValueChange={(value) => {
-                    if (newItem.sizes.includes(value)) {
-                      setNewItem({
-                        ...newItem,
-                        sizes: newItem.sizes.filter((s) => s !== value),
-                      });
-                    } else {
-                      setNewItem({
-                        ...newItem,
-                        sizes: [...newItem.sizes, value],
-                      });
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="item-quality">Quality</Label>
+                  <Select
+                    value={newItem.quality}
+                    onValueChange={(value) =>
+                      setNewItem({ ...newItem, quality: value })
                     }
-                  }}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select sizes" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {allSizes.map((size) => (
-                      <SelectItem key={size} value={size}>
-                        <div className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`checkbox-${size}`}
-                            checked={newItem.sizes.includes(size)}
-                            onCheckedChange={() => {
-                              if (newItem.sizes.includes(size)) {
-                                setNewItem({
-                                  ...newItem,
-                                  sizes: newItem.sizes.filter(
-                                    (s) => s !== size,
-                                  ),
-                                });
-                              } else {
-                                setNewItem({
-                                  ...newItem,
-                                  sizes: [...newItem.sizes, size],
-                                });
-                              }
-                            }}
-                          />
-                          <label htmlFor={`checkbox-${size}`}>{size}</label>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {newItem.sizes.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {newItem.sizes.map((s, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Regular">Regular</SelectItem>
+                      <SelectItem value="Premium">Premium</SelectItem>
+                      <SelectItem value="Luxury">Luxury</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="item-sizes">Available Sizes</Label>
+                  <Select
+                    value=""
+                    onValueChange={(value) => {
+                      if (newItem.sizes.includes(value)) {
+                        setNewItem({
+                          ...newItem,
+                          sizes: newItem.sizes.filter((s) => s !== value),
+                        });
+                      } else {
+                        setNewItem({
+                          ...newItem,
+                          sizes: [...newItem.sizes, value],
+                        });
+                      }
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select sizes" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {allSizes.map((size) => (
+                        <SelectItem key={size} value={size}>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`checkbox-${size}`}
+                              checked={newItem.sizes.includes(size)}
+                              onCheckedChange={() => {
+                                if (newItem.sizes.includes(size)) {
+                                  setNewItem({
+                                    ...newItem,
+                                    sizes: newItem.sizes.filter(
+                                      (s) => s !== size,
+                                    ),
+                                  });
+                                } else {
+                                  setNewItem({
+                                    ...newItem,
+                                    sizes: [...newItem.sizes, size],
+                                  });
+                                }
+                              }}
+                            />
+                            <label htmlFor={`checkbox-${size}`}>{size}</label>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {newItem.sizes.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {newItem.sizes.map((s, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div>
@@ -305,7 +307,7 @@ const CollectionsManagement = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         {collections.map((item) => (
           <Card key={item.id} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
@@ -318,15 +320,17 @@ const CollectionsManagement = () => {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <ShoppingBag size={48} />
+                    <ShoppingBag size={40} className="lg:w-12 lg:h-12" />
                   </div>
                 )}
               </div>
-              <div className="p-6">
+              <div className="p-4 lg:p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <h3 className="font-semibold text-base lg:text-lg flex-1 min-w-0">
+                    <span className="truncate block">{item.name}</span>
+                  </h3>
                   <span
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2 ${
                       item.instock
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
@@ -336,10 +340,12 @@ const CollectionsManagement = () => {
                   </span>
                 </div>
 
-                <div className="space-y-2 mb-4 text-sm">
+                <div className="space-y-2 mb-3 lg:mb-4 text-xs lg:text-sm">
                   <div className="flex justify-between">
                     <span>Name:</span>
-                    <span className="font-semibold">{item.title}</span>
+                    <span className="font-semibold truncate ml-2">
+                      {item.title}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Price:</span>
@@ -349,10 +355,10 @@ const CollectionsManagement = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Category:</span>
-                    <span>{item.category}</span>
+                    <span className="truncate ml-2">{item.category}</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <Star size={14} className="text-yellow-500" />
+                    <Star size={12} className="text-yellow-500 lg:w-4 lg:h-4" />
                     <span>{item.quality}</span>
                   </div>
                   <div className="flex flex-wrap gap-1">
@@ -367,30 +373,32 @@ const CollectionsManagement = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-2">
+                <div className="flex space-x-1 lg:space-x-2">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleView(item)}
-                    className="flex-1"
+                    className="flex-1 text-xs lg:text-sm"
                   >
-                    <Eye size={16} className="mr-1" /> View
+                    <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                    <span className="hidden sm:inline">View</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleEdit(item)}
-                    className="flex-1"
+                    className="flex-1 text-xs lg:text-sm"
                   >
-                    <Edit size={16} className="mr-1" /> Edit
+                    <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                    <span className="hidden sm:inline">Edit</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleDelete(item)}
-                    className="text-red-600"
+                    className="text-red-600 hover:text-red-700 text-xs lg:text-sm"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={14} className="lg:w-4 lg:h-4" />
                   </Button>
                 </div>
               </div>
@@ -400,8 +408,12 @@ const CollectionsManagement = () => {
       </div>
 
       {hasNextPage && (
-        <div className="text-center mt-6">
-          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+        <div className="text-center mt-4 lg:mt-6">
+          <Button
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+            className="w-full sm:w-auto"
+          >
             {isFetchingNextPage ? 'Loading more...' : 'Load More'}
           </Button>
         </div>
