@@ -45,7 +45,7 @@ const BlogManagement = () => {
     title: '',
     content: '',
     author: '',
-    published: false,
+    published: true,
   });
 
   const resetForm = () => {
@@ -53,7 +53,7 @@ const BlogManagement = () => {
       title: '',
       content: '',
       author: '',
-      published: false,
+      published: true,
     });
     setImageFile(null);
     setImagePreview(null);
