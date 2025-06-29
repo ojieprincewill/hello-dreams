@@ -1,35 +1,35 @@
-import { React, useState } from 'react';
-import supabase from '../../supabase/client';
-import { CheckIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
+import { React, useState } from "react";
+import supabase from "../../supabase/client";
+import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
-import { toast } from 'react-toastify';
-import ReferSuccess from './refer-success.component';
+import { motion } from "motion/react";
+import { toast } from "react-toastify";
+import ReferSuccess from "./refer-success.component";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
-    service: '',
-    name: '',
-    email: '',
+    service: "",
+    name: "",
+    email: "",
     data: {
-      referralName: '',
-      referralEmail: '',
+      referralName: "",
+      referralEmail: "",
     },
-    referralCode: '',
+    referralCode: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [generatedCode, setGeneratedCode] = useState('');
+  const [generatedCode, setGeneratedCode] = useState("");
   const [step, setStep] = useState(1);
   const [codeSeen, setCodeSeen] = useState(false);
 
   const generateReferralCode = (length = 6) => {
     const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -51,7 +51,7 @@ const ReferForm = () => {
     setSuccess(null);
     setError(null);
 
-    console.log('Form Data on Submit:', formData);
+    console.log("Form Data on Submit:", formData);
 
     const { service, name, email, data, referralCode } = formData;
     if (
@@ -62,13 +62,13 @@ const ReferForm = () => {
       !data.referralEmail
     ) {
       setError(
-        'Please fill in all required fields, including referral details.',
+        "Please fill in all required fields, including referral details."
       );
       setLoading(false);
       return;
     }
     if (!referralCode) {
-      setError('Please generate your referral code first.');
+      setError("Please generate your referral code first.");
       setLoading(false);
       return;
     }
@@ -83,33 +83,33 @@ const ReferForm = () => {
 
     try {
       const { data: responseData, error: supabaseError } =
-        await supabase.functions.invoke('referral-handler', {
+        await supabase.functions.invoke("referral-handler", {
           body: payload,
         });
 
       if (supabaseError) {
-        console.error('Supabase Error:', supabaseError);
-        setError('Submission failed. Please try again.');
+        console.error("Supabase Error:", supabaseError);
+        setError("Submission failed. Please try again.");
         setLoading(false);
         return;
       }
 
-      setSuccess('Your enquiry has been submitted!');
+      setSuccess("Your enquiry has been submitted!");
       setFormData({
-        service: '',
-        name: '',
-        email: '',
+        service: "",
+        name: "",
+        email: "",
         data: {
-          referralName: '',
-          referralEmail: '',
+          referralName: "",
+          referralEmail: "",
         },
-        referralCode: '',
+        referralCode: "",
       });
-      setGeneratedCode('');
+      setGeneratedCode("");
       setShowModal(false);
     } catch (err) {
       console.error(err);
-      setError('Something went wrong. Please try again later.');
+      setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -141,11 +141,11 @@ const ReferForm = () => {
     navigator.clipboard
       .writeText(generatedCode)
       .then(() => {
-        toast.success('Referral code copied to clipboard!');
+        toast.success("Referral code copied to clipboard!");
       })
       .catch((err) => {
-        console.error('Failed to copy code: ', err);
-        toast.error('Failed to copy code. Please try manually.');
+        console.error("Failed to copy code: ", err);
+        toast.error("Failed to copy code. Please try manually.");
       });
   };
 
@@ -158,7 +158,7 @@ const ReferForm = () => {
       !data.referralName ||
       !data.referralEmail
     ) {
-      setError('Please fill in all required fields.');
+      setError("Please fill in all required fields.");
       return;
     }
     setStep(2);
@@ -182,7 +182,7 @@ const ReferForm = () => {
         <motion.form
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           onSubmit={handleSubmit}
           className="md:w-[450.75px] mx-auto md:p-6 mt-3 "
         >
@@ -200,7 +200,7 @@ const ReferForm = () => {
                   className="block text-[#475569] text-[12px] text-center md:text-[16px] font-medium mb-3 md:mb-4"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  Select Service <span class="text-red-500">*</span>
+                  Select Service <span className="text-red-500">*</span>
                 </label>
                 <select
                   name="service"
@@ -240,7 +240,7 @@ const ReferForm = () => {
                   className="block text-[#475569] text-[12px] md:text-[16px] font-medium mb-3 md:mb-4"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  Referral Name (Business or Personal){' '}
+                  Referral Name (Business or Personal){" "}
                   <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -306,7 +306,7 @@ const ReferForm = () => {
                   onClick={handleStepOneComplete}
                   className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                 >
-                  {formData.referralCode ? 'Resave' : 'Save & Continue'}
+                  {formData.referralCode ? "Resave" : "Save & Continue"}
                 </button>
               </div>
             </div>
@@ -317,7 +317,7 @@ const ReferForm = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
               className="md:w-max mx-auto space-y-8 md:p-6 mt-3 "
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
@@ -359,11 +359,11 @@ const ReferForm = () => {
                   disabled={!codeSeen || loading}
                   className={`bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg transition-colors duration-300 cursor-pointer ${
                     !codeSeen || loading
-                      ? 'opacity-50 cursor-not-allowed'
-                      : 'hover:bg-[#1342ff] hover:border-[#1342ff]'
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-[#1342ff] hover:border-[#1342ff]"
                   }`}
                 >
-                  {loading ? 'Submitting...' : 'Submit'}
+                  {loading ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </motion.div>
