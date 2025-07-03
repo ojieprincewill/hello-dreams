@@ -1,49 +1,50 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import { ToastContainer, Zoom } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { Toaster } from './components/admin-dashboard/ui/toaster';
-import { Toaster as Sonner } from './components/admin-dashboard/ui/sonner';
-import { TooltipProvider } from './components/admin-dashboard/ui/tooltip';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from "./components/admin-dashboard/ui/toaster";
+import { Toaster as Sonner } from "./components/admin-dashboard/ui/sonner";
+import { TooltipProvider } from "./components/admin-dashboard/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Import troubleshooting utility for WebSocket debugging
-import './utils/troubleshooting';
+import "./utils/troubleshooting";
 
-import HomePage from './pages/homepage/homepage';
-import PortfolioPage from './pages/portfolio-page/portfolio-page';
-import AcademyPage from './pages/academy-page/academy-page';
-import AboutPage from './pages/about-page/about-page';
-import BookCallPage from './pages/book-call-page/book-call-page';
-import UiDesignPage from './pages/ui-design-page/ui-design-page';
-import UiConsultationPage from './pages/ui-consultation-page/ui-consultation-page';
-import CvOptimizationPage from './pages/cv-optimization-page/cv-optimzation-page';
-import OptimizeProfilePage from './pages/optimize-profile-page/optimize-profile-page';
-import PrintingPage from './pages/printing-page/printing-page';
-import PrintingConsultationPage from './pages/printing-consultation-page/printing-consultation-page';
-import SocialManagementPage from './pages/social-management-page/social-management-page';
-import SocialConsultationPage from './pages/social-consultation-page/social-consultation-page';
-import GraphicsDesignPage from './pages/graphics-design-page/graphics-design-page';
-import GraphicsConsultationPage from './pages/graphics-consultation-page/graphics-consultation-page';
-import WebDevPage from './pages/web-dev-page/web-dev-page';
-import WebDevConsultationPage from './pages/web-dev-consultation-page/web-dev-consultation-page';
-import CollectionsPage from './pages/collections-page/collections-page';
+import HomePage from "./pages/homepage/homepage";
+import PortfolioPage from "./pages/portfolio-page/portfolio-page";
+import AcademyLandingPage from "./pages/academy-pages/academy-landing-page";
+import AboutPage from "./pages/about-page/about-page";
+import BookCallPage from "./pages/book-call-page/book-call-page";
+import UiDesignPage from "./pages/ui-design-page/ui-design-page";
+import UiConsultationPage from "./pages/ui-consultation-page/ui-consultation-page";
+import CvOptimizationPage from "./pages/cv-optimization-page/cv-optimzation-page";
+import OptimizeProfilePage from "./pages/optimize-profile-page/optimize-profile-page";
+import PrintingPage from "./pages/printing-page/printing-page";
+import PrintingConsultationPage from "./pages/printing-consultation-page/printing-consultation-page";
+import SocialManagementPage from "./pages/social-management-page/social-management-page";
+import SocialConsultationPage from "./pages/social-consultation-page/social-consultation-page";
+import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-page";
+import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
+import WebDevPage from "./pages/web-dev-page/web-dev-page";
+import WebDevConsultationPage from "./pages/web-dev-consultation-page/web-dev-consultation-page";
+import CollectionsPage from "./pages/collections-page/collections-page";
 
-import ReferPage from './pages/refer-page/refer-page';
-import CommunityChallengePage from './pages/community-challenge-page/community-challenge-page';
-import JoinCommunityPage from './pages/join-community-page/join-community-page';
-import JobPage from './pages/job-page/job-page';
-import SustainabilityPage from './pages/sustainability-page/sustainability-page';
-import BlogPage from './pages/sustainability-page/blog-page';
-import MentorshipApplicationPage from './pages/mentorship-application-page/mentorship-application-page';
-import PostJobPage from './pages/post-job-page/post-job-page';
-import CartPage from './pages/cart-page/cart-page';
-import CheckoutPage from './pages/checkout-page/checkout-page';
-import AdminDashboardPage from './pages/admin-dashboard-page/admin-dashboard-page';
-import NotFound from './pages/admin-dashboard-page/NotFound';
-import TermsPage from './pages/terms-page/terms-page';
-import PrivacyPage from './pages/privacy-policy-page/privacy-page';
+import ReferPage from "./pages/refer-page/refer-page";
+import CommunityChallengePage from "./pages/community-challenge-page/community-challenge-page";
+import JoinCommunityPage from "./pages/join-community-page/join-community-page";
+import JobPage from "./pages/job-page/job-page";
+import SustainabilityPage from "./pages/sustainability-page/sustainability-page";
+import BlogPage from "./pages/sustainability-page/blog-page";
+import MentorshipApplicationPage from "./pages/mentorship-application-page/mentorship-application-page";
+import PostJobPage from "./pages/post-job-page/post-job-page";
+import CartPage from "./pages/cart-page/cart-page";
+import CheckoutPage from "./pages/checkout-page/checkout-page";
+import AdminDashboardPage from "./pages/admin-dashboard-page/admin-dashboard-page";
+import NotFound from "./pages/admin-dashboard-page/NotFound";
+import TermsPage from "./pages/terms-page/terms-page";
+import PrivacyPage from "./pages/privacy-policy-page/privacy-page";
+import CoursePreviewPage from "./pages/academy-pages/course-preview-page";
 
 const queryClient = new QueryClient();
 
@@ -122,7 +123,11 @@ function App() {
               element={<MentorshipApplicationPage />}
             />
             <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/academy" element={<AcademyPage />} />
+            <Route path="/academy" element={<AcademyLandingPage />} />
+            <Route
+              path="/academy/coursepreview"
+              element={<CoursePreviewPage />}
+            />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
             <Route path="/work-with-us" element={<BookCallPage />} />

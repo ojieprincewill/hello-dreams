@@ -10,7 +10,7 @@ import LandingPreviews from "../../components/academy/landing-previews/landing-p
 const isDev = import.meta.env.DEV;
 const isAcademyLive = isDev || import.meta.env.VITE_ACADEMY_LIVE === "true";
 
-const AcademyPage = () => {
+const AcademyLandingPage = () => {
   return isAcademyLive ? (
     <>
       <AcademyNavbar />
@@ -27,4 +27,4 @@ const AcademyPage = () => {
   );
 };
 
-export default AcademyPage;
+export default AcademyLandingPage;
