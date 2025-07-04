@@ -38,6 +38,13 @@ export const PreviewData1 = [
     title: "Auto Layout in Figma: Understanding the Basics",
     totalCourses: 19,
     totalTime: "31:45",
+    sections: [
+      { id: 101, title: "Introduction to auto layout", duration: "10:39" },
+      { id: 102, title: "Introduction to auto layout", duration: "10:39" },
+      { id: 103, title: "Introduction to auto layout", duration: "10:39" },
+      { id: 104, title: "Introduction to auto layout", duration: "10:39" },
+      { id: 105, title: "Introduction to auto layout", duration: "10:39" },
+    ],
   },
   {
     id: 2,
@@ -46,6 +53,13 @@ export const PreviewData1 = [
     title: "Wireframes",
     totalCourses: 19,
     totalTime: "31:45",
+    sections: [
+      { id: 201, title: "Introduction to wireframes", duration: "20:39" },
+      { id: 202, title: "Introduction to wireframes", duration: "20:39" },
+      { id: 203, title: "Introduction to wireframes", duration: "20:39" },
+      { id: 204, title: "Introduction to wireframes", duration: "20:39" },
+      { id: 205, title: "Introduction to wireframes", duration: "20:39" },
+    ],
   },
   {
     id: 3,
@@ -54,6 +68,13 @@ export const PreviewData1 = [
     title: "How to create responsive Buttons in Figma",
     totalCourses: 19,
     totalTime: "31:45",
+    sections: [
+      { id: 301, title: "Introduction to responsiveness", duration: "13:57" },
+      { id: 302, title: "Introduction to responsiveness", duration: "13:57" },
+      { id: 303, title: "Introduction to responsiveness", duration: "13:57" },
+      { id: 304, title: "Introduction to responsiveness", duration: "13:57" },
+      { id: 305, title: "Introduction to responsiveness", duration: "13:57" },
+    ],
   },
 ];
 

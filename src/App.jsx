@@ -125,7 +125,7 @@ function App() {
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/academy" element={<AcademyLandingPage />} />
             <Route
-              path="/academy/coursepreview"
+              path="/academy/coursepreview/:courseId"
               element={<CoursePreviewPage />}
             />
             <Route path="/about" element={<AboutPage />} />
