@@ -98,6 +98,33 @@ export const CvPricingData = [
 export const BrandingSmeData = [
   {
     id: 1,
+    title: "Wow Package",
+    price: "$150",
+    options: [
+      {
+        id: 1,
+        text: "Logo Design (1 Design concept)",
+      },
+      {
+        id: 2,
+        text: "Packaging materials design",
+      },
+      {
+        id: 3,
+        text: "1 Flyer ( 1 Design concept )",
+      },
+      {
+        id: 4,
+        text: "Business card Design",
+      },
+      {
+        id: 5,
+        text: "Letterhead Design",
+      },
+    ],
+  },
+  {
+    id: 2,
     title: "Mega Package",
     price: "$250",
     options: [
@@ -132,33 +159,6 @@ export const BrandingSmeData = [
       {
         id: 8,
         text: "Social media banner ( LinkedIn, Twitter, YT  )",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Wow Package",
-    price: "$150",
-    options: [
-      {
-        id: 1,
-        text: "Logo Design (1 Design concept)",
-      },
-      {
-        id: 2,
-        text: "Packaging materials design",
-      },
-      {
-        id: 3,
-        text: "1 Flyer ( 1 Design concept )",
-      },
-      {
-        id: 4,
-        text: "Business card Design",
-      },
-      {
-        id: 5,
-        text: "Letterhead Design",
       },
     ],
   },

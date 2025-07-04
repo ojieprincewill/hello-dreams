@@ -29,12 +29,65 @@ const BrandingPackageSme = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-center items-center md:relative py-10"
+        className="grid grid-cols-1
+    md:grid-cols-3
+    gap-6
+    justify-items-center
+    items-center
+    py-10"
       >
         {BrandingSmeData.slice(0, 1).map((data) => (
+          <motion.div
+            key={data.id}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+            className=" bottom-[122px] border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263] md:-mr-2 lg:-mr-16"
+          >
+            <div className="bg-[#fff] text-[#323232] px-5 py-7 space-y-3">
+              <p
+                className="text-[10.76px] md:text-[14.98px] lg:text-[32px] text-center font-medium"
+                style={{ fontFamily: "'Epilogue', sans-serif" }}
+              >
+                {data.title}
+              </p>
+              <p
+                className="text-[16.91px] md:text-[22.47px] lg:text-[48px] text-center font-bold"
+                style={{ fontFamily: "'Sofia Sans', sans-serif" }}
+              >
+                {data.price}
+              </p>
+            </div>
+
+            <div className="bg-[#f5f5f5] p-4 md:p-7 space-y-5 border-t-2 border-t-[#00000010]">
+              {data.options.map((option) => (
+                <div className="flex items-center space-x-3">
+                  <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-6 lg:h-6 font-bold" />
+                  <p
+                    key={option.id}
+                    className="text-[#636363] text-[12.11px] md:text-[9.36px] lg:text-[20px]"
+                    style={{ fontFamily: "'Sofia Sans', sans-serif" }}
+                  >
+                    {option.text}
+                  </p>
+                </div>
+              ))}
+              <Link
+                to="/services/graphics-consultation"
+                onClick={HandleOrigins}
+                className="mt-10"
+              >
+                <button className="w-full bg-[#4d42f9]/10 text-[#3d66fb] text-[14px] md:text-[12px] lg:text-[20px] text-center border border-[#3d66fb] py-3 px-6 rounded-md overflow-hidden hover:bg-[#3d66fb] hover:text-[#fff] transition-colors duration-300 cursor-pointer">
+                  Buy now
+                </button>
+              </Link>
+            </div>
+          </motion.div>
+        ))}
+        {BrandingSmeData.slice(1, 2).map((data) => (
           <div
             key={data.id}
-            className="border-2 border-[#0c4bf6] rounded-2xl overflow-hidden w-full md:w-[300.3px] lg:w-[410px] h-max md:z-10 shadow-2xl shadow-[#32323263]"
+            className="border-2 border-[#0c4bf6] rounded-2xl overflow-hidden w-full md:w-[300.3px] lg:w-[410px] h-max z-20 shadow-2xl shadow-[#32323263]"
           >
             <div className="w-full h-[50px] bg-[#0c4bf6] flex justify-center items-center">
               <p
@@ -85,61 +138,13 @@ const BrandingPackageSme = () => {
             </div>
           </div>
         ))}
-        {BrandingSmeData.slice(1, 2).map((data) => (
-          <motion.div
-            key={data.id}
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-            className="md:absolute md:left-[10px] lg:left-[50px] bottom-[122px] border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263]"
-          >
-            <div className="bg-[#fff] text-[#323232] px-5 py-7 space-y-3">
-              <p
-                className="text-[10.76px] md:text-[14.98px] lg:text-[32px] text-center font-medium"
-                style={{ fontFamily: "'Epilogue', sans-serif" }}
-              >
-                {data.title}
-              </p>
-              <p
-                className="text-[16.91px] md:text-[22.47px] lg:text-[48px] text-center font-bold"
-                style={{ fontFamily: "'Sofia Sans', sans-serif" }}
-              >
-                {data.price}
-              </p>
-            </div>
-
-            <div className="bg-[#f5f5f5] p-4 md:p-7 space-y-5 border-t-2 border-t-[#00000010]">
-              {data.options.map((option) => (
-                <div className="flex items-center space-x-3">
-                  <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-6 lg:h-6 font-bold" />
-                  <p
-                    key={option.id}
-                    className="text-[#636363] text-[12.11px] md:text-[9.36px] lg:text-[20px]"
-                    style={{ fontFamily: "'Sofia Sans', sans-serif" }}
-                  >
-                    {option.text}
-                  </p>
-                </div>
-              ))}
-              <Link
-                to="/services/graphics-consultation"
-                onClick={HandleOrigins}
-                className="mt-10"
-              >
-                <button className="w-full bg-[#4d42f9]/10 text-[#3d66fb] text-[14px] md:text-[12px] lg:text-[20px] text-center border border-[#3d66fb] py-3 px-6 rounded-md overflow-hidden hover:bg-[#3d66fb] hover:text-[#fff] transition-colors duration-300 cursor-pointer">
-                  Buy now
-                </button>
-              </Link>
-            </div>
-          </motion.div>
-        ))}
         {BrandingSmeData.slice(2).map((data) => (
           <motion.div
             key={data.id}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-            className="md:absolute md:right-[10px] lg:right-[50px] border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263]"
+            className="border-2 border-[#ffffff] rounded-2xl overflow-hidden w-full md:w-[251px] lg:w-[381px] h-max shadow-2xl shadow-[#32323263] md:-ml-2 lg:-ml-16"
           >
             <div className="bg-[#fff] text-[#323232] px-5 py-7 space-y-3">
               <p
