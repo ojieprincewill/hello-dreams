@@ -56,12 +56,12 @@ const CollectionsHeader = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="w-full h-[391px] md:h-full"
+            className="w-full h-[391px] md:h-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] mx-auto overflow-hidden flex items-center justify-center"
           >
             <img
               src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749411724/hello%20dreams%20collection/collection%20page/ad625f059d4c14c3194e4dfc8466bf552e36e87f_ldsqlz.png"
               alt="pamela ohaeri"
-              className="w-full h-full object-contain md:object-contain lg:object-cover"
+              className="w-full h-full object-contain lg:object-cover"
             />
           </motion.div>
         </div>
