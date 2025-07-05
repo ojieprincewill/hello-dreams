@@ -25,7 +25,7 @@ const CollectionViewModal = ({ item, isOpen, onClose }) => {
               {item.image ? (
                 <img
                   src={item.image}
-                  alt={item.name}
+                  alt={item.title}
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -35,9 +35,9 @@ const CollectionViewModal = ({ item, isOpen, onClose }) => {
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">{item.name}</h2>
-                <Badge variant={item.inStock ? 'default' : 'destructive'}>
-                  {item.inStock ? 'In Stock' : 'Out of Stock'}
+                <h2 className="text-2xl font-bold">{item.title}</h2>
+                <Badge variant={item.instock ? 'default' : 'destructive'}>
+                  {item.instock ? 'In Stock' : 'Out of Stock'}
                 </Badge>
               </div>
 
@@ -73,6 +73,20 @@ const CollectionViewModal = ({ item, isOpen, onClose }) => {
                     )}
                   </div>
                 </div>
+
+                {item.shipment && (
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Shipment</p>
+                    <p className="font-semibold">{item.shipment}</p>
+                  </div>
+                )}
+
+                {item.ship_time && (
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Shipping Time</p>
+                    <p className="font-semibold">{item.ship_time}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

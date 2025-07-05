@@ -33,6 +33,7 @@ import CollectionEditModal from './modals/CollectionEditModal';
 import DeleteConfirmModal from './modals/DeleteConfirmModal';
 import { useToast } from '../hooks/use-toast';
 import { useCollections } from '../../../hooks/useCollections';
+import supabase from '../../../supabase/client';
 
 const CollectionsManagement = () => {
   const { toast } = useToast();
@@ -40,15 +41,19 @@ const CollectionsManagement = () => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const [newItem, setNewItem] = useState({
-    name: '',
+    title: '',
     price: 0,
     image: '',
-    sizes: [''],
+    sizes: [],
     quality: 'Regular',
     category: 'T-Shirts',
-    inStock: true,
+    instock: true,
+    shipment: 'We ship to all parts of Nigeria',
+    ship_time: 'Shipping takes 5 to 7 working days',
   });
 
   // Define the available sizes
@@ -62,6 +67,59 @@ const CollectionsManagement = () => {
   } = useCollections();
 
   const collections = data?.pages.flatMap((page) => page.data) || [];
+
+  // Image upload function
+  const uploadImage = async (file) => {
+    if (!file) return null;
+
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `collections-images/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('collections-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw new Error('Failed to upload image');
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from('collections-images').getPublicUrl(filePath);
+
+    return publicUrl;
+  };
+
+  // Handle image change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Reset form including image
+  const resetForm = () => {
+    setNewItem({
+      title: '',
+      price: 0,
+      image: '',
+      sizes: [],
+      quality: 'Regular',
+      category: 'T-Shirts',
+      instock: true,
+      shipment: 'We ship to all parts of Nigeria',
+      ship_time: 'Shipping takes 5 to 7 working days',
+    });
+    setImageFile(null);
+    setImagePreview(null);
+  };
 
   const handleView = (item) => {
     setSelectedItem(item);
@@ -84,7 +142,7 @@ const CollectionsManagement = () => {
       await deleteCollection.mutateAsync(selectedItem.id);
       toast({
         title: 'Collection Deleted',
-        description: `${selectedItem.name} was successfully removed.`,
+        description: `${selectedItem.title} was successfully removed.`,
       });
       setDeleteModalOpen(false);
       setSelectedItem(null);
@@ -101,7 +159,7 @@ const CollectionsManagement = () => {
       await updateCollection.mutateAsync(updatedItem);
       toast({
         title: 'Collection Updated',
-        description: `${updatedItem.name} was successfully updated.`,
+        description: `${updatedItem.title} was successfully updated.`,
       });
     } catch (err) {
       toast({ title: 'Error updating collection', description: err.message });
@@ -110,20 +168,23 @@ const CollectionsManagement = () => {
 
   const handleCreate = async () => {
     try {
-      await createCollection.mutateAsync(newItem);
+      let imageUrl = newItem.image;
+
+      // Upload image if a new file is selected
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile);
+      }
+
+      await createCollection.mutateAsync({
+        ...newItem,
+        image: imageUrl,
+      });
+
       toast({
         title: 'Collection Created',
-        description: `${newItem.name} was successfully added.`,
+        description: `${newItem.title} was successfully added.`,
       });
-      setNewItem({
-        name: '',
-        price: 0,
-        image: '',
-        sizes: [''],
-        quality: 'Regular',
-        category: 'T-Shirts',
-        inStock: true,
-      });
+      resetForm();
     } catch (err) {
       toast({ title: 'Error creating collection', description: err.message });
     }
@@ -154,12 +215,12 @@ const CollectionsManagement = () => {
             </DialogHeader>
             <div className="space-y-4 lg:space-y-6">
               <div>
-                <Label htmlFor="item-name">Item Name</Label>
+                <Label htmlFor="item-title">Item Title</Label>
                 <Input
-                  id="item-name"
-                  value={newItem.name}
+                  id="item-title"
+                  value={newItem.title}
                   onChange={(e) =>
-                    setNewItem({ ...newItem, name: e.target.value })
+                    setNewItem({ ...newItem, title: e.target.value })
                   }
                 />
               </div>
@@ -287,16 +348,75 @@ const CollectionsManagement = () => {
                 </div>
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="item-shipment">Shipment Info</Label>
+                  <Input
+                    id="item-shipment"
+                    value={newItem.shipment}
+                    onChange={(e) =>
+                      setNewItem({ ...newItem, shipment: e.target.value })
+                    }
+                    placeholder="We ship to all parts of Nigeria"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="item-ship-time">Shipping Time</Label>
+                  <Input
+                    id="item-ship-time"
+                    value={newItem.ship_time}
+                    onChange={(e) =>
+                      setNewItem({ ...newItem, ship_time: e.target.value })
+                    }
+                    placeholder="Shipping takes 5 to 7 working days"
+                  />
+                </div>
+              </div>
+
               <div>
-                <Label htmlFor="item-image">Image URL</Label>
-                <Input
-                  id="item-image"
-                  value={newItem.image}
-                  onChange={(e) =>
-                    setNewItem({ ...newItem, image: e.target.value })
-                  }
-                  placeholder="https://your-image-url"
-                />
+                <Label htmlFor="item-image">Product Image</Label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  {imagePreview ? (
+                    <div className="space-y-4">
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="mx-auto max-h-32 rounded-lg"
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setImageFile(null);
+                          setImagePreview(null);
+                          setNewItem({ ...newItem, image: '' });
+                        }}
+                      >
+                        Remove Image
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <Upload
+                        size={40}
+                        className="mx-auto text-gray-400 mb-4 lg:w-12 lg:h-12"
+                      />
+                      <p className="text-sm lg:text-base text-gray-600">
+                        Click to upload product image
+                      </p>
+                    </>
+                  )}
+                  <div className="mt-4">
+                    <Input
+                      type="file"
+                      id="item-image"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                    />
+                  </div>
+                </div>
               </div>
 
               <Button onClick={handleCreate} className="w-full">
@@ -315,7 +435,7 @@ const CollectionsManagement = () => {
                 {item.image ? (
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={item.title}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -327,7 +447,7 @@ const CollectionsManagement = () => {
               <div className="p-4 lg:p-6">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-semibold text-base lg:text-lg flex-1 min-w-0">
-                    <span className="truncate block">{item.name}</span>
+                    <span className="truncate block">{item.title}</span>
                   </h3>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2 ${
@@ -342,7 +462,7 @@ const CollectionsManagement = () => {
 
                 <div className="space-y-2 mb-3 lg:mb-4 text-xs lg:text-sm">
                   <div className="flex justify-between">
-                    <span>Name:</span>
+                    <span>Title:</span>
                     <span className="font-semibold truncate ml-2">
                       {item.title}
                     </span>
@@ -434,7 +554,7 @@ const CollectionsManagement = () => {
         isOpen={deleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
         onConfirm={confirmDelete}
-        title={`Delete "${selectedItem?.name}"`}
+        title={`Delete "${selectedItem?.title}"`}
         message="Are you sure you want to delete this item? This action cannot be undone."
       />
     </div>
