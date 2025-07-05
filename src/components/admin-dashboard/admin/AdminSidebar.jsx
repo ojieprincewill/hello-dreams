@@ -10,6 +10,7 @@ import {
   BarChart3,
   ShoppingBag,
   X,
+  Activity,
 } from 'lucide-react';
 
 const menuItems = [
@@ -19,12 +20,14 @@ const menuItems = [
   { id: 'challenges', label: 'UI/UX Challenges', icon: Users },
   { id: 'blog', label: 'Blog Articles', icon: FileText },
   { id: 'collections', label: 'Collections', icon: ShoppingBag },
+  { id: 'activity', label: 'Recent Activity', icon: Activity },
 ];
 
 const AdminSidebar = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="w-64 lg:w-64 bg-white border-r border-gray-200 shadow-sm h-full">
-      <div className="p-4 lg:p-6 border-b border-gray-200">
+    <div className="w-64 h-full bg-white border-r border-gray-200 shadow-sm flex flex-col">
+      {/* Header - Fixed at top */}
+      <div className="p-4 lg:p-6 border-b border-gray-200 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl lg:text-2xl font-bold text-gray-900">
@@ -40,7 +43,8 @@ const AdminSidebar = ({ activeSection, setActiveSection }) => {
         </div>
       </div>
 
-      <nav className="p-2 lg:p-4 space-y-1 lg:space-y-2">
+      {/* Navigation - Scrollable if needed */}
+      <nav className="flex-1 overflow-y-auto p-2 lg:p-4 space-y-1 lg:space-y-2">
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (

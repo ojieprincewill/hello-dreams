@@ -18,7 +18,8 @@ const DashboardOverview = ({ setActiveSection }) => {
   const statCards = [
     {
       title: 'Total Students',
-      value: stats.data?.totalStudents ?? '...',
+      totalValue: stats.data?.totalStudents ?? '...',
+      monthlyValue: stats.data?.studentsThisMonth ?? '...',
       change: `${stats.data?.studentChange ?? 0}%`,
       icon: Users,
       color: 'text-blue-600',
@@ -26,7 +27,12 @@ const DashboardOverview = ({ setActiveSection }) => {
     },
     {
       title: 'Revenue Generated',
-      value: stats.data ? `$${stats.data.revenue.toLocaleString()}` : '...',
+      totalValue: stats.data
+        ? `$${stats.data.totalRevenue.toLocaleString()}`
+        : '...',
+      monthlyValue: stats.data
+        ? `$${stats.data.revenueThisMonth.toLocaleString()}`
+        : '...',
       change: `${stats.data?.revenueChange ?? 0}%`,
       icon: DollarSign,
       color: 'text-green-600',
@@ -34,7 +40,8 @@ const DashboardOverview = ({ setActiveSection }) => {
     },
     {
       title: 'Active Courses',
-      value: stats.data?.activeCourses ?? '...',
+      totalValue: stats.data?.totalCourses ?? '...',
+      monthlyValue: stats.data?.coursesThisMonth ?? '...',
       change: `${stats.data?.courseChange ?? 0}%`,
       icon: BookOpen,
       color: 'text-purple-600',
@@ -42,7 +49,8 @@ const DashboardOverview = ({ setActiveSection }) => {
     },
     {
       title: 'Job Postings',
-      value: stats.data?.jobPostings ?? '...',
+      totalValue: stats.data?.totalJobs ?? '...',
+      monthlyValue: stats.data?.jobsThisMonth ?? '...',
       change: `${stats.data?.jobChange ?? 0}%`,
       icon: Briefcase,
       color: 'text-orange-600',
@@ -106,7 +114,7 @@ const DashboardOverview = ({ setActiveSection }) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
@@ -115,15 +123,30 @@ const DashboardOverview = ({ setActiveSection }) => {
               className="hover:shadow-lg transition-shadow duration-200"
             >
               <CardContent className="p-4 lg:p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs lg:text-sm font-medium text-gray-600 truncate">
+                    <p className="text-sm lg:text-base font-medium text-gray-600 mb-2">
                       {stat.title}
                     </p>
-                    <p className="text-xl lg:text-2xl font-bold text-gray-900 mt-1 lg:mt-2">
-                      {stat.value}
-                    </p>
-                    <div className="flex items-center mt-1 lg:mt-2">
+
+                    {/* Total Value */}
+                    <div className="mb-2">
+                      <p className="text-lg lg:text-xl font-bold text-gray-900">
+                        {stat.totalValue}
+                      </p>
+                      <p className="text-xs text-gray-500">Total</p>
+                    </div>
+
+                    {/* Monthly Value */}
+                    <div className="mb-3">
+                      <p className="text-sm lg:text-base font-semibold text-gray-700">
+                        {stat.monthlyValue}
+                      </p>
+                      <p className="text-xs text-gray-500">This Month</p>
+                    </div>
+
+                    {/* Change Indicator */}
+                    <div className="flex items-center">
                       {parseFloat(stat.change) >= 0 ? (
                         <TrendingUp
                           size={14}
@@ -144,13 +167,13 @@ const DashboardOverview = ({ setActiveSection }) => {
                       >
                         {stat.change}
                       </span>
-                      <span className="text-xs lg:text-sm text-gray-500 ml-1 hidden sm:inline">
-                        from last month
+                      <span className="text-xs text-gray-500 ml-1 hidden sm:inline">
+                        vs last month
                       </span>
                     </div>
                   </div>
                   <div
-                    className={`p-2 lg:p-3 rounded-full ${stat.bgColor} flex-shrink-0`}
+                    className={`p-2 lg:p-3 rounded-full ${stat.bgColor} flex-shrink-0 ml-3`}
                   >
                     <Icon size={20} className={`${stat.color} lg:w-6 lg:h-6`} />
                   </div>
@@ -174,7 +197,7 @@ const DashboardOverview = ({ setActiveSection }) => {
               <p className="text-sm text-gray-500">Loading...</p>
             ) : (
               <div className="space-y-3 lg:space-y-4">
-                {activity.data?.map((item, index) => (
+                {activity.data?.slice(0, 3).map((item, index) => (
                   <div
                     key={index}
                     className={`flex items-center space-x-3 p-2 lg:p-3 rounded-lg ${
@@ -192,6 +215,14 @@ const DashboardOverview = ({ setActiveSection }) => {
                     </div>
                   </div>
                 ))}
+                {activity.data && activity.data.length > 0 && (
+                  <button
+                    onClick={() => setActiveSection('activity')}
+                    className="w-full text-center text-sm text-blue-600 hover:text-blue-700 font-medium py-2"
+                  >
+                    View All Activities →
+                  </button>
+                )}
               </div>
             )}
           </CardContent>

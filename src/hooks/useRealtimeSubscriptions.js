@@ -23,6 +23,8 @@ export const useRealtimeSubscriptions = () => {
           clearTimeout(retryTimeoutRef.current);
         }
 
+        console.log('Setting up realtime subscriptions...');
+        
         // Set up real-time subscriptions for all admin tables
         const subscriptions = [];
 
@@ -38,6 +40,8 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
+              
+              console.log('Jobs subscription update:', payload);
               
               // Update the jobs cache based on the event type
               queryClient.setQueryData(['jobs'], (oldData) => {
@@ -68,7 +72,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
+            console.log('Jobs subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
+              console.error('Jobs subscription error');
               scheduleRetry();
             }
           });
@@ -87,6 +93,8 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
+              
+              console.log('Blogs subscription update:', payload);
               
               // Update blogs infinite query cache
               queryClient.setQueryData(['blogs'], (oldData) => {
@@ -148,7 +156,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
+            console.log('Blogs subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
+              console.error('Blogs subscription error');
               scheduleRetry();
             }
           });
@@ -167,6 +177,8 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
+              
+              console.log('Collections subscription update:', payload);
               
               queryClient.setQueryData(['collections'], (oldData) => {
                 if (!oldData) return oldData;
@@ -187,7 +199,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
+            console.log('Collections subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
+              console.error('Collections subscription error');
               scheduleRetry();
             }
           });
@@ -202,10 +216,12 @@ export const useRealtimeSubscriptions = () => {
             {
               event: '*',
               schema: 'public',
-              table: 'community_challenges',
+              table: 'ui_challenges',
             },
             (payload) => {
               if (!isSubscribed) return;
+              
+              console.log('Challenges subscription update:', payload);
               
               queryClient.setQueryData(['challenges'], (oldData) => {
                 if (!oldData) return oldData;
@@ -226,14 +242,16 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
+            console.log('Challenges subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
+              console.error('Challenges subscription error');
               scheduleRetry();
             }
           });
 
         subscriptions.push(challengesSubscription);
 
-        // Academy courses table subscription
+        // Courses table subscription
         const coursesSubscription = supabase
           .channel('courses-changes')
           .on(
@@ -241,12 +259,14 @@ export const useRealtimeSubscriptions = () => {
             {
               event: '*',
               schema: 'public',
-              table: 'academy_courses',
+              table: 'courses',
             },
             (payload) => {
               if (!isSubscribed) return;
               
-              queryClient.setQueryData(['academy-courses'], (oldData) => {
+              console.log('Courses subscription update:', payload);
+              
+              queryClient.setQueryData(['courses'], (oldData) => {
                 if (!oldData) return oldData;
                 
                 switch (payload.eventType) {
@@ -265,7 +285,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
+            console.log('Courses subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
+              console.error('Courses subscription error');
               scheduleRetry();
             }
           });
@@ -278,8 +300,11 @@ export const useRealtimeSubscriptions = () => {
         // Reset retry count on successful connection
         retryCount = 0;
         startTime = null;
+        
+        console.log('Realtime subscriptions setup complete');
 
       } catch (error) {
+        console.error('Error setting up realtime subscriptions:', error);
         if (isSubscribed) {
           scheduleRetry();
         }
@@ -299,12 +324,12 @@ export const useRealtimeSubscriptions = () => {
       // Check if we've exceeded the maximum retry time
       const elapsedTime = Date.now() - startTime;
       if (elapsedTime >= MAX_RETRY_TIME) {
+        console.error('Max retry time exceeded for realtime subscriptions');
         return;
       }
 
       retryCount++;
-      const remainingTime = Math.max(0, MAX_RETRY_TIME - elapsedTime);
-      const remainingMinutes = Math.ceil(remainingTime / 1000 / 60);
+      console.log(`Retrying realtime subscriptions (attempt ${retryCount})`);
       
       retryTimeoutRef.current = setTimeout(() => {
         if (isSubscribed) {
@@ -328,6 +353,7 @@ export const useRealtimeSubscriptions = () => {
         try {
           supabase.removeChannel(subscription);
         } catch (error) {
+          console.error('Error removing subscription:', error);
         }
       });
       

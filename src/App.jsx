@@ -1,50 +1,59 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-import { ToastContainer, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { Toaster } from "./components/admin-dashboard/ui/toaster";
-import { Toaster as Sonner } from "./components/admin-dashboard/ui/sonner";
-import { TooltipProvider } from "./components/admin-dashboard/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from './components/admin-dashboard/ui/toaster';
+import { Toaster as Sonner } from './components/admin-dashboard/ui/sonner';
+import { TooltipProvider } from './components/admin-dashboard/ui/tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Import troubleshooting utility for WebSocket debugging
-import "./utils/troubleshooting";
+import './utils/troubleshooting';
 
-import HomePage from "./pages/homepage/homepage";
-import PortfolioPage from "./pages/portfolio-page/portfolio-page";
-import AcademyLandingPage from "./pages/academy-pages/academy-landing-page";
-import AboutPage from "./pages/about-page/about-page";
-import BookCallPage from "./pages/book-call-page/book-call-page";
-import UiDesignPage from "./pages/ui-design-page/ui-design-page";
-import UiConsultationPage from "./pages/ui-consultation-page/ui-consultation-page";
-import CvOptimizationPage from "./pages/cv-optimization-page/cv-optimzation-page";
-import OptimizeProfilePage from "./pages/optimize-profile-page/optimize-profile-page";
-import PrintingPage from "./pages/printing-page/printing-page";
-import PrintingConsultationPage from "./pages/printing-consultation-page/printing-consultation-page";
-import SocialManagementPage from "./pages/social-management-page/social-management-page";
-import SocialConsultationPage from "./pages/social-consultation-page/social-consultation-page";
-import GraphicsDesignPage from "./pages/graphics-design-page/graphics-design-page";
-import GraphicsConsultationPage from "./pages/graphics-consultation-page/graphics-consultation-page";
-import WebDevPage from "./pages/web-dev-page/web-dev-page";
-import WebDevConsultationPage from "./pages/web-dev-consultation-page/web-dev-consultation-page";
-import CollectionsPage from "./pages/collections-page/collections-page";
+// Import auth components
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 
-import ReferPage from "./pages/refer-page/refer-page";
-import CommunityChallengePage from "./pages/community-challenge-page/community-challenge-page";
-import JoinCommunityPage from "./pages/join-community-page/join-community-page";
-import JobPage from "./pages/job-page/job-page";
-import SustainabilityPage from "./pages/sustainability-page/sustainability-page";
-import BlogPage from "./pages/sustainability-page/blog-page";
-import MentorshipApplicationPage from "./pages/mentorship-application-page/mentorship-application-page";
-import PostJobPage from "./pages/post-job-page/post-job-page";
-import CartPage from "./pages/cart-page/cart-page";
-import CheckoutPage from "./pages/checkout-page/checkout-page";
-import AdminDashboardPage from "./pages/admin-dashboard-page/admin-dashboard-page";
-import NotFound from "./pages/admin-dashboard-page/NotFound";
-import TermsPage from "./pages/terms-page/terms-page";
-import PrivacyPage from "./pages/privacy-policy-page/privacy-page";
-import CoursePreviewPage from "./pages/academy-pages/course-preview-page";
+// Import all existing pages
+import HomePage from './pages/homepage/homepage';
+import PortfolioPage from './pages/portfolio-page/portfolio-page';
+import AcademyLandingPage from './pages/academy-pages/academy-landing-page';
+import AboutPage from './pages/about-page/about-page';
+import BookCallPage from './pages/book-call-page/book-call-page';
+import UiDesignPage from './pages/ui-design-page/ui-design-page';
+import UiConsultationPage from './pages/ui-consultation-page/ui-consultation-page';
+import CvOptimizationPage from './pages/cv-optimization-page/cv-optimzation-page';
+import OptimizeProfilePage from './pages/optimize-profile-page/optimize-profile-page';
+import PrintingPage from './pages/printing-page/printing-page';
+import PrintingConsultationPage from './pages/printing-consultation-page/printing-consultation-page';
+import SocialManagementPage from './pages/social-management-page/social-management-page';
+import SocialConsultationPage from './pages/social-consultation-page/social-consultation-page';
+import GraphicsDesignPage from './pages/graphics-design-page/graphics-design-page';
+import GraphicsConsultationPage from './pages/graphics-consultation-page/graphics-consultation-page';
+import WebDevPage from './pages/web-dev-page/web-dev-page';
+import WebDevConsultationPage from './pages/web-dev-consultation-page/web-dev-consultation-page';
+import CollectionsPage from './pages/collections-page/collections-page';
+
+import ReferPage from './pages/refer-page/refer-page';
+import CommunityChallengePage from './pages/community-challenge-page/community-challenge-page';
+import JoinCommunityPage from './pages/join-community-page/join-community-page';
+import JobPage from './pages/job-page/job-page';
+import SustainabilityPage from './pages/sustainability-page/sustainability-page';
+import BlogPage from './pages/sustainability-page/blog-page';
+import MentorshipApplicationPage from './pages/mentorship-application-page/mentorship-application-page';
+import PostJobPage from './pages/post-job-page/post-job-page';
+import CartPage from './pages/cart-page/cart-page';
+import CheckoutPage from './pages/checkout-page/checkout-page';
+import AdminDashboardPage from './pages/admin-dashboard-page/admin-dashboard-page';
+import NotFound from './pages/admin-dashboard-page/NotFound';
+import TermsPage from './pages/terms-page/terms-page';
+import PrivacyPage from './pages/privacy-policy-page/privacy-page';
+import CoursePreviewPage from './pages/academy-pages/course-preview-page';
+import DashboardPage from './pages/dashboard-page/dashboard-page';
+
+// Import new auth pages
+import LoginPage from './pages/login-page/login-page';
+import UnauthorizedPage from './pages/unauthorized-page/unauthorized-page';
 
 const queryClient = new QueryClient();
 
@@ -70,7 +79,12 @@ function App() {
           <Toaster />
           <Sonner />
           <Routes>
+            {/* Public routes - no authentication required */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/unauthorized" element={<UnauthorizedPage />} />
+
+            {/* Service pages - public */}
             <Route path="/services/ui-design" element={<UiDesignPage />} />
             <Route
               path="/services/ui-design-consultation"
@@ -118,6 +132,7 @@ function App() {
               element={<CollectionsPage />}
             />
 
+            {/* Public pages */}
             <Route
               path="/apply-for-mentorship"
               element={<MentorshipApplicationPage />}
@@ -137,14 +152,55 @@ function App() {
             />
             <Route path="/join-our-community" element={<JoinCommunityPage />} />
             <Route path="/jobs" element={<JobPage />} />
-            <Route path="/post-a-job" element={<PostJobPage />} />
             <Route path="/sustainability" element={<SustainabilityPage />} />
             <Route path="/sustainability/:blogId" element={<BlogPage />} />
-            <Route path="/cart-summary" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/helloadmin1212" element={<AdminDashboardPage />} />
             <Route path="/terms-of-service" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
+
+            {/* Protected routes - require authentication */}
+            <Route
+              path="/post-a-job"
+              element={
+                <ProtectedRoute>
+                  <PostJobPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/cart-summary"
+              element={
+                <ProtectedRoute>
+                  <CartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Admin-only routes - require admin authentication */}
+            <Route
+              path="/helloadmin1212"
+              element={
+                <ProtectedRoute requireAdmin={true}>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
