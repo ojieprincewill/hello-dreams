@@ -54,6 +54,7 @@ import DashboardPage from "./pages/dashboard-page/dashboard-page";
 // Import new auth pages
 import LoginPage from "./pages/login-page/login-page";
 import UnauthorizedPage from "./pages/unauthorized-page/unauthorized-page";
+import CoursePlayerPage from "./pages/academy-pages/course-player-page";
 
 const queryClient = new QueryClient();
 
