@@ -45,6 +45,7 @@ import NotFound from "./pages/admin-dashboard-page/NotFound";
 import TermsPage from "./pages/terms-page/terms-page";
 import PrivacyPage from "./pages/privacy-policy-page/privacy-page";
 import CoursePreviewPage from "./pages/academy-pages/course-preview-page";
+import CoursePlayerPage from "./pages/academy-pages/course-player-page";
 
 const queryClient = new QueryClient();
 
@@ -127,6 +128,10 @@ function App() {
             <Route
               path="/academy/coursepreview/:courseId"
               element={<CoursePreviewPage />}
+            />
+            <Route
+              path="/academy/courseplayer"
+              element={<CoursePlayerPage />}
             />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
