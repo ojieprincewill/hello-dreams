@@ -10,13 +10,9 @@ import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Label } from '../../ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
-import { Plus, Edit, Trash2, Upload, Video, Loader2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Video, Loader2 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
-import {
-  useLessons,
-  useCreateLesson,
-  useDeleteLesson,
-} from '@/hooks/useLessons';
+import { useLessons, useDeleteLesson } from '@/hooks/useLessons';
 import { uploadLessonToMux } from '../../../../services/uploadLessonToMux.js';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
@@ -24,26 +20,25 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const [newLesson, setNewLesson] = useState({
     title: '',
     duration: '',
-    videoUrl: '',
     description: '',
+    videoFile: null,
   });
   const [editingLesson, setEditingLesson] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [showAddLesson, setShowAddLesson] = useState(false);
 
   const { data: lessons = [], isLoading } = useLessons(courseId);
-  const createLesson = useCreateLesson();
   const deleteLesson = useDeleteLesson();
 
   const handleAddLesson = async () => {
     if (
       !newLesson.title.trim() ||
       !newLesson.duration.trim() ||
-      !newLesson.videoUrl.trim()
+      !newLesson.videoFile
     ) {
       toast({
         title: 'Missing information',
-        description: 'Please provide title, duration, and video link.',
+        description: 'Please provide title, duration, and video file.',
         variant: 'destructive',
       });
       return;
@@ -51,23 +46,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
 
     try {
       setUploading(true);
-      const lesson = {
-        course_id: courseId,
-        title: newLesson.title,
-        duration: newLesson.duration,
-        description: newLesson.description,
-        video_url: newLesson.videoUrl,
-        asset_id: '',
-        playback_id: '',
-      };
 
-      // 1. Save lesson to DB
-      // const savedLesson = await createLesson.mutateAsync(lesson);
-
-      // 2. Call edge function to upload to Mux
       const res = await uploadLessonToMux({
-        videoUrl: newLesson.videoUrl,
-        course_id: courseId, // <-- renamed here
+        file: newLesson.videoFile,
+        course_id: courseId,
         title: newLesson.title,
         duration: newLesson.duration,
         description: newLesson.description,
@@ -84,14 +66,14 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       setNewLesson({
         title: '',
         duration: '',
-        videoUrl: '',
         description: '',
+        videoFile: null,
       });
       setShowAddLesson(false);
     } catch (error) {
       toast({
         title: 'Error',
-        description: error.message,
+        description: error.message || 'Mux upload failed',
         variant: 'destructive',
       });
     } finally {
@@ -120,8 +102,8 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
     setNewLesson({
       title: lesson.title,
       duration: lesson.duration,
-      videoUrl: lesson.video_url,
       description: lesson.description,
+      videoFile: null,
     });
     setShowAddLesson(true);
   };
@@ -144,8 +126,8 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                 setNewLesson({
                   title: '',
                   duration: '',
-                  videoUrl: '',
                   description: '',
+                  videoFile: null,
                 });
                 setEditingLesson(null);
               }}
@@ -187,13 +169,16 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                   </div>
                 </div>
                 <div>
-                  <Label>Google Drive Video URL</Label>
+                  <Label>Upload Video File</Label>
                   <Input
-                    value={newLesson.videoUrl}
+                    type="file"
+                    accept="video/*"
                     onChange={(e) =>
-                      setNewLesson({ ...newLesson, videoUrl: e.target.value })
+                      setNewLesson({
+                        ...newLesson,
+                        videoFile: e.target.files?.[0] || null,
+                      })
                     }
-                    placeholder="Paste Drive link here"
                   />
                 </div>
                 <div>

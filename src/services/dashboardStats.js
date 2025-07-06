@@ -23,6 +23,16 @@ async function getCount(table, timestampCol = 'created_at', offset = 0) {
   return count ?? 0;
 }
 
+// Get total count (not just this month)
+async function getTotalCount(table) {
+  const { count, error } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+
+  if (error) throw error;
+  return count ?? 0;
+}
+
 function calculateChange(current, previous) {
   if (previous === 0 && current > 0) return 100;
   if (previous === 0) return 0;
@@ -30,6 +40,13 @@ function calculateChange(current, previous) {
 }
 
 export async function fetchDashboardStats() {
+  // Get total counts
+  const [totalStudents, totalCourses] = await Promise.all([
+    getTotalCount('users'),
+    getTotalCount('courses'),
+  ]);
+
+  // Get this month's counts for change calculation
   const [studentsThisMonth, studentsLastMonth] = await Promise.all([
     getCount('users'),
     getCount('users', 'created_at', -1),
@@ -72,13 +89,22 @@ export async function fetchDashboardStats() {
     .reduce((sum, p) => sum + Number(p.amount), 0);
 
   return {
-    totalStudents: studentsThisMonth,
+    // Total counts
+    totalStudents: totalStudents,
+    totalCourses: totalCourses,
+    totalJobs: await getTotalCount('job_postings'),
+    totalRevenue: payments.reduce((sum, p) => sum + Number(p.amount), 0),
+    
+    // Monthly counts
+    studentsThisMonth: studentsThisMonth,
+    coursesThisMonth: coursesThisMonth,
+    jobsThisMonth: jobsThisMonth,
+    revenueThisMonth: revenueThisMonth,
+    
+    // Change percentages
     studentChange: calculateChange(studentsThisMonth, studentsLastMonth),
-    activeCourses: coursesThisMonth,
     courseChange: calculateChange(coursesThisMonth, coursesLastMonth),
-    jobPostings: jobsThisMonth,
     jobChange: calculateChange(jobsThisMonth, jobsLastMonth),
-    revenue: revenueThisMonth,
     revenueChange: calculateChange(revenueThisMonth, revenueLastMonth),
   };
 }

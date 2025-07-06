@@ -11,6 +11,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Import troubleshooting utility for WebSocket debugging
 import "./utils/troubleshooting";
 
+// Import auth components
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+
+// Import all existing pages
 import HomePage from "./pages/homepage/homepage";
 import PortfolioPage from "./pages/portfolio-page/portfolio-page";
 import AcademyLandingPage from "./pages/academy-pages/academy-landing-page";
@@ -45,7 +49,11 @@ import NotFound from "./pages/admin-dashboard-page/NotFound";
 import TermsPage from "./pages/terms-page/terms-page";
 import PrivacyPage from "./pages/privacy-policy-page/privacy-page";
 import CoursePreviewPage from "./pages/academy-pages/course-preview-page";
-import CoursePlayerPage from "./pages/academy-pages/course-player-page";
+import DashboardPage from "./pages/dashboard-page/dashboard-page";
+
+// Import new auth pages
+import LoginPage from "./pages/login-page/login-page";
+import UnauthorizedPage from "./pages/unauthorized-page/unauthorized-page";
 
 const queryClient = new QueryClient();
 
@@ -71,7 +79,12 @@ function App() {
           <Toaster />
           <Sonner />
           <Routes>
+            {/* Public routes - no authentication required */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/unauthorized" element={<UnauthorizedPage />} />
+
+            {/* Service pages - public */}
             <Route path="/services/ui-design" element={<UiDesignPage />} />
             <Route
               path="/services/ui-design-consultation"
@@ -119,6 +132,7 @@ function App() {
               element={<CollectionsPage />}
             />
 
+            {/* Public pages */}
             <Route
               path="/apply-for-mentorship"
               element={<MentorshipApplicationPage />}
@@ -142,14 +156,55 @@ function App() {
             />
             <Route path="/join-our-community" element={<JoinCommunityPage />} />
             <Route path="/jobs" element={<JobPage />} />
-            <Route path="/post-a-job" element={<PostJobPage />} />
             <Route path="/sustainability" element={<SustainabilityPage />} />
             <Route path="/sustainability/:blogId" element={<BlogPage />} />
-            <Route path="/cart-summary" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/helloadmin1212" element={<AdminDashboardPage />} />
             <Route path="/terms-of-service" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
+
+            {/* Protected routes - require authentication */}
+            <Route
+              path="/post-a-job"
+              element={
+                <ProtectedRoute>
+                  <PostJobPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/cart-summary"
+              element={
+                <ProtectedRoute>
+                  <CartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Admin-only routes - require admin authentication */}
+            <Route
+              path="/helloadmin1212"
+              element={
+                <ProtectedRoute requireAdmin={true}>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 import {
   openQuickview,
   selectProduct,
-} from "../../../state-slices/quickview/quickviewSlice";
-import { addItem } from "../../../state-slices/cart/cartSlice";
-import { useSelector, useDispatch } from "react-redux";
-import AddToCart from "../add-to-cart/add-to-cart.component";
-import QuantityControl from "../quantity-control/quantity-control.component";
-import { toast } from "react-toastify";
+} from '../../../state-slices/quickview/quickviewSlice';
+import { addItem } from '../../../state-slices/cart/cartSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import AddToCart from '../add-to-cart/add-to-cart.component';
+import QuantityControl from '../quantity-control/quantity-control.component';
+import { toast } from 'react-toastify';
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();
@@ -25,12 +25,12 @@ const Product = ({ product }) => {
     toast.success(`Item added to cart`);
   };
 
-  const { image, title, price, name, size, quality } = product;
+  const { image, title, price, size, quality } = product;
 
   return (
     <div className="md:p-2">
       <div className="w-full h-[351.61px] md:h-[400px] rounded-sm overflow-hidden ">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="flex justify-between items-center text-[#1e1e1e] text-[16px] md:text-[20px] font-semibold mt-6 mb-3">
         <p>{title}</p>

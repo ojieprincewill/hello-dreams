@@ -157,10 +157,10 @@ const BlogManagement = () => {
     setEditOpen(true);
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (updatedArticle) => {
     try {
-      let imageUrl = selected.image_url;
-      let authorImageUrl = selected.author_image_url;
+      let imageUrl = updatedArticle.image_url;
+      let authorImageUrl = updatedArticle.author_image_url;
 
       if (imageFile) {
         imageUrl = await uploadImage(imageFile, 'blog-images');
@@ -171,8 +171,7 @@ const BlogManagement = () => {
       }
 
       await updateBlog.mutateAsync({
-        ...selected,
-        ...form,
+        ...updatedArticle,
         image_url: imageUrl,
         author_image_url: authorImageUrl,
       });
@@ -339,10 +338,7 @@ const BlogManagement = () => {
                 </div>
               </div>
 
-              <Button
-                className="w-full bg-[#010413] text-white"
-                onClick={handleCreate}
-              >
+              <Button onClick={handleCreate} className="w-full">
                 Create Article
               </Button>
             </div>
@@ -350,15 +346,15 @@ const BlogManagement = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         {allBlogs.length > 0 ? (
           allBlogs.map((article) => (
             <Card
               key={article.id}
-              className="hover:shadow-lg transition-shadow duration-200"
+              className="hover:shadow-lg transition-shadow"
             >
               <CardContent className="p-0">
-                <div className="aspect-video bg-gray-200 rounded-t-lg flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-gray-100 rounded-t-lg overflow-hidden">
                   {article.image_url ? (
                     <img
                       src={article.image_url}
@@ -366,14 +362,14 @@ const BlogManagement = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-gray-500 text-sm lg:text-base">
-                      Article Image
-                    </span>
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <Calendar size={40} className="lg:w-12 lg:h-12" />
+                    </div>
                   )}
                 </div>
                 <div className="p-4 lg:p-6">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-base lg:text-lg text-gray-900 flex-1 min-w-0">
+                    <h3 className="font-semibold text-base lg:text-lg flex-1 min-w-0">
                       <span className="truncate block">{article.title}</span>
                     </h3>
                     <span
@@ -386,54 +382,61 @@ const BlogManagement = () => {
                       {article.published ? 'Published' : 'Draft'}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-xs lg:text-sm mb-3 lg:mb-4 line-clamp-2">
-                    {article.content}
-                  </p>
 
-                  <div className="flex items-center text-xs lg:text-sm text-gray-500 mb-3 lg:mb-4">
-                    <User size={14} className="mr-1 lg:w-4 lg:h-4" />
-                    <span className="truncate">{article.author}</span>
-                    <Calendar size={14} className="ml-3 mr-1 lg:w-4 lg:h-4" />
-                    <span>
-                      {new Date(article.created_at).toLocaleDateString()}
-                    </span>
+                  <div className="space-y-2 mb-3 lg:mb-4 text-xs lg:text-sm">
+                    <div className="flex justify-between">
+                      <span>Author:</span>
+                      <span className="font-semibold truncate ml-2">
+                        {article.author || 'Unknown'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Created:</span>
+                      <span className="truncate ml-2">
+                        {new Date(article.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Status:</span>
+                      <span className="truncate ml-2">
+                        {article.published ? 'Published' : 'Draft'}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex space-x-1 lg:space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
-                        onClick={() => {
-                          setSelected(article);
-                          setViewOpen(true);
-                        }}
-                      >
-                        <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
-                        <span className="hidden sm:inline">View</span>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
-                        onClick={() => openEdit(article)}
-                      >
-                        <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
-                        <span className="hidden sm:inline">Edit</span>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setSelected(article);
-                          setDeleteOpen(true);
-                        }}
-                        className="text-red-600 hover:text-red-700 border-[#eaecf0] hover:bg-[#f0f5f7] text-xs lg:text-sm"
-                      >
-                        <Trash2 size={14} className="lg:w-4 lg:h-4" />
-                      </Button>
-                    </div>
+                  <div className="flex space-x-1 lg:space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setSelected(article);
+                        setViewOpen(true);
+                      }}
+                      className="flex-1 text-xs lg:text-sm"
+                    >
+                      <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">View</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => openEdit(article)}
+                      className="flex-1 text-xs lg:text-sm"
+                    >
+                      <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                      <span className="hidden sm:inline">Edit</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setSelected(article);
+                        setDeleteOpen(true);
+                      }}
+                      className="text-red-600 hover:text-red-700 text-xs lg:text-sm"
+                    >
+                      <Trash2 size={14} className="lg:w-4 lg:h-4" />
+                    </Button>
                   </div>
                 </div>
               </CardContent>
@@ -465,8 +468,6 @@ const BlogManagement = () => {
         onClose={() => setViewOpen(false)}
       />
       <BlogEditModal
-        form={form}
-        setForm={setForm}
         article={selected}
         isOpen={editOpen}
         onClose={() => setEditOpen(false)}

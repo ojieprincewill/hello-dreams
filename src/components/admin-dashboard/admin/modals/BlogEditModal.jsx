@@ -44,7 +44,13 @@ const BlogEditModal = ({
 
   const handleSave = () => {
     if (editedArticle) {
-      onSave(editedArticle);
+      // Merge the edited article with any new image files
+      const updatedArticle = {
+        ...editedArticle,
+        // If there are new image files, they will be handled by the parent component
+        // The parent component will upload them and update the URLs
+      };
+      onSave(updatedArticle);
       onClose();
     }
   };

@@ -6,6 +6,7 @@ import JobManagement from './JobManagement';
 import ChallengeManagement from './ChallengeManagement';
 import BlogManagement from './BlogManagement';
 import CollectionsManagement from './CollectionsManagement';
+import RecentActivityManagement from './RecentActivityManagement';
 import { Menu, X } from 'lucide-react';
 import { useRealtimeSubscriptions } from '@/hooks/useRealtimeSubscriptions';
 
@@ -30,6 +31,8 @@ const AdminDashboard = () => {
         return <BlogManagement />;
       case 'collections':
         return <CollectionsManagement />;
+      case 'activity':
+        return <RecentActivityManagement />;
       default:
         return <DashboardOverview setActiveSection={setActiveSection} />;
     }
@@ -57,7 +60,7 @@ const AdminDashboard = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:fixed lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -79,7 +82,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 lg:ml-0">
+      <div className="flex-1 lg:ml-64">
         <div className="p-4 lg:p-8">{renderActiveSection()}</div>
       </div>
     </div>

@@ -70,8 +70,8 @@ const PostJobForm = () => {
           },
         },
       );
-      console.log(data);
-      console.log(initError);
+      // console.log(data);
+      // console.log(initError);
       if (initError || !data?.access_code || !data?.reference) {
         setError('Payment initiation failed.');
         setLoading(false);
