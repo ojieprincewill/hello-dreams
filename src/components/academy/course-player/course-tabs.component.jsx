@@ -15,15 +15,18 @@ const CourseTabs = () => {
   return (
     <div className="mt-6">
       {/* Tab List */}
-      <div className="flex space-x-2 md:space-x-6 border-b border-gray-200 overflow-x-auto">
+      <div
+        className="flex justify-between items-center border-b border-[#cccccc] overflow-x-auto md:overflow-x-visible"
+        style={{ fontFamily: "DM Sans, sans-serif" }}
+      >
         {TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`py-2 px-3 md:px-6 text-[15px] font-medium whitespace-nowrap border-b-2 transition-colors duration-200 ${
+            className={`py-2 px-3 md:px-4 text-[16px] lg:text-[20px] whitespace-nowrap border-b-2 transition-colors duration-300 cursor-pointer ${
               activeTab === tab.key
-                ? "border-[#1342ff] text-[#1342ff] bg-white"
-                : "border-transparent text-[#667085] hover:text-[#1342ff]"
+                ? "border-b-4 border-[#667085] text-[#010413]"
+                : "border-transparent text-[#667085] hover:text-[#010413]"
             }`}
           >
             {tab.label}

@@ -4,8 +4,8 @@ import CourseContentSidebar from "./course-content-sidebar.component";
 
 const CoursePlayerLayout = () => {
   return (
-    <div className="min-h-screen bg-[#f8f9fb]">
-      <div className="max-w-[1440px] mx-auto px-[2%] py-10 flex flex-col lg:flex-row gap-8">
+    <div className="min-h-screen">
+      <div className="max-w-[1440px] mx-auto px-[5%] py-10 flex flex-col lg:flex-row gap-8">
         {/* Main Section */}
         <div className="flex-1 min-w-0">
           <CourseVideoSection />
