@@ -78,72 +78,88 @@ export const MeetExpertsData = [
     id: 1,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248863/About%20page/3785487c563d7bc058e44ee94c8d03a2024f1eae_jbibrr.png",
-    name: "Pamela Ohaeri",
+    name: "Pamela",
     text: "Pamela is the founder of Hello Dreams. She started from law and moved to Tech.",
-    role: "Product Designer",
+    text1:
+      "Pamela is the Founder of Hello Dreams, a visionary Senior Product Designer, UX Analyst, and Tech Educator on a mission to help people unlock new opportunities through design and technology. With a background in law and years of experience designing mobile and web products, Pamela brings a unique blend of analytical thinking and creative strategy to every project.",
+    text2:
+      "Through Hello Dreams, she leads a fast-growing community focused on design, branding, digital upskilling, and mentorship, empowering thousands of learners to build meaningful careers and dream bigger. Pamela has trained and guided over 200 aspiring designers, helping them land roles in top organizations.",
+    text3:
+      "As an advocate for using technology to create real impact, Pamela combines product design, AI, and digital education to shape experiences that inspire people to learn, grow, and succeed.",
+    role: "Senior UX Consultant",
     bgColor: "#ffc501",
     modalPosition: "right",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 2,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248831/About%20page/5d85fc7c25981c6d1182607b92f56fcd30381dba_easvvk.jpg",
-    name: "Arinze Mbonu",
+    name: "Arinze",
     text: "Arinze is the co-founder of Hello Dreams, he is the head of Graphics and branding. ",
+    text1:
+      "Arinze is the Co-Founder and Head of Graphics & Branding at Hello Dreams, and a seasoned Senior Graphic Designer with over a decade of experience. He leads the visual strategy of Hello Dreams with a strong ethos of storytelling, crafting memorable logos, brand identities, UI assets, and marketing collaterals that resonate.",
     role: "Graphic Designer",
     bgColor: "#ff7f50",
     modalPosition: "right",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 3,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248843/About%20page/0403d085380ae5044431065acc5f41ea08b08b7c_j085l0.jpg",
-    name: "Cynthia Ohaeri",
+    name: "Cynthia",
     text: "Cynthia is a petrophysicist who works at Hello Dreams as the Project Delivery Manager.",
+    text1:
+      "Cynthia is the Project Delivery Manager at Hello Dreams, where she combines her strong STEM background and passion for impact to deliver projects that drive innovation and measurable results. With a First-Class degree in Physics and Astronomy and years of experience in the energy sector, Cynthia brings sharp analytical skills, strategic thinking, and a commitment to excellence to every project she leads.",
+    text2:
+      "Beyond her technical expertise, Cynthia is a dedicated advocate for empowering young women in STEM. As founder of the Nigerian Girl In STEM Foundation, she champions initiatives that open doors for girls to pursue science, technology, engineering, and mathematics.",
+    text3:
+      "At Hello Dreams, Cynthia ensures that ideas are turned into actionable plans and completed to the highest standard helping the team build solutions that transform lives and inspire people to dream bigger.",
     role: "Petrophysicist",
     bgColor: "#008080",
     modalPosition: "left",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 4,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750085444/cv%20optimization%20page/2df0a4ea796e5398d4b722280a1e7e08c0404d17_cldiub.jpg",
-    name: "Lilian Chinonye",
-    text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch. ",
+    name: "Lilian",
+    text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch.",
+    text1:
+      "Lilian is the Software Quality Assurance Tester, she ensures that every digital product and feature meets the highest standards of functionality, reliability, and user experience. With a keen eye for detail and a passion for delivering error-free solutions, Lilian plays a key role in making sure Hello Dreams' platforms run smoothly for every user. Combining her background in scientific research with practical experience in quality assurance and digital design, Lilian brings a unique perspective to testing, balancing technical precision with a user-first mindset. Her commitment to excellence helps the Hello Dreams team build trusted solutions that empower people to dream bigger and achieve more.",
     role: "Petrophysicist",
     bgColor: "#008080",
     modalPosition: "left",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 5,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330671/59889901474710ef1bcd3aa9b3ca78aa7c16443a_salk6z.jpg",
-    name: "Jennifer Obatta",
-    text: "Jennifer content goes here...",
+    name: "Jennifer",
+    text: "Jennifer is a customer experience leader and digital transformation expert, leading impactful digital campaigns and AI powered solutions.",
+    text1:
+      "Jennifer is a Customer Experience Leader, Digital Transformation Expert, and Tech Entrepreneur with over 12 years of driving innovation across corporate and startup spaces. As Head of Customer Experience at Hello Dreams, she leads impactful digital campaigns and AI-powered solutions that help shape Hello Dreams into a truly customer-focused brand.",
+    text2:
+      "A passionate advocate for women's financial empowerment through technology, Jennifer guides people to turn skills into income",
+    text3:
+      "Through her practical approach, Jennifer inspires women to harness technology for financial freedom and business success.",
     role: "Quality Assurance",
     bgColor: "#ff7f50",
     modalPosition: "right",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
   {
     id: 6,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248852/About%20page/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d_l5zfmc.jpg",
-    name: "Sixth Person",
-    text: "Content goes here... Everything here is a placeholder",
-    role: "Role goes here...",
+    name: "Lynda",
+    text: "Lynda, a Founding Member of Hello Dreams, blends educational and administrative leadership with real-world operational expertise.",
+    text1:
+      "Lynda is a Founding Member at Hello Dreams, bringing her wealth of experience as an Educationist, School Administrator, and Operations Manager to the team. With a strong foundation as an English major and years of experience as a respected School Proprietress, Lynda combines her deep passion for education with practical leadership and business management skills.",
+    text2:
+      "At Hello Dreams, Lynda ensures that every project is executed efficiently and on time, while also overseeing the company's operational and financial integrity. She keeps the team organized, ensures deliverables meet high standards, and guarantees that clients and partners honor their commitments, making sure Hello Dreams gets paid what it's due.",
+    text3:
+      "Her unique blend of educational leadership, administrative expertise, and people management keeps Hello Dreams running smoothly, supporting the team to deliver exceptional work and empowering others to dream and grow.",
+    role: "Senior UX Consultant",
     bgColor: "#ffc501",
     modalPosition: "left",
-    details:
-      "Lorem ipsum dolor sit amet consectetur. Morbi ultricies penatibus fermentum ipsum sagittis malesuada. Morbi urna interdum egestas risus orci sit eget massa. Sit vel tempus morbi a lacus quisque metus porta. Dolor mi cursus auctor purus porta sit vel dui. Sed pharetra sagittis erat id mi in odio viverra. Mattis nisi neque dui dictum. Eget amet molestie pharetra est quis. Maecenas orci fermentum odio viverra iaculis blandit consequat amet. Varius lectus mauris rutrum nullam vel praesent sit rhoncus magna. Lorem mauris turpis amet adipiscing quis nunc. Justo velit ullamcorper consectetur phasellus. Tempus nisl et neque justo maecenas nulla mauris in eget. Mauris nisl fringilla aliquet sagittis est. Viverra leo nunc etiam gravida etiam fermentum quam ut suscipit.",
   },
 ];

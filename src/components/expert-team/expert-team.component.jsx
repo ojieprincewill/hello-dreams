@@ -90,7 +90,7 @@ const ExpertTeam = () => {
                     } top-1/2 -translate-y-1/2`}
                   ></div>
 
-                  <div className="h-[444px] md:h-max p-4 overflow-auto">
+                  <div className="max-h-[444px] md:max-h-[500px] p-4 overflow-auto">
                     <p className="text-[#26262b] text-[20px] font-semibold mb-3">
                       {data.name}
                     </p>
@@ -99,9 +99,19 @@ const ExpertTeam = () => {
                     >
                       {data.role}
                     </p>
-                    <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5]">
-                      {data.details}
+                    <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                      {data.text1}
                     </p>
+                    {data.text2 && (
+                      <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                        {data.text2}
+                      </p>
+                    )}
+                    {data.text3 && (
+                      <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                        {data.text3}
+                      </p>
+                    )}
                   </div>
                 </div>
               </>
