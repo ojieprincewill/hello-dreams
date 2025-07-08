@@ -67,7 +67,7 @@ const CourseDescription = () => {
       </div>
 
       <div className="flex justify-center items-center">
-        <button className="mt-3 px-4 py-2 border-[1.5px] border-[#eaecf0] rounded-md text-[14px] font-medium hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <button className="mt-3 px-4 py-2 border-[1.5px] border-[#eaecf0] rounded-md text-[14px] font-medium hover:bg-[#eef2fe] transition-colors duration-300 cursor-pointer">
           Load more
         </button>
       </div>

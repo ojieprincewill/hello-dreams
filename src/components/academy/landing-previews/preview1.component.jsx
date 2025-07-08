@@ -85,10 +85,7 @@ const Preview1 = () => {
               <p className="text-[#010413] text-[20px] md:text-[24px] leading-[1.3] font-semibold">
                 {data.title}
               </p>
-              <Link
-                to={`/academy/coursepreview/${data.id}`}
-                onClick={handleOrigins}
-              >
+              <Link to={`/academy/courses/${data.id}`} onClick={handleOrigins}>
                 <ArrowTopRightOnSquareIcon className="w-[23px] h-[23px] md:w-[28px] md:h-[28px] cursor-pointer" />
               </Link>
             </div>

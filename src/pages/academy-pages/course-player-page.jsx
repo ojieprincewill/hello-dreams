@@ -2,12 +2,21 @@ import AcademyNavbar from "@/components/academy/academy-nav/academy-nav.componen
 import CoursePlayerLayout from "@/components/academy/course-player/course-player-layour.component";
 import FooterSection from "@/components/footer-section/footer-section.component";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { PreviewData1 } from "@/data/academy-data/academy.data";
 
 const CoursePlayerPage = () => {
+  const { courseId } = useParams();
+  const course = PreviewData1.find((course) => course.id === Number(courseId));
+
+  if (!course) {
+    return <div>Course not found.</div>;
+  }
+
   return (
     <>
       <AcademyNavbar />
-      <CoursePlayerLayout />
+      <CoursePlayerLayout course={course} />
       <FooterSection />
     </>
   );

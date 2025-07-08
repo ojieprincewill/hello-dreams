@@ -126,7 +126,7 @@ export const MeetExpertsData = [
     text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch.",
     text1:
       "Lilian is the Software Quality Assurance Tester, she ensures that every digital product and feature meets the highest standards of functionality, reliability, and user experience. With a keen eye for detail and a passion for delivering error-free solutions, Lilian plays a key role in making sure Hello Dreams' platforms run smoothly for every user. Combining her background in scientific research with practical experience in quality assurance and digital design, Lilian brings a unique perspective to testing, balancing technical precision with a user-first mindset. Her commitment to excellence helps the Hello Dreams team build trusted solutions that empower people to dream bigger and achieve more.",
-    role: "Petrophysicist",
+    role: "Software Tester",
     bgColor: "#008080",
     modalPosition: "left",
   },

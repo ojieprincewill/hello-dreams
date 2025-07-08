@@ -141,11 +141,11 @@ function App() {
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/academy" element={<AcademyLandingPage />} />
             <Route
-              path="/academy/coursepreview/:courseId"
+              path="/academy/courses/:courseId"
               element={<CoursePreviewPage />}
             />
             <Route
-              path="/academy/courseplayer"
+              path="/academy/courses/:courseId/player"
               element={<CoursePlayerPage />}
             />
             <Route path="/about" element={<AboutPage />} />

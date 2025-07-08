@@ -1,7 +1,7 @@
 import React from "react";
 import { ChevronDown, Play, FileText, Lock, Award } from "lucide-react";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { PreviewData1 } from "@/data/academy-data/academy.data";
 
 const CoursePreview = () => {
@@ -39,12 +39,13 @@ const CoursePreview = () => {
                 constraints to create responsive screens for mobile, tablet, and
                 desktop.
               </p>
-              <button
-                className="bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2  rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+              <Link
+                to={`/academy/courses/${course.id}/player`}
+                className="block w-max bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2  rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <Play className="w-4 h-4 inline" /> Start course
-              </button>
+              </Link>
             </div>
 
             {/* Course Content */}
@@ -233,9 +234,13 @@ const CoursePreview = () => {
                 <p className="text-[#667085] lg:text-[16px] text-[13px]">
                   Beginner . {course.totalTime}
                 </p>
-                <button className="w-full bg-[#efece9] border-[0.7px] border-[#eaecf0] text-[#010413] text-[12px] md:text-[16px] text-center lg:font-medium mt-7 px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+                <Link
+                  to={`/academy/courses/${course.id}/player`}
+                  className="block w-full bg-[#efece9] border-[0.7px] border-[#eaecf0] text-[#010413] text-[12px] md:text-[16px] text-center lg:font-medium mt-7 px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
                   Start Course
-                </button>
+                </Link>
               </div>
 
               <div className="p-4 my-2 border-b-[1.5px] border-b-[#eaecf0]">

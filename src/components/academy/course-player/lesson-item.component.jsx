@@ -39,29 +39,43 @@ const LessonItem = ({
         </div>
       </div>
 
-      <div className="flex-shrink-0 relative" onClick={e => e.stopPropagation()}>
+      <div
+        className="flex-shrink-0 relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         {resources && (
           <>
             <button
-              className="flex items-center gap-1 text-[12px] px-2 py-1 border border-gray-300 rounded-md text-[#1342ff] bg-white hover:bg-[#eef2fe] transition-colors"
+              className="flex items-center gap-1 text-[12px] px-2 py-1 border border-gray-300 rounded-md text-[#010413] bg-white hover:bg-[#eef2fe] transition-colors duration-300 cursor-pointer"
               onClick={onResourceToggle}
               type="button"
             >
               Resources
-              <ChevronDown size={16} className={`ml-1 transition-transform ${isResourceOpen ? "rotate-180" : "rotate-0"}`} />
+              <ChevronDown
+                size={16}
+                className={`ml-1 text-[#5d7280] transition-transform ${
+                  isResourceOpen ? "rotate-180" : "rotate-0"
+                }`}
+              />
             </button>
             {isResourceOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10 p-3 text-[13px] text-gray-800">
                 <div className="font-semibold mb-2">Lesson Resources</div>
                 <ul className="space-y-1">
                   <li>
-                    <a href="#" className="text-[#1342ff] hover:underline">PDF: Lesson Notes</a>
+                    <a href="#" className="text-[#1342ff] hover:underline">
+                      PDF: Lesson Notes
+                    </a>
                   </li>
                   <li>
-                    <a href="#" className="text-[#1342ff] hover:underline">Figma File</a>
+                    <a href="#" className="text-[#1342ff] hover:underline">
+                      Figma File
+                    </a>
                   </li>
                   <li>
-                    <a href="#" className="text-[#1342ff] hover:underline">Download Assets</a>
+                    <a href="#" className="text-[#1342ff] hover:underline">
+                      Download Assets
+                    </a>
                   </li>
                 </ul>
               </div>

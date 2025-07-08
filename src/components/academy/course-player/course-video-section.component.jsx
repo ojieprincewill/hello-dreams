@@ -4,16 +4,16 @@ import CourseTabs from "./course-tabs.component";
 import CourseInfo from "./course-info.component";
 import CourseDescription from "./course-description.component";
 
-const CourseVideoSection = () => {
+const CourseVideoSection = ({ image, title }) => {
   return (
     <div>
       <VideoPlayer
         videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
-        poster="https://via.placeholder.com/800x450.png?text=Course+Video"
+        poster={image}
         captions={null}
       />
       <CourseTabs />
-      <CourseInfo />
+      <CourseInfo title={title} />
       <CourseDescription />
     </div>
   );

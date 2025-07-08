@@ -1,7 +1,7 @@
 import React from "react";
 
 const CourseInfo = ({
-  title = "3 in 1 Course: Learn to design website with figma, build with webflow, and make a living freelancing .",
+  title,
   lastUpdated = "August 2024",
   language = "English",
   captions = "yes",
@@ -50,7 +50,7 @@ const CourseInfo = ({
           <p className="text-[#010413]">
             Get your certificate by completing entire course
           </p>
-          <button className="border-[1.5px] border-[#eaecf0] w-full rounded-md px-3 py-2 text-[14px] text-center font-medium hover:bg-[#1342ff] hover:text-[#fff] transition-colors duration-300 cursor-pointer">
+          <button className="border-[1.5px] border-[#eaecf0] w-full rounded-md px-3 py-2 text-[14px] text-center font-medium hover:bg-[#eef2fe] transition-colors duration-300 cursor-pointer">
             {certificate}
           </button>
         </div>

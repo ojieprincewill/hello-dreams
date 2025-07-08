@@ -18,7 +18,7 @@ const VideoPlayer = ({ videoUrl, poster, captions }) => {
         src={videoUrl}
         poster={poster}
         controls
-        className="w-full h-full object-contain"
+        className="w-full h-full object-cover"
         onLoadedData={handleLoadedData}
         preload="auto"
       >
