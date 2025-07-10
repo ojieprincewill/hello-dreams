@@ -10,10 +10,19 @@ import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Label } from '../../ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
-import { Plus, Edit, Trash2, Video, Loader2 } from 'lucide-react';
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Video,
+  Loader2,
+  Upload,
+  CheckCircle,
+} from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { useLessons, useDeleteLesson } from '@/hooks/useLessons';
-import { uploadLessonToMux } from '../../../../services/uploadLessonToMux.js';
+import { uploadLessonWithProgress } from '../../../../services/uploadLessonToMux.js';
+import { Progress } from '../../ui/progress';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const { toast } = useToast();
@@ -26,6 +35,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const [editingLesson, setEditingLesson] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [showAddLesson, setShowAddLesson] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState({
+    stage: '',
+    percent: 0,
+  });
 
   const { data: lessons = [], isLoading } = useLessons(courseId);
   const deleteLesson = useDeleteLesson();
@@ -46,13 +59,17 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
 
     try {
       setUploading(true);
+      setUploadProgress({ stage: 'uploading', percent: 0 });
 
-      const res = await uploadLessonToMux({
+      const res = await uploadLessonWithProgress({
         file: newLesson.videoFile,
         course_id: courseId,
         title: newLesson.title,
         duration: newLesson.duration,
         description: newLesson.description,
+        onProgress: (progress) => {
+          setUploadProgress(progress);
+        },
       });
 
       console.log(res);
@@ -60,7 +77,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       toast({
         title: 'Lesson added',
         description:
-          'Mux is processing your video. This may take a few minutes.',
+          'Video uploaded successfully and sent to Mux for processing. This may take a few minutes.',
       });
 
       setNewLesson({
@@ -70,14 +87,16 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
         videoFile: null,
       });
       setShowAddLesson(false);
+      setUploadProgress({ stage: '', percent: 0 });
     } catch (error) {
       toast({
         title: 'Error',
-        description: error.message || 'Mux upload failed',
+        description: error.message || 'Upload failed',
         variant: 'destructive',
       });
     } finally {
       setUploading(false);
+      setUploadProgress({ stage: '', percent: 0 });
     }
   };
 
@@ -106,6 +125,15 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       videoFile: null,
     });
     setShowAddLesson(true);
+  };
+
+  const getProgressMessage = () => {
+    if (uploadProgress.stage === 'uploading') {
+      return `Uploading video... ${uploadProgress.percent}%`;
+    } else if (uploadProgress.stage === 'processing') {
+      return 'Sending to Mux for processing...';
+    }
+    return '';
   };
 
   if (!courseId) return null;
@@ -195,12 +223,39 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                     rows={3}
                   />
                 </div>
+
+                {/* Upload Progress Indicator */}
+                {uploading && (
+                  <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center space-x-2">
+                      {uploadProgress.stage === 'uploading' ? (
+                        <Upload className="h-4 w-4 animate-pulse text-blue-600" />
+                      ) : uploadProgress.stage === 'processing' ? (
+                        <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+                      ) : (
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      )}
+                      <span className="text-sm font-medium text-gray-700">
+                        {getProgressMessage()}
+                      </span>
+                    </div>
+                    {uploadProgress.stage === 'uploading' && (
+                      <Progress
+                        value={uploadProgress.percent}
+                        className="w-full"
+                      />
+                    )}
+                  </div>
+                )}
+
                 <div className="flex space-x-2">
                   <Button onClick={handleAddLesson} disabled={uploading}>
                     {uploading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Uploading...
+                        {uploadProgress.stage === 'uploading'
+                          ? 'Uploading...'
+                          : 'Processing...'}
                       </>
                     ) : editingLesson ? (
                       'Save Changes'
@@ -214,6 +269,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                       setShowAddLesson(false);
                       setEditingLesson(null);
                     }}
+                    disabled={uploading}
                   >
                     Cancel
                   </Button>

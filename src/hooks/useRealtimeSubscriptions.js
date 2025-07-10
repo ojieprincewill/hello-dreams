@@ -5,26 +5,12 @@ import supabase from '@/supabase/client';
 export const useRealtimeSubscriptions = () => {
   const queryClient = useQueryClient();
   const subscriptionsRef = useRef([]);
-  const retryTimeoutRef = useRef(null);
 
   useEffect(() => {
     let isSubscribed = true;
-    const MAX_RETRY_TIME = 15 * 1000; // 15 seconds in milliseconds
-    const RETRY_INTERVAL = 5000; // 5 seconds
-    
-    // Move retry tracking inside useEffect to avoid hook order changes
-    let retryCount = 0;
-    let startTime = null;
 
     const setupSubscriptions = async () => {
       try {
-        // Clear any existing retry timeout
-        if (retryTimeoutRef.current) {
-          clearTimeout(retryTimeoutRef.current);
-        }
-
-        console.log('Setting up realtime subscriptions...');
-        
         // Set up real-time subscriptions for all admin tables
         const subscriptions = [];
 
@@ -40,8 +26,6 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
-              
-              console.log('Jobs subscription update:', payload);
               
               // Update the jobs cache based on the event type
               queryClient.setQueryData(['jobs'], (oldData) => {
@@ -72,10 +56,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
-            console.log('Jobs subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
-              console.error('Jobs subscription error');
-              scheduleRetry();
+              // Immediately unsubscribe on error - no retry
+              supabase.removeChannel(jobsSubscription);
             }
           });
 
@@ -93,8 +76,6 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
-              
-              console.log('Blogs subscription update:', payload);
               
               // Update blogs infinite query cache
               queryClient.setQueryData(['blogs'], (oldData) => {
@@ -156,10 +137,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
-            console.log('Blogs subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
-              console.error('Blogs subscription error');
-              scheduleRetry();
+              // Immediately unsubscribe on error - no retry
+              supabase.removeChannel(blogSubscription);
             }
           });
 
@@ -177,8 +157,6 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
-              
-              console.log('Collections subscription update:', payload);
               
               queryClient.setQueryData(['collections'], (oldData) => {
                 if (!oldData) return oldData;
@@ -199,10 +177,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
-            console.log('Collections subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
-              console.error('Collections subscription error');
-              scheduleRetry();
+              // Immediately unsubscribe on error - no retry
+              supabase.removeChannel(collectionsSubscription);
             }
           });
 
@@ -220,8 +197,6 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
-              
-              console.log('Challenges subscription update:', payload);
               
               queryClient.setQueryData(['challenges'], (oldData) => {
                 if (!oldData) return oldData;
@@ -242,10 +217,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
-            console.log('Challenges subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
-              console.error('Challenges subscription error');
-              scheduleRetry();
+              // Immediately unsubscribe on error - no retry
+              supabase.removeChannel(challengesSubscription);
             }
           });
 
@@ -263,8 +237,6 @@ export const useRealtimeSubscriptions = () => {
             },
             (payload) => {
               if (!isSubscribed) return;
-              
-              console.log('Courses subscription update:', payload);
               
               queryClient.setQueryData(['courses'], (oldData) => {
                 if (!oldData) return oldData;
@@ -285,10 +257,9 @@ export const useRealtimeSubscriptions = () => {
             }
           )
           .subscribe((status) => {
-            console.log('Courses subscription status:', status);
             if (status === 'CHANNEL_ERROR' && isSubscribed) {
-              console.error('Courses subscription error');
-              scheduleRetry();
+              // Immediately unsubscribe on error - no retry
+              supabase.removeChannel(coursesSubscription);
             }
           });
 
@@ -297,45 +268,20 @@ export const useRealtimeSubscriptions = () => {
         // Store subscriptions for cleanup
         subscriptionsRef.current = subscriptions;
 
-        // Reset retry count on successful connection
-        retryCount = 0;
-        startTime = null;
-        
-        console.log('Realtime subscriptions setup complete');
-
       } catch (error) {
-        console.error('Error setting up realtime subscriptions:', error);
+        // Silent error handling - no retry, no logging
         if (isSubscribed) {
-          scheduleRetry();
+          // Clean up any existing subscriptions on error
+          subscriptionsRef.current.forEach(subscription => {
+            try {
+              supabase.removeChannel(subscription);
+            } catch (cleanupError) {
+              // Silent cleanup error
+            }
+          });
+          subscriptionsRef.current = [];
         }
       }
-    };
-
-    const scheduleRetry = () => {
-      if (retryTimeoutRef.current) {
-        clearTimeout(retryTimeoutRef.current);
-      }
-
-      // Initialize start time on first retry
-      if (startTime === null) {
-        startTime = Date.now();
-      }
-
-      // Check if we've exceeded the maximum retry time
-      const elapsedTime = Date.now() - startTime;
-      if (elapsedTime >= MAX_RETRY_TIME) {
-        console.error('Max retry time exceeded for realtime subscriptions');
-        return;
-      }
-
-      retryCount++;
-      console.log(`Retrying realtime subscriptions (attempt ${retryCount})`);
-      
-      retryTimeoutRef.current = setTimeout(() => {
-        if (isSubscribed) {
-          setupSubscriptions();
-        }
-      }, RETRY_INTERVAL);
     };
 
     // Initial setup
@@ -344,16 +290,12 @@ export const useRealtimeSubscriptions = () => {
     // Cleanup function to unsubscribe from all channels
     return () => {
       isSubscribed = false;
-      
-      if (retryTimeoutRef.current) {
-        clearTimeout(retryTimeoutRef.current);
-      }
 
       subscriptionsRef.current.forEach(subscription => {
         try {
           supabase.removeChannel(subscription);
         } catch (error) {
-          console.error('Error removing subscription:', error);
+          // Silent cleanup error
         }
       });
       
