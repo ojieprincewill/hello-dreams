@@ -2,15 +2,21 @@ import React from "react";
 import { ChevronDown, Play, FileText, Lock, Award } from "lucide-react";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 import { useParams, Link } from "react-router-dom";
-import { PreviewData1 } from "@/data/academy-data/academy.data";
+import { academyItems } from "@/data/academy-data/academy.data";
 
 const CoursePreview = () => {
   const { courseId } = useParams();
-  const course = PreviewData1.find((course) => course.id === Number(courseId));
+  const course = academyItems.find((item) => item.id === Number(courseId));
+
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
 
   if (!course) {
     return <div>Course not found.</div>;
   }
+
+  const sections = course.sections || [];
 
   return (
     <div className="px-[5%] py-10">
@@ -41,6 +47,7 @@ const CoursePreview = () => {
               </p>
               <Link
                 to={`/academy/courses/${course.id}/player`}
+                onClick={handleOrigins}
                 className="block w-max bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2  rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
@@ -54,7 +61,7 @@ const CoursePreview = () => {
                 Content
               </p>
               <div>
-                {course.sections.map((section) => (
+                {(course.sections || []).map((section) => (
                   <div
                     key={section.id}
                     className="bg-[#f7f7f7] lg:text-[14px] text-[12px] flex justify-between items-center overflow-hidden border border-[#eaecf0] rounded-sm p-3"
@@ -236,6 +243,7 @@ const CoursePreview = () => {
                 </p>
                 <Link
                   to={`/academy/courses/${course.id}/player`}
+                  onClick={handleOrigins}
                   className="block w-full bg-[#efece9] border-[0.7px] border-[#eaecf0] text-[#010413] text-[12px] md:text-[16px] text-center lg:font-medium mt-7 px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >

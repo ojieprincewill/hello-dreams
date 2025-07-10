@@ -73,7 +73,7 @@ const AcademyNavbar = () => {
           </Link>
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
-            to=""
+            to="/academy/classes"
             onClick={handleOrigins}
           >
             UI/UX Classes
