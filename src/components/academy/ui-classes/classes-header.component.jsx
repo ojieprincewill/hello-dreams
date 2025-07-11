@@ -3,7 +3,7 @@ import React from "react";
 const ClassesHeader = () => {
   return (
     <div
-      className="flex flex-col items-center px-[5%] py-4 md:py-8 bg-gradient-to-b from-[#f8f9fb] to-white"
+      className="flex flex-col items-center px-[5%] py-4 md:py-8"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       <div className="flex -space-x-4 mb-3">

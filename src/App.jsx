@@ -56,6 +56,7 @@ import ClassesPage from "./pages/academy-pages/classes-page";
 import LoginPage from "./pages/login-page/login-page";
 import UnauthorizedPage from "./pages/unauthorized-page/unauthorized-page";
 import CoursePlayerPage from "./pages/academy-pages/course-player-page";
+import CohortsPage from "./pages/cohorts-page/CohortsPage";
 
 const queryClient = new QueryClient();
 
@@ -150,6 +151,7 @@ function App() {
               element={<CoursePlayerPage />}
             />
             <Route path="/academy/classes" element={<ClassesPage />} />
+            <Route path="/academy/cohorts" element={<CohortsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
             <Route path="/work-with-us" element={<BookCallPage />} />

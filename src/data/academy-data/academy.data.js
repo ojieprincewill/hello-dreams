@@ -640,29 +640,107 @@ export const academyItems = [
   },
 ];
 
-export const JoinCohortData = [
+export const CohortsData = [
   {
     id: 1,
-    image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/1f4a683c23d8f7044f1595f63e6045e6037d3fd0_abwprv.jpg",
-    text: "August 31st, 2024",
+    category: "Live UI/UX Classes",
+    info: [
+      {
+        id: 1,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/1f4a683c23d8f7044f1595f63e6045e6037d3fd0_abwprv.jpg",
+
+        text: "August 31st, 2024",
+      },
+      {
+        id: 2,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/9f0b02158d825c8b0e8a3c41c696acd8d3d8a402_k4f3r2.jpg",
+        text: "8 weeks",
+      },
+      {
+        id: 3,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/b947ba7f94860086f5f9ef4863ce53521f556bee_yj5ujp.jpg",
+        text: "Instructors",
+      },
+      {
+        id: 4,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858108/Academy/landing/7a6d2d5d2930143b52860b5330f914f66c4774ee_u2vafu.jpg",
+        text: "Beginners friendly",
+      },
+    ],
+    price: 300000,
+    oldPrice: 350000,
+    currency: "NGN",
   },
   {
     id: 2,
-    image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/9f0b02158d825c8b0e8a3c41c696acd8d3d8a402_k4f3r2.jpg",
-    text: "8 weeks",
+    category: "Live Data Analysis Classes",
+    info: [
+      {
+        id: 1,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/1f4a683c23d8f7044f1595f63e6045e6037d3fd0_abwprv.jpg",
+
+        text: "August 31st, 2024",
+      },
+      {
+        id: 2,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/9f0b02158d825c8b0e8a3c41c696acd8d3d8a402_k4f3r2.jpg",
+        text: "8 weeks",
+      },
+      {
+        id: 3,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/b947ba7f94860086f5f9ef4863ce53521f556bee_yj5ujp.jpg",
+        text: "Instructors",
+      },
+      {
+        id: 4,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858108/Academy/landing/7a6d2d5d2930143b52860b5330f914f66c4774ee_u2vafu.jpg",
+        text: "Beginners friendly",
+      },
+    ],
+    price: 300000,
+    oldPrice: 350000,
+    currency: "NGN",
   },
   {
     id: 3,
-    image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/b947ba7f94860086f5f9ef4863ce53521f556bee_yj5ujp.jpg",
-    text: "Instructors",
-  },
-  {
-    id: 4,
-    image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858108/Academy/landing/7a6d2d5d2930143b52860b5330f914f66c4774ee_u2vafu.jpg",
-    text: "Beginner friendly",
+    category: "Live Digital Marketing Classes",
+    info: [
+      {
+        id: 1,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/1f4a683c23d8f7044f1595f63e6045e6037d3fd0_abwprv.jpg",
+
+        text: "August 31st, 2024",
+      },
+      {
+        id: 2,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/9f0b02158d825c8b0e8a3c41c696acd8d3d8a402_k4f3r2.jpg",
+        text: "8 weeks",
+      },
+      {
+        id: 3,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858109/Academy/landing/b947ba7f94860086f5f9ef4863ce53521f556bee_yj5ujp.jpg",
+        text: "Instructors",
+      },
+      {
+        id: 4,
+        image:
+          "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750858108/Academy/landing/7a6d2d5d2930143b52860b5330f914f66c4774ee_u2vafu.jpg",
+        text: "Beginners friendly",
+      },
+    ],
+    price: 300000,
+    oldPrice: 350000,
+    currency: "NGN",
   },
 ];

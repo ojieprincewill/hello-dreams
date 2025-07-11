@@ -11,6 +11,8 @@ import FreeClassCard from "../class-cards/free-class-card.component";
 import Min20ClassCard from "../class-cards/min20-class-card.component";
 import CourseCard from "../course-cards/CourseCard";
 import { useSelector } from "react-redux";
+import CohortCard from "../cohort-card/CohortCard";
+import { CohortsData } from "@/data/academy-data/academy.data";
 
 const CATEGORY_OPTIONS = [
   { label: "All classes", value: "all" },
@@ -134,27 +136,37 @@ const ClassesMain = () => {
 
       {/* Grid */}
       {category === "courses" ? (
-        COURSE_CATEGORIES.map((cat) => {
-          const coursesInCat = filteredCourses.filter(
-            (c) => c.category === cat
-          );
-          if (coursesInCat.length === 0) return null;
-          return (
-            <div key={cat} className="mb-15">
-              <h2
-                className="text-[20px] md:text-[24px] lg:text-[40px] font-bold mb-5 text-[#010413]"
-                style={{ fontFamily: "DM Sans, sans-serif" }}
-              >
-                {cat}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-                {coursesInCat.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
+        <>
+          {COURSE_CATEGORIES.map((cat) => {
+            const coursesInCat = filteredCourses.filter(c => c.category === cat);
+            if (coursesInCat.length === 0) return null;
+            return (
+              <div key={cat} className="mb-15">
+                <h2 className="text-[20px] md:text-[30px] lg:text-[40px] font-bold mb-5 text-[#010413]" style={{ fontFamily: "DM Sans, sans-serif" }}>{cat}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+                  {coursesInCat.map(course => (
+                    <CourseCard key={course.id} course={course} />
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })
+            );
+          })}
+          {/* UI/UX Cohort Card at the bottom */}
+          <div className="mt-10">
+            <h2
+              className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold mb-7"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              {CohortsData[0].category}
+            </h2>
+            <CohortCard
+              info={CohortsData[0].info}
+              price={CohortsData[0].price}
+              oldPrice={CohortsData[0].oldPrice}
+              currency={CohortsData[0].currency}
+            />
+          </div>
+        </>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
           {filteredClasses.length === 0 ? (
