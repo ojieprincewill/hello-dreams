@@ -21,7 +21,11 @@ import {
 } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import { useLessons, useDeleteLesson } from '@/hooks/useLessons';
-import { uploadLessonWithProgress } from '../../../../services/uploadLessonToMux.js';
+import {
+  uploadLessonWithProgress,
+  uploadThumbnailToStorage,
+  uploadAttachmentsToStorage,
+} from '../../../../services/uploadLessonToMux.js';
 import { Progress } from '../../ui/progress';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
@@ -30,6 +34,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
     title: '',
     duration: '',
     description: '',
+    section_title: '',
+    thumbnail_image: '',
+    resources: [],
+    attachments: [],
     videoFile: null,
   });
   const [editingLesson, setEditingLesson] = useState(null);
@@ -61,18 +69,62 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       setUploading(true);
       setUploadProgress({ stage: 'uploading', percent: 0 });
 
+      // Upload video
       const res = await uploadLessonWithProgress({
         file: newLesson.videoFile,
         course_id: courseId,
         title: newLesson.title,
         duration: newLesson.duration,
         description: newLesson.description,
-        onProgress: (progress) => {
-          setUploadProgress(progress);
-        },
+        onProgress: (progress) => setUploadProgress(progress),
       });
 
-      console.log(res);
+      // Upload thumbnail if present
+      let thumbnailUrl = '';
+      if (
+        newLesson.thumbnail_image &&
+        newLesson.thumbnail_image instanceof File
+      ) {
+        try {
+          thumbnailUrl = await uploadThumbnailToStorage(
+            newLesson.thumbnail_image,
+          );
+        } catch (err) {
+          toast({
+            title: 'Thumbnail upload failed',
+            description: err.message,
+            variant: 'destructive',
+          });
+          thumbnailUrl = '';
+        }
+      }
+
+      // Upload attachments if present
+      let attachmentsUrls = [];
+      if (
+        Array.isArray(newLesson.attachments) &&
+        newLesson.attachments.some((a) => a instanceof File)
+      ) {
+        try {
+          const files = newLesson.attachments.filter((a) => a instanceof File);
+          attachmentsUrls = await uploadAttachmentsToStorage(files);
+        } catch (err) {
+          toast({
+            title: 'Attachment upload failed',
+            description: err.message,
+            variant: 'destructive',
+          });
+          attachmentsUrls = [];
+        }
+      } else if (typeof newLesson.attachments === 'string') {
+        attachmentsUrls = newLesson.attachments.split(',').map((s) => s.trim());
+      } else if (Array.isArray(newLesson.attachments)) {
+        attachmentsUrls = newLesson.attachments;
+      }
+
+      // Save lesson to DB (call your createLesson mutation or API here)
+      // Example: await createLesson.mutateAsync({ ...newLesson, thumbnail_image: thumbnailUrl, attachments: attachmentsUrls });
+      // You may need to adjust this to fit your actual mutation logic
 
       toast({
         title: 'Lesson added',
@@ -84,6 +136,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
         title: '',
         duration: '',
         description: '',
+        section_title: '',
+        thumbnail_image: '',
+        resources: [],
+        attachments: [],
         videoFile: null,
       });
       setShowAddLesson(false);
@@ -122,6 +178,10 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       title: lesson.title,
       duration: lesson.duration,
       description: lesson.description,
+      section_title: lesson.section_title || '',
+      thumbnail_image: lesson.thumbnail_image || '',
+      resources: lesson.resources || [],
+      attachments: lesson.attachments || [],
       videoFile: null,
     });
     setShowAddLesson(true);
@@ -186,7 +246,20 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                     />
                   </div>
                   <div>
-                    <Label>Duration</Label>
+                    <Label>Section Title</Label>
+                    <Input
+                      value={newLesson.section_title}
+                      onChange={(e) =>
+                        setNewLesson({
+                          ...newLesson,
+                          section_title: e.target.value,
+                        })
+                      }
+                      placeholder="Enter section title"
+                    />
+                  </div>
+                  <div>
+                    <Label>Duration (formatted)</Label>
                     <Input
                       value={newLesson.duration}
                       onChange={(e) =>
@@ -205,6 +278,55 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
                       setNewLesson({
                         ...newLesson,
                         videoFile: e.target.files?.[0] || null,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label>Thumbnail Image</Label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) =>
+                      setNewLesson({
+                        ...newLesson,
+                        thumbnail_image: e.target.files?.[0] || null,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label>
+                    Resources (comma separated URLs or file uploads)
+                  </Label>
+                  <Input
+                    type="text"
+                    value={
+                      Array.isArray(newLesson.resources)
+                        ? newLesson.resources.join(',')
+                        : newLesson.resources
+                    }
+                    onChange={(e) =>
+                      setNewLesson({
+                        ...newLesson,
+                        resources: e.target.value
+                          .split(',')
+                          .map((s) => s.trim()),
+                      })
+                    }
+                    placeholder="https://example.com/resource1, https://example.com/resource2"
+                  />
+                </div>
+                <div>
+                  <Label>Attachments (upload one or more files)</Label>
+                  <Input
+                    type="file"
+                    multiple
+                    accept="*"
+                    onChange={(e) =>
+                      setNewLesson({
+                        ...newLesson,
+                        attachments: Array.from(e.target.files || []),
                       })
                     }
                   />

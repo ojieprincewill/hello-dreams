@@ -1,17 +1,17 @@
-import AcademyNavbar from "@/components/academy/academy-nav/academy-nav.component";
-import CoursePlayerLayout from "@/components/academy/course-player/course-player-layour.component";
-import FooterSection from "@/components/footer-section/footer-section.component";
-import React from "react";
-import { useParams } from "react-router-dom";
-import { PreviewData1 } from "@/data/academy-data/academy.data";
+import AcademyNavbar from '@/components/academy/academy-nav/academy-nav.component';
+import CoursePlayerLayout from '@/components/academy/course-player/course-player-layour.component';
+import FooterSection from '@/components/footer-section/footer-section.component';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useCourse } from '@/hooks/useCourses';
 
 const CoursePlayerPage = () => {
   const { courseId } = useParams();
-  const course = PreviewData1.find((course) => course.id === Number(courseId));
+  const { data: course, isLoading, error } = useCourse(courseId);
 
-  if (!course) {
-    return <div>Course not found.</div>;
-  }
+  if (isLoading) return <div>Loading course...</div>;
+  if (error) return <div>Error loading course.</div>;
+  if (!course) return <div>Course not found.</div>;
 
   return (
     <>

@@ -1,24 +1,58 @@
-import React from "react";
-import { ChevronDown, Play, FileText, Lock, Award } from "lucide-react";
-import { BookmarkIcon } from "@heroicons/react/24/solid";
-import { useParams, Link } from "react-router-dom";
-import { PreviewData1 } from "@/data/academy-data/academy.data";
+import React, { useState, useRef, useCallback } from 'react';
+import { ChevronDown, Play, FileText, Lock, Award } from 'lucide-react';
+import { BookmarkIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import { useCourse } from '@/hooks/useCourses';
+import { useCourseSectionsData } from '@/hooks/useAcademy';
 
-const CoursePreview = () => {
-  const { courseId } = useParams();
-  const course = PreviewData1.find((course) => course.id === Number(courseId));
+const PAGE_SIZE = 15;
 
-  if (!course) {
-    return <div>Course not found.</div>;
-  }
+const CoursePreview = ({ courseId }) => {
+  const { data: course, isLoading, error } = useCourse(courseId);
+  const {
+    data: sections = [],
+    isLoading: sectionsLoading,
+    error: sectionsError,
+  } = useCourseSectionsData(courseId);
+  const [visibleSections, setVisibleSections] = useState(PAGE_SIZE);
+  const loader = useRef();
+
+  // Infinite scroll: load more sections when the loader is visible
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        setVisibleSections((prev) =>
+          Math.min(prev + PAGE_SIZE, sections.length),
+        );
+      }
+    },
+    [sections.length],
+  );
+
+  React.useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 1.0,
+    };
+    const observer = new window.IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+    return () => observer.disconnect();
+  }, [handleObserver]);
+
+  if (isLoading || sectionsLoading) return <div>Loading course...</div>;
+  if (error || sectionsError) return <div>Error loading course.</div>;
+  if (!course) return <div>Course not found.</div>;
 
   return (
     <div className="px-[5%] py-10">
       <div className="bg-[#efece9] h-[180px] lg:h-[338px] md:h-[240px] p-3 lg:p-5 flex justify-center items-center rounded-md overflow-hidden shadow-lg">
         <img
-          src={course.image}
+          src={course.cover_image}
           alt="Course preview"
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
 
@@ -35,9 +69,7 @@ const CoursePreview = () => {
                 className="text-[#667085] text-[13px] md:text-[14px] leading-[1.5] max-w-full md:max-w-[422px]"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Master Figma's Auto Layout—learn alignment, spacing, and
-                constraints to create responsive screens for mobile, tablet, and
-                desktop.
+                {course.description}
               </p>
               <Link
                 to={`/academy/courses/${course.id}/player`}
@@ -54,7 +86,7 @@ const CoursePreview = () => {
                 Content
               </p>
               <div>
-                {course.sections.map((section) => (
+                {sections.slice(0, visibleSections).map((section) => (
                   <div
                     key={section.id}
                     className="bg-[#f7f7f7] lg:text-[14px] text-[12px] flex justify-between items-center overflow-hidden border border-[#eaecf0] rounded-sm p-3"
@@ -74,13 +106,21 @@ const CoursePreview = () => {
                     </div>
                   </div>
                 ))}
+                <div ref={loader} />
+                {visibleSections < sections.length && (
+                  <button
+                    className="w-full bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    onClick={() =>
+                      setVisibleSections((prev) =>
+                        Math.min(prev + PAGE_SIZE, sections.length),
+                      )
+                    }
+                  >
+                    Load 15 More Sections
+                  </button>
+                )}
               </div>
-              <button
-                className="w-full bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Load 15 More Sections
-              </button>
             </div>
 
             {/* Requirements */}
@@ -92,15 +132,15 @@ const CoursePreview = () => {
                 className="list-disc pl-6 space-y-2"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <li className="text-[#2d2f31] lg:text-[14px] text-[13px] ">
-                  A copy of Figma (a free plan is available on the Figma
-                  website).
-                </li>
-                <li className="text-[#2d2f31] lg:text-[14px] text-[13px] ">
-                  Basic knowledge of Figma is required. I recommend watching my
-                  Figma Essentials course prior to embarking on this epic
-                  adventure.
-                </li>
+                {course.requirements &&
+                  course.requirements.split('\n').map((req, idx) => (
+                    <li
+                      key={idx}
+                      className="text-[#2d2f31] lg:text-[14px] text-[13px] "
+                    >
+                      {req}
+                    </li>
+                  ))}
               </ul>
             </div>
 
@@ -113,51 +153,8 @@ const CoursePreview = () => {
                 className="text-[#2d2f31] lg:text-[14px] text-[13px] lg:space-y-4 space-y-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <p>
-                  Hi there, aspiring Figma enthusiasts! Are you ready to embark
-                  on an exhilarating journey with me, Dan Scott, as we unlock
-                  the full potential of our Figma skills in the dazzling realm
-                  of UX/UI Design using Figma Advanced?
-                </p>
-                <p>
-                  This course is tailor-made for those who have already mastered
-                  the fundamental principles of UI/UX Design using Figma. If
-                  you've triumphed over my Figma Essentials course or have a
-                  sneaking suspicion that there's a treasure trove of unexplored
-                  tools, tips, workflows, and updates awaiting your discovery,
-                  then look no further! This course is your golden ticket to
-                  taking your UI/UX prowess to the next level.
-                </p>
-                <p>
-                  Together, we'll start by delving into the depths of multilevel
-                  nested autolayouts, and unravel the secrets used by UX
-                  professionals by learning:
-                </p>
-                <p>
-                  Workflow techniques, managing design assets, styles,
-                  components, grid and column layouts like true virtuosos.
-                </p>
+                <p>{course.long_description || course.description}</p>
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <p className="text-[#212121] lg:text-[18px] text-[14px] font-semibold">
-                Master auto layout
-              </p>
-              <p
-                className="text-[#414141] lg:text-[14px] text-[13px] leading-[1.5]"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Explore Auto Layout in Figma, starting with horizontal,
-                vertical, and wrap layouts. Manage padding, gaps, and alignment,
-                and use constraints like fixed, hug, and fill for optimal
-                sizing. Design navigation bars, top bars, headings, cards, and
-                lists for mobile, tablet, and desktop. This course prepares you
-                to create scalable and adaptable UI designs across devices.
-              </p>
-              <p className="text-[#1342ff] lg:text-[14px] text-[13px] font-bold leading-[1.5] cursor-pointer">
-                Show more <ChevronDown className="w-4 h-4 inline" />
-              </p>
             </div>
 
             {/* Certificate */}
@@ -167,9 +164,10 @@ const CoursePreview = () => {
               </p>
               <div className="relative h-[260px] lg:h-[574px] md:h-[350px] bg-[#eef2fe] p-3 lg:p-6 rounded-2xl overflow-hidden">
                 <img
-                  src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751490284/Academy/course%20preview/71932497220d21a58200c812efe31b01f8162fbe_iitqym.png"
+                  src={course.certificate_image}
                   alt="certificate"
                   className="w-full h-full object-cover rounded-2xl"
+                  loading="lazy"
                 />
                 <div
                   className="absolute bottom-0 left-0 right-0 h-[55%] lg:p-6 p-3 bg-[#f7f7f7]/50 backdrop-blur-sm border-t border-t-[#e5e7eb] overflow-hidden"
@@ -195,9 +193,10 @@ const CoursePreview = () => {
               <div className="flex flex-col items-start md:flex-row md:items-center lg:space-x-7 md:space-x-4 sm:space-x-0 ">
                 <div className="w-full h-[180px] md:w-[162px] md:h-[198px] rounded-xl overflow-hidden flex-shrink-0 mb-0 sm:mb-2">
                   <img
-                    src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751491144/Academy/course%20preview/dc82c7df5c7eb1bbe6fd228eb18844a8cadd6cbf_zc7ssz.jpg"
+                    src={course.instructor_image}
                     alt="instructor"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div
@@ -206,18 +205,14 @@ const CoursePreview = () => {
                 >
                   <div className="mt-2 md:mt-0 md:space-y-2 ">
                     <p className="text-[#212121] lg:text-[16px] text-[14px] font-semibold">
-                      Pamela Ohaeri
+                      {course.instructor_name}
                     </p>
                     <p className="text-[#2d2f31] text-[12px]">
-                      Lead Instructor
+                      {course.instructor_title}
                     </p>
                   </div>
                   <p className="text-[#2d2f31] text-[13px] lg:text-[14px] leading-[1.5]">
-                    Lorem ipsum dolor sit amet consectetur. Nulla amet velit in
-                    eu ut turpis vitae. Id posuere consequat adipiscing sodales
-                    pellentesque velit massa id elementum. Eu mi vitae nisl
-                    nullam mauris non aliquam. Nec aliquet suscipit elementum
-                    nec et cras aliquet.
+                    {course.instructor_bio}
                   </p>
                 </div>
               </div>
@@ -232,7 +227,7 @@ const CoursePreview = () => {
                   {course.title}
                 </p>
                 <p className="text-[#667085] lg:text-[16px] text-[13px]">
-                  Beginner . {course.totalTime}
+                  {course.difficulty_level} . {course.total_duration}
                 </p>
                 <Link
                   to={`/academy/courses/${course.id}/player`}
@@ -249,9 +244,10 @@ const CoursePreview = () => {
                 </p>
                 <div className="relative h-[240px] bg-[#eef2fe] p-3 rounded-2xl overflow-hidden">
                   <img
-                    src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751490284/Academy/course%20preview/71932497220d21a58200c812efe31b01f8162fbe_iitqym.png"
+                    src={course.certificate_image}
                     alt="certificate"
                     className="w-full h-full object-cover rounded-2xl"
+                    loading="lazy"
                   />
                   <div
                     className="absolute bottom-0 left-0 right-0 h-[55%] p-3 bg-[#f7f7f7]/50 backdrop-blur-sm border-t border-t-[#e5e7eb] overflow-hidden"
@@ -274,12 +270,7 @@ const CoursePreview = () => {
                   Skills
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Auto layout",
-                    "Figma auto layout",
-                    "Responsive design",
-                    "Constraints",
-                  ].map((skill) => (
+                  {(course.skills_covered || []).map((skill) => (
                     <div
                       key={skill}
                       className="flex items-center px-2 py-1 lg:px-3 lg:py-2 border-[1.5px] border-[#eaecf0] lg:text-[14px] text-[12px] rounded-sm"
