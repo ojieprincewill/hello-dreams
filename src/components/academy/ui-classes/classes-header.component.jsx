@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ClassesHeader = () => {
+  const handleOrigins = () => {
+    window.scrollTo(0,0);
+  }
+
   return (
     <div
       className="flex flex-col items-center px-[5%] py-4 md:py-8"
@@ -40,9 +45,9 @@ const ClassesHeader = () => {
         You can develop your UI/UX career & skills for less than $2/week —
         cancel anytime
       </p>
-      <button className="bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
+      <Link to="/signup" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
         Sign up
-      </button>
+      </Link>
     </div>
   );
 };
