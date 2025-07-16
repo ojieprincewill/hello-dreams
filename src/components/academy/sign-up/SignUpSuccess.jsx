@@ -32,7 +32,7 @@ const SignUpSuccess = ({ formData }) => {
         </p>
 
         <Link
-          to="/login"
+          to="/signin"
           onClick={handleOrigins}
           className="block w-full py-3 rounded-lg bg-[#1342ff] text-white text-[16px] md:text-[18px] font-bold text-center hover:bg-[#2313ff] transition-colors duration-200 "
         >

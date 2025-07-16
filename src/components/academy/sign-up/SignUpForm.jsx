@@ -36,7 +36,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
                 Acade<span className="text-[#1342ff]">m</span>y
               </span>
             </div>
-            <div className="pl-10 mb--20 mt-auto">
+            <div className="pl-10 -mb-40 mt-auto">
               <h2 className="text-white text-[36px] font-semibold mb-4 leading-tight w-[495px] ">
                 Building a brighter future by equipping you with valuable
                 skills.
@@ -150,7 +150,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
             </div>
             <button
               type="submit"
-              className="w-full mt-4 py-3 rounded-lg bg-[#E4E9F5] text-[#101828] text-[18px] font-bold hover:bg-[#1342ff] hover:text-white disabled:opacity-60 transition-colors duration-200 cursor-pointer"
+              className="w-full mt-4 py-3 rounded-lg bg-[#1342ff] text-[#fff] text-[18px] font-bold hover:bg-[#2313ff] disabled:opacity-60 transition-colors duration-200 cursor-pointer"
               disabled={
                 !(
                   formData.firstName &&
@@ -170,7 +170,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
             <div className="text-center text-[#667085] text-[15px] px-2">
               Already have an account?{" "}
               <Link
-                to="/login"
+                to="/signin"
                 onClick={handleOrigins}
                 className="text-[#1342ff] font-bold hover:underline"
               >

@@ -109,7 +109,7 @@ const AcademyNavbar = () => {
 
         <div className="space-x-3">
           <Link
-            to=""
+            to="/signin"
             className="hidden lg:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
@@ -117,7 +117,7 @@ const AcademyNavbar = () => {
           </Link>
 
           <Link
-            to=""
+            to="/signup"
             className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] lg:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
             onClick={handleOrigins}
           >
