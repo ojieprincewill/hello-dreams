@@ -100,7 +100,7 @@ const AcademyNavbar = () => {
           </div>
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
-            to=""
+            to="/academy/pricing"
             onClick={handleOrigins}
           >
             Pricing

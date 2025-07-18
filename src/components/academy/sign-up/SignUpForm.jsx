@@ -6,6 +6,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   const currentYear = new Date().getFullYear();
 
   const handleOrigins = () => {

@@ -59,6 +59,8 @@ import CoursePlayerPage from "./pages/academy-pages/course-player-page";
 import CohortsPage from "./pages/cohorts-page/CohortsPage";
 import SignUpFlow from "./pages/auth/SignUpFlow";
 import LoginForm from "./components/academy/login/login-form.component";
+import PricingPage from "./pages/academy-pages/pricing-page";
+import MembershipPage from "./pages/academy-pages/membership-page";
 
 const queryClient = new QueryClient();
 
@@ -154,8 +156,10 @@ function App() {
             />
             <Route path="/academy/classes" element={<ClassesPage />} />
             <Route path="/academy/cohorts" element={<CohortsPage />} />
+            <Route path="/academy/pricing" element={<PricingPage />} />
             <Route path="/signup" element={<SignUpFlow />} />
             <Route path="/signin" element={<LoginForm />} />
+            <Route path="/membership" element={<MembershipPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
             <Route path="/work-with-us" element={<BookCallPage />} />
