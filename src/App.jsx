@@ -61,6 +61,7 @@ import SignUpFlow from "./pages/auth/SignUpFlow";
 import LoginForm from "./components/academy/login/login-form.component";
 import PricingPage from "./pages/academy-pages/pricing-page";
 import MembershipPage from "./pages/academy-pages/membership-page";
+import UserProfilePage from "./pages/academy-pages/user-profile-page";
 
 const queryClient = new QueryClient();
 
@@ -160,6 +161,7 @@ function App() {
             <Route path="/signup" element={<SignUpFlow />} />
             <Route path="/signin" element={<LoginForm />} />
             <Route path="/membership" element={<MembershipPage />} />
+            <Route path="/userprofile" element={<UserProfilePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/refer-and-earn" element={<ReferPage />} />
             <Route path="/work-with-us" element={<BookCallPage />} />
