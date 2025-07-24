@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
+import Logo from "@/components/logo/logo.component";
 
 const VerifyAccount = ({ onContinue, onBack, formData }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -55,19 +56,24 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
         {/* Back arrow */}
         <button
           onClick={onBack}
-          className="block text-[#101828] hover:text-[#1342ff]"
+          className="text-[#101828] hover:text-[#1342ff] text-2xl md:text-3xl transition-colors duration-200 cursor-pointer"
         >
           <span aria-label="Back" role="img">
             <ArrowLeft size={24} strokeWidth={2.5} />
           </span>
         </button>
         <div className="w-full flex flex-col items-center mt-2">
-          <span
-            className="text-[18px] md:text-[20px] font-bold mb-2"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            Acade<span className="text-[#1342ff]">m</span>y
-          </span>
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px]">
+              <Logo />
+            </div>
+            <span
+              className="text-[18px] md:text-[20px] font-bold mb-2"
+              style={{ fontFamily: "DM Sans, sans-serif" }}
+            >
+              Acade<span className="text-[#1342ff]">m</span>y
+            </span>
+          </div>
           <h1 className="text-[#14142a] text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-2 text-center">
             Verify your account
           </h1>

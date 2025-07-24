@@ -1,7 +1,19 @@
 import React from "react";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const AcademyPricing = () => {
+  const navigate = useNavigate();
+
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleOrigins();
+  };
+
   return (
     <div className="w-full px-[5%] lg:px-[14%] py-10">
       <div>
@@ -78,6 +90,7 @@ const AcademyPricing = () => {
               </div>
             </div>
             <button
+              onClick={() => handleNavigate("/membership?active=course")}
               className="w-full bg-[#101828] text-white text-[15.13px] font-bold rounded-lg py-3 hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer"
               style={{ fontFamily: "DM Sans, sans-serif" }}
             >
@@ -122,6 +135,7 @@ const AcademyPricing = () => {
               </div>
             </div>
             <button
+              onClick={() => handleNavigate("/membership?active=member")}
               className="w-full bg-white text-[#101828] text-[15.13px] font-bold rounded-lg py-3 mt-auto hover:bg-[#eaecf0] transition-colors duration-300 cursor-pointer"
               style={{ fontFamily: "DM Sans, sans-serif" }}
             >

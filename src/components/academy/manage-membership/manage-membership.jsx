@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import Preview2 from "../landing-previews/preview2.component";
 import JoinCohort from "../landing-previews/join-cohort.component";
 
 const ManageMembership = () => {
-  const [activeTab, setActiveTab] = useState("membership");
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get("active");
+  const initialTab =
+    tabParam === "course" || tabParam === "membership"
+      ? tabParam
+      : "membership";
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [billingCycle, setBillingCycle] = useState("monthly");
   const [formStep, setFormStep] = useState(1);
   const [formData, setFormData] = useState({

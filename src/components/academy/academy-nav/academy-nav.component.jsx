@@ -2,14 +2,11 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import Logo from "../../logo/logo.component";
-
 import {
   ChevronDownIcon,
   ChevronUpIcon,
   Bars3BottomLeftIcon,
 } from "@heroicons/react/24/solid";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 import { CourseOptions } from "../../../data/academy-courses-data/course-options.data";
 import AcademySidebar from "./academy-sidebar.component";
@@ -48,22 +45,15 @@ const AcademyNavbar = () => {
       >
         {/* Logo Section */}
         <Link
-          to="/"
+          className="text-[#010413] font-bold text-[16px] md:text-[20px] hover:text-[#1342ff] transition-colors duration-300"
+          to="/academy"
           onClick={handleOrigins}
-          className="lg:hidden flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px] lg:w-[78.68px] lg:h-[54.89px] cursor-pointer"
         >
-          <Logo />
+          Acade<span className="text-[#1342ff]">m</span>y
         </Link>
 
         {/* Navigation Links */}
-        <div className=" hidden lg:flex space-x-6 items-center">
-          <Link
-            className="text-[#010413] font-bold text-[20px] hover:text-[#1342ff] transition-colors duration-300"
-            to="/academy"
-            onClick={handleOrigins}
-          >
-            Acade<span className="text-[#1342ff]">m</span>y
-          </Link>
+        <div className=" hidden xl:flex space-x-6 items-center">
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/"
@@ -95,9 +85,7 @@ const AcademyNavbar = () => {
               className="w-full h-full border-[0.5px] border-[#101828] rounded-sm outline-none p-2"
             />
           </div>
-          <div>
-            <ShoppingCartIcon className="w-4 h-4 md:h-6 md:w-6 " />
-          </div>
+
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/academy/pricing"
@@ -110,7 +98,7 @@ const AcademyNavbar = () => {
         <div className="space-x-3">
           <Link
             to="/signin"
-            className="hidden lg:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+            className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
             Sign in
@@ -125,7 +113,7 @@ const AcademyNavbar = () => {
           </Link>
           <button
             onClick={openSideBar}
-            className="h-8 w-8 text-[#010413] lg:hidden cursor-pointer align-middle"
+            className="h-8 w-8 text-[#010413] xl:hidden cursor-pointer align-middle"
           >
             <Bars3BottomLeftIcon />
           </button>

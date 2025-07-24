@@ -50,7 +50,7 @@ const AccountSettings = () => {
             readOnly
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 mb-4">
           <div>
             <label className="block text-[#667085] text-[12px] mb-1">
               Country code
@@ -76,6 +76,14 @@ const AccountSettings = () => {
               readOnly
             />
           </div>
+        </div>
+        <div className="flex justify-end">
+          <button
+            className="w-max bg-[#1342ff] text-[#fff] text-[14px] md:text-[16px] font-bold rounded-lg py-2 px-3 hover:bg-[#2313ff] disabled:opacity-60 transition-colors duration-200 cursor-pointer"
+            disabled={true}
+          >
+            Save changes
+          </button>
         </div>
       </div>
     </div>

@@ -95,14 +95,14 @@ const SocialManagementSection = () => {
         </div>
 
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] flex justify-center items-center">
-          <motion.img
+          {/* <motion.img
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330726/dd88d0d80e3a90b61f773f01e03e6be721b91599_l0osml.png"
             alt="graphic design image"
             className="w-[261px] h-[261px] md:w-[492px] md:h-[492px] object-contain"
-          />
+          /> */}
         </div>
       </div>
     </div>

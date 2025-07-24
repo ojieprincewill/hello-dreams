@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import Logo from "@/components/logo/logo.component";
 
 const CreatePassword = ({ onContinue, onBack, formData, setFormData }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,12 +62,17 @@ const CreatePassword = ({ onContinue, onBack, formData, setFormData }) => {
           </span>
         </button>
         <div className="w-full flex flex-col items-center mt-2">
-          <span
-            className="text-[18px] md:text-[20px] font-bold mb-2"
-            style={{ fontFamily: "DM Sans, sans-serif" }}
-          >
-            Acade<span className="text-[#1342ff]">m</span>y
-          </span>
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px]">
+              <Logo />
+            </div>
+            <span
+              className="text-[18px] md:text-[20px] font-bold mb-2"
+              style={{ fontFamily: "DM Sans, sans-serif" }}
+            >
+              Acade<span className="text-[#1342ff]">m</span>y
+            </span>
+          </div>
           <h1 className="text-[#101828] text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-2 text-center">
             Create your password
           </h1>

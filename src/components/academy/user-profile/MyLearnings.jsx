@@ -54,7 +54,7 @@ const MyLearnings = () => {
           display: none;
         }
       `}</style>
-      
+
       <div className="bg-[#1342ff] pt-6 md:pt-10 pl-4 md:pl-10 pr-4 md:pr-10 mb-6 text-[#fff] relative overflow-hidden">
         {/* Rotated image in header - hidden on mobile */}
         <div className="absolute top-[-370px] right-[-560px] w-[736px] h-auto hidden lg:block">
@@ -76,12 +76,9 @@ const MyLearnings = () => {
           13hr 27min{" "}
           <span className="text-[#f7f7f7]/60 text-[12px] md:text-[14px] lg:text-[16px]">
             watched
-          </span>{" "}
-          <span className="ml-2 text-[12px] md:text-[14px] lg:text-[16px] hover:underline cursor-pointer">
-            view all activity
           </span>
         </div>
-        
+
         {/* Responsive tabs */}
         <div className="relative z-10 mt-10 md:mt-20 lg:mt-30">
           <div className="flex gap-3 md:gap-8 overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
@@ -103,12 +100,14 @@ const MyLearnings = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="p-4 md:p-6">
         {activeTab === "all" && (
           <div>
             {allInteractedClasses.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">No classes yet.</div>
+              <div className="text-[#667085] text-center py-8">
+                No classes yet.
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {allInteractedClasses.map((classItem) => {
@@ -122,7 +121,9 @@ const MyLearnings = () => {
         {activeTab === "wishlist" && (
           <div>
             {wishlistClasses.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">No saved classes yet.</div>
+              <div className="text-[#667085] text-center py-8">
+                No saved classes yet.
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {wishlistClasses.map((classItem) => {
@@ -136,7 +137,9 @@ const MyLearnings = () => {
         {activeTab === "progress" && (
           <div>
             {progressClasses.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">No in-progress classes yet.</div>
+              <div className="text-[#667085] text-center py-8">
+                No in-progress classes yet.
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {progressClasses.map((classItem) => {
@@ -150,7 +153,9 @@ const MyLearnings = () => {
         {activeTab === "completed" && (
           <div>
             {completedClassesList.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">No completed classes yet.</div>
+              <div className="text-[#667085] text-center py-8">
+                No completed classes yet.
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {completedClassesList.map((classItem) => {

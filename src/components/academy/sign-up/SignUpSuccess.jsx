@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "@/components/logo/logo.component";
 
 const SignUpSuccess = ({ formData }) => {
   const handleOrigins = () => {
@@ -7,14 +8,20 @@ const SignUpSuccess = ({ formData }) => {
   };
 
   return (
-    <div className="min-h-screen w-full p-[5%] flex items-center justify-center">
-      <div className="w-full md:w-[635px] flex flex-col items-center justify-center bg-white rounded-3xl shadow-lg p-4">
-        <span
-          className="text-[18px] md:text-[20px] font-bold mb-2 mt-4"
-          style={{ fontFamily: "DM Sans, sans-serif" }}
-        >
-          Acade<span className="text-[#1342ff]">m</span>y
-        </span>
+    <div className="relative min-h-screen w-full p-[5%] flex items-center justify-center bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/v1752984140/Academy/sign%20up/3f66b694a8196a4df5f2b870dc9901b56806d575_pntsis.png')] bg-cover bg-center">
+      <div className="absolute inset-0 bg-white/70"></div>
+      <div className="relative z-10 w-full md:w-[635px] flex flex-col items-center justify-center bg-white rounded-3xl p-4">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px]">
+            <Logo />
+          </div>
+          <span
+            className="text-[18px] md:text-[20px] font-bold mb-2"
+            style={{ fontFamily: "DM Sans, sans-serif" }}
+          >
+            Acade<span className="text-[#1342ff]">m</span>y
+          </span>
+        </div>
         <img
           src="https://res.cloudinary.com/dganx8kmn/image/upload/v1752671335/Academy/sign%20up/57748ea748da9204ec419470544d09d5567918bb_dvjl7o.png"
           alt="Confetti box"

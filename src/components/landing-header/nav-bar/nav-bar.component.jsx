@@ -49,7 +49,7 @@ const NavBar = () => {
         </Link>
 
         {/* Navigation Links */}
-        <div className=" hidden lg:flex space-x-10">
+        <div className=" hidden xl:flex space-x-10">
           <div
             className="relative text-[#010413] font-bold text-[18px] hover:text-[#1342ff] transition-colors duration-300 flex items-center space-x-1 cursor-pointer"
             onClick={() => setServicesOpen(true)}
@@ -103,7 +103,7 @@ const NavBar = () => {
           </Link>
           <button
             onClick={openSideBar}
-            className="h-8 w-8 text-[#010413] lg:hidden cursor-pointer align-middle"
+            className="h-8 w-8 text-[#010413] xl:hidden cursor-pointer align-middle"
           >
             <Bars3BottomLeftIcon />
           </button>
