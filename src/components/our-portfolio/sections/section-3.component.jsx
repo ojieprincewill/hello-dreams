@@ -30,9 +30,15 @@ const Section3 = () => {
         >
           Graphics & Branding
         </p>
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#f49674d5] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
-          View Details
-        </button>
+        <a
+          href="https://www.figma.com/proto/hl8IO4HOn8DN1JYM2IeGWB/HELLO-DREAM-S-PORTFOLIO?page-id=1%3A98&node-id=11-2&viewport=1367%2C906%2C0.12&t=XwFal9Hj4WiBy40a-1&scaling=min-zoom&content-scaling=fixed"
+          target="_blank"
+        >
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#f49674d5] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
+            View Details
+          </button>
+        </a>
+
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -65,9 +71,15 @@ const Section3 = () => {
         >
           Graphics & Branding
         </p>
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
-          View Details
-        </button>
+        <a
+          href="https://www.figma.com/proto/hl8IO4HOn8DN1JYM2IeGWB/HELLO-DREAM-S-PORTFOLIO?page-id=1%3A98&node-id=1-99&viewport=1367%2C906%2C0.12&t=XwFal9Hj4WiBy40a-1&scaling=min-zoom&content-scaling=fixed"
+          target="_blank"
+        >
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
+            View Details
+          </button>
+        </a>
+
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}

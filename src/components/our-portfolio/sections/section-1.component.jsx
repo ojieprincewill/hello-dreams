@@ -27,9 +27,11 @@ const Section1 = () => {
         >
           UI/UX Design
         </p>
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
-          View Website
-        </button>
+        <a href="http://new.cibng.org" target="_blank">
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
+            View Website
+          </button>
+        </a>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -43,39 +45,37 @@ const Section1 = () => {
           />
         </motion.div>
       </div>
-      <div className="relative bg-[#ff7f50] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
+      <div className="relative bg-[#763d36] p-5 w-full h-[451px] md:h-[400.29px] lg:h-[800px] rounded-2xl space-y-2 overflow-hidden">
         <p
           className="text-[13.46px] md:text-[11.74px] lg:text-[24px] text-[#f7f7f7]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          UI DESIGNS
+          Hello Dreams Academy
         </p>
-        <p
-          className="text-[17.95px] md:text-[15px] lg:text-[32px] text-[#f7f7f7] mb-3 w-[170px] md:w-full"
-          style={{ fontFamily: "'Sofia Sans', sans-serif" }}
-        >
-          UI DESIGNS ACROSS DIFF INDUS
+        <p className="text-[17.95px] md:text-[15px] lg:text-[32px] text-[#f7f7f7] mb-3 w-[170px] md:w-full">
+          EduTech
         </p>
         <p
           className="text-[12px] md:text-[10px] lg:text-[18px] text-[#f7f7f7] mb-4"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          UI/UX Design
+          UI/UX Design & development
         </p>
-
-        <button className="bg-gradient-to-b from-[#f7f7f7] to-[#f49674d5] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
-          View Design
-        </button>
+        <a href="" target="_blank">
+          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#9f6c65] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
+            View
+          </button>
+        </a>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-[-80px] right-[-60px] lg:bottom-[-120px] lg:right-[-130px] w-[320px] h-[346px] lg:w-[640.92px] lg:h-[693px] rounded-3xl overflow-hidden"
+          className="absolute bottom-[-80px] right-[-60px] lg:bottom-[-160px] lg:right-[-130px] w-[320px] h-[346px] lg:w-[640.92px] lg:h-[693px] rounded-3xl overflow-hidden"
         >
           <img
-            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750281917/Portfolio%20page/image_2_dofiuu.png"
+            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751979100/Portfolio%20page/ece9409e288426c04664694765f23a2f184fa3f1_mpbhfw.png"
             alt="dashboard design"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
           />
         </motion.div>
       </div>
