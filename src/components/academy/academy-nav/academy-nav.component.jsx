@@ -95,7 +95,7 @@ const AcademyNavbar = () => {
         </div>
 
         <div className="flex items-center space-x-3">
-          {/* <Link
+          <Link
             to="/signin"
             className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
@@ -109,10 +109,10 @@ const AcademyNavbar = () => {
             onClick={handleOrigins}
           >
             Sign up $10/m
-          </Link> */}
+          </Link>
 
           {/* Add conditional after sign in */}
-          <UserDropdown />
+          {/* <UserDropdown /> */}
 
           <button
             onClick={openSideBar}
