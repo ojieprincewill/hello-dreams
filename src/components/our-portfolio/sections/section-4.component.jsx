@@ -26,17 +26,19 @@ const Section4 = () => {
         >
           Graphics & Branding
         </p>
-        <a href="https://robertasluxe.com" target="_blank">
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
-            View Details
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a href="https://robertasluxe.com" target="_blank">
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
+              View Details
+            </button>
+          </a>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute right-0 bottom-[-70px] lg:bottom-[-150px] w-[250px] h-[450px] lg:w-[450.6px] lg:h-[800px]"
+          className="absolute z-10 right-0 bottom-[-70px] lg:bottom-[-150px] w-[250px] h-[450px] lg:w-[450.6px] lg:h-[800px]"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750281917/Portfolio%20page/a3bd5d78364b1d07f2aaa1c8ff1156d1bf6ba7ba_ytfpkz.png"
@@ -62,20 +64,22 @@ const Section4 = () => {
         >
           Graphics & Branding
         </p>
-        <a
-          href="https://ng.linkedin.com/company/nigeriangirlinstem"
-          target="_blank"
-        >
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ae5aad] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
-            View Details
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a
+            href="https://ng.linkedin.com/company/nigeriangirlinstem"
+            target="_blank"
+          >
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ae5aad] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
+              View Details
+            </button>
+          </a>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="max-w-[530px] h-auto"
+          className="max-w-[530px] h-auto z-10"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1753562835/Portfolio%20page/92ecb0d247cbb0574abba59555678e91732a9ba5_qzpyti.png"

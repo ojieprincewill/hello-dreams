@@ -29,20 +29,22 @@ const Section5 = () => {
         >
           Graphics & Branding
         </p>
-        <a
-          href="https://www.canva.com/design/DAGpp6T8lI8/nZq1S0FoVTNiMHN8q0GV1A/edit?utm_content=DAGpp6T8lI8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-          target="_blank"
-        >
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#7ac4dd] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer">
-            View Details
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a
+            href="https://www.canva.com/design/DAGpp6T8lI8/nZq1S0FoVTNiMHN8q0GV1A/edit?utm_content=DAGpp6T8lI8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+            target="_blank"
+          >
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#7ac4dd] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer">
+              View Details
+            </button>
+          </a>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-[-50px] left-[-100px] lg:bottom-[-110px] lg:left-[-270px] w-[445px] h-[400px] lg:w-[991px] lg:h-[700px]"
+          className="absolute z-10 bottom-[-50px] left-[-100px] lg:bottom-[-110px] lg:left-[-270px] w-[445px] h-[400px] lg:w-[991px] lg:h-[700px]"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751979098/Portfolio%20page/2feaefa67adbbbf51925484058bf69b98fc9b9f1_ly1n5o.png"
@@ -70,20 +72,22 @@ const Section5 = () => {
         >
           Logo & Branding
         </p>
-        <a
-          href="https://www.canva.com/design/DAGH7nX4n8s/EIId7mce4oCtuNPsEOjFtQ/edit?utm_content=DAGH7nX4n8s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-          target="_blank"
-        >
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
-            View Details
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a
+            href="https://www.canva.com/design/DAGH7nX4n8s/EIId7mce4oCtuNPsEOjFtQ/edit?utm_content=DAGH7nX4n8s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+            target="_blank"
+          >
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#299393] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
+              View Details
+            </button>
+          </a>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-[-30px] right-[-120px] lg:bottom-[-50px] lg:right-[-230px] w-[445px] h-[350px] lg:w-[891px] lg:h-[650px]"
+          className="absolute z-10 bottom-[-30px] right-[-120px] lg:bottom-[-50px] lg:right-[-230px] w-[445px] h-[350px] lg:w-[891px] lg:h-[650px]"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751979098/Portfolio%20page/e42c05349b71ad097708e86dc5e55a22d1273f0d_g4uzbt.png"

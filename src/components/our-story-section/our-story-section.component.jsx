@@ -28,7 +28,7 @@ const OurStorySection = () => {
           poster="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330684/ba1eb8a6e990e81f5fc28bf52459d03f55f76d4a_zqvm39.png"
         >
           <source
-            src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            src="https://res.cloudinary.com/dganx8kmn/video/upload/q_auto,f_mp4/v1753636272/videos/Story_of_Hello_Dreams_epiphg.mov"
             type="video/mp4"
           />
         </video>

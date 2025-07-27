@@ -27,16 +27,18 @@ const Section1 = () => {
         >
           UI/UX Design
         </p>
-        <a href="http://new.cibng.org" target="_blank">
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
-            View Website
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a href="http://new.cibng.org" target="_blank">
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#ffffff6c] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer ">
+              View Website
+            </button>
+          </a>
+        </div>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-[-80px] right-[-100px] lg:bottom-[-102px] lg:right-[-220px] w-[321px] h-[305px] lg:w-[643px] lg:h-[611.84px] rounded-3xl overflow-hidden"
+          className="absolute z-10 bottom-[-80px] right-[-100px] lg:bottom-[-102px] lg:right-[-220px] w-[321px] h-[305px] lg:w-[643px] lg:h-[611.84px] rounded-3xl overflow-hidden"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750281921/Portfolio%20page/image1_pos3mb.png"
@@ -61,16 +63,18 @@ const Section1 = () => {
         >
           UI/UX Design & development
         </p>
-        <a href="" target="_blank">
-          <button className="bg-gradient-to-b from-[#f7f7f7] to-[#9f6c65] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
-            View
-          </button>
-        </a>
+        <div className="relative z-20">
+          <a href="" target="_blank">
+            <button className="bg-gradient-to-b from-[#f7f7f7] to-[#9f6c65] min-w-[89.74px] md:min-w-[78.26px] lg:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] lg:text-[16px] px-6 py-3 lg:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
+              View
+            </button>
+          </a>
+        </div>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute bottom-[-80px] right-[-60px] lg:bottom-[-160px] lg:right-[-130px] w-[320px] h-[346px] lg:w-[640.92px] lg:h-[693px] rounded-3xl overflow-hidden"
+          className="absolute z-10 bottom-[-80px] right-[-60px] lg:bottom-[-160px] lg:right-[-130px] w-[320px] h-[346px] lg:w-[640.92px] lg:h-[693px] rounded-3xl overflow-hidden"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1751979100/Portfolio%20page/ece9409e288426c04664694765f23a2f184fa3f1_mpbhfw.png"
