@@ -13,6 +13,9 @@ import AcademySidebar from "./academy-sidebar.component";
 
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
+import NavbarSearch from "../navbar-search/navbar-search.component";
+import { academyItems } from "@/data/academy-data/academy.data";
+import UserDropdown from "../user-dropdown/user-dropdown.component";
 
 const AcademyNavbar = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -79,12 +82,8 @@ const AcademyNavbar = () => {
               <ChevronDownIcon className="h-4 w-4" />
             )}
           </div>
-          <div className="w-[312px] h-[44px]">
-            <input
-              type="text"
-              className="w-full h-full border-[0.5px] border-[#101828] rounded-sm outline-none p-2"
-            />
-          </div>
+
+          <NavbarSearch coursesArray={academyItems} />
 
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
@@ -95,8 +94,8 @@ const AcademyNavbar = () => {
           </Link>
         </div>
 
-        <div className="space-x-3">
-          <Link
+        <div className="flex items-center space-x-3">
+          {/* <Link
             to="/signin"
             className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
@@ -110,7 +109,11 @@ const AcademyNavbar = () => {
             onClick={handleOrigins}
           >
             Sign up $10/m
-          </Link>
+          </Link> */}
+
+          {/* Add conditional after sign in */}
+          <UserDropdown />
+
           <button
             onClick={openSideBar}
             className="h-8 w-8 text-[#010413] xl:hidden cursor-pointer align-middle"

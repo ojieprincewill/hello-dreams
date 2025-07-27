@@ -12,9 +12,10 @@ import MyLearnings from "./MyLearnings";
 import AccountSecurity from "./AccountSecurity";
 import AccountSettings from "./AccountSettings";
 import HelpCenter from "./HelpCenter";
+import { useLocation } from "react-router-dom";
 
 const navItems = [
-  { key: "learnings", label: "My Learnings", icon: <Home size={20} /> },
+  { key: "learnings", label: "My Learning", icon: <Home size={20} /> },
   { key: "security", label: "Account Security", icon: <Shield size={20} /> },
   { key: "settings", label: "Settings", icon: <Settings size={20} /> },
   { key: "help", label: "Help Center", icon: <HelpCircle size={20} /> },
@@ -102,7 +103,9 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
 };
 
 const UserProfileMain = () => {
-  const [active, setActive] = useState("learnings");
+  const location = useLocation();
+  const initialTab = location.state?.active || "learnings";
+  const [active, setActive] = useState(initialTab);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
