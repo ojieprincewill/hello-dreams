@@ -52,7 +52,7 @@ const AboutMission = () => {
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="grid grid-cols-4 px-2 py-5 gap-y-4 lg:gap-y-6 border border-[#dfdfdf] rounded-xl place-items-center"
+          className="grid grid-cols-4 px-2 py-5 gap-y-4 xl:gap-y-6 border border-[#dfdfdf] rounded-xl place-items-center"
         >
           {MissionProfilesData.map((data, index) => (
             <motion.div
@@ -62,7 +62,7 @@ const AboutMission = () => {
               variants={imageVariants}
               viewport={{ once: true }}
               custom={index}
-              className="w-[57.55px] h-[57.55px] md:w-[70px] md:h-[70px] lg:w-[102px] lg:h-[102px] rounded-full overflow-hidden"
+              className="w-[57.55px] h-[57.55px] md:w-[70px] md:h-[70px] xl:w-[102px] xl:h-[102px] rounded-full overflow-hidden"
             >
               <img
                 src={data.image}
@@ -76,20 +76,20 @@ const AboutMission = () => {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="lg:w-[512px] ml-auto"
+          className="xl:w-[512px] ml-auto"
           style={{ fontFamily: "'Roboto', sans-serif" }}
         >
           <p className="text-[#505050] text-[14px] md:text-[12px] uppercase mb-2 ">
             mission
           </p>
-          <p className="text-[#000000] text-[24px] md:text-[30px] lg:text-[40px] font-bold mb-5 leading-[1.5] ">
+          <p className="text-[#000000] text-[24px] md:text-[30px] xl:text-[40px] font-bold mb-5 leading-[1.5] ">
             We're making building a business and a brand easy and fun
           </p>
           <p className="text-[#505050] text-[14px] md:text-[19.84px] mb-3 ">
             Through structured learning,
           </p>
 
-          <div className="space-y-7 mt-5 md:mt-10 lg:mt-15">
+          <div className="space-y-7 mt-5 md:mt-10 xl:mt-15">
             {MissionTextData.map((data, index) => (
               <motion.div
                 key={data.id}
@@ -125,7 +125,7 @@ const AboutMission = () => {
             >
               {data.title}
             </p>
-            <p className="text-[#000000] text-[16px] md:text-[20px] lg:text-[40px] font-semibold leading-[1.5] w-full lg:w-[1006px] ">
+            <p className="text-[#000000] text-[16px] md:text-[20px] xl:text-[40px] font-semibold leading-[1.5] w-full xl:w-[1006px] ">
               {data.text}
             </p>
           </motion.div>

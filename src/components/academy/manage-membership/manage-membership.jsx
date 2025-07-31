@@ -33,9 +33,9 @@ const ManageMembership = () => {
       <div>
         {/* Tabs */}
         <div className="w-full overflow-x-auto whitespace-nowrap mb-10 scrollbar-hide">
-          <div className="w-max flex flex-row items-center gap-2 md:gap-4 lg:gap-8 mx-auto border-b border-[#e5e7eb]">
+          <div className="w-max flex flex-row items-center gap-2 md:gap-4 xl:gap-8 mx-auto border-b border-[#e5e7eb]">
             <button
-              className={`pb-3 px-2 text-[14px] md:text-[16px] lg:text-[18px] font-semibold transition-colors duration-200 cursor-pointer ${
+              className={`pb-3 px-2 text-[14px] md:text-[16px] xl:text-[18px] font-semibold transition-colors duration-200 cursor-pointer ${
                 activeTab === "membership"
                   ? "text-[#101828] border-b-4 border-[#efece9]"
                   : "text-[#667085] border-b-4 border-transparent hover:text-[#1342ff]"
@@ -45,7 +45,7 @@ const ManageMembership = () => {
               Become a member of Hello Dreams Academy
             </button>
             <button
-              className={`pb-3 px-2 text-[14px] md:text-[16px] lg:text-[18px] font-semibold transition-colors duration-200 cursor-pointer ${
+              className={`pb-3 px-2 text-[14px] md:text-[16px] xl:text-[18px] font-semibold transition-colors duration-200 cursor-pointer ${
                 activeTab === "course"
                   ? "text-[#101828] border-b-4 border-[#efece9]"
                   : "text-[#667085] border-b-4 border-transparent hover:text-[#1342ff]"
@@ -59,18 +59,18 @@ const ManageMembership = () => {
 
         {/* Content */}
         {activeTab === "membership" ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 mt-10">
             {/* Billing Cycle Selection */}
             <div>
-              <h2 className="text-[#000000] text-[16px] lg:text-[18px] font-semibold mb-6">
+              <h2 className="text-[#000000] text-[16px] xl:text-[18px] font-semibold mb-6">
                 Billing Cycle
               </h2>
-              <p className="text-[#000000] text-[14px] md:text-[16px] lg:text-[18px] mb-8 ">
+              <p className="text-[#000000] text-[14px] md:text-[16px] xl:text-[18px] mb-8 ">
                 Save 30% with an annual billing cycle
               </p>
-              <div className="flex flex-wrap gap-10 md:gap-20 lg:gap-40 items-center my-10">
+              <div className="flex flex-wrap gap-10 md:gap-20 xl:gap-40 items-center my-10">
                 <div className="space-y-6">
-                  <p className="text-[#000000] text-[14px] md:text-[16px] lg:text-[18px] font-semibold">
+                  <p className="text-[#000000] text-[14px] md:text-[16px] xl:text-[18px] font-semibold">
                     Monthly
                   </p>
                   <label className="flex items-center cursor-pointer">
@@ -82,7 +82,7 @@ const ManageMembership = () => {
                       onChange={() => setBillingCycle("monthly")}
                       className="mr-2 appearance-none w-[20px] h-[17px] border border-[#eaecf0] rounded-sm checked:bg-[#1342ff] focus:outline-none focus:ring-1 focus:ring-[#1342ff] transition-colors duration-200 cursor-pointer"
                     />
-                    <span className="text-[#667085] text-[14px] md:text-[16px] lg:text-[18px]">
+                    <span className="text-[#667085] text-[14px] md:text-[16px] xl:text-[18px]">
                       Pay :{" "}
                       <span className="font-semibold text-[#000000]">
                         ₦12,000
@@ -91,7 +91,7 @@ const ManageMembership = () => {
                   </label>
                 </div>
                 <div className="space-y-6">
-                  <p className="text-[#000000] text-[14px] md:text-[16px] lg:text-[18px] font-semibold">
+                  <p className="text-[#000000] text-[14px] md:text-[16px] xl:text-[18px] font-semibold">
                     Annually
                   </p>
                   <label className="flex items-center cursor-pointer">
@@ -103,7 +103,7 @@ const ManageMembership = () => {
                       onChange={() => setBillingCycle("annually")}
                       className="mr-2 appearance-none w-[20px] h-[17px] border border-[#eaecf0] rounded-sm checked:bg-[#1342ff] focus:outline-none focus:ring-1 focus:ring-[#1342ff] transition-colors duration-200 cursor-pointer"
                     />
-                    <span className="text-[#667085] text-[14px] md:text-[16px] lg:text-[18px]">
+                    <span className="text-[#667085] text-[14px] md:text-[16px] xl:text-[18px]">
                       Pay :{" "}
                       <span className="font-semibold text-[#000000]">
                         ₦100,800
@@ -191,7 +191,7 @@ const ManageMembership = () => {
               <div className="bg-white rounded-xl shadow p-3 md:p-6 min-h-[300px] flex flex-col justify-between">
                 {formStep === 1 && (
                   <div>
-                    <h3 className="text-[#000000] text-[16px] lg:text-[18px] font-semibold mb-4">
+                    <h3 className="text-[#000000] text-[16px] xl:text-[18px] font-semibold mb-4">
                       Invoice details
                     </h3>
                     <form
@@ -311,7 +311,7 @@ const ManageMembership = () => {
         ) : (
           <div className="mt-10">
             <h2
-              className="text-[#010413] text-[20px] md:text-[30px] lg:text-[40px] font-bold my-6 text-center"
+              className="text-[#010413] text-[20px] md:text-[30px] xl:text-[40px] font-bold my-6 text-center"
               style={{ fontFamily: "DM Sans, sans-serif" }}
             >
               Choose a course to buy

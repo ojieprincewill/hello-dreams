@@ -22,17 +22,17 @@ const OurProcess = () => {
   };
 
   return (
-    <div className="w-full px-[5%] lg:px-[10%] py-10">
-      <p className="text-[24px] lg:text-[48px] text-[#101828] text-center font-bold mb-2">
+    <div className="w-full px-[5%] xl:px-[10%] py-10">
+      <p className="text-[24px] xl:text-[48px] text-[#101828] text-center font-bold mb-2">
         Our Process
       </p>
       <p
-        className="text-[12px] lg:text-[17.44px] text-[#667085] text-center font-bold capitalize"
+        className="text-[12px] xl:text-[17.44px] text-[#667085] text-center font-bold capitalize"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         User experience design services
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 md:mt-10 lg:mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-5 md:mt-10 xl:mt-20">
         {ProcessData.map((data, index) => (
           <motion.div
             key={data.id}
@@ -40,9 +40,9 @@ const OurProcess = () => {
             whileInView="visible"
             variants={cardVariants}
             custom={index}
-            className={`bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 lg:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl ${
+            className={`bg-[#fafafa] h-[386px] flex flex-col justify-center p-2 xl:p-5 items-center shadow-lg shadow-[#d2d2f5b0] rounded-xl ${
               index === ProcessData.length - 1 && ProcessData.length % 2 !== 0
-                ? "md:col-span-2 lg:col-span-1"
+                ? "md:col-span-2 xl:col-span-1"
                 : ""
             }`}
           >
@@ -70,7 +70,7 @@ const OurProcess = () => {
         className="flex justify-center items-center mt-15"
         onClick={handleOrigins}
       >
-        <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
           Get a Free Consultation
         </button>
       </Link>

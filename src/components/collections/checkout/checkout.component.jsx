@@ -17,7 +17,7 @@ const Checkout = ({ onPaymentSuccess }) => {
   );
 
   return (
-    <div className="bg-[#f7f7f7] flex flex-col-reverse lg:space-y-0 lg:grid lg:grid-cols-[60%_40%] lg:gap-7 px-[5%] md:px-[10%] lg:px-[5%] py-10 md:py-20 lg:py-30 ">
+    <div className="bg-[#f7f7f7] flex flex-col-reverse xl:space-y-0 xl:grid xl:grid-cols-[60%_40%] xl:gap-7 px-[5%] md:px-[10%] xl:px-[5%] py-10 md:py-20 xl:py-30 ">
       <CheckoutForm onSuccess={onPaymentSuccess} />
       <motion.div
         initial={{ opacity: 0, y: 50 }}

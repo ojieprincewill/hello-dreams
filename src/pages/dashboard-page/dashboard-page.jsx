@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import { uploadAvatar, deleteAvatar } from '../../services/avatarUpload';
-import supabase from '../../supabase/client';
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { uploadAvatar, deleteAvatar } from "../../services/avatarUpload";
+import supabase from "../../supabase/client";
 // import { updateUserProfileWithAvatar } from '../../services/auth';
 
 export default function DashboardPage() {
@@ -15,34 +15,34 @@ export default function DashboardPage() {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
   const [formData, setFormData] = useState({
-    full_name: user?.user_metadata?.full_name || '',
-    role: user?.user_metadata?.role || '',
-    avatar_url: user?.user_metadata?.avatar_url || '',
-    bio: user?.user_metadata?.bio || '',
-    phone: user?.user_metadata?.phone || '',
-    location: user?.user_metadata?.location || '',
-    website: user?.user_metadata?.website || '',
-    company: user?.user_metadata?.company || '',
-    job_title: user?.user_metadata?.job_title || '',
+    full_name: user?.user_metadata?.full_name || "",
+    role: user?.user_metadata?.role || "",
+    avatar_url: user?.user_metadata?.avatar_url || "",
+    bio: user?.user_metadata?.bio || "",
+    phone: user?.user_metadata?.phone || "",
+    location: user?.user_metadata?.location || "",
+    website: user?.user_metadata?.website || "",
+    company: user?.user_metadata?.company || "",
+    job_title: user?.user_metadata?.job_title || "",
   });
 
   const handleSignOut = () => {
     signOut.mutate();
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleEdit = () => {
     setIsEditing(true);
     setFormData({
-      full_name: user?.user_metadata?.full_name || '',
-      role: user?.user_metadata?.role || '',
-      avatar_url: user?.user_metadata?.avatar_url || '',
-      bio: user?.user_metadata?.bio || '',
-      phone: user?.user_metadata?.phone || '',
-      location: user?.user_metadata?.location || '',
-      website: user?.user_metadata?.website || '',
-      company: user?.user_metadata?.company || '',
-      job_title: user?.user_metadata?.job_title || '',
+      full_name: user?.user_metadata?.full_name || "",
+      role: user?.user_metadata?.role || "",
+      avatar_url: user?.user_metadata?.avatar_url || "",
+      bio: user?.user_metadata?.bio || "",
+      phone: user?.user_metadata?.phone || "",
+      location: user?.user_metadata?.location || "",
+      website: user?.user_metadata?.website || "",
+      company: user?.user_metadata?.company || "",
+      job_title: user?.user_metadata?.job_title || "",
     });
     setAvatarPreview(null);
     setAvatarFile(null);
@@ -65,7 +65,7 @@ export default function DashboardPage() {
       setAvatarPreview(null);
       setAvatarFile(null);
     } catch (error) {
-      console.error('Failed to update profile:', error);
+      console.error("Failed to update profile:", error);
     }
   };
 
@@ -81,14 +81,14 @@ export default function DashboardPage() {
     const file = e.target.files[0];
     if (file) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
-        alert('Please select an image file');
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image file");
         return;
       }
 
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('File size must be less than 5MB');
+        alert("File size must be less than 5MB");
         return;
       }
 
@@ -117,7 +117,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">
         <div className="px-4 py-6 sm:px-0">
           <div className="bg-white shadow rounded-lg">
             {/* Header */}
@@ -152,7 +152,7 @@ export default function DashboardPage() {
                   <div className="relative">
                     <img
                       className={`h-24 w-24 rounded-full object-cover ${
-                        isEditing ? 'cursor-pointer hover:opacity-80' : ''
+                        isEditing ? "cursor-pointer hover:opacity-80" : ""
                       }`}
                       src={getAvatarUrl()}
                       alt="Profile"
@@ -213,7 +213,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.full_name || 'Not set'}
+                        {user?.user_metadata?.full_name || "Not set"}
                       </p>
                     )}
                   </div>
@@ -236,7 +236,7 @@ export default function DashboardPage() {
                       </select>
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.role || 'User'}
+                        {user?.user_metadata?.role || "User"}
                       </p>
                     )}
                   </div>
@@ -255,7 +255,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.bio || 'No bio added'}
+                        {user?.user_metadata?.bio || "No bio added"}
                       </p>
                     )}
                   </div>
@@ -281,7 +281,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.phone || 'Not set'}
+                        {user?.user_metadata?.phone || "Not set"}
                       </p>
                     )}
                   </div>
@@ -300,7 +300,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.location || 'Not set'}
+                        {user?.user_metadata?.location || "Not set"}
                       </p>
                     )}
                   </div>
@@ -319,7 +319,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.website || 'Not set'}
+                        {user?.user_metadata?.website || "Not set"}
                       </p>
                     )}
                   </div>
@@ -338,7 +338,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.company || 'Not set'}
+                        {user?.user_metadata?.company || "Not set"}
                       </p>
                     )}
                   </div>
@@ -357,7 +357,7 @@ export default function DashboardPage() {
                       />
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
-                        {user?.user_metadata?.job_title || 'Not set'}
+                        {user?.user_metadata?.job_title || "Not set"}
                       </p>
                     )}
                   </div>
@@ -379,8 +379,8 @@ export default function DashboardPage() {
                     className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
                   >
                     {updateProfileWithAvatar.isPending
-                      ? 'Saving...'
-                      : 'Save Changes'}
+                      ? "Saving..."
+                      : "Save Changes"}
                   </button>
                 </div>
               )}
@@ -389,7 +389,7 @@ export default function DashboardPage() {
               {updateProfileWithAvatar.isError && (
                 <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
                   <p className="text-red-600 text-sm">
-                    Failed to update profile:{' '}
+                    Failed to update profile:{" "}
                     {updateProfileWithAvatar.error?.message}
                   </p>
                 </div>

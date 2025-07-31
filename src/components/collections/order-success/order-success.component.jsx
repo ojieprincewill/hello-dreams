@@ -12,7 +12,7 @@ const OrderSuccess = () => {
   };
 
   return (
-    <div className="bg-[#f7f7f7] px-[5%] lg:px-[10%] py-10 md:py-20 lg:py-30 ">
+    <div className="bg-[#f7f7f7] px-[5%] xl:px-[10%] py-10 md:py-20 xl:py-30 ">
       <div
         className="bg-[#ffffff] py-5 px-5 md:py-8 md:px-15 rounded-md md:rounded-2xl flex flex-col items-center md:w-max mx-auto"
         style={{ fontFamily: "'Inter', sans-serif" }}
@@ -24,7 +24,7 @@ const OrderSuccess = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <p className="text-[#010413] text-[18px] md:text-[26px] lg:text-[32px] text-center font-bold mb-2 ">
+        <p className="text-[#010413] text-[18px] md:text-[26px] xl:text-[32px] text-center font-bold mb-2 ">
           Order successfully placed
         </p>
         <p className="text-[#475467] text-[12px] md:text-[14px] ">
@@ -69,7 +69,7 @@ const OrderSuccess = () => {
         </div>
         <button
           onClick={handleClose}
-          className="bg-[#010413] w-full mt-2 text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-[#fff] hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+          className="bg-[#010413] w-full mt-2 text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-[#fff] hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
         >
           Close
         </button>

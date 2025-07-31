@@ -35,17 +35,17 @@ const TestimonialSection = () => {
 
   return (
     <div className="w-full px-[5%] py-10">
-      <div className="flex flex-col lg:flex-row justify-between">
+      <div className="flex flex-col xl:flex-row justify-between">
         <div className="space-y-4">
           <p className="text-[24px] text-center md:text-left md:text-[36px] text-[#101828] font-semibold ">
             Don't just take our word for it.
           </p>
-          <p className="text-[16px] md:text-[14px] text-center md:text-left lg:text-[20px] md:w-full text-[#475467] md:font-bold leading-[1.5]">
+          <p className="text-[16px] md:text-[14px] text-center md:text-left xl:text-[20px] md:w-full text-[#475467] md:font-bold leading-[1.5]">
             Hear from some of our amazing customers who are building faster.
           </p>
         </div>
 
-        <div className="flex flex-col w-auto h-max space-y-4 mt-5 lg:mt-0 lg:flex-row lg:space-y-0 lg:space-x-2">
+        <div className="flex flex-col w-auto h-max space-y-4 mt-5 xl:mt-0 xl:flex-row xl:space-y-0 xl:space-x-2">
           <Link
             to="/apply-for-mentorship"
             onClick={handleOrigins}
@@ -63,7 +63,7 @@ const TestimonialSection = () => {
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 pt-20">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 pt-20">
         {TestimonialData.map((data, index) => (
           <motion.div
             initial="hidden"
@@ -73,7 +73,7 @@ const TestimonialSection = () => {
             custom={index}
             key={data.id}
             className={`relative w-full h-[480px] ${
-              index % 3 === 2 ? "md:col-span-2 lg:col-span-1" : ""
+              index % 3 === 2 ? "md:col-span-2 xl:col-span-1" : ""
             }`}
           >
             <img

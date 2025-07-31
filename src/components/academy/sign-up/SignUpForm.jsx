@@ -14,11 +14,11 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
   };
 
   return (
-    <div className="min-h-screen w-full px-[5%] lg:px-0 flex items-center justify-center">
-      <div className="w-full grid lg:grid-cols-[45%_55%] bg-white shadow-lg overflow-hidden">
+    <div className="min-h-screen w-full px-[5%] xl:px-0 flex items-center justify-center">
+      <div className="w-full grid xl:grid-cols-[45%_55%] bg-white shadow-lg overflow-hidden">
         {/* Left: Image and text */}
         <div
-          className="hidden lg:flex flex-col justify-between bg-black/80 p-10 relative rounded-tr-[10%] rounded-br-[10%]"
+          className="hidden xl:flex flex-col justify-between bg-black/80 p-10 relative rounded-tr-[10%] rounded-br-[10%]"
           style={{ minHeight: 600 }}
         >
           <img
@@ -57,7 +57,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
           className="w-full flex flex-col justify-center p-[6%] md:p-12"
           style={{ fontFamily: "Inter, sans-serif" }}
         >
-          <h1 className="text-[#101828] text-[22px] md:text-[38px] lg:text-[48px] font-bold mb-2">
+          <h1 className="text-[#101828] text-[22px] md:text-[38px] xl:text-[48px] font-bold mb-2">
             Sign Up
           </h1>
           <p className="text-[#667085] text-[14px] md:text-[16px] mb-6">

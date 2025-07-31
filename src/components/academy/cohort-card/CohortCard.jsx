@@ -27,10 +27,10 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
 
   return (
     <div className="w-full bg-[#eef2fe] rounded-2xl overflow-hidden px-[5%] py-5 mb-15 ">
-      <p className="text-[#000000] text-[20px] md:text-[24px] lg:text-[40px] text-center font-bold my-3">
+      <p className="text-[#000000] text-[20px] md:text-[24px] xl:text-[40px] text-center font-bold my-3">
         Join our next cohort
       </p>
-      <div className="grid grid-cols-2 lg:grid-cols-4 my-10 gap-y-10">
+      <div className="grid grid-cols-2 xl:grid-cols-4 my-10 gap-y-10">
         {info.map((data, index) => (
           <motion.div
             initial="hidden"
@@ -47,7 +47,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-[#000000] text-[12px] md:text-[16px] lg:text-[20px] font-bold mt-2 ">
+            <p className="text-[#000000] text-[12px] md:text-[16px] xl:text-[20px] font-bold mt-2 ">
               {data.text}
             </p>
           </motion.div>
@@ -58,14 +58,14 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
         <div className="mt-2">{children}</div>
       ) : (
         <div
-          className="flex flex-row gap-2 overflow-x-auto whitespace-nowrap md:justify-center bg-[#010413] w-full h-[38px] md:h-[58px] lg:h-[98px] items-center rounded-xl overflow-hidden my-5 "
+          className="flex flex-row gap-2 overflow-x-auto whitespace-nowrap md:justify-center bg-[#010413] w-full h-[38px] md:h-[58px] xl:h-[98px] items-center rounded-xl overflow-hidden my-5 "
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           {tabs.map((tab) => (
             <span
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`cursor-pointer px-2 md:px-5 py-2 text-[10px] md:text-[14px] lg:text-[18px] font-medium rounded-md transition-colors duration-300
+              className={`cursor-pointer px-2 md:px-5 py-2 text-[10px] md:text-[14px] xl:text-[18px] font-medium rounded-md transition-colors duration-300
         ${
           activeTab === tab.id
             ? "bg-[#ff7f50] text-white"
@@ -84,7 +84,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <div className="flex items-center space-x-2">
-            <span className="text-[#010413] text-[8px] md:text-[14px] lg:text-[18px] font-medium ">
+            <span className="text-[#010413] text-[8px] md:text-[14px] xl:text-[18px] font-medium ">
               Course fee
             </span>
             <p className="border border-[#eaecf0] text-[#000000] text-[6px] md:text-[8px] rounded-sm h-[16px] md:h-[26px] px-1 md:px-2 flex justify-center items-center ">
@@ -93,21 +93,21 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <span className="text-[#010413] text-[9px] md:text-[16px] lg:text-[20px] font-bold ">
+            <span className="text-[#010413] text-[9px] md:text-[16px] xl:text-[20px] font-bold ">
               {currency} {price.toLocaleString()}
             </span>
-            <span className="text-[#ed405c] text-[9px] md:text-[16px] lg:text-[20px] font-bold line-through">
+            <span className="text-[#ed405c] text-[9px] md:text-[16px] xl:text-[20px] font-bold line-through">
               {currency} {oldPrice.toLocaleString()}
             </span>
           </div>
-          <button className="bg-[#1342ff] w-[100px] md:w-[176px] text-[#fff] text-[9px] md:text-[16px] lg:text-[20px] font-bold rounded-md px-6 py-2 overflow-hidden hover:bg-[#1b13ff] cursor-pointer transition-colors duration-300">
+          <button className="bg-[#1342ff] w-[100px] md:w-[176px] text-[#fff] text-[9px] md:text-[16px] xl:text-[20px] font-bold rounded-md px-6 py-2 overflow-hidden hover:bg-[#1b13ff] cursor-pointer transition-colors duration-300">
             Pay now
           </button>
         </div>
       )}
 
       {activeTab !== "course-fee" && (
-        <div className="w-full text-center mt-5 text-[#010413] text-[14px] md:text-[16px] lg:text-[18px]">
+        <div className="w-full text-center mt-5 text-[#010413] text-[14px] md:text-[16px] xl:text-[18px]">
           Placeholder content for {activeTab.replace("-", " ")}
         </div>
       )}

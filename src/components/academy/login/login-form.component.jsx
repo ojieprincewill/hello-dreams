@@ -22,10 +22,10 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full h-screen px-[5%] lg:px-0 flex items-center justify-center">
-      <div className="w-full grid lg:grid-cols-[45%_55%] bg-white shadow-lg overflow-hidden">
+    <div className="w-full h-screen px-[5%] xl:px-0 flex items-center justify-center">
+      <div className="w-full grid xl:grid-cols-[45%_55%] bg-white shadow-lg overflow-hidden">
         {/* Left: Image and text */}
-        <div className="hidden h-screen lg:flex flex-col justify-between bg-black/80 p-10 relative rounded-tr-[10%] rounded-br-[10%]">
+        <div className="hidden h-screen xl:flex flex-col justify-between bg-black/80 p-10 relative rounded-tr-[10%] rounded-br-[10%]">
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/v1752698465/Academy/sign%20up/ef9d88980ccdbe63c578ec2f42fdc6e46f8282e1_guckoj.jpg"
             alt="Login visual"
@@ -62,7 +62,7 @@ const LoginForm = () => {
           className="w-full flex flex-col justify-center p-[6%] md:p-12"
           style={{ fontFamily: "Inter, sans-serif" }}
         >
-          <h1 className="text-[#101828] text-[22px] md:text-[38px] lg:text-[48px] font-bold mb-2">
+          <h1 className="text-[#101828] text-[22px] md:text-[38px] xl:text-[48px] font-bold mb-2">
             Great! You're back 😊
           </h1>
           <p className="text-[#667085] text-[14px] md:text-[16px] mb-6">
@@ -150,20 +150,54 @@ const LoginForm = () => {
                 </div>
               </>
             ) : (
-              <div>
-                <label className="block text-[#101828] text-[16px] mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter your phone number"
-                  className="w-full px-4 py-3 rounded-lg border border-[#eaecf0] bg-[#f7f7f7] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1342ff]"
-                  required={activeTab === "phone"}
-                />
-              </div>
+              <>
+                <div>
+                  <label className="block text-[#101828] text-[16px] mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Enter your phone number"
+                    className="w-full px-4 py-3 rounded-lg border border-[#eaecf0] bg-[#f7f7f7] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1342ff]"
+                    required={activeTab === "phone"}
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#101828] text-[16px] mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="Enter password"
+                      className="w-full px-4 py-3 rounded-lg border border-[#eaecf0] bg-[#f7f7f7] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1342ff] pr-12"
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#667085]"
+                      onClick={() => setShowPassword((v) => !v)}
+                      tabIndex={-1}
+                    >
+                      {showPassword ? (
+                        <span role="img" aria-label="Hide">
+                          <EyeSlashIcon className="w-4 h-4 text-[#667085] cursor-pointer" />
+                        </span>
+                      ) : (
+                        <span role="img" aria-label="Show">
+                          <EyeIcon className="w-4 h-4 text-[#667085] cursor-pointer" />
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </>
             )}
 
             <p className="text-[#1342ff] text-[14px] md:text-[16px] w-max mr-0.5 ml-auto font-medium cursor-pointer hover:underline ">

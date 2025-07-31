@@ -20,6 +20,7 @@ import UserDropdown from "../user-dropdown/user-dropdown.component";
 const AcademyNavbar = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const user = false;
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -43,7 +44,7 @@ const AcademyNavbar = () => {
       )}
 
       <nav
-        className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[100px] md:rounded-none md:mt-0 md:px-[5%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630] "
+        className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] xl:h-[100px] md:rounded-none md:mt-0 md:px-[5%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630] "
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {/* Logo Section */}
@@ -95,24 +96,29 @@ const AcademyNavbar = () => {
         </div>
 
         <div className="flex items-center space-x-3">
-          <Link
-            to="/signin"
-            className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
-            onClick={handleOrigins}
-          >
-            Sign in
-          </Link>
+          {user ? (
+            <UserDropdown />
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/signin"
+                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+                onClick={handleOrigins}
+              >
+                Sign in
+              </Link>
 
-          <Link
-            to="/signup"
-            className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] lg:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
-            onClick={handleOrigins}
-          >
-            Sign up $10/m
-          </Link>
+              <Link
+                to="/signup"
+                className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] xl:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
+                onClick={handleOrigins}
+              >
+                Sign up $10/m
+              </Link>
+            </div>
+          )}
 
           {/* Add conditional after sign in */}
-          {/* <UserDropdown /> */}
 
           <button
             onClick={openSideBar}
@@ -123,7 +129,7 @@ const AcademyNavbar = () => {
         </div>
       </nav>
 
-      <div className="hidden md:block md:h-[80px] lg:h-[100px]"></div>
+      <div className="hidden md:block md:h-[80px] xl:h-[100px]"></div>
 
       <AnimatePresence>
         {optionsOpen && (

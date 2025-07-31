@@ -3,19 +3,19 @@ import React from "react";
 const AccountSettings = () => {
   return (
     <div className="w-full px-[5%] py-10">
-      <div className="w-full lg:w-[804px] lg:mx-auto h-[150px] border border-[#eaecf0] rounded-sm p-8 mb-6 text-center flex flex-col justify-center items-center">
-        <h2 className="text-[#010413] text-[20px] md:text-[28px] lg:text-[32px] mb-2">
+      <div className="w-full xl:w-[804px] xl:mx-auto h-[150px] border border-[#eaecf0] rounded-sm p-8 mb-6 text-center flex flex-col justify-center items-center">
+        <h2 className="text-[#010413] text-[20px] md:text-[28px] xl:text-[32px] mb-2">
           Profile
         </h2>
         <div
-          className="text-[#3a4459] text-[14px] md:text-[16px] lg:text-[18px] text-center font-medium"
+          className="text-[#3a4459] text-[14px] md:text-[16px] xl:text-[18px] text-center font-medium"
           style={{ fontFamily: "DM Sans, sans-serif" }}
         >
           Edit your profile details here
         </div>
       </div>
       <div
-        className="bg-white rounded-xl shadow-xl p-8 lg:w-[804px] lg:mx-auto"
+        className="bg-white rounded-xl shadow-xl p-8 xl:w-[804px] xl:mx-auto"
         style={{ fontFamily: "DM Sans, sans-serif" }}
       >
         <div className="flex flex-col md:flex-row gap-4 mb-4">

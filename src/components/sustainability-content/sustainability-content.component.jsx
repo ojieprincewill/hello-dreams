@@ -1,9 +1,9 @@
-import React from 'react';
-import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
-import { usePublishedBlogs } from '../../hooks/useBlogs';
+import { motion } from "motion/react";
+import { usePublishedBlogs } from "../../hooks/useBlogs";
 
 const imageVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -12,7 +12,7 @@ const imageVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: 'easeOut',
+      ease: "easeOut",
       delay: index * 0.2,
     },
   }),
@@ -57,7 +57,7 @@ const SustainabilityContent = () => {
   }
 
   return (
-    <div className="w-full px-[5%] py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
+    <div className="w-full px-[5%] py-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-10">
       {publishedBlogs.map((blog, index) => (
         <motion.div
           initial="hidden"
@@ -66,7 +66,7 @@ const SustainabilityContent = () => {
           custom={index}
           key={blog.id}
           className={`relative w-full h-[448px] p-1 ${
-            index === publishedBlogs.length - 1 ? 'lg:col-span-3' : ''
+            index === publishedBlogs.length - 1 ? "xl:col-span-3" : ""
           }`}
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
@@ -74,7 +74,7 @@ const SustainabilityContent = () => {
             <img
               src={
                 blog.image_url ||
-                'https://via.placeholder.com/400x240?text=No+Image'
+                "https://via.placeholder.com/400x240?text=No+Image"
               }
               alt={blog.title}
               className="w-full h-full object-cover"
@@ -96,15 +96,15 @@ const SustainabilityContent = () => {
               <img
                 src={
                   blog.author_image_url ||
-                  'https://via.placeholder.com/40x40?text=Author'
+                  "https://via.placeholder.com/40x40?text=Author"
                 }
-                alt={blog.author || 'Unknown Author'}
+                alt={blog.author || "Unknown Author"}
                 className="w-full h-full object-contain "
               />
             </div>
             <div>
               <p className="text-[#010413] text-[14px] font-semibold">
-                {blog.author || 'Unknown Author'}
+                {blog.author || "Unknown Author"}
               </p>
               <p className="text-[#667085] text-[14px]">
                 {new Date(blog.created_at).toLocaleDateString()}

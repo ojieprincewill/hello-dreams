@@ -32,7 +32,7 @@ const CartContent = () => {
   };
 
   return (
-    <div className="bg-[#f7f7f7] px-[5%] lg:px-[10%] py-10 md:py-20 lg:py-30 ">
+    <div className="bg-[#f7f7f7] px-[5%] xl:px-[10%] py-10 md:py-20 xl:py-30 ">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ const CartContent = () => {
         viewport={{ once: true }}
         className="bg-[#ffffff] px-5 py-10 md:px-10 md:py-15 rounded-2xl"
       >
-        <p className="text-[#010413] text-[20px] md:text-[26px] lg:text-[32px] font-bold pb-5 border-b border-b-[#eaecf0] capitalize">
+        <p className="text-[#010413] text-[20px] md:text-[26px] xl:text-[32px] font-bold pb-5 border-b border-b-[#eaecf0] capitalize">
           your shopping cart
         </p>
         {cartItems.length ? (
@@ -70,7 +70,7 @@ const CartContent = () => {
               onClick={handleOrigins}
               className="flex justify-center items-center"
             >
-              <button className="bg-transparent text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer">
+              <button className="bg-transparent text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer">
                 Continue shopping
               </button>
             </Link>
@@ -80,7 +80,7 @@ const CartContent = () => {
       {!cartItems.length < 1 && (
         <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:justify-between md:items-center mt-6">
           <Link to="/services/our-collection" onClick={handleOrigins}>
-            <button className="bg-transparent w-full md:w-max text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer">
+            <button className="bg-transparent w-full md:w-max text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer">
               Continue shopping
             </button>
           </Link>
@@ -88,12 +88,12 @@ const CartContent = () => {
           <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 md:items-center">
             <button
               onClick={handleClearAllItems}
-              className="bg-transparent w-full md:w-max text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer"
+              className="bg-transparent w-full md:w-max text-[#212121] border border-[#eaecf0] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-[#fff] hover:bg-[#010413] hover:border-[#010413] transition-colors duration-300 cursor-pointer"
             >
               Clear cart
             </button>
             <Link to="/checkout" onClick={handleOrigins}>
-              <button className="bg-[#010413] w-full md:w-max text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-[#fff] hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+              <button className="bg-[#010413] w-full md:w-max text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-[#fff] hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
                 Proceed to checkout
               </button>
             </Link>

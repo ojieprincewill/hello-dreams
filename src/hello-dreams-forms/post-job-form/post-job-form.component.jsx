@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import supabase from '../../supabase/client';
-import PaystackPop from '@paystack/inline-js';
-import PostJobSuccess from './post-job-success.component';
+import React, { useState } from "react";
+import supabase from "../../supabase/client";
+import PaystackPop from "@paystack/inline-js";
+import PostJobSuccess from "./post-job-success.component";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 const PostJobForm = () => {
   const [loading, setLoading] = useState(false);
@@ -11,14 +11,14 @@ const PostJobForm = () => {
   const [error, setError] = useState(null);
 
   const [formData, setFormData] = useState({
-    jobTitle: '',
-    experienceLevel: '',
-    workHours: '',
-    payType: '',
-    jobDescription: '',
-    applicationInstructions: '',
-    companyName: '',
-    companyEmail: '',
+    jobTitle: "",
+    experienceLevel: "",
+    workHours: "",
+    payType: "",
+    jobDescription: "",
+    applicationInstructions: "",
+    companyName: "",
+    companyEmail: "",
   });
 
   const handleChange = (e) => {
@@ -56,38 +56,38 @@ const PostJobForm = () => {
       !companyEmail ||
       !companyName
     ) {
-      setError('Missing required fields');
+      setError("Missing required fields");
     }
 
     try {
       // STEP 1: Call initiate-payment function
       const { data, error: initError } = await supabase.functions.invoke(
-        'paystack-payment-initiation',
+        "paystack-payment-initiation",
         {
           body: {
             email: companyEmail,
             amount: 50000, // Amount in Naira
           },
-        },
+        }
       );
       // console.log(data);
       // console.log(initError);
       if (initError || !data?.access_code || !data?.reference) {
-        setError('Payment initiation failed.');
+        setError("Payment initiation failed.");
         setLoading(false);
         return;
       }
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f', // Optional: You can omit if set in backend
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f", // Optional: You can omit if set in backend
         reference: data.reference,
         email: companyEmail,
         amount: 50000 * 100,
         onSuccess: async (response) => {
           // STEP 2: On success, verify the payment and post job
           const { data: verifyData, error: verifyError } =
-            await supabase.functions.invoke('handle-job-posting', {
+            await supabase.functions.invoke("handle-job-posting", {
               body: {
                 reference: response.reference,
                 ...formData,
@@ -95,30 +95,30 @@ const PostJobForm = () => {
             });
 
           if (verifyError || verifyData?.error) {
-            setError('Verification failed. Payment may not be confirmed.');
+            setError("Verification failed. Payment may not be confirmed.");
           } else {
-            setSuccess('Job posted successfully!');
+            setSuccess("Job posted successfully!");
             setFormData({
-              jobTitle: '',
-              experienceLevel: '',
-              workHours: '',
-              payType: '',
-              jobDescription: '',
-              applicationInstructions: '',
-              companyName: '',
-              companyEmail: '',
+              jobTitle: "",
+              experienceLevel: "",
+              workHours: "",
+              payType: "",
+              jobDescription: "",
+              applicationInstructions: "",
+              companyName: "",
+              companyEmail: "",
             });
           }
           setLoading(false);
         },
         onCancel: () => {
-          setError('Payment was cancelled.');
+          setError("Payment was cancelled.");
           setLoading(false);
         },
       });
     } catch (err) {
-      console.error('Submission Error:', err);
-      setError('An unexpected error occurred.');
+      console.error("Submission Error:", err);
+      setError("An unexpected error occurred.");
       setLoading(false);
     }
   };
@@ -126,12 +126,12 @@ const PostJobForm = () => {
   return success ? (
     <PostJobSuccess />
   ) : (
-    <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+    <div className="bg-[#f8f8f8] xl:bg-[#fff] w-full px-[5%] xl:px-[10%] py-15 md:py-25">
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Post a Job
@@ -139,14 +139,14 @@ const PostJobForm = () => {
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-        className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]"
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="text-[#667085] text-[14px] md:text-[16px] text-center xl:text-[18px] mb-10 xl:mb-20 xl:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Post your job in front of top-tier creative talent. A one-time fee of{' '}
+        Post your job in front of top-tier creative talent. A one-time fee of{" "}
         <span className="font-bold">₦50,000</span> is required to submit your
         listing. Once your job is submitted and payment is confirmed, it will be
-        reviewed and published on our platform within{' '}
+        reviewed and published on our platform within{" "}
         <span className="font-bold">24 hours</span>.
       </motion.p>
 
@@ -155,7 +155,7 @@ const PostJobForm = () => {
       <motion.form
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         className="w-full space-y-8 text-[#000000] md:p-6 "
         onSubmit={handleSubmit}
       >
@@ -228,7 +228,7 @@ const PostJobForm = () => {
           disabled={loading}
           className="w-full bg-[#010413] text-white font-semibold border border-[#010413] mt-7 text-[14px] px-6 py-3 rounded-lg hover:bg-[#1342ff] transition-colors duration-300"
         >
-          {loading ? 'Posting...' : 'Post Job'}
+          {loading ? "Posting..." : "Post Job"}
         </button>
       </motion.form>
     </div>

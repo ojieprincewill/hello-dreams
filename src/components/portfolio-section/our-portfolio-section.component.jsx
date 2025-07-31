@@ -19,7 +19,7 @@ const OurPortfolioSection = () => {
           <br />
           Achievements and Creativity
         </p>
-        <div className="mt-6 flex flex-col justify-center w-full md:w-[431px] lg:w-full space-y-4 lg:flex-row lg:space-x-4">
+        <div className="mt-6 flex flex-col justify-center w-full md:w-[431px] xl:w-full space-y-4 xl:flex-row xl:space-x-4">
           <Link
             to="/portfolio"
             onClick={handleOrigins}
@@ -34,7 +34,7 @@ const OurPortfolioSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        className="grid grid-cols-1 xl:grid-cols-2 gap-6"
       >
         <div className="relative bg-[#1a212a] p-5 w-full h-[478px] md:h-[800px] rounded-2xl space-y-2 overflow-hidden">
           <p className="text-[16px] md:text-[24px] md:font-bold md:uppercase text-[#fff]">
@@ -53,7 +53,7 @@ const OurPortfolioSection = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            className="absolute bottom-0 right-[-160px] md:bottom-[-10px] md:right-[-300px] lg:right-[-350px] w-[406px] h-[265.61px] md:w-[856px] md:h-[560px]"
+            className="absolute bottom-0 right-[-160px] md:bottom-[-10px] md:right-[-300px] xl:right-[-350px] w-[406px] h-[265.61px] md:w-[856px] md:h-[560px]"
           >
             <img
               src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330729/f123697aa370f082191412d5dc38d04629b4621e_jth7jv.png"

@@ -9,12 +9,12 @@ const SectionFour = () => {
   };
 
   return (
-    <div className="relative bg-[#eef2fe] h-max md:h-[526.66px] lg:h-[982px] px-[5%] py-5">
+    <div className="relative bg-[#eef2fe] h-max md:h-[526.66px] xl:h-[982px] px-[5%] py-5">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="grid grid-cols-1 md:grid-cols-2 w-full h-max md:h-[426.11px] lg:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 lg:mt-8"
+        className="grid grid-cols-1 md:grid-cols-2 w-full h-max md:h-[426.11px] xl:h-[800px] bg-[#fff] overflow-hidden rounded-2xl md:mt-4 xl:mt-8"
       >
         <div className="relative bg-[#efece9] w-full h-[332px] md:w-full md:h-full rounded-2xl overflow-hidden">
           <span
@@ -29,33 +29,33 @@ const SectionFour = () => {
             transition={{ duration: 0.5, ease: "easeOut" }}
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071729/Graphics%20page/standing-111_vh6p2c.png"
             alt="outline-svg-1"
-            className="justify-self-center md:absolute md:top-[15px] md:right-0 w-[175.14px] h-full md:w-[250.23px] md:h-[410.26px] lg:hidden object-contain md:object-cover"
+            className="justify-self-center md:absolute md:top-[15px] md:right-0 w-[175.14px] h-full md:w-[250.23px] md:h-[410.26px] xl:hidden object-contain md:object-cover"
           />
         </div>
         <div className="px-3 py-10 rounded-tr-2xl rounded-br-2xl ">
-          <p className="text-[#101828] text-[12px] lg:text-[22.31px] mb-5">
+          <p className="text-[#101828] text-[12px] xl:text-[22.31px] mb-5">
             Packaging Design
           </p>
-          <p className="text-[#101828] text-[18px] md:text-[25.57px] lg:text-[48px] mb-5 font-semibold md:font-normal">
+          <p className="text-[#101828] text-[18px] md:text-[25.57px] xl:text-[48px] mb-5 font-semibold md:font-normal">
             Make your products stand out on the shelves with our eye-catching
             packaging designs
           </p>
-          <p className="text-[#101828] text-[16px] md:text-[8.84px] lg:text-[16.59px] leading-[1.5] mb-5">
+          <p className="text-[#101828] text-[16px] md:text-[8.84px] xl:text-[16.59px] leading-[1.5] mb-5">
             Let us find you that perfect colour, perfect style, and rhythm
           </p>
-          <p className="hidden md:block text-[#101828] md:text-[8px] lg:text-[9px] pb-5 border-b border-b-[#d9d9d9]">
+          <p className="hidden md:block text-[#101828] md:text-[8px] xl:text-[9px] pb-5 border-b border-b-[#d9d9d9]">
             We cater for both multi-million companies, small businesses,
             professionals, individual brands, just name it.
           </p>
 
-          <div className="hidden md:flex justify-between items-center md:mt-5 md:mb-8 lg:mt-25 lg:mb-15">
-            <p className="text-[#101828] md:text-[8.91px] lg:text-[16.73px]">
+          <div className="hidden md:flex justify-between items-center md:mt-5 md:mb-8 xl:mt-25 xl:mb-15">
+            <p className="text-[#101828] md:text-[8.91px] xl:text-[16.73px]">
               Mock-up presentations
             </p>
-            <p className="text-[#101828] md:text-[8.84px] lg:text-[16.59px]">
+            <p className="text-[#101828] md:text-[8.84px] xl:text-[16.59px]">
               Visualize your packaging in a real-world context
             </p>
-            <p className="text-[#101828] md:text-[9.06px] lg:text-[17.02px]">
+            <p className="text-[#101828] md:text-[9.06px] xl:text-[17.02px]">
               100% satisfaction
             </p>
           </div>
@@ -65,7 +65,7 @@ const SectionFour = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] lg:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 lg:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+              className="bg-[#010413] text-[#fff] text-[14px] md:text-[10px] xl:text-[16px] text-center border border-[#010413] mt-3 md:mt-0 rounded-md px-6 py-2 xl:py-3 hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
             >
               Get free consultation
             </motion.button>
@@ -78,7 +78,7 @@ const SectionFour = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750071729/Graphics%20page/standing-111_vh6p2c.png"
         alt="outline-svg-1"
-        className="hidden lg:block absolute bottom-0 left-[110px] lg:w-[560.23px] lg:h-[921.22px] object-cover"
+        className="hidden xl:block absolute bottom-0 left-[110px] xl:w-[560.23px] xl:h-[921.22px] object-cover"
       />
     </div>
   );

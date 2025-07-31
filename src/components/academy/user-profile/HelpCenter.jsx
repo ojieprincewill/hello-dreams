@@ -11,13 +11,13 @@ const HelpCenter = () => {
 
   return (
     <div className="w-full px-[5%] py-10 ">
-      <div className="w-full flex justify-center items-center lg:w-[804px] lg:mx-auto h-[150px] border border-[#eaecf0] rounded-sm p-8 mb-6 text-center">
-        <h2 className="text-[#010413] text-[20px] md:text-[28px] lg:text-[32px] mb-2">
+      <div className="w-full flex justify-center items-center xl:w-[804px] xl:mx-auto h-[150px] border border-[#eaecf0] rounded-sm p-8 mb-6 text-center">
+        <h2 className="text-[#010413] text-[20px] md:text-[28px] xl:text-[32px] mb-2">
           Contact Support
         </h2>
       </div>
       <div
-        className="bg-white rounded-xl shadow-xl p-8 lg:w-[804px] lg:mx-auto space-y-6"
+        className="bg-white rounded-xl shadow-xl p-8 xl:w-[804px] xl:mx-auto space-y-6"
         style={{ fontFamily: "DM Sans, sans-serif" }}
       >
         <div>

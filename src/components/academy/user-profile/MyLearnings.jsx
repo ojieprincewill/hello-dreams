@@ -57,7 +57,7 @@ const MyLearnings = () => {
 
       <div className="bg-[#1342ff] pt-6 md:pt-10 pl-4 md:pl-10 pr-4 md:pr-10 mb-6 text-[#fff] relative overflow-hidden">
         {/* Rotated image in header - hidden on mobile */}
-        <div className="absolute top-[-370px] right-[-560px] w-[736px] h-auto hidden lg:block">
+        <div className="absolute top-[-370px] right-[-560px] w-[736px] h-auto hidden xl:block">
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/v1752984140/Academy/sign%20up/3f66b694a8196a4df5f2b870dc9901b56806d575_pntsis.png"
             alt="Decorative"
@@ -66,26 +66,26 @@ const MyLearnings = () => {
           />
         </div>
 
-        <h1 className="text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-3 md:mb-5 relative z-10">
+        <h1 className="text-[20px] md:text-[30px] xl:text-[48px] font-bold mb-3 md:mb-5 relative z-10">
           My Learning
         </h1>
         <div
-          className="text-[14px] md:text-[16px] lg:text-[20px] mb-3 md:mb-5 relative z-10"
+          className="text-[14px] md:text-[16px] xl:text-[20px] mb-3 md:mb-5 relative z-10"
           style={{ fontFamily: "DM Sans, sans-serif" }}
         >
           13hr 27min{" "}
-          <span className="text-[#f7f7f7]/60 text-[12px] md:text-[14px] lg:text-[16px]">
+          <span className="text-[#f7f7f7]/60 text-[12px] md:text-[14px] xl:text-[16px]">
             watched
           </span>
         </div>
 
         {/* Responsive tabs */}
-        <div className="relative z-10 mt-10 md:mt-20 lg:mt-30">
+        <div className="relative z-10 mt-10 md:mt-20 xl:mt-30">
           <div className="flex gap-3 md:gap-8 overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
             {tabs.map((tab) => (
               <button
                 key={tab.key}
-                className={`pb-2 transition-colors duration-200 text-xs sm:text-sm md:text-base lg:text-lg cursor-pointer whitespace-nowrap flex-shrink-0 min-w-fit
+                className={`pb-2 transition-colors duration-200 text-xs sm:text-sm md:text-base xl:text-lg cursor-pointer whitespace-nowrap flex-shrink-0 min-w-fit
                    ${
                      activeTab === tab.key
                        ? "border-b-2 sm:border-b-4 md:border-b-6 border-[#d9d9d9] font-semibold text-white"
@@ -109,7 +109,7 @@ const MyLearnings = () => {
                 No classes yet.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                 {allInteractedClasses.map((classItem) => {
                   const CardComponent = getCardComponent(classItem);
                   return <CardComponent key={classItem.id} data={classItem} />;
@@ -125,7 +125,7 @@ const MyLearnings = () => {
                 No saved classes yet.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                 {wishlistClasses.map((classItem) => {
                   const CardComponent = getCardComponent(classItem);
                   return <CardComponent key={classItem.id} data={classItem} />;
@@ -141,7 +141,7 @@ const MyLearnings = () => {
                 No in-progress classes yet.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                 {progressClasses.map((classItem) => {
                   const CardComponent = getCardComponent(classItem);
                   return <CardComponent key={classItem.id} data={classItem} />;
@@ -157,7 +157,7 @@ const MyLearnings = () => {
                 No completed classes yet.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                 {completedClassesList.map((classItem) => {
                   const CardComponent = getCardComponent(classItem);
                   return <CardComponent key={classItem.id} data={classItem} />;

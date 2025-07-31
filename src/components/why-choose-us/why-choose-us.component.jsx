@@ -20,18 +20,18 @@ const WhyChooseUs = () => {
   return (
     <div className="w-full px-[5%] py-10 ">
       {/* Header Animation */}
-      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] lg:text-[96px] font-bold pb-15 flex items-center justify-center gap-2">
+      <h1 className="text-center text-[#1b212c34] text-[24px] md:text-[48px] xl:text-[96px] font-bold pb-15 flex items-center justify-center gap-2">
         Why Choose Us
         <span className="ml-1">
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330672/arrow-block-down_vsasxf.png"
             alt="arrow-block"
-            className="w-[36.67px] h-[36.67px] md:w-[64px] md:h-[64px] lg:w-[128px] lg:h-[128px] object-cover"
+            className="w-[36.67px] h-[36.67px] md:w-[64px] md:h-[64px] xl:w-[128px] xl:h-[128px] object-cover"
           />
         </span>
       </h1>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
         {ChooseData.map((data, index) => (
           <motion.div
             key={data.id}
@@ -41,7 +41,7 @@ const WhyChooseUs = () => {
             custom={index} // Pass index for staggered delay
             className={`p-3 border border-[#ccc] rounded-2xl ${
               index === ChooseData.length - 1
-                ? "md:col-span-2 lg:col-span-1"
+                ? "md:col-span-2 xl:col-span-1"
                 : ""
             }`}
           >

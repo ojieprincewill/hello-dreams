@@ -99,7 +99,7 @@ const ClassesMain = () => {
   return (
     <div className="px-[5%] py-8">
       <h1
-        className="text-[#010413] text-[20px] md:text-[30px] lg:text-[40px] font-bold mb-6"
+        className="text-[#010413] text-[20px] md:text-[30px] xl:text-[40px] font-bold mb-6"
         style={{ fontFamily: "DM Sans, sans-serif" }}
       >
         {heading}
@@ -190,7 +190,7 @@ const ClassesMain = () => {
       {category === "courses" ? (
         <>
           {showSaved ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
               {filteredCourses.length === 0 ? (
                 <p className="text-center text-[#667085] py-6">
                   You haven't saved any courses yet. Try bookmarking one! 📚✨
@@ -211,12 +211,12 @@ const ClassesMain = () => {
                 return (
                   <div key={cat} className="mb-15">
                     <h2
-                      className="text-[20px] md:text-[30px] lg:text-[40px] font-bold mb-5 text-[#010413]"
+                      className="text-[20px] md:text-[30px] xl:text-[40px] font-bold mb-5 text-[#010413]"
                       style={{ fontFamily: "DM Sans, sans-serif" }}
                     >
                       {cat}
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
                       {coursesInCat.map((course) => (
                         <CourseCard key={course.id} course={course} />
                       ))}
@@ -227,7 +227,7 @@ const ClassesMain = () => {
 
               {/* Cohort card still renders at the bottom */}
               <div className="mt-10">
-                <h2 className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold mb-7">
+                <h2 className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold mb-7">
                   {CohortsData[0].category}
                 </h2>
                 <CohortCard
@@ -241,7 +241,7 @@ const ClassesMain = () => {
           )}
         </>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
           {filteredClasses.length === 0 ? (
             <div className="col-span-full text-center text-[#667085] text-lg py-10">
               No classes found.

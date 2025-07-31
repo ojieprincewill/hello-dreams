@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import supabase from '../../supabase/client';
-import { motion } from 'motion/react';
-import { useDispatch } from 'react-redux';
-import { resetCart } from '@/state-slices/cart/cartSlice';
-import PaystackPop from '@paystack/inline-js';
+import React, { useState } from "react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import supabase from "../../supabase/client";
+import { motion } from "motion/react";
+import { useDispatch } from "react-redux";
+import { resetCart } from "@/state-slices/cart/cartSlice";
+import PaystackPop from "@paystack/inline-js";
 const CheckoutForm = ({ onSuccess }) => {
   const handleOrigins = () => {
     window.scrollTo(0, 0);
@@ -22,27 +22,27 @@ const CheckoutForm = ({ onSuccess }) => {
       .reduce(
         (accumulatedQuantity, cartItem) =>
           accumulatedQuantity + cartItem.quantity * cartItem.price,
-        0,
+        0
       )
-      .toFixed(2),
+      .toFixed(2)
   );
 
   // Calculate total items count
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
-    0,
+    0
   );
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    deliveryAddress: '',
-    city: '',
-    state: '',
-    phone: '',
+    fullName: "",
+    email: "",
+    deliveryAddress: "",
+    city: "",
+    state: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -70,17 +70,17 @@ const CheckoutForm = ({ onSuccess }) => {
 
     try {
       const { data, error: initError } = await supabase.functions.invoke(
-        'paystack-payment-initiation',
+        "paystack-payment-initiation",
         {
           body: paymentData,
-        },
+        }
       );
       console.log(paymentData);
       console.log(data);
       console.log(initError);
 
       if (initError || !data?.access_code || !data?.reference) {
-        setError('Payment initiation failed.');
+        setError("Payment initiation failed.");
         setIsLoading(false);
         return;
       }
@@ -88,7 +88,7 @@ const CheckoutForm = ({ onSuccess }) => {
       const orderData = {
         name: formData.name,
         totalItems,
-        orderStatus: 'pending',
+        orderStatus: "pending",
         orderTotal: cartTotal,
         orderItems: cartItems,
         orderEmail: email,
@@ -102,14 +102,14 @@ const CheckoutForm = ({ onSuccess }) => {
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f', // Optional: You can omit if set in backend
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f", // Optional: You can omit if set in backend
         reference: data.reference,
         email: email,
         amount: cartTotal * 100,
         onSuccess: async (response) => {
           // STEP 2: On success, verify the payment and update the order status
           const { data: verifyData, error: verifyError } =
-            await supabase.functions.invoke('collections-checkout-handler', {
+            await supabase.functions.invoke("collections-checkout-handler", {
               body: {
                 reference: response.reference,
                 ...formData,
@@ -117,7 +117,7 @@ const CheckoutForm = ({ onSuccess }) => {
             });
 
           if (verifyError || verifyData?.error) {
-            setError('Verification failed. Payment may not be confirmed.');
+            setError("Verification failed. Payment may not be confirmed.");
           } else {
             onSuccess({
               orderId: response.reference,
@@ -127,26 +127,26 @@ const CheckoutForm = ({ onSuccess }) => {
 
             dispatch(resetCart());
 
-            setSuccess('Payment Successful!');
+            setSuccess("Payment Successful!");
             setFormData({
-              fullName: '',
-              email: '',
-              deliveryAddress: '',
-              city: '',
-              state: '',
-              phone: '',
+              fullName: "",
+              email: "",
+              deliveryAddress: "",
+              city: "",
+              state: "",
+              phone: "",
             });
           }
           setIsLoading(false);
         },
         onCancel: () => {
-          setError('Payment was cancelled.');
+          setError("Payment was cancelled.");
           setIsLoading(false);
         },
       });
     } catch (err) {
-      console.error('Submission Error:', err);
-      setError('An unexpected error occurred.');
+      console.error("Submission Error:", err);
+      setError("An unexpected error occurred.");
       setIsLoading(false);
     }
   };
@@ -162,7 +162,7 @@ const CheckoutForm = ({ onSuccess }) => {
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#010413] text-[20px] md:text-[24px] font-bold mb-5"
         >
@@ -172,7 +172,7 @@ const CheckoutForm = ({ onSuccess }) => {
         <motion.form
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="w-full space-y-6 md:space-y-8 text-[#667085]"
           onSubmit={handleSubmit}
@@ -315,9 +315,9 @@ const CheckoutForm = ({ onSuccess }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-2 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-2 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Processing...' : 'Place Order'}
+              {isLoading ? "Processing..." : "Place Order"}
             </button>
           </div>
         </motion.form>
@@ -325,7 +325,7 @@ const CheckoutForm = ({ onSuccess }) => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
         className="bg-[#eaecf0] text-[#1a212a] text-[14px] p-3 rounded-md leading-[1.7] "
       >

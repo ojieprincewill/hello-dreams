@@ -23,7 +23,7 @@ const CourseCard = ({ course }) => {
   };
 
   return (
-    <div className="w-full h-max md:h-[500px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl flex flex-col">
+    <div className="w-full h-max md:h-[500px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl flex flex-col">
       <div className="relative w-full h-[181.55px] md:h-[221.16px] overflow-hidden rounded-xl mb-4">
         <img
           src={course.image}

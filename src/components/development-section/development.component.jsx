@@ -24,11 +24,11 @@ const Development = () => {
 
   return (
     <div className="w-full px-[5%] py-10">
-      <p className="text-[#101828] text-center text-[20px] md:text-[23.98px] lg:text-[48px] font-bold mb-3 ">
+      <p className="text-[#101828] text-center text-[20px] md:text-[23.98px] xl:text-[48px] font-bold mb-3 ">
         Development
       </p>
       <p
-        className="text-[#667085] text-center text-[12px] md:text-[10px] lg:text-[17.44px] mb-7 w-full md:w-[598px] md:mx-auto"
+        className="text-[#667085] text-center text-[12px] md:text-[10px] xl:text-[17.44px] mb-7 w-full md:w-[598px] md:mx-auto"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Professional web and mobile app development services tailored to your
@@ -39,12 +39,12 @@ const Development = () => {
         onClick={handleOrigins}
         className="flex justify-center items-center"
       >
-        <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <button className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
           Get a Free Consultation
         </button>
       </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 my-10">
         {DevData.map((data, index) => (
           <motion.div
             key={data.id}
@@ -54,7 +54,7 @@ const Development = () => {
             custom={index}
             className="border border-[#dfdfe2] rounded-xl p-2"
           >
-            <div className="w-full h-[280px] lg:h-[360px] rounded-xl overflow-hidden ">
+            <div className="w-full h-[280px] xl:h-[360px] rounded-xl overflow-hidden ">
               <img
                 src={data.image}
                 alt={data.title}
@@ -64,13 +64,13 @@ const Development = () => {
               />
             </div>
             <p
-              className="text-[#26262b] text-[16px] md:text-[12px] lg:text-[18px] font-medium my-2"
+              className="text-[#26262b] text-[16px] md:text-[12px] xl:text-[18px] font-medium my-2"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {data.title}
             </p>
             <p
-              className="text-[#7f8090] text-[14px] md:text-[10px] lg:text-[15.5px]  "
+              className="text-[#7f8090] text-[14px] md:text-[10px] xl:text-[15.5px]  "
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {data.text}

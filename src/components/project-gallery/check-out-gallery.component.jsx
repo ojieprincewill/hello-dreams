@@ -9,16 +9,16 @@ const CheckOutGallery = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: false, amount: 0.2 }}
-      className="w-full px-[5%] lg:px-[10%] py-10"
+      className="w-full px-[5%] xl:px-[10%] py-10"
     >
       <p
-        className="text-[#000000] text-[16px] lg:text-[32px] lg:font-bold text-center mb-5"
+        className="text-[#000000] text-[16px] xl:text-[32px] xl:font-bold text-center mb-5"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Check out our project gallery
       </p>
       <p
-        className="text-[#07111d] text-[11px] lg:text-[17px] lg:font-bold text-center mb-7"
+        className="text-[#07111d] text-[11px] xl:text-[17px] xl:font-bold text-center mb-7"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Explore our figma designs, which are not under NDA
@@ -29,14 +29,14 @@ const CheckOutGallery = () => {
         whileInView={{ opacity: 1, scale: 1 }} // ✅ Grows into place
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.2 }}
-        className="flex flex-row justify-center items-center space-x-2 lg:space-x-4"
+        className="flex flex-row justify-center items-center space-x-2 xl:space-x-4"
       >
         <motion.button
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.2 }}
-          className="bg-[#ffffff] border border-[#00000015] text-[#000000] text-[10px] lg:text-[14px] px-6 md:px-8 py-3 lg:font-bold text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90]"
+          className="bg-[#ffffff] border border-[#00000015] text-[#000000] text-[10px] xl:text-[14px] px-6 md:px-8 py-3 xl:font-bold text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <img
@@ -52,7 +52,7 @@ const CheckOutGallery = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.2 }}
-          className="bg-[#ffffff] border border-[#00000015] text-[#000000] text-[10px] lg:text-[14px] px-6 md:px-8 py-3 lg:font-bold text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90]"
+          className="bg-[#ffffff] border border-[#00000015] text-[#000000] text-[10px] xl:text-[14px] px-6 md:px-8 py-3 xl:font-bold text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90]"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <img

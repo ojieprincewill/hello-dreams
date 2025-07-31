@@ -27,10 +27,10 @@ const SignUpSuccess = ({ formData }) => {
           alt="Confetti box"
           className="md:w-[233.72px] md:h-[236.3px] mx-auto my-6"
         />
-        <h1 className="text-[#101828] capitalize text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-2 text-center">
+        <h1 className="text-[#101828] capitalize text-[20px] md:text-[30px] xl:text-[48px] font-bold mb-2 text-center">
           congratulations {formData.firstName || "!"}
         </h1>
-        <p className="text-[#667085] text-[14px] md:text-[16px] lg:text-[18px] mb-8 text-center max-w-lg">
+        <p className="text-[#667085] text-[14px] md:text-[16px] xl:text-[18px] mb-8 text-center max-w-lg">
           You have successfully created your Hello Dreams{" "}
           <span className="font-bold text-[#101828]">
             Acade<span className="text-[#1342ff]">m</span>y's

@@ -22,7 +22,9 @@ const handleOrigins = () => {
 };
 
 const Preview2 = () => {
-  const previewCourses = academyItems.filter(item => item.type === "course").slice(0, 3);
+  const previewCourses = academyItems
+    .filter((item) => item.type === "course")
+    .slice(0, 3);
 
   return (
     <>
@@ -30,18 +32,18 @@ const Preview2 = () => {
         className="flex justify-between items-center mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        <p className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold">
+        <p className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold">
           Explore Tech Courses
         </p>
         <Link
           to="/academy/classes?category=courses"
           onClick={handleOrigins}
-          className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          className="hidden md:inline text-[#ff7f50] text-[14px] xl:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
         >
           View all
         </Link>
       </div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-15">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
         {previewCourses.map((course, index) => (
           <CourseCard key={course.id} course={course} />
         ))}

@@ -5,13 +5,13 @@ const Terms = () => {
   return (
     <div className="bg-[#f7f7f7] px-[5%] py-5 md:py-10">
       <div className="bg-[#ffffff] p-5 md:p-10 rounded-xl w-full leading-[1.5]">
-        <p className="text-[#667085] text-[18px] md:text-[24px] lg:text-[32px] font-bold md:mb-1 ">
+        <p className="text-[#667085] text-[18px] md:text-[24px] xl:text-[32px] font-bold md:mb-1 ">
           Terms of Service for Hello Dreams
         </p>
-        <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px] ">
+        <p className="text-[#667085] text-[12px] md:text-[16px] xl:text-[20px] ">
           18th June, 2025
         </p>
-        <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px] py-4 md:py-7">
+        <p className="text-[#667085] text-[12px] md:text-[16px] xl:text-[20px] py-4 md:py-7">
           Welcome to Hello Dreams! By using our platform, you agree to the
           following Terms of Service. If you do not agree, please do not use the
           platform.
@@ -20,13 +20,13 @@ const Terms = () => {
         {TermsData.map((data) => (
           <div key={data.id} className="mb-5 md:mb-10">
             {data.title && (
-              <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px] font-bold mb-2 md:mb-5">
+              <p className="text-[#667085] text-[12px] md:text-[16px] xl:text-[20px] font-bold mb-2 md:mb-5">
                 {data.title}
               </p>
             )}
             {data.text1 && (
               <p
-                className={`text-[12px] md:text-[16px] lg:text-[20px] ${
+                className={`text-[12px] md:text-[16px] xl:text-[20px] ${
                   data.id === 10
                     ? "text-[#336aea] font-medium underline"
                     : "text-[#667085]"
@@ -46,7 +46,7 @@ const Terms = () => {
                 {data.options.map((option, index) => (
                   <li
                     key={index}
-                    className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px]"
+                    className="text-[#667085] text-[12px] md:text-[16px] xl:text-[20px]"
                   >
                     {option}
                   </li>
@@ -54,7 +54,7 @@ const Terms = () => {
               </ul>
             )}
             {data.text2 && (
-              <p className="text-[#667085] text-[12px] md:text-[16px] lg:text-[20px]">
+              <p className="text-[#667085] text-[12px] md:text-[16px] xl:text-[20px]">
                 {data.text2}
               </p>
             )}

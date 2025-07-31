@@ -9,15 +9,15 @@ const PrintingSection = () => {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-col py-5">
-      <div className="w-full  text-center flex flex-col justify-center items-center py-5 px-5 lg:pb-10">
+    <div className="flex flex-col-reverse xl:flex-col py-5">
+      <div className="w-full  text-center flex flex-col justify-center items-center py-5 px-5 xl:pb-10">
         <h1 className="text-[#010413] text-[24px] md:text-[48px] leading-[1.1] font-semibold md:font-bold">
           Printing
         </h1>
         <p className="mt-3 md:mt-8 text-[16px] md:text-[20px] text-[#667085] font-bold leading-[1.4]">
           Professional & clean
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:inline xl:space-x-4">
           <Link
             to="/services/printing-consultation"
             onClick={handleOrigins}
@@ -34,7 +34,7 @@ const PrintingSection = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-[#ffadd9] w-full h-[420px] md:h-[530px] lg:h-[761px] rounded-xl">
+      <div className="bg-[#ffadd9] w-full h-[420px] md:h-[530px] xl:h-[761px] rounded-xl">
         <motion.img
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

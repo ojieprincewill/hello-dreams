@@ -56,15 +56,15 @@ const AcademyHeader = () => {
 
   const getTextPositionClasses = (position) => {
     if (position === "left") {
-      return "left-8 lg:left-16 bottom-8 lg:bottom-16";
+      return "left-8 xl:left-16 bottom-8 xl:bottom-16";
     } else if (position === "right") {
-      return "right-8 lg:right-16 bottom-8 lg:bottom-16";
+      return "right-8 xl:right-16 bottom-8 xl:bottom-16";
     }
-    return "left-8 lg:left-16 bottom-8 lg:bottom-16"; // default
+    return "left-8 xl:left-16 bottom-8 xl:bottom-16"; // default
   };
 
   return (
-    <div className="relative h-[320px] md:h-[463px] lg:h-[732px] overflow-hidden">
+    <div className="relative h-[320px] md:h-[463px] xl:h-[732px] overflow-hidden">
       {/* Slides */}
       <div className="relative h-full">
         {slides.map((slide, index) => (
@@ -86,14 +86,14 @@ const AcademyHeader = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="hidden md:block absolute top-1/2 left-4 lg:left-8 transform -translate-y-1/2 z-10">
+      <div className="hidden md:block absolute top-1/2 left-4 xl:left-8 transform -translate-y-1/2 z-10">
         <button
           onClick={prevSlide}
-          className="bg-white hover:bg-gray-50 text-gray-800 p-3 lg:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="bg-white hover:bg-gray-50 text-gray-800 p-3 xl:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Previous slide"
         >
           <svg
-            className="w-5 h-5 lg:w-6 lg:h-6"
+            className="w-5 h-5 xl:w-6 xl:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -108,14 +108,14 @@ const AcademyHeader = () => {
         </button>
       </div>
 
-      <div className="hidden md:block absolute top-1/2 right-4 lg:right-8 transform -translate-y-1/2 z-10">
+      <div className="hidden md:block absolute top-1/2 right-4 xl:right-8 transform -translate-y-1/2 z-10">
         <button
           onClick={nextSlide}
-          className="bg-white hover:bg-gray-50 text-gray-800 p-3 lg:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="bg-white hover:bg-gray-50 text-gray-800 p-3 xl:p-4 rounded-full cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl"
           aria-label="Next slide"
         >
           <svg
-            className="w-5 h-5 lg:w-6 lg:h-6"
+            className="w-5 h-5 xl:w-6 xl:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -134,14 +134,14 @@ const AcademyHeader = () => {
       <div
         className={`absolute ${getTextPositionClasses(
           slides[currentSlide].textPosition
-        )} z-20 bg-white rounded-lg shadow-xl p-3 lg:p-8 max-w-md lg:max-w-lg`}
+        )} z-20 bg-white rounded-lg shadow-xl p-3 xl:p-8 max-w-md xl:max-w-lg`}
       >
         <div className="text-left">
-          <h1 className="text-xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-1 md:mb-3 lg:mb-4">
+          <h1 className="text-xl xl:text-3xl xl:text-4xl font-bold text-gray-900 mb-1 md:mb-3 xl:mb-4">
             {slides[currentSlide].title}
           </h1>
           <p
-            className="text-sm lg:text-base xl:text-lg text-gray-600 leading-relaxed"
+            className="text-sm xl:text-base xl:text-lg text-gray-600 leading-relaxed"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             {slides[currentSlide].subtitle}

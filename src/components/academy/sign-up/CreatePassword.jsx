@@ -73,10 +73,10 @@ const CreatePassword = ({ onContinue, onBack, formData, setFormData }) => {
               Acade<span className="text-[#1342ff]">m</span>y
             </span>
           </div>
-          <h1 className="text-[#101828] text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-2 text-center">
+          <h1 className="text-[#101828] text-[20px] md:text-[30px] xl:text-[48px] font-bold mb-2 text-center">
             Create your password
           </h1>
-          <p className="text-[#667085] text-[14px] md:text-[16px] lg:text-[18px] mb-6 text-center max-w-md">
+          <p className="text-[#667085] text-[14px] md:text-[16px] xl:text-[18px] mb-6 text-center max-w-md">
             Please create your password
           </p>
           <form

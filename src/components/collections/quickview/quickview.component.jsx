@@ -62,10 +62,10 @@ const Quickview = () => {
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
         key={id}
-        className="bg-[#fff] w-[90%] md:w-[427px] h-max md:h-[90vh] lg:h-[564.09px] p-2 rounded-sm overflow-auto"
+        className="bg-[#fff] w-[90%] md:w-[427px] h-max md:h-[90vh] xl:h-[564.09px] p-2 rounded-sm overflow-auto"
       >
         <div className="flex justify-between items-center mb-3 pb-1 border-b border-b-[#e6e2dd] text-[#1b212c]">
-          <h2 className=" text-[14px] lg:text-[16px] font-medium  ">
+          <h2 className=" text-[14px] xl:text-[16px] font-medium  ">
             Product Details
           </h2>
           <XMarkIcon

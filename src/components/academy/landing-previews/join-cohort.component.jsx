@@ -8,8 +8,8 @@ const JoinCohort = () => {
   const cohort = CohortsData[0];
 
   const handleOrigins = () => {
-    window.scrollTo(0,0);
-  }
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="my-10">
@@ -17,10 +17,14 @@ const JoinCohort = () => {
         className="flex justify-between items-center mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        <p className="text-[#010413] text-[20px] md:text-[30px] lg:text-[40px] font-bold">
+        <p className="text-[#010413] text-[20px] md:text-[30px] xl:text-[40px] font-bold">
           {cohort.category}
         </p>
-        <Link to="/academy/cohorts" onClick={handleOrigins} className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <Link
+          to="/academy/cohorts"
+          onClick={handleOrigins}
+          className="hidden md:inline text-[#ff7f50] text-[14px] xl:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+        >
           View all
         </Link>
       </div>

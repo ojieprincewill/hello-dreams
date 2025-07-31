@@ -51,7 +51,7 @@ const AcademySidebar = ({ closeSidebar }) => {
               <Logo />
             </div>
             <Link
-              className="text-[#010413] font-bold text-[14px] md:text-[16px] lg:text-[20px] hover:text-[#1342ff] transition-colors duration-300"
+              className="text-[#010413] font-bold text-[14px] md:text-[16px] xl:text-[20px] hover:text-[#1342ff] transition-colors duration-300"
               to="/academy"
               onClick={handleOrigins}
             >

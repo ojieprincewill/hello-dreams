@@ -58,7 +58,7 @@ const DesignHeader = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-[#000000] text-[24px] md:text-[33.36px] lg:text-[56px] text-center font-medium md:font-bold lg:w-[900px]"
+            className="text-[#000000] text-[24px] md:text-[33.36px] xl:text-[56px] text-center font-medium md:font-bold xl:w-[900px]"
           >
             Digital Experiences With Expert UI/UX Design
           </motion.p>
@@ -66,7 +66,7 @@ const DesignHeader = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-[#07111d] text-[12px] lg:text-[18px] text-center lg:font-bold mt-5"
+            className="text-[#07111d] text-[12px] xl:text-[18px] text-center xl:font-bold mt-5"
           >
             Say goodbye to bad user experience reviews. Say hello to 5-star
             reviews.
@@ -81,7 +81,7 @@ const DesignHeader = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             Get a Free Consultation
           </motion.button>

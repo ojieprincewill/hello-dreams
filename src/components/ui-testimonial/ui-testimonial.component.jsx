@@ -20,13 +20,13 @@ const UiTestimonial = () => {
   return (
     <div className="w-full px-[5%] py-10">
       <p
-        className="text-[#041856] text-[20px] md:text-[27.32px] lg:text-[48px] text-center mb-5"
+        className="text-[#041856] text-[20px] md:text-[27.32px] xl:text-[48px] text-center mb-5"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Testimonials
       </p>
       <p
-        className="text-[#101010] text-[14px] md:text-[15.94px] lg:text-[28px] text-center font-medium capitalize mb-5"
+        className="text-[#101010] text-[14px] md:text-[15.94px] xl:text-[28px] text-center font-medium capitalize mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Hear what our clients have to say
@@ -43,7 +43,7 @@ const UiTestimonial = () => {
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row space-x-3 items-center">
-                <div className="w-[45.77px] h-[45.77px] md:w-[43.83px] md:h-[43.83px] lg:w-[77px] lg:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
+                <div className="w-[45.77px] h-[45.77px] md:w-[43.83px] md:h-[43.83px] xl:w-[77px] xl:h-[77px] bg-[#d9d9d9] flex justify-center items-center rounded-full overflow-hidden">
                   <img
                     src={data.logo}
                     alt={data.client}
@@ -51,7 +51,7 @@ const UiTestimonial = () => {
                   />
                 </div>
                 <div className="space-y-1 md:space-y-2">
-                  <p className="text-[#101010] text-[16px] md:text-[14px] lg:text-[20px]">
+                  <p className="text-[#101010] text-[16px] md:text-[14px] xl:text-[20px]">
                     {data.client}
                   </p>
                   <p
@@ -62,7 +62,7 @@ const UiTestimonial = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-[27.35px] h-[24.19px] lg:w-[46px] lg:h-[39.03px]">
+              <div className="w-[27.35px] h-[24.19px] xl:w-[46px] xl:h-[39.03px]">
                 <img
                   src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750070959/UI%20page/quote_icon_flyun2.png"
                   alt="quote icon"

@@ -18,19 +18,19 @@ const AccountSecurity = () => {
 
   return (
     <div className="w-full px-[5%] py-10">
-      <div className="w-full lg:w-[810px] lg:mx-auto h-[150px] border border-[#eaecf0] rounded-sm px-8 py-4 mb-6 flex flex-col justify-center items-center">
-        <h2 className="text-[#010413] text-[20px] md:text-[28px] lg:text-[32px] mb-2">
+      <div className="w-full xl:w-[810px] xl:mx-auto h-[150px] border border-[#eaecf0] rounded-sm px-8 py-4 mb-6 flex flex-col justify-center items-center">
+        <h2 className="text-[#010413] text-[20px] md:text-[28px] xl:text-[32px] mb-2">
           Account Settings
         </h2>
         <div
-          className="text-[#3a4459] text-[14px] md:text-[16px] lg:text-[18px] text-center font-medium"
+          className="text-[#3a4459] text-[14px] md:text-[16px] xl:text-[18px] text-center font-medium"
           style={{ fontFamily: "DM Sans, sans-serif" }}
         >
           Edit your account settings and change your password here
         </div>
       </div>
       <div
-        className="bg-white rounded-xl shadow-xl p-8 lg:w-[877px] lg:mx-auto"
+        className="bg-white rounded-xl shadow-xl p-8 xl:w-[877px] xl:mx-auto"
         style={{ fontFamily: "DM Sans, sans-serif" }}
       >
         <div className="mb-6">

@@ -52,7 +52,7 @@ const Sidebar = ({ active, setActive, onClose = null }) => {
 
 const MobileSidebar = ({ active, setActive, onClose }) => {
   return (
-    <div className="fixed inset-0 z-90 lg:hidden">
+    <div className="fixed inset-0 z-90 xl:hidden">
       {/* Backdrop - only on tablet (md and up) */}
       <div
         className="fixed inset-0 bg-[#000000]/30 md:block hidden"
@@ -111,12 +111,12 @@ const UserProfileMain = () => {
   return (
     <div className="flex min-h-[80vh]">
       {/* Desktop Sidebar - hidden on mobile/tablet, visible on desktop */}
-      <div className="hidden lg:block">
+      <div className="hidden xl:block">
         <Sidebar active={active} setActive={setActive} />
       </div>
 
       {/* Mobile/Tablet Menu Button - visible on mobile/tablet, hidden on desktop */}
-      <div className="fixed top-4 md:top-25 left-4 z-80 lg:hidden ">
+      <div className="fixed top-4 md:top-25 left-4 z-80 xl:hidden ">
         <button
           onClick={() => setIsMobileMenuOpen(true)}
           className="p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors"
@@ -135,7 +135,7 @@ const UserProfileMain = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 lg:ml-0">
+      <main className="flex-1 xl:ml-0">
         {active === "learnings" && <MyLearnings />}
         {active === "security" && <AccountSecurity />}
         {active === "settings" && <AccountSettings />}

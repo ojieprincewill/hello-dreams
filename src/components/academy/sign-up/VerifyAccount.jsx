@@ -74,7 +74,7 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
               Acade<span className="text-[#1342ff]">m</span>y
             </span>
           </div>
-          <h1 className="text-[#14142a] text-[20px] md:text-[30px] lg:text-[48px] font-bold mb-2 text-center">
+          <h1 className="text-[#14142a] text-[20px] md:text-[30px] xl:text-[48px] font-bold mb-2 text-center">
             Verify your account
           </h1>
           <p className="text-[#667085] text-[14px] md:text-[16px] mb-6 text-center max-w-md">

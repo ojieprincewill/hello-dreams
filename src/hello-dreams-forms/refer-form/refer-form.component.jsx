@@ -166,13 +166,13 @@ const ReferForm = () => {
 
   return (
     <div className="px-[5%] md:px-[10%] py-10">
-      <p className="text-[#667085] text-[12px] md:text-[19.54px] lg:text-[24px] text-center font-bold md:w-[480px] mx-auto mb-5">
+      <p className="text-[#667085] text-[12px] md:text-[19.54px] xl:text-[24px] text-center font-bold md:w-[480px] mx-auto mb-5">
         Earn Rewards with Our Refer and Earn Program
       </p>
-      <p className="text-[#010413] text-[24px] md:text-[39.09px] lg:text-[48px] text-center lg:w-[840px] mx-auto mb-5">
+      <p className="text-[#010413] text-[24px] md:text-[39.09px] xl:text-[48px] text-center xl:w-[840px] mx-auto mb-5">
         Share the Benefits and Get Rewarded for Every Referral
       </p>
-      <p className="text-[#667085] text-[12px] md:text-[13.1px] lg:text-[16px] text-center mb-5">
+      <p className="text-[#667085] text-[12px] md:text-[13.1px] xl:text-[16px] text-center mb-5">
         Make up to 10% on commission for every referral of any of our services.
       </p>
 
@@ -190,7 +190,7 @@ const ReferForm = () => {
           {step === 1 && (
             <div className="space-y-8">
               <p
-                className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold "
+                className="text-[#000000] text-[24.15px] md:text-[36.02px] xl:text-[40px] text-center font-bold "
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Step 1
@@ -304,7 +304,7 @@ const ReferForm = () => {
                 <button
                   type="button"
                   onClick={handleStepOneComplete}
-                  className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+                  className="bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 rounded-lg hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                 >
                   {formData.referralCode ? "Resave" : "Save & Continue"}
                 </button>
@@ -322,7 +322,7 @@ const ReferForm = () => {
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               <p
-                className="text-[#000000] text-[24.15px] md:text-[36.02px] lg:text-[40px] text-center font-bold "
+                className="text-[#000000] text-[24.15px] md:text-[36.02px] xl:text-[40px] text-center font-bold "
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Step 2
@@ -333,31 +333,31 @@ const ReferForm = () => {
                   onClick={handleGenerateAndShowCode}
                   className="bg-[#ffffff] border border-[#00000015] text-[#010413] text-[12px] md:text-[14px] px-6 md:px-8 py-3 font-medium text-center rounded-2xl shadow-[inset_0px_-2px_4px] shadow-[#ffe7de90] cursor-pointer"
                 >
-                  <DocumentDuplicateIcon className="inline w-4 h-4 lg:w-5 lg:h-5 align-middle mr-1" />
+                  <DocumentDuplicateIcon className="inline w-4 h-4 xl:w-5 xl:h-5 align-middle mr-1" />
                   Copy Your Referral Id
                 </button>
               </div>
               <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
-                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 xl:w-5 xl:h-5 align-middle mr-3" />
                 Share our “Get a quote” link with your referral
               </p>
               <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
-                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 xl:w-5 xl:h-5 align-middle mr-3" />
                 Ensure your referral submits a quote request
               </p>
               <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
-                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 xl:w-5 xl:h-5 align-middle mr-3" />
                 Assist the company to ensure the deal is closed
               </p>
               <p className="bg-[#f7f7f7] text-[#000000] text-[12px] md:text-[14.38px] px-5 py-4 rounded-md h-[80px] flex items-center">
-                <CheckIcon className="inline text-[#1342ff] w-4 h-4 lg:w-5 lg:h-5 align-middle mr-3" />
+                <CheckIcon className="inline text-[#1342ff] w-4 h-4 xl:w-5 xl:h-5 align-middle mr-3" />
                 When successful, you will get 10%
               </p>
               <div className="flex justify-center items-center">
                 <button
                   type="submit"
                   disabled={!codeSeen || loading}
-                  className={`bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] lg:text-[16px] px-6 py-3 rounded-lg transition-colors duration-300 cursor-pointer ${
+                  className={`bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] text-[12px] md:text-[14px] xl:text-[16px] px-6 py-3 rounded-lg transition-colors duration-300 cursor-pointer ${
                     !codeSeen || loading
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-[#1342ff] hover:border-[#1342ff]"

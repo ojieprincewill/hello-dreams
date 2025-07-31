@@ -23,7 +23,7 @@ const CourseTabs = () => {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`py-2 px-3 md:px-4 text-[16px] lg:text-[20px] whitespace-nowrap border-b-2 transition-colors duration-300 cursor-pointer ${
+            className={`py-2 px-3 md:px-4 text-[16px] xl:text-[20px] whitespace-nowrap border-b-2 transition-colors duration-300 cursor-pointer ${
               activeTab === tab.key
                 ? "border-b-4 border-[#667085] text-[#010413]"
                 : "border-transparent text-[#667085] hover:text-[#010413]"
