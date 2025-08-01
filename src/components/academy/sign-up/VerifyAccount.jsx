@@ -5,6 +5,7 @@ import Logo from "@/components/logo/logo.component";
 const VerifyAccount = ({ onContinue, onBack, formData }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(30);
+  const [isVerifying, setIsVerifying] = useState(false);
   const inputRefs = useRef([]);
 
   // Timer countdown
@@ -50,6 +51,15 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
     return user.slice(0, 2) + "*****" + user.slice(-1) + "@" + domain;
   };
 
+  const handleContinue = () => {
+    setIsVerifying(true);
+    // Simulate verification process
+    setTimeout(() => {
+      setIsVerifying(false);
+      onContinue();
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen w-full p-[5%] flex items-center justify-center">
       <div className="w-full md:w-[632px] bg-white rounded-3xl shadow-lg p-4">
@@ -57,6 +67,7 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
         <button
           onClick={onBack}
           className="text-[#101828] hover:text-[#1342ff] text-2xl md:text-3xl transition-colors duration-200 cursor-pointer"
+          disabled={isVerifying}
         >
           <span aria-label="Back" role="img">
             <ArrowLeft size={24} strokeWidth={2.5} />
@@ -78,61 +89,57 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
             Verify your account
           </h1>
           <p className="text-[#667085] text-[14px] md:text-[16px] mb-6 text-center max-w-md">
-            Kindly enter the 6-digits OTP we sent to{" "}
-            <span className="font-bold">{maskPhone(formData.phone)}</span> &{" "}
+            We've sent a verification link to{" "}
             <span className="font-bold">{maskEmail(formData.email)}</span>
           </p>
-          <form
-            className="w-full flex flex-col"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (isComplete) onContinue();
-            }}
-          >
-            <p className="text-[#394455] text-[14px] uppercase mb-3">pin</p>
-            <div className="flex space-x-2 mb-4">
-              {otp.map((digit, idx) => (
-                <input
-                  key={idx}
-                  ref={(el) => (inputRefs.current[idx] = el)}
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleChange(e, idx)}
-                  onKeyDown={(e) => handleKeyDown(e, idx)}
-                  onPaste={handlePaste}
-                  className="w-full h-10 md:w-full md:h-14 text-center text-[28px] font-bold border border-[#eaecf0] rounded-lg bg-[#f7f7f7] focus:outline-none focus:ring-2 focus:ring-[#1342ff]"
-                  autoFocus={idx === 0}
-                />
-              ))}
-            </div>
-            <div className="flex flex-col space-y-2 mb-6">
-              <span className="text-[#0c111d] text-[14px] md:text-[16px]">
-                Didn't receive OTP?
-              </span>
-              <div className="flex space-x-2 text-[14px] md:text-[16px] font-bold">
-                <span className="text-[#db9308] ">{`00:${timer
-                  .toString()
-                  .padStart(2, "0")}`}</span>
-                <button
-                  type="button"
-                  className="text-[#667085] hover:text-[#1342ff] font-bold disabled:opacity-50 transition-colors duration-200 cursor-pointer"
-                  disabled={timer > 0}
-                  onClick={() => setTimer(30)}
-                >
-                  Resend
-                </button>
+          
+          <div className="w-full flex flex-col items-center space-y-6">
+            <div className="text-center space-y-4">
+              <div className="flex justify-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-[#101828] font-semibold text-lg">
+                  Check your email
+                </p>
+                <p className="text-[#667085] text-sm">
+                  Click the verification link in your email to complete your account setup.
+                </p>
               </div>
             </div>
-            <button
-              type="submit"
-              className="w-full py-3 rounded-lg bg-[#1342ff] text-white text-[16px] md:text-[18px] font-bold hover:bg-[#2313ff] disabled:opacity-60 transition-colors duration-200 cursor-pointer"
-              disabled={!isComplete}
-            >
-              Continue
-            </button>
-          </form>
+
+            <div className="w-full space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-start space-x-3">
+                  <div className="flex-shrink-0">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="text-sm text-blue-800">
+                    <p className="font-medium">Didn't receive the email?</p>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Check your spam folder</li>
+                      <li>• Make sure you entered the correct email address</li>
+                      <li>• Wait a few minutes for the email to arrive</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={handleContinue}
+                disabled={isVerifying}
+                className="w-full py-3 rounded-lg bg-[#1342ff] text-white text-[16px] md:text-[18px] font-bold hover:bg-[#2313ff] disabled:opacity-60 transition-colors duration-200 cursor-pointer"
+              >
+                {isVerifying ? "Verifying..." : "Continue to Success"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

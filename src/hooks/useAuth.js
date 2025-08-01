@@ -6,7 +6,8 @@ import {
   signUpWithEmail, 
   signOut, 
   resetPassword, 
-  updatePassword, 
+  updatePassword,
+  updatePasswordWithToken,
   updateUserProfile,
   updateUserProfileWithAvatar
 } from '../services/auth';
@@ -61,9 +62,14 @@ export function useAuth() {
     mutationFn: resetPassword,
   });
 
-  // Update password mutation
+  // Update password mutation (for authenticated users)
   const updatePasswordMutation = useMutation({
     mutationFn: updatePassword,
+  });
+
+  // Update password with token mutation (for password reset flow)
+  const updatePasswordWithTokenMutation = useMutation({
+    mutationFn: updatePasswordWithToken,
   });
 
   // Update user profile mutation
@@ -95,6 +101,7 @@ export function useAuth() {
     signOut: signOutMutation,
     resetPassword: resetPasswordMutation,
     updatePassword: updatePasswordMutation,
+    updatePasswordWithToken: updatePasswordWithTokenMutation,
     updateProfile,
     updateProfileWithAvatar,
     

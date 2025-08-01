@@ -16,11 +16,12 @@ import { motion, AnimatePresence } from "motion/react";
 import NavbarSearch from "../navbar-search/navbar-search.component";
 import { academyItems } from "@/data/academy-data/academy.data";
 import UserDropdown from "../user-dropdown/user-dropdown.component";
+import { useAuth } from "@/hooks/useAuth";
 
 const AcademyNavbar = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const user = false;
+  const { isAuthenticated, user } = useAuth();
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -96,7 +97,7 @@ const AcademyNavbar = () => {
         </div>
 
         <div className="flex items-center space-x-3">
-          {user ? (
+          {isAuthenticated ? (
             <UserDropdown />
           ) : (
             <div className="flex items-center space-x-3">
