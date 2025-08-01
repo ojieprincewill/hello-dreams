@@ -11,10 +11,10 @@ const UxDesignSection = () => {
   return (
     <div className="flex flex-col-reverse md:flex-col">
       <div className="px-10 md:px-5 py-10 md:py-20 w-full text-center flex flex-col justify-center items-center">
-        <h1 className="text-[24px] md:text-[52px] leading-[1.1] font-extrabold">
+        <h1 className="text-[24px] md:text-[40px] xl:text-[52px] leading-[1.1] font-extrabold">
           UI/UX Design
         </h1>
-        <p className="mt-4 md:mt-8 text-[16px] md:text-[36px] text-[#667085] font-semibold leading-[1.4]">
+        <p className="mt-4 md:mt-8 text-[16px] md:text-[32px] xl:text-[36px] text-[#667085] font-semibold leading-[1.4]">
           No clutter. No confusion.
           <br />→ Just <span className="text-[#1342ff]">seamless</span>{" "}
           experiences.

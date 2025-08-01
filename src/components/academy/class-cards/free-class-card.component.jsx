@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "../../../state-slices/saved-classes/savedClassesSlice";
 
-const FreeClassCard = ({ data }) => {
+const FreeClassCard = ({ data, className = "" }) => {
   const dispatch = useDispatch();
   const savedClasses = useSelector((state) => state.savedClasses);
   const isSaved = savedClasses.includes(data.id);
@@ -25,7 +25,7 @@ const FreeClassCard = ({ data }) => {
 
   return (
     <div
-      className="md:relative w-full h-max md:h-[450px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl"
+      className={`md:relative w-full h-max md:h-[450px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl ${className}`}
       style={{ fontFamily: "DM Sans, sans-serif" }}
     >
       <div className="flex justify-between items-center mb-1">

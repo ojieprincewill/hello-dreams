@@ -217,9 +217,23 @@ const ClassesMain = () => {
                       {cat}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-                      {coursesInCat.map((course) => (
-                        <CourseCard key={course.id} course={course} />
-                      ))}
+                      {coursesInCat.map((course, index) => {
+                        const isLastOdd =
+                          index === coursesInCat.length - 1 &&
+                          coursesInCat.length % 2 !== 0;
+
+                        const cardClass = isLastOdd
+                          ? "md:col-span-2 xl:col-span-1"
+                          : "";
+
+                        return (
+                          <CourseCard
+                            key={course.id}
+                            course={course}
+                            className={cardClass}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -247,15 +261,39 @@ const ClassesMain = () => {
               No classes found.
             </div>
           ) : (
-            filteredClasses.map((cls) => {
+            filteredClasses.map((cls, index) => {
+              const isLastOdd =
+                index === filteredClasses.length - 1 &&
+                filteredClasses.length % 2 !== 0;
+
+              const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
               if (cls.category === "uiux") {
-                return <UiuxClassCard key={cls.id} data={cls} />;
+                return (
+                  <UiuxClassCard
+                    key={cls.id}
+                    data={cls}
+                    className={cardClass}
+                  />
+                );
               }
               if (cls.category === "20min") {
-                return <Min20ClassCard key={cls.id} data={cls} />;
+                return (
+                  <Min20ClassCard
+                    key={cls.id}
+                    data={cls}
+                    className={cardClass}
+                  />
+                );
               }
               if (cls.category === "free") {
-                return <FreeClassCard key={cls.id} data={cls} />;
+                return (
+                  <FreeClassCard
+                    key={cls.id}
+                    data={cls}
+                    className={cardClass}
+                  />
+                );
               }
               // Placeholder for other categories
               return null;

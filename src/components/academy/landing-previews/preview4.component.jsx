@@ -53,9 +53,16 @@ const Preview4 = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
-        {freeClasses.map((data) => (
-          <FreeClassCard key={data.id} data={data} />
-        ))}
+        {freeClasses.map((data, index) => {
+          const isLastOdd =
+            index === freeClasses.length - 1 && freeClasses.length % 2 !== 0;
+
+          const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
+          return (
+            <FreeClassCard key={data.id} data={data} className={cardClass} />
+          );
+        })}
         <div className="md:hidden flex justify-end">
           <Link
             to="/academy/classes?category=free"

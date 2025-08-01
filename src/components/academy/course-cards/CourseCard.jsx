@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "@/state-slices/saved-classes/savedClassesSlice";
 import { Link } from "react-router-dom";
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, className = "" }) => {
   const dispatch = useDispatch();
   const savedClasses = useSelector((state) => state.savedClasses);
   const isSaved = savedClasses.includes(course.id);
@@ -23,7 +23,9 @@ const CourseCard = ({ course }) => {
   };
 
   return (
-    <div className="w-full h-max md:h-[500px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl flex flex-col">
+    <div
+      className={`w-full h-max md:h-[500px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl flex flex-col ${className}`}
+    >
       <div className="relative w-full h-[181.55px] md:h-[221.16px] overflow-hidden rounded-xl mb-4">
         <img
           src={course.image}

@@ -26,7 +26,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
   ];
 
   return (
-    <div className="w-full bg-[#eef2fe] rounded-2xl overflow-hidden px-[5%] py-5 mb-15 ">
+    <div className="w-full bg-[#eef2fe] rounded-2xl overflow-hidden px-[5%] py-5 mb-5">
       <p className="text-[#000000] text-[20px] md:text-[24px] xl:text-[40px] text-center font-bold my-3">
         Join our next cohort
       </p>

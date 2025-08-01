@@ -110,9 +110,23 @@ const MyLearnings = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                {allInteractedClasses.map((classItem) => {
+                {allInteractedClasses.map((classItem, index) => {
+                  const isLastOdd =
+                    index === allInteractedClasses.length - 1 &&
+                    allInteractedClasses.length % 2 !== 0;
+
+                  const cardClass = isLastOdd
+                    ? "md:col-span-2 xl:col-span-1"
+                    : "";
+
                   const CardComponent = getCardComponent(classItem);
-                  return <CardComponent key={classItem.id} data={classItem} />;
+                  return (
+                    <CardComponent
+                      key={classItem.id}
+                      data={classItem}
+                      className={cardClass}
+                    />
+                  );
                 })}
               </div>
             )}

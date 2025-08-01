@@ -52,9 +52,16 @@ const Preview1 = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
-        {uiuxClasses.map((data) => (
-          <UiuxClassCard key={data.id} data={data} />
-        ))}
+        {uiuxClasses.map((data, index) => {
+          const isLastOdd =
+            index === uiuxClasses.length - 1 && uiuxClasses.length % 2 !== 0;
+
+          const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
+          return (
+            <UiuxClassCard key={data.id} data={data} className={cardClass} />
+          );
+        })}
         <div className="md:hidden flex justify-end">
           <Link
             to="/academy/classes?category=uiux"

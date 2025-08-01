@@ -44,17 +44,26 @@ const AcademySection = () => {
         </div>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 pt-10">
-        {previewCourses.map((course, index) => (
-          <motion.div
-            key={course.id}
-            initial="hidden"
-            whileInView="visible"
-            variants={cardVariants}
-            custom={index}
-          >
-            <CourseCard course={course} />
-          </motion.div>
-        ))}
+        {previewCourses.map((course, index) => {
+          const isLastOdd =
+            index === previewCourses.length - 1 &&
+            previewCourses.length % 2 !== 0;
+
+          const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
+          return (
+            <motion.div
+              key={course.id}
+              className={cardClass}
+              initial="hidden"
+              whileInView="visible"
+              variants={cardVariants}
+              custom={index}
+            >
+              <CourseCard course={course} />
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

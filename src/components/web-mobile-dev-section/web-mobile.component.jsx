@@ -11,12 +11,12 @@ const WebMobile = () => {
   return (
     <div className="flex flex-col-reverse md:flex-col">
       <div className="px-10 md:px-5 py-10 md:py-20 w-full text-center flex flex-col justify-center items-center">
-        <h1 className="text-[24px] md:text-[52px] leading-[1.1] font-extrabold">
+        <h1 className="text-[24px] md:text-[40px] xl:text-[52px] leading-[1.1] font-extrabold">
           Website & Mobile
           <br />
           App Development
         </h1>
-        <p className="mt-4 md:mt-8 text-[16px] md:text-[36px] text-[#667085] font-semibold leading-[1.4]">
+        <p className="mt-4 md:mt-8 text-[16px] md:text-[32px] xl:text-[36px] text-[#667085] font-semibold leading-[1.4]">
           No delays. No limitations.
           <br />→ <span className="text-[#1342ff]">Build fast.</span> Scale
           faster.
@@ -54,8 +54,8 @@ const WebMobile = () => {
         {/* Second Image Block */}
         <div className="relative w-full h-[549px] xl:h-[845px] p-6 md:p-0 overflow-hidden bg-[#0c0c0c] xl:rounded-tr-2xl">
           <motion.img
-            initial={{ opacity: 0, y: 50 }} // Starts faded and lower
-            whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330643/363baf51b8410db321c93037a944d36f9995f398_ktfyzq.png"

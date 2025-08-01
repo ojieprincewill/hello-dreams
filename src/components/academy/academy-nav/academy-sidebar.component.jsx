@@ -20,7 +20,7 @@ import Logo from "../../logo/logo.component";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react";
 
-const AcademySidebar = ({ closeSidebar }) => {
+const AcademySidebar = ({ closeSidebar, user }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
 
   const toggleDropdown = (event) => {
@@ -43,7 +43,7 @@ const AcademySidebar = ({ closeSidebar }) => {
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="bg-[#fff] w-[90%] md:w-[350px] p-2 h-screen overflow-auto"
+        className="bg-[#fff] w-[90%] md:w-[350px] p-2 h-screen overflow-auto z-60"
       >
         <div className="flex flex-row p-4 justify-between items-center w-full px-[2%] py-2">
           <div className="flex flex-col">
@@ -137,23 +137,24 @@ const AcademySidebar = ({ closeSidebar }) => {
             <Tags size={16} strokeWidth={2} className="mr-2" /> Pricing
           </Link>
 
-          {/* There should be a conditional.
-          When user is signed in display membership button else display sign in button */}
-          <Link
-            to="/signin"
-            className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
-            onClick={handleOrigins}
-          >
-            <LogIn size={16} strokeWidth={2} className="mr-2" /> Sign in
-          </Link>
-          {/* <Link
-            to="/membership"
-            className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
-            onClick={handleOrigins}
-          >
-            <CreditCard size={16} strokeWidth={2} className="mr-2" /> Manage
-            membership
-          </Link> */}
+          {user ? (
+            <Link
+              to="/membership"
+              className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
+              onClick={handleOrigins}
+            >
+              <CreditCard size={16} strokeWidth={2} className="mr-2" /> Manage
+              membership
+            </Link>
+          ) : (
+            <Link
+              to="/signin"
+              className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
+              onClick={handleOrigins}
+            >
+              <LogIn size={16} strokeWidth={2} className="mr-2" /> Sign in
+            </Link>
+          )}
         </div>
       </motion.div>
     </div>

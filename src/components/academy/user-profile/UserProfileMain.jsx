@@ -13,6 +13,8 @@ import AccountSecurity from "./AccountSecurity";
 import AccountSettings from "./AccountSettings";
 import HelpCenter from "./HelpCenter";
 import { useLocation } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "motion/react";
 
 const navItems = [
   { key: "learnings", label: "My Learning", icon: <Home size={20} /> },
@@ -60,7 +62,13 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
       />
 
       {/* Sidebar */}
-      <div className="fixed inset-0 z-50 bg-white w-full md:w-80 transform transition-transform duration-300 ease-in-out">
+      <motion.div
+        initial={{ x: "-100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed inset-0 z-50 bg-white w-full md:w-80 transform transition-transform duration-300 ease-in-out"
+      >
         <div className="w-full h-full flex flex-col py-8 px-2">
           <div className="flex justify-between items-center px-6 mb-6">
             <h2 className="text-xl font-bold text-[#101828]">Menu</h2>
@@ -97,7 +105,7 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
             <LogOut size={20} /> Log out
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -116,7 +124,7 @@ const UserProfileMain = () => {
       </div>
 
       {/* Mobile/Tablet Menu Button - visible on mobile/tablet, hidden on desktop */}
-      <div className="fixed top-4 md:top-25 left-4 z-80 xl:hidden ">
+      <div className="fixed top-4 md:top-25 left-4 z-70 xl:hidden ">
         <button
           onClick={() => setIsMobileMenuOpen(true)}
           className="p-3 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors"
@@ -126,13 +134,15 @@ const UserProfileMain = () => {
       </div>
 
       {/* Mobile/Tablet Sidebar - only shows when menu is open */}
-      {isMobileMenuOpen && (
-        <MobileSidebar
-          active={active}
-          setActive={setActive}
-          onClose={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileSidebar
+            active={active}
+            setActive={setActive}
+            onClose={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Main Content */}
       <main className="flex-1 xl:ml-0">

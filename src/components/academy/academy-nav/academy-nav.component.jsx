@@ -118,8 +118,6 @@ const AcademyNavbar = () => {
             </div>
           )}
 
-          {/* Add conditional after sign in */}
-
           <button
             onClick={openSideBar}
             className="h-8 w-8 text-[#010413] xl:hidden cursor-pointer align-middle"
@@ -180,7 +178,9 @@ const AcademyNavbar = () => {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {sideBarOpen ? <AcademySidebar closeSidebar={closeSideBar} /> : null}
+        {sideBarOpen ? (
+          <AcademySidebar closeSidebar={closeSideBar} user={user} />
+        ) : null}
       </AnimatePresence>
     </>
   );

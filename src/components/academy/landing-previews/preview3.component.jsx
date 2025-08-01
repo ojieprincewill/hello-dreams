@@ -51,9 +51,16 @@ const Preview3 = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
-        {min20Classes.map((data) => (
-          <Min20ClassCard key={data.id} data={data} />
-        ))}
+        {min20Classes.map((data, index) => {
+          const isLastOdd =
+            index === min20Classes.length - 1 && min20Classes.length % 2 !== 0;
+
+          const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
+          return (
+            <Min20ClassCard key={data.id} data={data} className={cardClass} />
+          );
+        })}
         <div className="md:hidden flex justify-end">
           <Link
             to="/academy/classes?category=20min"

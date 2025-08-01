@@ -44,9 +44,17 @@ const Preview2 = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
-        {previewCourses.map((course, index) => (
-          <CourseCard key={course.id} course={course} />
-        ))}
+        {previewCourses.map((course, index) => {
+          const isLastOdd =
+            index === previewCourses.length - 1 &&
+            previewCourses.length % 2 !== 0;
+
+          const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
+
+          return (
+            <CourseCard key={course.id} course={course} className={cardClass} />
+          );
+        })}
         <div className="md:hidden flex justify-end">
           <Link
             to="/academy/classes?category=courses"
