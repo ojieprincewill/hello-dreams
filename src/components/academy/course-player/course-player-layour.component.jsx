@@ -1,6 +1,6 @@
-import React from "react";
-import CourseVideoSection from "./course-video-section.component";
-import CourseContentSidebar from "./course-content-sidebar.component";
+import React from 'react';
+import CourseVideoSection from './course-video-section.component';
+import CourseContentSidebar from './course-content-sidebar.component';
 
 const CoursePlayerLayout = ({ course }) => {
   return (
@@ -8,7 +8,14 @@ const CoursePlayerLayout = ({ course }) => {
       <div className="max-w-[1440px] mx-auto px-[5%] py-10 flex flex-col xl:flex-row gap-8">
         {/* Main Section */}
         <div className="flex-1 min-w-0">
-          <CourseVideoSection image={course.image} title={course.title} />
+          <CourseVideoSection
+            image={course.image}
+            title={course.title}
+            playbackId={course.playbackId}
+            userId={course.userId}
+            assetId={course.assetId}
+            lessonTitle={course.lessonTitle}
+          />
         </div>
         {/* Sidebar */}
         <aside className="w-full xl:w-[340px] flex-shrink-0">

@@ -51,3 +51,42 @@ export async function uploadLessonWithProgress({ file, course_id, title, duratio
 
   return result;
 }
+
+// Upload thumbnail image to Supabase storage (lesson-thumbnails bucket)
+export async function uploadThumbnailToStorage(file) {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+  const filePath = `lesson-thumbnails/${fileName}`;
+
+  const { data, error } = await supabase.storage
+    .from('lesson-thumbnails')
+    .upload(filePath, file);
+
+  if (error) throw new Error('Failed to upload thumbnail to storage');
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('lesson-thumbnails')
+    .getPublicUrl(filePath);
+
+  return publicUrl;
+}
+
+// Upload attachments to Supabase storage (lesson-attachments bucket)
+export async function uploadAttachmentsToStorage(files) {
+  if (!Array.isArray(files)) files = [files];
+  const urls = [];
+  for (const file of files) {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `lesson-attachments/${fileName}`;
+    const { data, error } = await supabase.storage
+      .from('lesson-attachments')
+      .upload(filePath, file);
+    if (error) throw new Error('Failed to upload attachment to storage');
+    const { data: { publicUrl } } = supabase.storage
+      .from('lesson-attachments')
+      .getPublicUrl(filePath);
+    urls.push(publicUrl);
+  }
+  return urls;
+}

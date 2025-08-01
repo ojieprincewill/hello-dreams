@@ -24,7 +24,15 @@ import {
   useCreateCourse,
   useUpdateCourse,
   useDeleteCourse,
-} from "@/hooks/useCourses";
+} from '@/hooks/useCourses';
+import { useTutors } from '@/hooks/useAcademy';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '../ui/select';
 
 const CourseManagement = () => {
   const { toast } = useToast();
@@ -32,6 +40,7 @@ const CourseManagement = () => {
   const createCourse = useCreateCourse();
   const updateCourse = useUpdateCourse();
   const deleteCourse = useDeleteCourse();
+  const { data: tutors = [], isLoading: tutorsLoading } = useTutors();
 
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
@@ -43,16 +52,60 @@ const CourseManagement = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   const [newCourse, setNewCourse] = useState({
-    title: "",
-    description: "",
-    coverImage: "",
+    title: '',
+    description: '',
+    coverImage: '',
+    tutor_id: '',
+    instructor_name: '',
+    instructor_title: '',
+    instructor_image: '',
+    instructor_bio: '',
+    price: '',
+    total_lessons: '',
+    total_duration: '',
+    difficulty_level: '',
+    language: '',
+    captions_available: false,
+    last_updated: '',
+    certificate_available: false,
+    certificate_image: '',
+    requirements: '',
+    what_you_will_learn: '',
+    skills_covered: '',
+    category: '',
+    subcategory: '',
+    tags: '',
+    featured: false,
+    status: 'Draft',
   });
 
   const resetForm = () => {
     setNewCourse({
-      title: "",
-      description: "",
-      coverImage: "",
+      title: '',
+      description: '',
+      coverImage: '',
+      tutor_id: '',
+      instructor_name: '',
+      instructor_title: '',
+      instructor_image: '',
+      instructor_bio: '',
+      price: '',
+      total_lessons: '',
+      total_duration: '',
+      difficulty_level: '',
+      language: '',
+      captions_available: false,
+      last_updated: '',
+      certificate_available: false,
+      certificate_image: '',
+      requirements: '',
+      what_you_will_learn: '',
+      skills_covered: '',
+      category: '',
+      subcategory: '',
+      tags: '',
+      featured: false,
+      status: 'Draft',
     });
     setImageFile(null);
     setImagePreview(null);
@@ -129,9 +182,12 @@ const CourseManagement = () => {
       }
 
       await createCourse.mutateAsync({
-        title: newCourse.title,
-        description: newCourse.description,
-        cover_image: imageUrl || "",
+        ...newCourse,
+        cover_image: imageUrl || '',
+        skills_covered: newCourse.skills_covered
+          .split(',')
+          .map((s) => s.trim()),
+        tags: newCourse.tags.split(',').map((s) => s.trim()),
       });
       resetForm();
       setCreateModalOpen(false);
@@ -202,7 +258,7 @@ const CourseManagement = () => {
               Create Course
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl bg-[#f7f7f7] mx-4">
+          <DialogContent className="max-w-2xl bg-[#f7f7f7] mx-4 max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Create New Course</DialogTitle>
             </DialogHeader>
@@ -276,6 +332,300 @@ const CourseManagement = () => {
                 </div>
               </div>
 
+              <div>
+                <Label htmlFor="tutor-select">Tutor</Label>
+                <Select
+                  value={newCourse.tutor_id || ''}
+                  onValueChange={(value) => {
+                    const selected = tutors.find((t) => t.id === value);
+                    setNewCourse({
+                      ...newCourse,
+                      tutor_id: selected?.id || '',
+                      instructor_name: selected?.name || '',
+                      instructor_title: selected?.title || '',
+                      instructor_image: selected?.avatar_url || '',
+                      instructor_bio: selected?.bio || '',
+                    });
+                  }}
+                  disabled={tutorsLoading}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue>
+                      {newCourse.tutor_id ? (
+                        <div className="flex items-center gap-2">
+                          {newCourse.instructor_image && (
+                            <img
+                              src={newCourse.instructor_image}
+                              alt="Tutor avatar"
+                              className="w-6 h-6 rounded-full"
+                            />
+                          )}
+                          <span>{newCourse.instructor_name}</span>
+                        </div>
+                      ) : (
+                        <span>Select a tutor</span>
+                      )}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {tutors.map((tutor) => (
+                      <SelectItem key={tutor.id} value={tutor.id}>
+                        <div className="flex items-center gap-2">
+                          {tutor.avatar_url && (
+                            <img
+                              src={tutor.avatar_url}
+                              alt="Tutor avatar"
+                              className="w-6 h-6 rounded-full"
+                            />
+                          )}
+                          <span>{tutor.name}</span>
+                          <span className="text-xs text-gray-500 ml-2">
+                            ({tutor.role})
+                          </span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {newCourse.tutor_id && (
+                  <div className="flex items-center mt-2 space-x-2">
+                    {newCourse.instructor_image && (
+                      <img
+                        src={newCourse.instructor_image}
+                        alt="Tutor avatar"
+                        className="w-8 h-8 rounded-full"
+                      />
+                    )}
+                    <span>{newCourse.instructor_name}</span>
+                    <span className="text-xs text-gray-500">
+                      {newCourse.instructor_title}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="price">Price (NGN)</Label>
+                <Input
+                  id="price"
+                  type="number"
+                  value={newCourse.price}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, price: e.target.value })
+                  }
+                  placeholder="Enter price"
+                />
+              </div>
+              <div>
+                <Label htmlFor="total_lessons">Total Lessons</Label>
+                <Input
+                  id="total_lessons"
+                  type="number"
+                  value={newCourse.total_lessons}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      total_lessons: e.target.value,
+                    })
+                  }
+                  placeholder="Enter total lessons"
+                />
+              </div>
+              <div>
+                <Label htmlFor="total_duration">Total Duration</Label>
+                <Input
+                  id="total_duration"
+                  value={newCourse.total_duration}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      total_duration: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. 5h 43m"
+                />
+              </div>
+              <div>
+                <Label htmlFor="difficulty_level">Difficulty Level</Label>
+                <Input
+                  id="difficulty_level"
+                  value={newCourse.difficulty_level}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      difficulty_level: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. Beginner, Intermediate, Advanced"
+                />
+              </div>
+              <div>
+                <Label htmlFor="language">Language</Label>
+                <Input
+                  id="language"
+                  value={newCourse.language}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, language: e.target.value })
+                  }
+                  placeholder="e.g. English"
+                />
+              </div>
+              <div>
+                <Label htmlFor="captions_available">Captions Available</Label>
+                <input
+                  id="captions_available"
+                  type="checkbox"
+                  checked={newCourse.captions_available}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      captions_available: e.target.checked,
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="last_updated">Last Updated</Label>
+                <Input
+                  id="last_updated"
+                  type="date"
+                  value={newCourse.last_updated}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, last_updated: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="certificate_available">
+                  Certificate Available
+                </Label>
+                <input
+                  id="certificate_available"
+                  type="checkbox"
+                  checked={newCourse.certificate_available}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      certificate_available: e.target.checked,
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="certificate_image">Certificate Image URL</Label>
+                <Input
+                  id="certificate_image"
+                  value={newCourse.certificate_image}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      certificate_image: e.target.value,
+                    })
+                  }
+                  placeholder="Enter certificate image URL"
+                />
+              </div>
+              <div>
+                <Label htmlFor="requirements">Requirements</Label>
+                <Textarea
+                  id="requirements"
+                  value={newCourse.requirements}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, requirements: e.target.value })
+                  }
+                  placeholder="Enter course requirements"
+                  rows={2}
+                />
+              </div>
+              <div>
+                <Label htmlFor="what_you_will_learn">What You Will Learn</Label>
+                <Textarea
+                  id="what_you_will_learn"
+                  value={newCourse.what_you_will_learn}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      what_you_will_learn: e.target.value,
+                    })
+                  }
+                  placeholder="Enter what students will learn"
+                  rows={2}
+                />
+              </div>
+              <div>
+                <Label htmlFor="skills_covered">
+                  Skills Covered (comma separated)
+                </Label>
+                <Input
+                  id="skills_covered"
+                  value={newCourse.skills_covered}
+                  onChange={(e) =>
+                    setNewCourse({
+                      ...newCourse,
+                      skills_covered: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. Figma, Auto Layout, Responsive Design"
+                />
+              </div>
+              <div>
+                <Label htmlFor="category">Category</Label>
+                <Input
+                  id="category"
+                  value={newCourse.category}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, category: e.target.value })
+                  }
+                  placeholder="e.g. UI/UX Design"
+                />
+              </div>
+              <div>
+                <Label htmlFor="subcategory">Subcategory</Label>
+                <Input
+                  id="subcategory"
+                  value={newCourse.subcategory}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, subcategory: e.target.value })
+                  }
+                  placeholder="e.g. Figma"
+                />
+              </div>
+              <div>
+                <Label htmlFor="tags">Tags (comma separated)</Label>
+                <Input
+                  id="tags"
+                  value={newCourse.tags}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, tags: e.target.value })
+                  }
+                  placeholder="e.g. design, web, beginner"
+                />
+              </div>
+              <div>
+                <Label htmlFor="featured">Featured</Label>
+                <input
+                  id="featured"
+                  type="checkbox"
+                  checked={newCourse.featured}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, featured: e.target.checked })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="status">Status</Label>
+                <select
+                  id="status"
+                  value={newCourse.status}
+                  onChange={(e) =>
+                    setNewCourse({ ...newCourse, status: e.target.value })
+                  }
+                >
+                  <option value="Draft">Draft</option>
+                  <option value="Published">Published</option>
+                </select>
+              </div>
+
               <Button
                 className="w-full bg-[#010413] text-white"
                 onClick={handleCreateCourse}
@@ -320,8 +670,8 @@ const CourseManagement = () => {
                   {course.description}
                 </p>
 
-                <div className="flex justify-between text-xs xl:text-sm text-gray-500 mb-3 xl:mb-4">
-                  <span>{course.lessons || 0} lessons</span>
+                <div className="flex justify-between text-xs lg:text-sm text-gray-500 mb-3 lg:mb-4">
+                  <span>{course.lessons?.count ?? 0} lessons</span>
                   <span>{course.enrolled || 0} enrolled</span>
                 </div>
 

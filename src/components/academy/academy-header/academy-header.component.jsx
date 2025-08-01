@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const AcademyHeader = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -7,29 +7,29 @@ const AcademyHeader = () => {
     {
       id: 1,
       backgroundImage:
-        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706964/Academy/landing/2a47486a1d7a57ab44e860d97ec7896316f2ab46_iqdwsy.jpg",
-      title: "We Dare to Dream",
+        'https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706964/Academy/landing/2a47486a1d7a57ab44e860d97ec7896316f2ab46_iqdwsy.jpg',
+      title: 'We Dare to Dream',
       subtitle:
-        "Empowering individuals to achieve their fullest potential through skill acquisition and ethical growth",
-      textPosition: "left",
+        'Empowering individuals to achieve their fullest potential through skill acquisition and ethical growth',
+      textPosition: 'left',
     },
     {
       id: 2,
       backgroundImage:
-        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706959/Academy/landing/30790dd232a38fc204599d3a1cb34cb3440a1b99_xkvxqt.jpg",
-      title: "Knowledge is Power",
+        'https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706959/Academy/landing/30790dd232a38fc204599d3a1cb34cb3440a1b99_xkvxqt.jpg',
+      title: 'Knowledge is Power',
       subtitle:
-        "Unlocking opportunities through education and skills development and acquisition",
-      textPosition: "right",
+        'Unlocking opportunities through education and skills development and acquisition',
+      textPosition: 'right',
     },
     {
       id: 3,
       backgroundImage:
-        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706958/Academy/landing/002a21ce8ac67e0d5d9f8e4fc999263f79258a74_aezjah.jpg",
-      title: "Transforming Lives",
+        'https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706958/Academy/landing/002a21ce8ac67e0d5d9f8e4fc999263f79258a74_aezjah.jpg',
+      title: 'Transforming Lives',
       subtitle:
-        "Building a brighter future by equipping people with valuable tech skills",
-      textPosition: "left",
+        'Building a brighter future by equipping people with valuable tech skills',
+      textPosition: 'left',
     },
   ];
 
@@ -71,7 +71,7 @@ const AcademyHeader = () => {
           <div
             key={slide.id}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
             {/* Background Image */}
