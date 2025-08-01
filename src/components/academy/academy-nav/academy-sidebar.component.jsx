@@ -142,11 +142,12 @@ const AcademySidebar = ({ closeSidebar, user }) => {
           {/* Conditional rendering based on authentication state */}
           {isAuthenticated ? (
             <Link
-              to="/userprofile"
+              to="/membership"
               className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
               onClick={handleOrigins}
             >
-              <CreditCard size={16} strokeWidth={2} className="mr-2" /> Profile
+              <CreditCard size={16} strokeWidth={2} className="mr-2" /> Manage
+              membership
             </Link>
           ) : (
             <Link
