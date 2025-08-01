@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import supabase from '../../supabase/client';
-import LoadingSpinner from '../loading-spinner/loading-spinner.component';
-import ContactSuccess from './contact-success.component';
+import { motion } from "motion/react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import supabase from "../../supabase/client";
+import LoadingSpinner from "../loading-spinner/loading-spinner.component";
+import ContactSuccess from "./contact-success.component";
 
 const LetsTalk = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    type: '',
-    budget: '',
-    message: '',
+    name: "",
+    email: "",
+    type: "",
+    budget: "",
+    message: "",
   });
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
@@ -26,10 +26,10 @@ const LetsTalk = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.type) newErrors.type = 'Service selection is required';
-    if (!formData.message) newErrors.message = 'Message is required';
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.type) newErrors.type = "Service selection is required";
+    if (!formData.message) newErrors.message = "Message is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -43,7 +43,7 @@ const LetsTalk = () => {
     const { name, email, type, budget, message } = formData;
 
     const payload = {
-      type: 'General Inquiry',
+      type: "General Inquiry",
       name,
       email,
       budget,
@@ -52,32 +52,32 @@ const LetsTalk = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke(
-        'general-enquiry-handler',
+        "general-enquiry-handler",
         {
           body: payload,
-        },
+        }
       );
       console.log(payload);
       console.log(data);
 
       if (error) {
-        console.error('Supabase Error:', error.message || error);
-        toast.error('Submission failed. Please try again.');
+        console.error("Supabase Error:", error.message || error);
+        toast.error("Submission failed. Please try again.");
         return;
       }
 
-      toast.success('Your message has been sent!');
+      toast.success("Your message has been sent!");
       setSuccess(true);
       setFormData({
-        name: '',
-        email: '',
-        type: '',
-        budget: '',
-        message: '',
+        name: "",
+        email: "",
+        type: "",
+        budget: "",
+        message: "",
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('Failed to submit form. Please try again.');
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -86,49 +86,49 @@ const LetsTalk = () => {
   return success ? (
     <ContactSuccess />
   ) : (
-    <div className="bg-[#f8f8f8] md:bg-[#fff] grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20 px-[5%] py-15 md:py-25">
+    <div className="bg-[#f8f8f8] md:bg-[#fff] grid grid-cols-1 gap-10 md:grid-cols-2 xl:gap-20 px-[5%] py-15 md:py-25">
       {isSubmitting && <LoadingSpinner />}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-[#000000] space-y-6 md:space-y-10 "
       >
         <div>
           <p
-            className="text-[20px] md:text-[32px] lg:text-[64px] font-bold mb-2 md:mb-4"
+            className="text-[20px] md:text-[32px] xl:text-[64px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Let's Talk
           </p>
-          <p className="text-[14px] md:text-[15px] lg:text-[20px] lg:font-bold leading-[1.5]">
+          <p className="text-[14px] md:text-[15px] xl:text-[20px] xl:font-bold leading-[1.5]">
             Have some big idea or brand to develop and need help? Then reach out
             we'd love to hear about your project and provide help
           </p>
         </div>
         <div>
           <p
-            className="text-[16px] md:text-[20px] lg:text-[32px] font-bold mb-2 md:mb-4"
+            className="text-[16px] md:text-[20px] xl:text-[32px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Email
           </p>
           <a
             href="mailto:support@myhellodreams.com"
-            className="block w-max text-[12px] md:text-[16px] lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Support@myhellodreams.com
           </a>
           <a
             href="mailto:partnership@myhellodreams.com"
-            className="block w-max text-[12px] md:text-[16px] lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Partnership@myhellodreams.com
           </a>
         </div>
         <div>
           <p
-            className="text-[16px] md:text-[20px] lg:text-[32px] font-bold mb-2 md:mb-4"
+            className="text-[16px] md:text-[20px] xl:text-[32px] font-bold mb-2 md:mb-4"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Socials
@@ -137,7 +137,7 @@ const LetsTalk = () => {
             href="https://www.linkedin.com/company/hello-dreams-limited/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             LinkedIn
           </a>
@@ -145,7 +145,7 @@ const LetsTalk = () => {
             href="https://www.instagram.com/hellodreamss/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Instagram
           </a>
@@ -153,7 +153,7 @@ const LetsTalk = () => {
             href="https://www.youtube.com/@HelloDreamsAcademy"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Youtube
           </a>
@@ -161,7 +161,7 @@ const LetsTalk = () => {
             href="https://www.tiktok.com/@myhellodreams?_t=ZM-8wv4XL55NBu&_r=1"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Tiktok
           </a>
@@ -169,7 +169,7 @@ const LetsTalk = () => {
             href="https://x.com/MyHelloDreams?t=iiEkr0Z3fveby5O8QVEP9A&s=09"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Twitter
           </a>
@@ -177,7 +177,7 @@ const LetsTalk = () => {
             href="https://web.facebook.com/profile.php?id=61565243428696"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-max text-[12px] md:text-[16px] underline lg:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
+            className="block w-max text-[12px] md:text-[16px] underline xl:font-bold mb-3 hover:text-[#598ac2] transition-colors duration-300"
           >
             Facebook
           </a>
@@ -187,9 +187,9 @@ const LetsTalk = () => {
       <motion.form
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         onSubmit={handleSubmit}
-        className="w-full space-y-6 md:space-y-10 text-[#000000] lg:p-6"
+        className="w-full space-y-6 md:space-y-10 text-[#000000] xl:p-6"
       >
         <div>
           <label className="block text-[12px] md:text-[16px] font-bold mb-3 md:mb-4">
@@ -223,7 +223,7 @@ const LetsTalk = () => {
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-bold mb-3 md:mb-4">
-            What type of service are you interested in?{' '}
+            What type of service are you interested in?{" "}
             <span className="text-red-500">*</span>
           </label>
           <select
@@ -294,7 +294,7 @@ const LetsTalk = () => {
           disabled={isSubmitting}
           className="w-full bg-[#010413] text-[#fff] text-[14px] md:text-[16px] font-semibold py-3 rounded-4xl hover:bg-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </motion.form>
     </div>

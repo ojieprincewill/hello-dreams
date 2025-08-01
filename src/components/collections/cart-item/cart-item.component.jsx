@@ -15,9 +15,9 @@ const CartItem = ({ cartProduct }) => {
   };
 
   return (
-    <div className="w-[600px] md:w-[800px] lg:w-full flex justify-between items-center py-5 border-b border-b-[#eaecf0]">
+    <div className="w-[600px] md:w-[800px] xl:w-full flex justify-between items-center py-5 border-b border-b-[#eaecf0]">
       <div className="flex space-x-7 items-center">
-        <div className="w-[150px] h-[120px] md:w-[200px] md:h-[170px] lg:w-[259px] lg:h-[161px] rounded-2xl overflow-hidden">
+        <div className="w-[150px] h-[120px] md:w-[200px] md:h-[170px] xl:w-[259px] xl:h-[161px] rounded-2xl overflow-hidden">
           <img src={image} alt={title} className="w-full h-full object-cover" />
         </div>
         <div className="space-y-3">

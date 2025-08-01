@@ -102,7 +102,7 @@ const AcademySection = () => {
           Empowering individuals to achieve their fullest potential through
           skill aquisition and ethical growth
         </p>
-        <div className="mt-6 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:flex-row lg:space-x-4 justify-center">
+        <div className="mt-6 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:flex-row xl:space-x-4 justify-center">
           <Link
             to="/academy"
             className="bg-[#1a212a] text-[#fff] font-semibold border border-[#010413] text-[14px] md:text-[16px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"

@@ -14,7 +14,7 @@ const CollectionsHeader = () => {
     <>
       <div className=" bg-[#eef2fe] pt-3 md:pt-0">
         <NavBar />
-        <div className="w-full h-max lg:h-[900px] flex flex-col-reverse lg:grid lg:grid-cols-2 lg:place-items-center">
+        <div className="w-full h-max xl:h-[900px] flex flex-col-reverse xl:grid xl:grid-cols-2 xl:place-items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -23,13 +23,13 @@ const CollectionsHeader = () => {
             className="flex flex-col items-start justify-start text-[#010413] px-5 py-5"
           >
             <h1
-              className="text-[22px] md:text-[32px] lg:text-[56px] lg:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
+              className="text-[22px] md:text-[32px] xl:text-[56px] xl:w-[509px] leading-[1.1] font-semibold md:font-extrabold "
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Hello Dreams Collections
             </h1>
             <p
-              className="mt-8 text-[16px] md:text-[20px] lg:text-[24px]  text-[#667085] lg:text-[#010413] lg:w-[530px] leading-[1.6]"
+              className="mt-8 text-[16px] md:text-[20px] xl:text-[24px]  text-[#667085] xl:text-[#010413] xl:w-[530px] leading-[1.6]"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               Shop from our collection of quality T-shirts, hoodies, and custom
@@ -56,12 +56,12 @@ const CollectionsHeader = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="w-full h-[391px] md:h-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] mx-auto overflow-hidden flex items-center justify-center"
+            className="w-full h-[391px] md:h-full max-w-[600px] xl:max-w-[700px] xl:max-w-[800px] mx-auto overflow-hidden flex items-center justify-center"
           >
             <img
               src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749411724/hello%20dreams%20collection/collection%20page/ad625f059d4c14c3194e4dfc8466bf552e36e87f_ldsqlz.png"
               alt="pamela ohaeri"
-              className="w-full h-full object-contain lg:object-cover"
+              className="w-full h-full object-contain xl:object-cover"
             />
           </motion.div>
         </div>

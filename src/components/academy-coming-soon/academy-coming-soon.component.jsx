@@ -37,7 +37,7 @@ const AcademyComingSoon = () => {
   const { days, hours, minutes, seconds } = timeLeft;
 
   return (
-    <div className="bg-[#f7f7f7] px-[5%] lg:px-[10%] py-5 md:py-20">
+    <div className="bg-[#f7f7f7] px-[5%] xl:px-[10%] py-5 md:py-20">
       <div className="bg-[#ffffff] p-5 md:p-10 rounded-xl w-full leading-[1.5]">
         <div className="bg-[#1342ff] w-[93px] h-[93px] rounded-full mb-5 "></div>
         <p className="text-[#000000] text-[24px] md:text-[48px] font-bold mb-4 md:mb-7 ">

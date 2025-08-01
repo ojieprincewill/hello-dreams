@@ -19,7 +19,7 @@ const UxDesignSection = () => {
           <br />→ Just <span className="text-[#1342ff]">seamless</span>{" "}
           experiences.
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:inline xl:space-x-4">
           <Link
             to="/services/ui-design-consultation"
             onClick={handleOrigins}
@@ -36,7 +36,7 @@ const UxDesignSection = () => {
           </Link>
         </div>
       </div>
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[875px] lg:h-[845px] pl-6 md:pl-10 lg:pl-20 py-5 md:py-15 lg:py-25">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#1e276c] via-[#7081c7] to-[#ffffff] text-[#fff] w-full h-[373px] md:h-[875px] xl:h-[845px] pl-6 md:pl-10 xl:pl-20 py-5 md:py-15 xl:py-25">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -60,7 +60,7 @@ const UxDesignSection = () => {
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="absolute w-[290px] h-auto md:w-[640px] lg:w-[955px] lg:h-[600px] bottom-0 right-[-100px] md:right-[-105px]"
+          className="absolute w-[290px] h-auto md:w-[640px] xl:w-[955px] xl:h-[600px] bottom-0 right-[-100px] md:right-[-105px]"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330685/be2fcc5390cdc081ed0b94431ff02178db711b6e_alqk6z.png"

@@ -19,7 +19,7 @@ const OurCommunity = () => {
           Join over <span className="text-[#010413]">2000+</span> beautiful
           people in Hello Dreams Community
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] md:mx-auto lg:w-full space-y-4 lg:inline lg:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] md:mx-auto xl:w-full space-y-4 xl:inline xl:space-x-4">
           <Link
             to="/community-challenge"
             onClick={handleOrigins}
@@ -48,7 +48,7 @@ const OurCommunity = () => {
                 ease: "easeOut",
                 delay: index * 0.2,
               }}
-              className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
+              className="w-full h-[59.21px] md:h-[135.56px] xl:h-[203.18px]"
             >
               <img
                 src={data.image}
@@ -69,7 +69,7 @@ const OurCommunity = () => {
                 ease: "easeOut",
                 delay: index * 0.2,
               }}
-              className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
+              className="w-full h-[59.21px] md:h-[135.56px] xl:h-[203.18px]"
             >
               <img
                 src={data.image}
@@ -90,7 +90,7 @@ const OurCommunity = () => {
                 ease: "easeOut",
                 delay: index * 0.2,
               }}
-              className="w-full h-[59.21px] md:h-[135.56px] lg:h-[203.18px]"
+              className="w-full h-[59.21px] md:h-[135.56px] xl:h-[203.18px]"
             >
               <img
                 src={data.image}

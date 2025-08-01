@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import AdminSidebar from './AdminSidebar';
-import DashboardOverview from './DashboardOverview';
-import CourseManagement from './CourseManagement';
-import JobManagement from './JobManagement';
-import ChallengeManagement from './ChallengeManagement';
-import BlogManagement from './BlogManagement';
-import CollectionsManagement from './CollectionsManagement';
-import RecentActivityManagement from './RecentActivityManagement';
-import { Menu, X } from 'lucide-react';
-import { useRealtimeSubscriptions } from '@/hooks/useRealtimeSubscriptions';
+import React, { useState } from "react";
+import AdminSidebar from "./AdminSidebar";
+import DashboardOverview from "./DashboardOverview";
+import CourseManagement from "./CourseManagement";
+import JobManagement from "./JobManagement";
+import ChallengeManagement from "./ChallengeManagement";
+import BlogManagement from "./BlogManagement";
+import CollectionsManagement from "./CollectionsManagement";
+import RecentActivityManagement from "./RecentActivityManagement";
+import { Menu, X } from "lucide-react";
+import { useRealtimeSubscriptions } from "@/hooks/useRealtimeSubscriptions";
 
 const AdminDashboard = () => {
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Set up real-time subscriptions for all admin tables
@@ -19,19 +19,19 @@ const AdminDashboard = () => {
 
   const renderActiveSection = () => {
     switch (activeSection) {
-      case 'dashboard':
+      case "dashboard":
         return <DashboardOverview setActiveSection={setActiveSection} />;
-      case 'courses':
+      case "courses":
         return <CourseManagement />;
-      case 'jobs':
+      case "jobs":
         return <JobManagement />;
-      case 'challenges':
+      case "challenges":
         return <ChallengeManagement />;
-      case 'blog':
+      case "blog":
         return <BlogManagement />;
-      case 'collections':
+      case "collections":
         return <CollectionsManagement />;
-      case 'activity':
+      case "activity":
         return <RecentActivityManagement />;
       default:
         return <DashboardOverview setActiveSection={setActiveSection} />;
@@ -43,13 +43,13 @@ const AdminDashboard = () => {
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 xl:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Mobile menu button */}
-      <div className="fixed top-4 left-4 z-50 lg:hidden">
+      <div className="fixed top-4 left-4 z-50 xl:hidden">
         <button
           onClick={() => setSidebarOpen(true)}
           className="p-2 bg-white rounded-md shadow-md hover:bg-gray-50"
@@ -60,15 +60,15 @@ const AdminDashboard = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:fixed lg:translate-x-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out xl:fixed xl:translate-x-0 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between  ">
           {/* <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1> */}
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-1 hover:bg-gray-100 rounded"
+            className="xl:hidden p-1 hover:bg-gray-100 rounded"
           >
             <X className="w-5 h-5" />
           </button>
@@ -82,8 +82,8 @@ const AdminDashboard = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 lg:ml-64">
-        <div className="p-4 lg:p-8">{renderActiveSection()}</div>
+      <div className="flex-1 xl:ml-64">
+        <div className="p-4 xl:p-8">{renderActiveSection()}</div>
       </div>
     </div>
   );

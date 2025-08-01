@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const CourseDescription = () => {
   return (
     <div className="mb-10">
-      <h3 className="text-[16px] lg:text-[20px] text-[#010413] font-bold mb-2">
+      <h3 className="text-[16px] xl:text-[20px] text-[#010413] font-bold mb-2">
         Description
       </h3>
       <div className="text-[14px] text-[#010413] space-y-4">

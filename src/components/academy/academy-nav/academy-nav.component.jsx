@@ -2,24 +2,26 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import Logo from "../../logo/logo.component";
-
 import {
   ChevronDownIcon,
   ChevronUpIcon,
   Bars3BottomLeftIcon,
 } from "@heroicons/react/24/solid";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 import { CourseOptions } from "../../../data/academy-courses-data/course-options.data";
 import AcademySidebar from "./academy-sidebar.component";
 
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
+import NavbarSearch from "../navbar-search/navbar-search.component";
+import { academyItems } from "@/data/academy-data/academy.data";
+import UserDropdown from "../user-dropdown/user-dropdown.component";
+import { useAuth } from "@/hooks/useAuth";
 
 const AcademyNavbar = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -43,27 +45,20 @@ const AcademyNavbar = () => {
       )}
 
       <nav
-        className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] lg:h-[100px] md:rounded-none md:mt-0 md:px-[5%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630] "
+        className="bg-white w-[90%] mx-auto rounded-2xl px-[3%] py-3 md:fixed md:top-0 md:left-0 md:w-full md:h-[80px] xl:h-[100px] md:rounded-none md:mt-0 md:px-[5%] md:py-8 flex justify-between items-center z-60 md:drop-shadow-2xl md:drop-shadow-[#0c4af630] "
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {/* Logo Section */}
         <Link
-          to="/"
+          className="text-[#010413] font-bold text-[16px] md:text-[20px] hover:text-[#1342ff] transition-colors duration-300"
+          to="/academy"
           onClick={handleOrigins}
-          className="lg:hidden flex-shrink-0 w-[38.17px] h-[28.44px] md:w-[67px] md:h-[46.75px] lg:w-[78.68px] lg:h-[54.89px] cursor-pointer"
         >
-          <Logo />
+          Acade<span className="text-[#1342ff]">m</span>y
         </Link>
 
         {/* Navigation Links */}
-        <div className=" hidden lg:flex space-x-6 items-center">
-          <Link
-            className="text-[#010413] font-bold text-[20px] hover:text-[#1342ff] transition-colors duration-300"
-            to="/academy"
-            onClick={handleOrigins}
-          >
-            Acade<span className="text-[#1342ff]">m</span>y
-          </Link>
+        <div className=" hidden xl:flex space-x-6 items-center">
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
             to="/"
@@ -89,50 +84,53 @@ const AcademyNavbar = () => {
               <ChevronDownIcon className="h-4 w-4" />
             )}
           </div>
-          <div className="w-[312px] h-[44px]">
-            <input
-              type="text"
-              className="w-full h-full border-[0.5px] border-[#101828] rounded-sm outline-none p-2"
-            />
-          </div>
-          <div>
-            <ShoppingCartIcon className="w-4 h-4 md:h-6 md:w-6 " />
-          </div>
+
+          <NavbarSearch coursesArray={academyItems} />
+
           <Link
             className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
-            to=""
+            to="/academy/pricing"
             onClick={handleOrigins}
           >
             Pricing
           </Link>
         </div>
 
-        <div className="space-x-3">
-          <Link
-            to=""
-            className="hidden lg:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
-            onClick={handleOrigins}
-          >
-            Sign in
-          </Link>
+        <div className="flex items-center space-x-3">
+          {isAuthenticated ? (
+            <UserDropdown />
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/signin"
+                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+                onClick={handleOrigins}
+              >
+                Sign in
+              </Link>
 
-          <Link
-            to=""
-            className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] lg:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
-            onClick={handleOrigins}
-          >
-            Sign up $10/m
-          </Link>
+              <Link
+                to="/signup"
+                className="bg-[#1342ff] text-white border border-[#1342ff] font-medium text-[12px] md:text-[16px] xl:text-[18px] px-3 py-2 rounded-md hover:bg-[#1b13ff] hover:border-[#1b13ff] cursor-pointer transition-colors duration-300"
+                onClick={handleOrigins}
+              >
+                Sign up $10/m
+              </Link>
+            </div>
+          )}
+
+          {/* Add conditional after sign in */}
+
           <button
             onClick={openSideBar}
-            className="h-8 w-8 text-[#010413] lg:hidden cursor-pointer align-middle"
+            className="h-8 w-8 text-[#010413] xl:hidden cursor-pointer align-middle"
           >
             <Bars3BottomLeftIcon />
           </button>
         </div>
       </nav>
 
-      <div className="hidden md:block md:h-[80px] lg:h-[100px]"></div>
+      <div className="hidden md:block md:h-[80px] xl:h-[100px]"></div>
 
       <AnimatePresence>
         {optionsOpen && (

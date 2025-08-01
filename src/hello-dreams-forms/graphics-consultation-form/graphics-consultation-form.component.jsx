@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import supabase from '../../supabase/client';
-import GraphicsConsultationSuccess from './graphics-consultation-success.component';
-import LoadingSpinner from '../../components/loading-spinner/loading-spinner.component';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import supabase from "../../supabase/client";
+import GraphicsConsultationSuccess from "./graphics-consultation-success.component";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 const GraphicsConsultationForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    type: 'Graphics Design',
-    email: '',
-    phone: '',
-    company: '',
-    message: '',
-    service: '',
-    accompanyingService: '',
-    howDidYouHear: '',
+    name: "",
+    type: "Graphics Design",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+    service: "",
+    accompanyingService: "",
+    howDidYouHear: "",
   });
   const [success, setSuccess] = useState(null);
   const [errors, setErrors] = useState({});
@@ -30,13 +30,13 @@ const GraphicsConsultationForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.phone) newErrors.phone = 'Phone number is required';
-    if (!formData.message) newErrors.message = 'Message is required';
-    if (!formData.service) newErrors.service = 'Service selection is required';
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required";
+    if (!formData.message) newErrors.message = "Message is required";
+    if (!formData.service) newErrors.service = "Service selection is required";
     if (!formData.accompanyingService)
-      newErrors.accompanyingService = 'Accompanying service is required';
+      newErrors.accompanyingService = "Accompanying service is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -60,34 +60,34 @@ const GraphicsConsultationForm = () => {
 
     try {
       const { data, error } = await supabase.functions.invoke(
-        'handle-service-enquiries',
+        "handle-service-enquiries",
         {
           body: payload,
-        },
+        }
       );
 
       if (error) {
-        console.error('Supabase Error:', error.message || error);
-        toast.error('Submission failed. Please try again.');
+        console.error("Supabase Error:", error.message || error);
+        toast.error("Submission failed. Please try again.");
         return;
       }
 
-      toast.success('Your enquiry has been submitted!');
+      toast.success("Your enquiry has been submitted!");
       setSuccess(true);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        message: '',
-        service: '',
-        accompanyingService: '',
-        howDidYouHear: '',
-        type: 'Graphics Design',
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        message: "",
+        service: "",
+        accompanyingService: "",
+        howDidYouHear: "",
+        type: "Graphics Design",
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('Failed to submit form. Please try again.');
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -96,13 +96,13 @@ const GraphicsConsultationForm = () => {
   return success ? (
     <GraphicsConsultationSuccess />
   ) : (
-    <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+    <div className="bg-[#f8f8f8] xl:bg-[#fff] w-full px-[5%] xl:px-[10%] py-15 md:py-25">
       {isSubmitting && <LoadingSpinner />}
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Get a free consultation for our Graphics & Branding Services
@@ -110,8 +110,8 @@ const GraphicsConsultationForm = () => {
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-        className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]"
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="text-[#667085] text-[14px] md:text-[16px] text-center xl:text-[18px] mb-10 xl:mb-20 xl:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Please provide the details below
@@ -119,9 +119,9 @@ const GraphicsConsultationForm = () => {
       <motion.form
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         onSubmit={handleSubmit}
-        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20 space-y-8 text-[#000000] md:p-6"
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:gap-x-20 space-y-8 text-[#000000] md:p-6"
       >
         <div>
           <input type="hidden" name="type" value="Graphics Design" />
@@ -238,7 +238,7 @@ const GraphicsConsultationForm = () => {
           </div>
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-              Choose accompanying services{' '}
+              Choose accompanying services{" "}
               <span className="text-red-500">*</span>
             </label>
             <select
@@ -292,9 +292,9 @@ const GraphicsConsultationForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
-            {isSubmitting ? 'Submitting...' : 'Schedule My Free Consultation'}
+            {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
           </button>
 
           {/* {errors && <p className="text-red-600 mt-4"></p>} */}

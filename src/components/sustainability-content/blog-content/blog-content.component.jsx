@@ -1,9 +1,9 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useBlogById } from '../../../hooks/useBlogs';
-import NavBar from '../../landing-header/nav-bar/nav-bar.component';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useBlogById } from "../../../hooks/useBlogs";
+import NavBar from "../../landing-header/nav-bar/nav-bar.component";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 const BlogContent = () => {
   const { blogId } = useParams();
@@ -41,12 +41,12 @@ const BlogContent = () => {
         style={{
           backgroundImage: `url(${
             blog.image_url ||
-            'https://via.placeholder.com/1200x600?text=No+Image'
+            "https://via.placeholder.com/1200x600?text=No+Image"
           })`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
-        className="w-full h-[435px] md:h-[867px] lg:h-[904px] pt-3 md:pt-0 "
+        className="w-full h-[435px] md:h-[867px] xl:h-[904px] pt-3 md:pt-0 "
       >
         <NavBar />
       </div>
@@ -54,7 +54,7 @@ const BlogContent = () => {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#010413] text-[20px] md:text-[24px] font-semibold mb-3"
           style={{ fontFamily: "'Inter', sans-serif" }}
@@ -64,19 +64,19 @@ const BlogContent = () => {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#0d111c] text-[14px] md:text-[16px] "
         >
           {blog.content
-            ? blog.content.substring(0, 200) + '...'
-            : 'No content available'}
+            ? blog.content.substring(0, 200) + "..."
+            : "No content available"}
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="flex flex-row space-x-8 my-5"
         >
@@ -89,15 +89,15 @@ const BlogContent = () => {
                 <img
                   src={
                     blog.author_image_url ||
-                    'https://via.placeholder.com/40x40?text=Author'
+                    "https://via.placeholder.com/40x40?text=Author"
                   }
-                  alt={blog.author || 'Unknown Author'}
+                  alt={blog.author || "Unknown Author"}
                   className="w-full h-full object-contain "
                 />
               </div>
 
               <p className="text-[#0d111c] text-[12px] md:text-[14px] font-medium">
-                {blog.author || 'Unknown Author'}
+                {blog.author || "Unknown Author"}
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ const BlogContent = () => {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#000000] text-[16px] md:text-[24px] mb-7 pt-7"
         >
@@ -123,7 +123,7 @@ const BlogContent = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-[#000000] text-[16px] md:text-[20px] mb-7 whitespace-pre-wrap"
         >

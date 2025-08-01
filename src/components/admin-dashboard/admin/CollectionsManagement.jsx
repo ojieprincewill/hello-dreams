@@ -1,24 +1,24 @@
 // components/CollectionsManagement.jsx
-import React, { useState } from 'react';
-import { Card, CardContent } from '../ui/card';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Checkbox } from '../ui/checkbox';
+import React, { useState } from "react";
+import { Card, CardContent } from "../ui/card";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from "../ui/select";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
+} from "../ui/dialog";
 import {
   Plus,
   Edit,
@@ -27,13 +27,13 @@ import {
   Upload,
   ShoppingBag,
   Star,
-} from 'lucide-react';
-import CollectionViewModal from './modals/CollectionViewModal';
-import CollectionEditModal from './modals/CollectionEditModal';
-import DeleteConfirmModal from './modals/DeleteConfirmModal';
-import { useToast } from '../hooks/use-toast';
-import { useCollections } from '../../../hooks/useCollections';
-import supabase from '../../../supabase/client';
+} from "lucide-react";
+import CollectionViewModal from "./modals/CollectionViewModal";
+import CollectionEditModal from "./modals/CollectionEditModal";
+import DeleteConfirmModal from "./modals/DeleteConfirmModal";
+import { useToast } from "../hooks/use-toast";
+import { useCollections } from "../../../hooks/useCollections";
+import supabase from "../../../supabase/client";
 
 const CollectionsManagement = () => {
   const { toast } = useToast();
@@ -45,19 +45,19 @@ const CollectionsManagement = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   const [newItem, setNewItem] = useState({
-    title: '',
+    title: "",
     price: 0,
-    image: '',
+    image: "",
     sizes: [],
-    quality: 'Regular',
-    category: 'T-Shirts',
+    quality: "Regular",
+    category: "T-Shirts",
     instock: true,
-    shipment: 'We ship to all parts of Nigeria',
-    ship_time: 'Shipping takes 5 to 7 working days',
+    shipment: "We ship to all parts of Nigeria",
+    ship_time: "Shipping takes 5 to 7 working days",
   });
 
   // Define the available sizes
-  const allSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+  const allSizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
   const {
     collectionsQuery: { data, fetchNextPage, hasNextPage, isFetchingNextPage },
@@ -72,21 +72,21 @@ const CollectionsManagement = () => {
   const uploadImage = async (file) => {
     if (!file) return null;
 
-    const fileExt = file.name.split('.').pop();
+    const fileExt = file.name.split(".").pop();
     const fileName = `${Math.random()}.${fileExt}`;
     const filePath = `collections-images/${fileName}`;
 
     const { error: uploadError } = await supabase.storage
-      .from('collections-images')
+      .from("collections-images")
       .upload(filePath, file);
 
     if (uploadError) {
-      throw new Error('Failed to upload image');
+      throw new Error("Failed to upload image");
     }
 
     const {
       data: { publicUrl },
-    } = supabase.storage.from('collections-images').getPublicUrl(filePath);
+    } = supabase.storage.from("collections-images").getPublicUrl(filePath);
 
     return publicUrl;
   };
@@ -107,15 +107,15 @@ const CollectionsManagement = () => {
   // Reset form including image
   const resetForm = () => {
     setNewItem({
-      title: '',
+      title: "",
       price: 0,
-      image: '',
+      image: "",
       sizes: [],
-      quality: 'Regular',
-      category: 'T-Shirts',
+      quality: "Regular",
+      category: "T-Shirts",
       instock: true,
-      shipment: 'We ship to all parts of Nigeria',
-      ship_time: 'Shipping takes 5 to 7 working days',
+      shipment: "We ship to all parts of Nigeria",
+      ship_time: "Shipping takes 5 to 7 working days",
     });
     setImageFile(null);
     setImagePreview(null);
@@ -141,14 +141,14 @@ const CollectionsManagement = () => {
     try {
       await deleteCollection.mutateAsync(selectedItem.id);
       toast({
-        title: 'Collection Deleted',
+        title: "Collection Deleted",
         description: `${selectedItem.title} was successfully removed.`,
       });
       setDeleteModalOpen(false);
       setSelectedItem(null);
     } catch (err) {
       toast({
-        title: 'Error deleting collection',
+        title: "Error deleting collection",
         description: err.message,
       });
     }
@@ -158,11 +158,11 @@ const CollectionsManagement = () => {
     try {
       await updateCollection.mutateAsync(updatedItem);
       toast({
-        title: 'Collection Updated',
+        title: "Collection Updated",
         description: `${updatedItem.title} was successfully updated.`,
       });
     } catch (err) {
-      toast({ title: 'Error updating collection', description: err.message });
+      toast({ title: "Error updating collection", description: err.message });
     }
   };
 
@@ -181,23 +181,23 @@ const CollectionsManagement = () => {
       });
 
       toast({
-        title: 'Collection Created',
+        title: "Collection Created",
         description: `${newItem.title} was successfully added.`,
       });
       resetForm();
     } catch (err) {
-      toast({ title: 'Error creating collection', description: err.message });
+      toast({ title: "Error creating collection", description: err.message });
     }
   };
 
   return (
-    <div className="space-y-6 lg:space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+          <h1 className="text-2xl xl:text-3xl font-bold text-gray-900">
             Collections Management
           </h1>
-          <p className="text-sm lg:text-base text-gray-600 mt-1 lg:mt-2">
+          <p className="text-sm xl:text-base text-gray-600 mt-1 xl:mt-2">
             Manage your merchandise and products for sale
           </p>
         </div>
@@ -205,7 +205,7 @@ const CollectionsManagement = () => {
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
-              <Plus size={18} className="mr-2 lg:w-5 lg:h-5" />
+              <Plus size={18} className="mr-2 xl:w-5 xl:h-5" />
               Add Item
             </Button>
           </DialogTrigger>
@@ -213,7 +213,7 @@ const CollectionsManagement = () => {
             <DialogHeader>
               <DialogTitle>Add New Item</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4 lg:space-y-6">
+            <div className="space-y-4 xl:space-y-6">
               <div>
                 <Label htmlFor="item-title">Item Title</Label>
                 <Input
@@ -316,7 +316,7 @@ const CollectionsManagement = () => {
                                   setNewItem({
                                     ...newItem,
                                     sizes: newItem.sizes.filter(
-                                      (s) => s !== size,
+                                      (s) => s !== size
                                     ),
                                   });
                                 } else {
@@ -390,7 +390,7 @@ const CollectionsManagement = () => {
                         onClick={() => {
                           setImageFile(null);
                           setImagePreview(null);
-                          setNewItem({ ...newItem, image: '' });
+                          setNewItem({ ...newItem, image: "" });
                         }}
                       >
                         Remove Image
@@ -400,9 +400,9 @@ const CollectionsManagement = () => {
                     <>
                       <Upload
                         size={40}
-                        className="mx-auto text-gray-400 mb-4 lg:w-12 lg:h-12"
+                        className="mx-auto text-gray-400 mb-4 xl:w-12 xl:h-12"
                       />
-                      <p className="text-sm lg:text-base text-gray-600">
+                      <p className="text-sm xl:text-base text-gray-600">
                         Click to upload product image
                       </p>
                     </>
@@ -427,7 +427,7 @@ const CollectionsManagement = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6">
         {collections.map((item) => (
           <Card key={item.id} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-0">
@@ -440,27 +440,27 @@ const CollectionsManagement = () => {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <ShoppingBag size={40} className="lg:w-12 lg:h-12" />
+                    <ShoppingBag size={40} className="xl:w-12 xl:h-12" />
                   </div>
                 )}
               </div>
-              <div className="p-4 lg:p-6">
+              <div className="p-4 xl:p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-base lg:text-lg flex-1 min-w-0">
+                  <h3 className="font-semibold text-base xl:text-lg flex-1 min-w-0">
                     <span className="truncate block">{item.title}</span>
                   </h3>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2 ${
                       item.instock
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {item.instock ? 'In Stock' : 'Out of Stock'}
+                    {item.instock ? "In Stock" : "Out of Stock"}
                   </span>
                 </div>
 
-                <div className="space-y-2 mb-3 lg:mb-4 text-xs lg:text-sm">
+                <div className="space-y-2 mb-3 xl:mb-4 text-xs xl:text-sm">
                   <div className="flex justify-between">
                     <span>Title:</span>
                     <span className="font-semibold truncate ml-2">
@@ -478,7 +478,7 @@ const CollectionsManagement = () => {
                     <span className="truncate ml-2">{item.category}</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <Star size={12} className="text-yellow-500 lg:w-4 lg:h-4" />
+                    <Star size={12} className="text-yellow-500 xl:w-4 xl:h-4" />
                     <span>{item.quality}</span>
                   </div>
                   <div className="flex flex-wrap gap-1">
@@ -493,32 +493,32 @@ const CollectionsManagement = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-1 lg:space-x-2">
+                <div className="flex space-x-1 xl:space-x-2">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleView(item)}
-                    className="flex-1 text-xs lg:text-sm"
+                    className="flex-1 text-xs xl:text-sm"
                   >
-                    <Eye size={14} className="mr-1 lg:w-4 lg:h-4" />
+                    <Eye size={14} className="mr-1 xl:w-4 xl:h-4" />
                     <span className="hidden sm:inline">View</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleEdit(item)}
-                    className="flex-1 text-xs lg:text-sm"
+                    className="flex-1 text-xs xl:text-sm"
                   >
-                    <Edit size={14} className="mr-1 lg:w-4 lg:h-4" />
+                    <Edit size={14} className="mr-1 xl:w-4 xl:h-4" />
                     <span className="hidden sm:inline">Edit</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleDelete(item)}
-                    className="text-red-600 hover:text-red-700 text-xs lg:text-sm"
+                    className="text-red-600 hover:text-red-700 text-xs xl:text-sm"
                   >
-                    <Trash2 size={14} className="lg:w-4 lg:h-4" />
+                    <Trash2 size={14} className="xl:w-4 xl:h-4" />
                   </Button>
                 </div>
               </div>
@@ -528,13 +528,13 @@ const CollectionsManagement = () => {
       </div>
 
       {hasNextPage && (
-        <div className="text-center mt-4 lg:mt-6">
+        <div className="text-center mt-4 xl:mt-6">
           <Button
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
             className="w-full sm:w-auto"
           >
-            {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+            {isFetchingNextPage ? "Loading more..." : "Load More"}
           </Button>
         </div>
       )}

@@ -12,7 +12,7 @@ const AboutProblem = () => {
         the problem
       </p>
       <p
-        className="text-[#000000] text-[12px] md:text-[20px] lg:text-[32px] font-bold mb-3"
+        className="text-[#000000] text-[12px] md:text-[20px] xl:text-[32px] font-bold mb-3"
         style={{ fontFamily: "'Roboto', sans-serif" }}
       >
         No one deserves to fail severally, be confused and not succeed
@@ -21,7 +21,7 @@ const AboutProblem = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="text-[#667085] text-[10px] md:text-[13px] lg:text-[16px] leading-[2] lg:leading-[1.7] mb-3"
+        className="text-[#667085] text-[10px] md:text-[13px] xl:text-[16px] leading-[2] xl:leading-[1.7] mb-3"
       >
         I've experienced failure countless times, often because I genuinely
         didn't know what I was doing wrong. I was putting in a lot of effort,
@@ -43,7 +43,7 @@ const AboutProblem = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-full h-[193.34px] md:h-[350px] lg:h-[705px] rounded-2xl overflow-hidden mt-5"
+        className="w-full h-[193.34px] md:h-[350px] xl:h-[705px] rounded-2xl overflow-hidden mt-5"
       >
         <img
           src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248921/About%20page/882201a45f54dc02fe0ca6e02fe4fcc558afa801_tklxa6.jpg"

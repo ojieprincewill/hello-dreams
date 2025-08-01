@@ -4,14 +4,14 @@ export const CourseOptions = [
     icon: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330733/icons_iwlubx.png",
     title: "UI/UX Design",
     text: "Stunning designs",
-    target: "#",
+    target: "/academy/classes?category=courses",
   },
   {
     id: 2,
     icon: "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330733/icons_iwlubx.png",
     title: "Live UI/UX Design Classes",
     text: "Stunning designs",
-    target: "#",
+    target: "/academy/cohorts",
   },
   {
     id: 3,

@@ -27,12 +27,12 @@ const FaqSection = () => {
   const activeFaq = FaqData.find((faq) => faq.id === activeId);
 
   return (
-    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 lg:my-10 lg:p-10">
+    <div className="md:bg-[#fff] rounded-2xl md:grid md:grid-cols-2 w-full h-auto md:gap-4 my-8 p-8 xl:my-10 xl:p-10">
       <div>
-        <p className="text-[15.05px] md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
+        <p className="text-[15.05px] md:text-[30.05px] xl:text-[56px] text-[#101828] font-bold mb-4">
           FAQs.
         </p>
-        <div className="flex flex-col space-y-2 md:h-[330px] lg:h-[470px] overflow-auto">
+        <div className="flex flex-col space-y-2 md:h-[330px] xl:h-[470px] overflow-auto">
           {FaqData.map((faq, index) => (
             <motion.div
               key={faq.id}
@@ -48,7 +48,7 @@ const FaqSection = () => {
                   activeId === faq.id ? "bg-[#101828] text-[#fff]" : "bg-[#fff]"
                 }`}
               >
-                <p className="text-[14px] md:text-[10px] lg:text-[18px] w-[230px] md:w-full font-bold">
+                <p className="text-[14px] md:text-[10px] xl:text-[18px] w-[230px] md:w-full font-bold">
                   {faq.question}{" "}
                   {activeId === faq.id && (
                     <span>
@@ -64,7 +64,7 @@ const FaqSection = () => {
                   <img
                     src="https://i.ibb.co/SDCPTNfc/STAR-FOOTER-YELLOW.png"
                     alt="sun icon"
-                    className="hidden md:block md:w-3 md:h-3 lg:h-6 lg:w-6"
+                    className="hidden md:block md:w-3 md:h-3 xl:h-6 xl:w-6"
                   />
                 )}
                 {activeId === faq.id ? (
@@ -111,17 +111,17 @@ const FaqSection = () => {
         </div>
       </div>
       <div className="hidden md:block">
-        <p className="md:text-[30.05px] lg:text-[56px] text-[#101828] font-bold mb-4">
+        <p className="md:text-[30.05px] xl:text-[56px] text-[#101828] font-bold mb-4">
           Ans.
         </p>
-        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] lg:h-[470px] overflow-auto">
+        <div className="bg-[#1342ff] text-[#fff] rounded-xl p-5 md:h-[330px] xl:h-[470px] overflow-auto">
           {activeId !== null ? (
-            <div className="md:text-[12px] lg:text-[24px] lg:font-semibold">
+            <div className="md:text-[12px] xl:text-[24px] xl:font-semibold">
               <span className="mb-2 block">
                 <img
                   src="https://i.ibb.co/ddcVBds/STAR-FOOTER-WHITE.png"
                   alt="sun icon"
-                  className="md:w-3 md:h-3 lg:h-6 lg:w-6 "
+                  className="md:w-3 md:h-3 xl:h-6 xl:w-6 "
                 />
               </span>
               {activeFaq && (
@@ -143,7 +143,7 @@ const FaqSection = () => {
               )}
             </div>
           ) : (
-            <p className="md:text-[12px] lg:text-[24px] lg:font-bold">
+            <p className="md:text-[12px] xl:text-[24px] xl:font-bold">
               Select a question to view the answer.
             </p>
           )}

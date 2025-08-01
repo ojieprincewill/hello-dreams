@@ -38,14 +38,7 @@ export async function signUpWithEmail({ email, password, user_metadata = {} }) {
   return data;
 }
 
-// Sign out
-export async function signOut() {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw error;
-  return true;
-}
-
-// Reset password
+// Reset password - sends reset email
 export async function resetPassword({ email }) {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${window.location.origin}/reset-password`,
@@ -54,11 +47,37 @@ export async function resetPassword({ email }) {
   return true;
 }
 
-// Update password
+// Update password (for authenticated users)
 export async function updatePassword({ password }) {
   const { error } = await supabase.auth.updateUser({
     password,
   });
+  if (error) throw error;
+  return true;
+}
+
+// Update password with reset token (for password reset flow)
+export async function updatePasswordWithToken({ password, accessToken, refreshToken }) {
+  // Set the session with the reset tokens
+  const { data, error } = await supabase.auth.setSession({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  });
+  
+  if (error) throw error;
+
+  // Now update the password
+  const { error: updateError } = await supabase.auth.updateUser({
+    password,
+  });
+  
+  if (updateError) throw updateError;
+  return data;
+}
+
+// Sign out
+export async function signOut() {
+  const { error } = await supabase.auth.signOut();
   if (error) throw error;
   return true;
 }

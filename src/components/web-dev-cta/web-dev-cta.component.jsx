@@ -16,7 +16,7 @@ const WebDevCta = () => {
           whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="w-full h-[382.33px] md:h-[463.33px] lg:h-[800px] bg-[#ffc501] rounded-2xl overflow-hidden"
+          className="w-full h-[382.33px] md:h-[463.33px] xl:h-[800px] bg-[#ffc501] rounded-2xl overflow-hidden"
         >
           <img
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330672/ae3bfa13ccf709991e22a3b74450b625f5b8f7f0_ilrurg.png"
@@ -30,12 +30,12 @@ const WebDevCta = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="flex justify-center items-center bg-[#ffadd9] w-[64px] h-[64px] md:w-[71.82px] md:h-[71.82px] lg:w-[124px] lg:h-[124px] mb-10 rounded-tr-[50%] rounded-tl-[50%] overflow-hidden"
+            className="flex justify-center items-center bg-[#ffadd9] w-[64px] h-[64px] md:w-[71.82px] md:h-[71.82px] xl:w-[124px] xl:h-[124px] mb-10 rounded-tr-[50%] rounded-tl-[50%] overflow-hidden"
           >
             <img
               src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750251218/Web%20dev%20page/Arrow_iconsvg_naab2a.png"
               alt="arrow"
-              className="w-[37.75px] md:w-[42.36px] lg:w-[73.14px] h-auto object-contain"
+              className="w-[37.75px] md:w-[42.36px] xl:w-[73.14px] h-auto object-contain"
             />
           </motion.div>
           <motion.p
@@ -43,14 +43,14 @@ const WebDevCta = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-[#fff] text-[25px] lg:text-[48px] text-center mb-6"
+            className="text-[#fff] text-[25px] xl:text-[48px] text-center mb-6"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Let Us Build That Application For You
           </motion.p>
           <Link
             to="/services/app-dev-consultation"
-            className="text-[#f7f7f7] text-[18.7px] lg:text-[36px] text-center underline cursor-pointer"
+            className="text-[#f7f7f7] text-[18.7px] xl:text-[36px] text-center underline cursor-pointer"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
             onClick={handleOrigins}
           >

@@ -23,7 +23,7 @@ const ExpertTeam = () => {
   const handleCloseModal = () => setActiveModal(null);
 
   return (
-    <div className="w-full mt-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+    <div className="w-full mt-15 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-4">
       {MeetExpertsData.map((data, index) => (
         <motion.div
           key={data.id}
@@ -32,14 +32,14 @@ const ExpertTeam = () => {
           variants={cardVariants}
           custom={index}
           className={`relative p-3 border border-[#dfdfe2] rounded-xl ${
-            index >= MeetExpertsData.length - 2 ? "lg:col-span-2" : ""
+            index >= MeetExpertsData.length - 2 ? "xl:col-span-2" : ""
           }`}
         >
           {/* Click Wrapper */}
           <div className="relative">
             {/* Image */}
             <div
-              className="w-full h-[221.35px] md:h-[286.65px] lg:h-[360px] mb-5 cursor-pointer"
+              className="w-full h-[221.35px] md:h-[286.65px] xl:h-[360px] mb-5 cursor-pointer"
               onClick={() => handleClick(data.id)}
             >
               <img
@@ -50,10 +50,10 @@ const ExpertTeam = () => {
             </div>
 
             {/* Name & Read More */}
-            <p className="text-[#26262b] text-[12px] md:text-[14px] lg:text-[18px] font-medium mb-2">
+            <p className="text-[#26262b] text-[12px] md:text-[14px] xl:text-[18px] font-medium mb-2">
               {data.name}
             </p>
-            <p className="text-[#7f8090] text-[11px] lg:text-[15.5px] leading-[1.5] mb-3">
+            <p className="text-[#7f8090] text-[11px] xl:text-[15.5px] leading-[1.5] mb-3">
               {data.text}{" "}
               <span
                 onClick={() => handleClick(data.id)}
@@ -75,17 +75,17 @@ const ExpertTeam = () => {
                 {/* Modal - Responsive Positioning */}
                 <div
                   className={`absolute bg-[#f7f7f7] shadow-lg rounded-lg z-[9999] 
-                    lg:w-[373px] top-1/2 -translate-y-1/2
+                    xl:w-[373px] top-1/2 -translate-y-1/2
                     ${
                       data.modalPosition === "left"
-                        ? "lg:right-full"
-                        : "lg:left-full"
+                        ? "xl:right-full"
+                        : "xl:left-full"
                     } 
                     w-full md:w-[320px]`}
                 >
                   {/* Arrow Pointer - Hidden on Mobile */}
                   <div
-                    className={`absolute lg:block hidden w-4 h-4 bg-[#f7f7f7] rotate-45 ${
+                    className={`absolute xl:block hidden w-4 h-4 bg-[#f7f7f7] rotate-45 ${
                       data.modalPosition === "left" ? "-right-2" : "-left-2"
                     } top-1/2 -translate-y-1/2`}
                   ></div>
@@ -99,16 +99,16 @@ const ExpertTeam = () => {
                     >
                       {data.role}
                     </p>
-                    <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                    <p className="text-[#7f8090] text-[12px] xl:text-[15.5px] leading-[1.5] mb-4">
                       {data.text1}
                     </p>
                     {data.text2 && (
-                      <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                      <p className="text-[#7f8090] text-[12px] xl:text-[15.5px] leading-[1.5] mb-4">
                         {data.text2}
                       </p>
                     )}
                     {data.text3 && (
-                      <p className="text-[#7f8090] text-[12px] lg:text-[15.5px] leading-[1.5] mb-4">
+                      <p className="text-[#7f8090] text-[12px] xl:text-[15.5px] leading-[1.5] mb-4">
                         {data.text3}
                       </p>
                     )}

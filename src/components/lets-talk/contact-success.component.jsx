@@ -9,7 +9,7 @@ const ContactSuccess = () => {
   return (
     <div className="flex flex-col justify-center items-center py-20 px-[5%]">
       <p
-        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Submitted
@@ -22,7 +22,7 @@ const ContactSuccess = () => {
         />
       </div>
       <p
-        className="text-[#667085] text-[14px] md:text-[16px] md:text-center lg:text-[24px] mb-10 lg:mb-20 md:w-[80%] lg:w-[757px] mx-auto leading-[1.5]"
+        className="text-[#667085] text-[14px] md:text-[16px] md:text-center xl:text-[24px] mb-10 xl:mb-20 md:w-[80%] xl:w-[757px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Thank you for contacting us! We have received your request and we will

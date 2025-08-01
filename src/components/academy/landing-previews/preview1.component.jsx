@@ -40,13 +40,13 @@ const Preview1 = () => {
         className="flex justify-between items-center mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        <p className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold">
+        <p className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold">
           Explore UI/UX Design Classes
         </p>
         <Link
           to="/academy/classes?category=uiux"
           onClick={handleOrigins}
-          className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          className="hidden md:inline text-[#ff7f50] text-[14px] xl:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
         >
           View all
         </Link>

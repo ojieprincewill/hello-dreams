@@ -11,15 +11,15 @@ const JobHeader = () => {
 
   return (
     <>
-      <div className="relative pt-[15px] w-full h-[435px] md:h-[640px] lg:h-[904px] bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330651/2abccb476d3287825cf1236bfc3642ead9bb3741_mhb65g.png')] bg-cover bg-center">
+      <div className="relative pt-[15px] w-full h-[435px] md:h-[640px] xl:h-[904px] bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330651/2abccb476d3287825cf1236bfc3642ead9bb3741_mhb65g.png')] bg-cover bg-center">
         <NavBar />
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="hidden absolute md:top-[200px] lg:top-[263px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]"
+          className="hidden absolute md:top-[200px] xl:top-[263px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]"
         >
-          <h1 className="md:text-[48px] lg:text-[64px] w-[630px] leading-[1.1] font-extrabold">
+          <h1 className="md:text-[48px] xl:text-[64px] w-[630px] leading-[1.1] font-extrabold">
             Your Dream Job Starts Here
           </h1>
           <p className="mt-8 text-[20px] w-[556px] leading-[1.4]">

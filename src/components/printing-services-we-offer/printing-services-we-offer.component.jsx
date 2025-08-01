@@ -21,7 +21,7 @@ function PrintingServicesWeOffer() {
   return (
     <div className="w-full px-[5%] py-10">
       <p
-        className="text-[#18181b] text-[24px] lg:text-[48px] text-center mb-3 md:w-[321.83px] lg:w-[626px] md:mx-auto"
+        className="text-[#18181b] text-[24px] xl:text-[48px] text-center mb-3 md:w-[321.83px] xl:w-[626px] md:mx-auto"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
         Types of Printing Services we offer
@@ -31,12 +31,12 @@ function PrintingServicesWeOffer() {
         {PrintingData.map((data) => (
           <div key={data.id}>
             <p
-              className="text-[#483d3d] text-[12.34px] lg:text-[24px] text-center my-10 "
+              className="text-[#483d3d] text-[12.34px] xl:text-[24px] text-center my-10 "
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {data.header}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 ">
               {data.options.map((option, index) => (
                 <motion.div
                   key={option.id}
@@ -44,14 +44,14 @@ function PrintingServicesWeOffer() {
                   whileInView="visible"
                   variants={cardVariants}
                   custom={index}
-                  className={`w-full lg:h-[450px] border border-[#dfdfe2] rounded-xl p-3 lg:p-4 ${
+                  className={`w-full xl:h-[450px] border border-[#dfdfe2] rounded-xl p-3 xl:p-4 ${
                     index === data.options.length - 1 &&
                     data.options.length % 2 !== 0
-                      ? "md:col-span-2 lg:col-span-1"
+                      ? "md:col-span-2 xl:col-span-1"
                       : ""
                   }`}
                 >
-                  <div className="w-full h-[120px] md:h-[180px] lg:h-[220px] rounded-xl overflow-hidden ">
+                  <div className="w-full h-[120px] md:h-[180px] xl:h-[220px] rounded-xl overflow-hidden ">
                     <img
                       src={option.image}
                       alt={option.title}

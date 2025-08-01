@@ -18,7 +18,7 @@ const DreamJobSection = () => {
           Explore curated jobs, internships and freelance gigs that match your
           skills
         </p>
-        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4">
+        <div className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:inline xl:space-x-4">
           <Link
             to="/post-a-job"
             onClick={handleOrigins}
@@ -40,7 +40,7 @@ const DreamJobSection = () => {
         whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
-        className=" w-full h-[326px] md:h-[633px] lg:h-[712px] rounded-xl"
+        className=" w-full h-[326px] md:h-[633px] xl:h-[712px] rounded-xl"
       >
         <img
           src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330651/2abccb476d3287825cf1236bfc3642ead9bb3741_mhb65g.png"

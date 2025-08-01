@@ -5,14 +5,14 @@ import { motion } from "motion/react";
 const AboutHeader = () => {
   return (
     <>
-      <div className="w-full h-[206.77px] md:h-[467px] lg:h-[794px]">
+      <div className="w-full h-[206.77px] md:h-[467px] xl:h-[794px]">
         <video
           className="w-full h-full object-cover"
           controls
           poster="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248830/About%20page/1db42bac4995832729ae334fa348520949dee99e_nwyp3t.png"
         >
           <source
-            src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            src="https://res.cloudinary.com/dganx8kmn/video/upload/q_auto,f_mp4/v1753989901/videos/about-hello-dreams_9UFtPDjF_uwhnj2.mp4"
             type="video/mp4"
           />
         </video>
@@ -22,7 +22,7 @@ const AboutHeader = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-[#000000] text-[16px] md:text-[20px] lg:text-[24px] leading-[2] md:leading-[44px] lg:leading-[64px]"
+          className="text-[#000000] text-[16px] md:text-[20px] xl:text-[24px] leading-[2] md:leading-[44px] xl:leading-[64px]"
         >
           Hello Dreams is a multidisciplinary company dedicated to empowering
           individuals and businesses through a comprehensive suite of

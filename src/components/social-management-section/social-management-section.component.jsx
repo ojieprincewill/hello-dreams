@@ -10,7 +10,7 @@ const SocialManagementSection = () => {
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-3">
+      <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-3">
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] flex items-center justify-center">
           <motion.img
             initial={{ opacity: 0, x: -30 }}
@@ -38,7 +38,7 @@ const SocialManagementSection = () => {
             whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4"
+            className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:inline xl:space-x-4"
           >
             <Link
               to="/services/social-consultation"
@@ -57,7 +57,7 @@ const SocialManagementSection = () => {
           </motion.div>
         </div>
       </div>
-      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 w-full gap-3">
+      <div className="flex flex-col-reverse xl:grid xl:grid-cols-2 w-full gap-3">
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] text-center flex flex-col justify-center items-center p-5 md:p-0">
           <motion.h1
             initial={{ opacity: 0, y: 30 }} // Starts faded and lower
@@ -75,7 +75,7 @@ const SocialManagementSection = () => {
             whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] lg:w-full space-y-4 lg:inline lg:space-x-4"
+            className="mt-6 md:mt-12 flex flex-col w-full md:w-[431px] xl:w-full space-y-4 xl:inline xl:space-x-4"
           >
             <Link
               to="/services/graphics-consultation"
@@ -95,14 +95,14 @@ const SocialManagementSection = () => {
         </div>
 
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] flex justify-center items-center">
-          <motion.img
+          {/* <motion.img
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330726/dd88d0d80e3a90b61f773f01e03e6be721b91599_l0osml.png"
             alt="graphic design image"
             className="w-[261px] h-[261px] md:w-[492px] md:h-[492px] object-contain"
-          />
+          /> */}
         </div>
       </div>
     </div>

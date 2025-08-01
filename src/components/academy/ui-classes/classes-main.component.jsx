@@ -22,6 +22,14 @@ const CATEGORY_OPTIONS = [
   { label: "Courses", value: "courses" },
 ];
 
+const LENGTH_OPTIONS = [
+  { label: "All lengths", value: "all" },
+  { label: "≤ 10 mins", value: "short" },
+  { label: "≤ 20 mins", value: "medium" },
+  { label: "≤ 30 mins", value: "long" },
+  { label: "> 30 mins", value: "extended" },
+];
+
 // Course categories for grouping
 const COURSE_CATEGORIES = [
   "User Experience Design",
@@ -37,6 +45,8 @@ const ClassesMain = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSaved, setShowSaved] = useState(false);
   const savedClasses = useSelector((state) => state.savedClasses);
+  const [lengthFilter, setLengthFilter] = useState("all");
+  const [lengthDropdownOpen, setLengthDropdownOpen] = useState(false);
 
   // Read category from query param on mount and when location.search changes
   useEffect(() => {
@@ -53,18 +63,34 @@ const ClassesMain = () => {
   // Filter logic
   let filteredClasses = [];
   let filteredCourses = [];
+
   if (category === "courses") {
-    filteredCourses = academyItems.filter((item) => item.type === "course");
-  } else if (showSaved) {
-    filteredClasses = academyItems.filter(
-      (item) => item.type === "class" && savedClasses.includes(item.id)
-    );
-  } else if (category === "all") {
-    filteredClasses = academyItems.filter((item) => item.type === "class");
+    filteredCourses = academyItems.filter((item) => {
+      if (item.type !== "course") return false;
+
+      // 👇 This filters by saved status if toggled
+      if (showSaved && !savedClasses.includes(item.id)) return false;
+
+      return true;
+    });
   } else {
-    filteredClasses = academyItems.filter(
-      (item) => item.type === "class" && item.category === category
-    );
+    filteredClasses = academyItems.filter((item) => {
+      if (item.type !== "class") return false;
+
+      // Saved classes logic
+      if (showSaved && !savedClasses.includes(item.id)) return false;
+
+      // Category logic
+      if (category !== "all" && item.category !== category) return false;
+
+      // // Length filter logic
+      // if (lengthFilter === "short" && item.totalTime > 10) return false;
+      // if (lengthFilter === "medium" && item.totalTime > 20) return false;
+      // if (lengthFilter === "long" && item.totalTime > 30) return false;
+      // if (lengthFilter === "extended" && item.totalTime <= 30) return false;
+
+      return true;
+    });
   }
 
   // Heading
@@ -73,7 +99,7 @@ const ClassesMain = () => {
   return (
     <div className="px-[5%] py-8">
       <h1
-        className="text-[#010413] text-[20px] md:text-[30px] lg:text-[40px] font-bold mb-6"
+        className="text-[#010413] text-[20px] md:text-[30px] xl:text-[40px] font-bold mb-6"
         style={{ fontFamily: "DM Sans, sans-serif" }}
       >
         {heading}
@@ -113,62 +139,109 @@ const ClassesMain = () => {
             </div>
           )}
         </div>
-        {category !== "courses" && (
-          <button
-            className={` bg-transparent text-[#010413] text-[16px] px-4 py-3 font-bold flex items-center justify-between md:w-auto md:text-[16px] md:px-4 md:py-2 md:justify-start border-b-2 md:border-b-2 ${
-              showSaved ? "border-[#ff7f50]" : "border-transparent"
+
+        <button
+          className={` bg-transparent text-[#010413] text-[16px] px-4 py-3 font-bold flex items-center justify-between md:w-auto md:text-[16px] md:px-4 md:py-2 md:justify-start border-b-2 md:border-b-2 transition-all duration-200 cursor-pointer ${
+            showSaved ? "border-[#ff7f50]" : "border-transparent"
+          }`}
+          onClick={() => setShowSaved((prev) => !prev)}
+        >
+          <BookmarkIcon
+            className={`w-5 h-5 mr-2 ${
+              showSaved ? "text-[#ff7f50]" : "text-[#41414150]"
             }`}
-            onClick={() => setShowSaved((prev) => !prev)}
-          >
-            <BookmarkIcon
-              className={`w-5 h-5 mr-2 ${
-                showSaved ? "text-[#ff7f50]" : "text-[#41414150]"
-              }`}
-            />
-            Saved classes
-          </button>
-        )}
-        <button className=" bg-[#efece9] border border-[#eaecf0] text-[#010413] text-[16px] px-4 py-3 rounded font-bold flex items-center justify-between md:w-auto md:text-[16px] md:px-2 md:py-2 md:justify-start">
-          <PlusIcon className="w-4 h-4 mr-2" />
-          Length
+          />
+          Saved {category === "courses" ? "courses" : "classes"}
         </button>
+
+        <div className="relative">
+          <button
+            className="bg-[#efece9] border border-[#eaecf0] text-[#010413] text-[16px] px-4 py-3 rounded font-bold flex items-center cursor-pointer"
+            onClick={() => setLengthDropdownOpen((prev) => !prev)}
+            disabled={showSaved}
+          >
+            + Length
+            <ChevronDownIcon className="w-4 h-4 ml-2" />
+          </button>
+          {lengthDropdownOpen && (
+            <div className="absolute mt-2 bg-white border border-[#e5e7eb] rounded shadow z-10">
+              {LENGTH_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  className={`block px-4 py-2 w-full text-left hover:bg-[#f7f7f7] ${
+                    lengthFilter === opt.value
+                      ? "font-bold text-[#ff7f50]"
+                      : "text-[#010413]"
+                  }`}
+                  onClick={() => {
+                    setLengthFilter(opt.value);
+                    setLengthDropdownOpen(false);
+                  }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Grid */}
       {category === "courses" ? (
         <>
-          {COURSE_CATEGORIES.map((cat) => {
-            const coursesInCat = filteredCourses.filter(c => c.category === cat);
-            if (coursesInCat.length === 0) return null;
-            return (
-              <div key={cat} className="mb-15">
-                <h2 className="text-[20px] md:text-[30px] lg:text-[40px] font-bold mb-5 text-[#010413]" style={{ fontFamily: "DM Sans, sans-serif" }}>{cat}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-                  {coursesInCat.map(course => (
-                    <CourseCard key={course.id} course={course} />
-                  ))}
-                </div>
+          {showSaved ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+              {filteredCourses.length === 0 ? (
+                <p className="text-center text-[#667085] py-6">
+                  You haven't saved any courses yet. Try bookmarking one! 📚✨
+                </p>
+              ) : (
+                filteredCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))
+              )}
+            </div>
+          ) : (
+            <>
+              {COURSE_CATEGORIES.map((cat) => {
+                const coursesInCat = filteredCourses.filter(
+                  (c) => c.category === cat
+                );
+                if (coursesInCat.length === 0) return null;
+                return (
+                  <div key={cat} className="mb-15">
+                    <h2
+                      className="text-[20px] md:text-[30px] xl:text-[40px] font-bold mb-5 text-[#010413]"
+                      style={{ fontFamily: "DM Sans, sans-serif" }}
+                    >
+                      {cat}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+                      {coursesInCat.map((course) => (
+                        <CourseCard key={course.id} course={course} />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Cohort card still renders at the bottom */}
+              <div className="mt-10">
+                <h2 className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold mb-7">
+                  {CohortsData[0].category}
+                </h2>
+                <CohortCard
+                  info={CohortsData[0].info}
+                  price={CohortsData[0].price}
+                  oldPrice={CohortsData[0].oldPrice}
+                  currency={CohortsData[0].currency}
+                />
               </div>
-            );
-          })}
-          {/* UI/UX Cohort Card at the bottom */}
-          <div className="mt-10">
-            <h2
-              className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold mb-7"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              {CohortsData[0].category}
-            </h2>
-            <CohortCard
-              info={CohortsData[0].info}
-              price={CohortsData[0].price}
-              oldPrice={CohortsData[0].oldPrice}
-              currency={CohortsData[0].currency}
-            />
-          </div>
+            </>
+          )}
         </>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
           {filteredClasses.length === 0 ? (
             <div className="col-span-full text-center text-[#667085] text-lg py-10">
               No classes found.

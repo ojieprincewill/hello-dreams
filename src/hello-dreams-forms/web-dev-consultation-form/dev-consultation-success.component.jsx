@@ -13,7 +13,7 @@ const DevConsultationSuccess = () => {
   return (
     <div className="flex flex-col justify-center items-center px-[5%] py-20">
       <p
-        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Request Received
@@ -26,7 +26,7 @@ const DevConsultationSuccess = () => {
         />
       </div>
       <p
-        className="text-[#667085] text-[14px] md:text-[16px] md:text-center lg:text-[24px] mb-10 lg:mb-20 md:w-[80%] lg:w-[757px] mx-auto leading-[1.5]"
+        className="text-[#667085] text-[14px] md:text-[16px] md:text-center xl:text-[24px] mb-10 xl:mb-20 md:w-[80%] xl:w-[757px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Thank you for requesting for our quote! We have received your request

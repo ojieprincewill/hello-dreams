@@ -104,13 +104,13 @@ const ProfileOptimizationForm = () => {
   return success ? (
     <ProfileOptimizationSuccess />
   ) : (
-    <div className="bg-[#f8f8f8] lg:bg-[#fff] w-full px-[5%] lg:px-[10%] py-15 md:py-25">
+    <div className="bg-[#f8f8f8] xl:bg-[#fff] w-full px-[5%] xl:px-[10%] py-15 md:py-25">
       {loading && <LoadingSpinner />}
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-[20px] md:text-[32px] text-center lg:text-[64px] font-bold mb-5"
+        className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Optimise my Profile
@@ -119,7 +119,7 @@ const ProfileOptimizationForm = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="text-[#667085] text-[14px] md:text-[16px] text-center lg:text-[18px] mb-10 lg:mb-20 lg:w-[793px] mx-auto leading-[1.5]"
+        className="text-[#667085] text-[14px] md:text-[16px] text-center xl:text-[18px] mb-10 xl:mb-20 xl:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         Please complete the form below and make the payment, we will contact you
@@ -132,7 +132,7 @@ const ProfileOptimizationForm = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         onSubmit={handleSubmit}
-        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 lg:gap-x-20  space-y-8 text-[#000000] md:p-6 "
+        className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:gap-x-20  space-y-8 text-[#000000] md:p-6 "
       >
         <div>
           <label
@@ -249,7 +249,7 @@ const ProfileOptimizationForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] lg:text-[16px] px-6 py-3 lg:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
           >
             {loading ? "Submitting..." : "Proceed"}
           </button>

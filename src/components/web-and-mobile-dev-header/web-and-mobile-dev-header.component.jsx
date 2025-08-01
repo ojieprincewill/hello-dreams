@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 
 const WebMobileDevHeader = () => {
   return (
-    <div className=" bg-[#7a2635] w-full h-[481px] md:h-[670.71px] lg:h-[1015px] pt-3 md:pt-0 ">
+    <div className=" bg-[#7a2635] w-full h-[481px] md:h-[670.71px] xl:h-[1015px] pt-3 md:pt-0 ">
       <NavBar />
       <div className="mt-5 md:mt-0 p-5 flex flex-col justify-center items-center">
         <motion.p
@@ -20,12 +20,12 @@ const WebMobileDevHeader = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="text-[#fff] text-[16px] md:text-[20px] lg:text-[24px] w-[259px] md:w-full text-center font-extrabold mb-5"
+          className="text-[#fff] text-[16px] md:text-[20px] xl:text-[24px] w-[259px] md:w-full text-center font-extrabold mb-5"
         >
           Mobile & Web Application Development
         </motion.p>
 
-        <div className="relative mt-3 md:mt-0 w-[269.73px] h-[211px] md:w-[594.64px] md:h-[445.98px] lg:w-[826px] lg:h-[669.5px]">
+        <div className="relative mt-3 md:mt-0 w-[269.73px] h-[211px] md:w-[594.64px] md:h-[445.98px] xl:w-[826px] xl:h-[669.5px]">
           <motion.img
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ const WebMobileDevHeader = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.8 }}
-            className="absolute left-[-15px] top-[10px] md:left-[80px] md:top-[80px] lg:md:-[60px] lg:top-[120px] text-[#fff] text-[12px] md:text-[13.91px] lg:text-[24px] font-medium"
+            className="absolute left-[-15px] top-[10px] md:left-[80px] md:top-[80px] xl:md:-[60px] xl:top-[120px] text-[#fff] text-[12px] md:text-[13.91px] xl:text-[24px] font-medium"
           >
             iOS app development
           </motion.p>
@@ -46,7 +46,7 @@ const WebMobileDevHeader = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1 }}
-            className="absolute left-[-15px] top-[80px] md:left-[60px] md:top-[180px]  lg:left-[20px] lg:top-[250px] text-[#fff] text-[12px] md:text-[13.91px] lg:text-[24px] font-medium"
+            className="absolute left-[-15px] top-[80px] md:left-[60px] md:top-[180px]  xl:left-[20px] xl:top-[250px] text-[#fff] text-[12px] md:text-[13.91px] xl:text-[24px] font-medium"
           >
             App design
           </motion.p>
@@ -54,7 +54,7 @@ const WebMobileDevHeader = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1.2 }}
-            className="absolute right-[-20px] top-[190px] md:right-[-50px] md:top-[140px]  lg:right-[-150px] lg:top-[200px] text-[#fff] text-[12px] md:text-[13.91px] lg:text-[24px] font-medium"
+            className="absolute right-[-20px] top-[190px] md:right-[-50px] md:top-[140px]  xl:right-[-150px] xl:top-[200px] text-[#fff] text-[12px] md:text-[13.91px] xl:text-[24px] font-medium"
           >
             E-commerce solutions
           </motion.p>
@@ -62,7 +62,7 @@ const WebMobileDevHeader = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1.4 }}
-            className="absolute right-[50px] top-[230px] md:right-[-80px] md:top-[230px]  lg:right-[-200px] lg:top-[340px] text-[#fff] text-[12px] md:text-[13.91px] lg:text-[24px] font-medium"
+            className="absolute right-[50px] top-[230px] md:right-[-80px] md:top-[230px]  xl:right-[-200px] xl:top-[340px] text-[#fff] text-[12px] md:text-[13.91px] xl:text-[24px] font-medium"
           >
             cutting-edge technologies
           </motion.p>

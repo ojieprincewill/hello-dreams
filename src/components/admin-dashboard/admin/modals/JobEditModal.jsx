@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '../../ui/dialog';
-import { Button } from '../../ui/button';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
-import { Label } from '../../ui/label';
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
+import { Label } from "../../ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../ui/select';
+} from "../../ui/select";
 
 const JobEditModal = ({ job, isOpen, onClose, onSave }) => {
   const [editedJob, setEditedJob] = useState(null);
 
   // Generate work hours options
   const workHoursOptions = Array.from({ length: 36 }, (_, i) =>
-    (i + 5).toString(),
+    (i + 5).toString()
   );
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const JobEditModal = ({ job, isOpen, onClose, onSave }) => {
         <DialogHeader>
           <DialogTitle>Edit Job Posting</DialogTitle>
         </DialogHeader>
-        <div className="space-y-4 lg:space-y-6">
+        <div className="space-y-4 xl:space-y-6">
           <div>
             <Label htmlFor="edit-job-title">Job Title</Label>
             <Input
@@ -94,14 +94,14 @@ const JobEditModal = ({ job, isOpen, onClose, onSave }) => {
             <div>
               <Label htmlFor="edit-hours-needed">Work Hours</Label>
               <Select
-                value={editedJob.hoursNeeded?.toString() || ''}
+                value={editedJob.hoursNeeded?.toString() || ""}
                 onValueChange={(value) =>
                   setEditedJob({
                     ...editedJob,
                     hoursNeeded: value,
                   })
                 }
-                disabled={editedJob.payType === 'contract'}
+                disabled={editedJob.payType === "contract"}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select hours" />
@@ -114,7 +114,7 @@ const JobEditModal = ({ job, isOpen, onClose, onSave }) => {
                   ))}
                 </SelectContent>
               </Select>
-              {editedJob.payType === 'contract' && (
+              {editedJob.payType === "contract" && (
                 <p className="text-xs text-gray-500 mt-1">
                   Work hours are not applicable for contract positions
                 </p>
@@ -130,17 +130,17 @@ const JobEditModal = ({ job, isOpen, onClose, onSave }) => {
                 onValueChange={(value) => {
                   setEditedJob({ ...editedJob, payType: value });
                   // Reset hours if switching to contract
-                  if (value === 'contract') {
+                  if (value === "contract") {
                     setEditedJob((prev) => ({
                       ...prev,
                       payType: value,
-                      hoursNeeded: '',
+                      hoursNeeded: "",
                     }));
-                  } else if (editedJob.hoursNeeded === '') {
+                  } else if (editedJob.hoursNeeded === "") {
                     setEditedJob((prev) => ({
                       ...prev,
                       payType: value,
-                      hoursNeeded: '40',
+                      hoursNeeded: "40",
                     }));
                   }
                 }}

@@ -24,7 +24,7 @@ const UiuxClassCard = ({ data }) => {
 
   return (
     <div
-      className="md:relative w-full h-max md:h-[450px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl"
+      className="md:relative w-full h-max md:h-[450px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl"
       style={{ fontFamily: "DM Sans, sans-serif" }}
     >
       <div className="flex justify-between items-center mb-1">
