@@ -73,6 +73,7 @@ const CoursePreview = ({ courseId }) => {
               </p>
               <Link
                 to={`/academy/courses/${course.id}/player`}
+                onClick={handleOrigins}
                 className="block w-max bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2  rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
@@ -231,6 +232,7 @@ const CoursePreview = ({ courseId }) => {
                 </p>
                 <Link
                   to={`/academy/courses/${course.id}/player`}
+                  onClick={handleOrigins}
                   className="block w-full bg-[#efece9] border-[0.7px] border-[#eaecf0] text-[#010413] text-[12px] md:text-[16px] text-center lg:font-medium mt-7 px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >

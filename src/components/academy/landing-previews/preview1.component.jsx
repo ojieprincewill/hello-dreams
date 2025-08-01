@@ -8,7 +8,8 @@ import { PreviewData1 } from '../../../data/academy-data/academy.data';
 import { PlayIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
+import UiuxClassCard from "../class-cards/uiux-class-card.component";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -28,6 +29,11 @@ const Preview1 = () => {
     window.scrollTo(0, 0);
   };
 
+  // Filter for UI/UX classes
+  const uiuxClasses = academyItems
+    .filter((item) => item.type === "class" && item.category === "uiux")
+    .slice(0, 3);
+
   return (
     <>
       <div
@@ -37,9 +43,13 @@ const Preview1 = () => {
         <p className="text-[#010413] text-[20px] md:text-[24px] lg:text-[40px] font-bold">
           Explore UI/UX Design Classes
         </p>
-        <span className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+        <Link
+          to="/academy/classes?category=uiux"
+          onClick={handleOrigins}
+          className="hidden md:inline text-[#ff7f50] text-[14px] lg:text-[24px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+        >
           View all
-        </span>
+        </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-15">
         {PreviewData1.map((data, index) => (
@@ -108,9 +118,13 @@ const Preview1 = () => {
           </motion.div>
         ))}
         <div className="md:hidden flex justify-end">
-          <span className=" text-[#ff7f50] text-[14px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">
+          <Link
+            to="/academy/classes?category=uiux"
+            onClick={handleOrigins}
+            className=" text-[#ff7f50] text-[14px] font-bold underline hover:text-[#1342ff] transition-colors duration-300 cursor-pointer"
+          >
             View all
-          </span>
+          </Link>
         </div>
       </div>
     </>
