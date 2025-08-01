@@ -20,6 +20,9 @@ const cardVariants = {
 
 const AcademySection = () => {
   const { data: academyData, isLoading, error } = useAcademySectionData();
+  const previewCourses = academyData
+    .filter((item) => item.type === "course")
+    .slice(0, 3);
 
   // Show loading state
   if (isLoading) {

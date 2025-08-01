@@ -4,12 +4,12 @@ import {
   ArrowTopRightOnSquareIcon,
   BookmarkIcon,
 } from "@heroicons/react/24/solid";
-import { PreviewData1 } from "../../../data/academy-data/academy.data";
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 import UiuxClassCard from "../class-cards/uiux-class-card.component";
+import { academyItems } from "@/data/academy-data/academy.data";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
