@@ -119,7 +119,6 @@ const AcademySection = () => {
             whileInView="visible"
             variants={cardVariants}
             custom={index}
-            key={data.id}
             className={`w-full h-max md:h-[500px] lg:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl ${
               index === academyData.length - 1
                 ? 'md:col-span-2 lg:col-span-1'
