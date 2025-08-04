@@ -18,7 +18,7 @@ const FooterSection = () => {
   return (
     <div className="bg-[#010413] text-[#fff] px-5 pt-5 md:px-10 md:pt-20 pb-4">
       <div className="grid grid-cols-1 md:grid-cols-[30%_70%] md:border-t-1 border-[#ffffff20]">
-        <div className="relative md:border-r-1 border-[#ffffff20] py-5 md:py-15">
+        <div className="relative md:border-r border-[#ffffff20] py-5 md:py-15">
           <Link
             to="/"
             onClick={handleOrigins}
@@ -47,9 +47,9 @@ const FooterSection = () => {
             <Logo2 />
           </Link>
         </div>
-        <div className="flex flex-row md:flex-col">
-          <div className="flex flex-col md:flex-row justify-between items-start">
-            <div className="border-l border-r md:border-0 border-[#ffffff20] pl-3 pr-[39px] md:pr-10 xl:pr-32 py-5 md:py-15">
+        <div className="flex flex-col border md:border-0 border-[#ffffff20] w-max md:w-full pb-4 md:pb-0">
+          <div className="flex flex-col md:flex-row justify-between items-start ">
+            <div className="border-l md:border-none border-[#ffffff20] pl-3  py-5 md:py-15">
               <h1 className="text-[12px] md:text-[9px] xl:text-[14px] text-[#ffffff91] uppercase font-bold mb-4 md:mb-7">
                 company
               </h1>
@@ -84,7 +84,7 @@ const FooterSection = () => {
                 </Link>
               </div>
             </div>
-            <div className="border-r-1 border-l-1 border-[#ffffff20] flex flex-col pl-3 pr-3 md:pr-10 xl:pr-32 py-5 md:py-15">
+            <div className="border-l border-[#ffffff20] flex flex-col pl-3  py-5 md:py-15">
               <div className="mb-7 md:mb-15">
                 <h1 className="text-[12px] md:text-[9px] xl:text-[14px] text-[#ffffff91] uppercase font-bold mb-4 md:mb-7">
                   Follow
@@ -144,48 +144,47 @@ const FooterSection = () => {
                 </div>
               </div>
             </div>
-            <div>
-              <div className="py-5 md:py-15">
-                <h1 className="text-[12px] md:text-[9px] xl:text-[14px] text-[#ffffff91] uppercase font-bold mb-4 md:mb-7">
-                  contact us
-                </h1>
-                <div className="text-[11px] md:text-[10px] xl:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
-                  <span className="w-[100px] md:w-full">
-                    Email:{" "}
-                    <a
-                      href="mailto:support@myhellodreams.com"
-                      className="hover:text-[#99c8ff] transition-colors duration-300"
-                    >
-                      support@myhellodreams.com
-                    </a>
-                  </span>
-                  <span>
-                    Phone:{" "}
-                    <a
-                      href="https://wa.me/2347016773420"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#99c8ff] transition-colors duration-300"
-                    >
-                      07016773420
-                    </a>
-                  </span>
-                </div>
+
+            <div className="md:border-r border-l border-[#ffffff20] h-full pl-3 pr-6 py-5 md:py-15">
+              <h1 className="text-[12px] md:text-[9px] xl:text-[14px] text-[#ffffff91] uppercase font-bold mb-4 md:mb-7">
+                contact us
+              </h1>
+              <div className="text-[11px] md:text-[10px] xl:text-[16px] text-[#fff] md:font-bold flex flex-col space-y-2 md:space-y-4">
+                <span className="w-[180px] md:w-full">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@myhellodreams.com"
+                    className="hover:text-[#99c8ff] transition-colors duration-300"
+                  >
+                    support@myhellodreams.com
+                  </a>
+                </span>
+                <span>
+                  Phone:{" "}
+                  <a
+                    href="https://wa.me/2347016773420"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#99c8ff] transition-colors duration-300"
+                  >
+                    07016773420
+                  </a>
+                </span>
               </div>
             </div>
           </div>
-          <div className="w-full h-max grid grid-cols-2 text-[#fff] text-[11px] md:text-[12px] xl:text-[20px] font-bold border-t border-b border-[#ffffff20]">
+          <div className="border-l md:border-l-0 w-full h-max grid grid-cols-1 md:grid-cols-2 text-[#fff] text-[11px] md:text-[12px] xl:text-[20px] font-bold md:border-t md:border-b border-[#ffffff20]">
             <a
               href="https://web.facebook.com/profile.php?id=61565243428696"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center px-1 py-3 md:px-10 xl:px-20 md:py-10 border-b border-[#ffffff20] w-full h-full hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
+              className="flex justify-start md:justify-center items-center px-3 py-[10px] md:px-10 xl:px-20 md:py-10 md:border-b border-[#ffffff20] w-full h-full hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
             >
-              <span className="mr-0.5 md:mr-2">
+              <span className="mr-1 md:mr-2">
                 <img
                   src="https://i.ibb.co/fYPXmXPX/SVG.png"
                   alt="svg"
-                  className="w-[8.1px] h-[8.1px] md:w-[13.56px] md:h-[13.56px] xl:w-[23.42px] xl:h-[23.42px] object-cover"
+                  className="w-[13.56px] h-[13.56px] xl:w-[23.42px] xl:h-[23.42px] object-cover"
                 />
               </span>
               Twitter
@@ -194,13 +193,13 @@ const FooterSection = () => {
               href="https://www.instagram.com/hellodreamss/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center px-1 py-3 md:px-10 xl:px-20 md:py-10 border-b border-l border-[#ffffff20] w-full h-full hover:text-[#ffb3ce] transition-colors duration-300 cursor-pointer"
+              className="flex justify-start md:justify-center items-center px-3 py-[10px] md:px-10 xl:px-20 md:py-10 md:border-b md:border border-[#ffffff20] w-full h-full hover:text-[#ffb3ce] transition-colors duration-300 cursor-pointer"
             >
-              <span className="mr-0.5 md:mr-2">
+              <span className="mr-1 md:mr-2">
                 <img
                   src="https://i.ibb.co/27nrzGhc/SVG-2.png"
                   alt="svg 2"
-                  className="w-[7px] h-[7px] md:w-[11.12px] md:h-[11.12px] xl:w-[24px] xl:h-[24px] object-cover"
+                  className="w-[11.12px] h-[11.12px] xl:w-[24px] xl:h-[24px] object-cover"
                 />
               </span>
               Instagram
@@ -209,13 +208,13 @@ const FooterSection = () => {
               href="https://web.facebook.com/profile.php?id=61565243428696"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center px-1 py-3 md:px-10 xl:px-20 md:py-10 border-[#ffffff20] w-full h-full hover:text-[#8c77ec] transition-colors duration-300 cursor-pointer"
+              className="flex justify-start md:justify-center items-center px-3 py-[10px] md:px-10 xl:px-20 md:py-10 border-[#ffffff20] w-full h-full hover:text-[#8c77ec] transition-colors duration-300 cursor-pointer"
             >
-              <span className="mr-0.5 md:mr-2">
+              <span className="mr-1 md:mr-2">
                 <img
                   src="https://i.ibb.co/xKdJ3Tgx/Vector.png"
                   alt="vector"
-                  className="w-[5.56px] h-[3.35px] md:w-[12.36px] md:h-[7.46px] xl:w-[21.33px] xl:h-[12.88px] object-cover"
+                  className="w-[12.36px] h-[7.46px] xl:w-[21.33px] xl:h-[12.88px] object-cover"
                 />
               </span>
               Facebook
@@ -224,13 +223,13 @@ const FooterSection = () => {
               href="https://www.linkedin.com/company/hello-dreams-limited/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex justify-center items-center px-1 py-3 md:px-10 xl:px-20 md:py-10 border-l border-[#ffffff20] w-full h-full hover:text-[#ff884d] transition-colors duration-300 cursor-pointer"
+              className="flex justify-start md:justify-center items-center px-3 py-[10px] md:px-10 xl:px-20 md:py-10 md:border border-[#ffffff20] w-full h-full hover:text-[#ff884d] transition-colors duration-300 cursor-pointer"
             >
-              <span className="mr-0.5 md:mr-2">
+              <span className="mr-1 md:mr-2">
                 <img
                   src="https://i.ibb.co/KxBB6mx2/Background-Border.png"
                   alt="background border"
-                  className="w-[5.21px] h-[5.21px] md:w-[11.58px] md:h-[11.58px] xl:w-[20px] xl:h-[20px] object-cover"
+                  className="w-[11.58px] h-[11.58px] xl:w-[20px] xl:h-[20px] object-cover"
                 />
               </span>
               LinkedIn
