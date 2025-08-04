@@ -2,13 +2,44 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
+import { useAuth } from "@/hooks/useAuth";
 
 const UserDropdown = ({ active, setActive }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   const handleOrigins = () => {
     window.scrollTo(0, 0);
+  };
+
+  // Generate user initials from full name
+  const getUserInitials = () => {
+    if (!user) return "U";
+    const fullName = user.user_metadata?.full_name || "";
+    if (fullName) {
+      // Split full name and get initials from first two words
+      const nameParts = fullName.trim().split(' ');
+      const initials = nameParts.slice(0, 2).map(part => part.charAt(0)).join('').toUpperCase();
+      return initials || user.email?.charAt(0).toUpperCase() || "U";
+    }
+    return user.email?.charAt(0).toUpperCase() || "U";
+  };
+
+  // Get user's full name
+  const getUserFullName = () => {
+    if (!user) return "User";
+    const fullName = user.user_metadata?.full_name || "";
+    return fullName || "User";
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut.mutateAsync();
+      navigate("/academy");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   const menuItems = [
@@ -21,19 +52,12 @@ const UserDropdown = ({ active, setActive }) => {
 
   return (
     <>
-      <Link
-        to="/membership"
-        className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
-        onClick={handleOrigins}
-      >
-        Manage Membership
-      </Link>
       <div className="relative">
         <div
           onClick={() => setOpen(!open)}
           className="bg-[#763d36] w-8 h-8 md:w-12 md:h-12 xl:w-16 xl:h-16 text-[#fff] uppercase text-[14px] md:text-[18px] xl:text-[20px] text-center font-bold flex justify-center items-center rounded-full cursor-pointer"
         >
-          PO
+          {getUserInitials()}
         </div>
         <AnimatePresence>
           {open && (
@@ -46,14 +70,14 @@ const UserDropdown = ({ active, setActive }) => {
             >
               <div className="hidden xl:flex space-x-2 items-center px-4 py-3 border-b border-b-[#eaecf0] ">
                 <div className="bg-[#763d36] w-8 h-8 md:w-12 md:h-12 xl:w-16 xl:h-16 text-[#fff] uppercase text-[14px] md:text-[18px] xl:text-[20px] text-center font-bold flex justify-center items-center rounded-full cursor-pointer">
-                  PO
+                  {getUserInitials()}
                 </div>
                 <div className="space-x-1">
                   <p className="text-[16px] md:text-[18px] xl:text-[20px] text-[#101828]">
-                    Pamela Ohaeri
+                    {getUserFullName()}
                   </p>
                   <p className="text-[12px] text-[#101828]">
-                    robertpamela17@gmail.com
+                    {user?.email || "user@example.com"}
                   </p>
                 </div>
               </div>
@@ -66,9 +90,7 @@ const UserDropdown = ({ active, setActive }) => {
                       } hover:bg-[#f7f7f7]`}
                       onClick={() => {
                         if (item.key === "logout") {
-                          // Call logout function here
-                          // logoutUser();
-                          navigate("/academy");
+                          handleLogout();
                         } else {
                           navigate("/userprofile", {
                             state: { active: item.key },

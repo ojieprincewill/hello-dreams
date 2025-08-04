@@ -98,7 +98,16 @@ const AcademyNavbar = () => {
 
         <div className="flex items-center space-x-3">
           {isAuthenticated ? (
-            <UserDropdown />
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/membership"
+                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+                onClick={handleOrigins}
+              >
+                Manage Membership
+              </Link>
+              <UserDropdown />
+            </div>
           ) : (
             <div className="flex items-center space-x-3">
               <Link

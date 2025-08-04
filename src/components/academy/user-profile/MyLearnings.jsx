@@ -1,47 +1,86 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { academyItems } from "@/data/academy-data/academy.data";
-import FreeClassCard from "../class-cards/free-class-card.component";
-import Min20ClassCard from "../class-cards/min20-class-card.component";
-import UiuxClassCard from "../class-cards/uiux-class-card.component";
+import { useCourseProgress } from "@/hooks/useCourseProgress";
+import { useAuth } from "@/hooks/useAuth";
+import { Play, Clock, Star, BookOpen, CheckCircle, Bookmark, RefreshCw } from "lucide-react";
 
 const MyLearnings = () => {
   const [activeTab, setActiveTab] = useState("all");
+  const { user } = useAuth();
+  const { 
+    enrollments, 
+    lessonProgress, 
+    progressSummary, 
+    isLoading, 
+    isFetching,
+    isError 
+  } = useCourseProgress();
+
   const tabs = [
     { key: "all", label: "All courses" },
-    { key: "wishlist", label: "Wishlist" },
     { key: "progress", label: "In progress" },
     { key: "completed", label: "Completed" },
+    { key: "bookmarked", label: "Bookmarked" },
   ];
 
-  const savedClasses = useSelector((state) => state.savedClasses);
-  const inProgressClasses = useSelector((state) => state.inProgressClasses);
-  const completedClasses = useSelector((state) => state.completedClasses);
-
-  const getCardComponent = (classItem) => {
-    if (classItem.category === "uiux") return UiuxClassCard;
-    if (classItem.category === "20min") return Min20ClassCard;
-    if (classItem.category === "free") return FreeClassCard;
-    return UiuxClassCard;
+  // Filter enrollments based on tab
+  const getFilteredEnrollments = () => {
+    if (!enrollments) return [];
+    
+    switch (activeTab) {
+      case "progress":
+        return enrollments.filter(enrollment => 
+          enrollment.progress_percentage > 0 && enrollment.progress_percentage < 100
+        );
+      case "completed":
+        return enrollments.filter(enrollment => 
+          enrollment.completed_at || enrollment.progress_percentage === 100
+        );
+      case "bookmarked":
+        // Filter lessons that are bookmarked and get their courses
+        const bookmarkedLessonIds = lessonProgress
+          .filter(lesson => lesson.bookmarked)
+          .map(lesson => lesson.lessons?.course_id);
+        return enrollments.filter(enrollment => 
+          bookmarkedLessonIds.includes(enrollment.course_id)
+        );
+      default:
+        return enrollments;
+    }
   };
 
-  // Filter for each tab
-  const wishlistClasses = academyItems.filter(
-    (item) => item.type === "class" && savedClasses.includes(item.id)
-  );
-  const progressClasses = academyItems.filter(
-    (item) => item.type === "class" && inProgressClasses.includes(item.id)
-  );
-  const completedClassesList = academyItems.filter(
-    (item) => item.type === "class" && completedClasses.includes(item.id)
-  );
-  // All unique interacted classes
-  const allClassIds = Array.from(
-    new Set([...savedClasses, ...inProgressClasses, ...completedClasses])
-  );
-  const allInteractedClasses = academyItems.filter(
-    (item) => item.type === "class" && allClassIds.includes(item.id)
-  );
+  const filteredEnrollments = getFilteredEnrollments();
+
+  // Get course progress for a specific course
+  const getCourseProgress = (courseId) => {
+    const courseLessons = lessonProgress.filter(
+      lesson => lesson.lessons?.course_id === courseId
+    );
+    
+    if (courseLessons.length === 0) return 0;
+    
+    const completedLessons = courseLessons.filter(lesson => lesson.completed).length;
+    return Math.round((completedLessons / courseLessons.length) * 100);
+  };
+
+  // Get last watched lesson for a course
+  const getLastWatchedLesson = (courseId) => {
+    const courseLessons = lessonProgress
+      .filter(lesson => lesson.lessons?.course_id === courseId)
+      .sort((a, b) => new Date(b.last_watched_at) - new Date(a.last_watched_at));
+    
+    return courseLessons[0];
+  };
+
+  // Show error state only if there's no cached data
+  if (isError && enrollments.length === 0) {
+    return (
+      <div className="w-full px-[5%] py-10">
+        <div className="text-center text-red-600">
+          Error loading your learning data. Please try again.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -66,18 +105,30 @@ const MyLearnings = () => {
           />
         </div>
 
-        <h1 className="text-[20px] md:text-[30px] xl:text-[48px] font-bold mb-3 md:mb-5 relative z-10">
+        <div className="flex items-center justify-between mb-3 md:mb-5">
+          <h1 className="text-[20px] md:text-[30px] xl:text-[48px] font-bold relative z-10">
           My Learning
         </h1>
+          {/* Background sync indicator */}
+          {isFetching && (
+            <div className="flex items-center gap-2 text-white/80 text-sm relative z-10">
+              <RefreshCw className="w-4 h-4 animate-spin" />
+              <span>Syncing...</span>
+            </div>
+          )}
+        </div>
+        
+        {progressSummary && (
         <div
           className="text-[14px] md:text-[16px] xl:text-[20px] mb-3 md:mb-5 relative z-10"
           style={{ fontFamily: "DM Sans, sans-serif" }}
         >
-          13hr 27min{" "}
+            {progressSummary.totalWatchTime.hours}hr {progressSummary.totalWatchTime.minutes}min{" "}
           <span className="text-[#f7f7f7]/60 text-[12px] md:text-[14px] xl:text-[16px]">
             watched
           </span>
         </div>
+        )}
 
         {/* Responsive tabs */}
         <div className="relative z-10 mt-10 md:mt-20 xl:mt-30">
@@ -102,82 +153,115 @@ const MyLearnings = () => {
       </div>
 
       <div className="p-4 md:p-6">
-        {activeTab === "all" && (
-          <div>
-            {allInteractedClasses.length === 0 ? (
+        {/* Show loading state only if no data exists */}
+        {isLoading && enrollments.length === 0 ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1342ff]"></div>
+          </div>
+        ) : filteredEnrollments.length === 0 ? (
               <div className="text-[#667085] text-center py-8">
-                No classes yet.
+            {activeTab === "all" && "No courses enrolled yet."}
+            {activeTab === "progress" && "No courses in progress yet."}
+            {activeTab === "completed" && "No completed courses yet."}
+            {activeTab === "bookmarked" && "No bookmarked lessons yet."}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                {allInteractedClasses.map((classItem, index) => {
-                  const isLastOdd =
-                    index === allInteractedClasses.length - 1 &&
-                    allInteractedClasses.length % 2 !== 0;
-
-                  const cardClass = isLastOdd
-                    ? "md:col-span-2 xl:col-span-1"
-                    : "";
-
-                  const CardComponent = getCardComponent(classItem);
+            {filteredEnrollments.map((enrollment) => {
+              const course = enrollment.courses;
+              const progress = getCourseProgress(course.id);
+              const lastWatched = getLastWatchedLesson(course.id);
+              
                   return (
-                    <CardComponent
-                      key={classItem.id}
-                      data={classItem}
-                      className={cardClass}
-                    />
-                  );
-                })}
+                <div
+                  key={enrollment.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+                >
+                  {/* Course Image */}
+                  <div className="relative h-48 bg-gray-200">
+                    {course.cover_image ? (
+                      <img
+                        src={course.cover_image}
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+                        <BookOpen className="w-12 h-12 text-blue-400" />
+              </div>
+            )}
+                    
+                    {/* Progress Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span>{progress}% Complete</span>
+                        <span>{course.total_duration || "N/A"}</span>
+                      </div>
+                      <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                        <div
+                          className="bg-white h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+          </div>
+
+                  {/* Course Content */}
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg text-[#101828] mb-2 line-clamp-2">
+                      {course.title}
+                    </h3>
+                    
+                    <p className="text-[#667085] text-sm mb-3 line-clamp-2">
+                      {course.description || "No description available"}
+                    </p>
+
+                    {/* Course Meta */}
+                    <div className="flex items-center justify-between text-sm text-[#667085] mb-3">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{course.total_lessons || 0} lessons</span>
+              </div>
+                      {course.rating && (
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                          <span>{course.rating.toFixed(1)}</span>
+              </div>
+            )}
+                    </div>
+
+                    {/* Instructor */}
+                    {course.instructor_name && (
+                      <div className="text-sm text-[#667085] mb-3">
+                        by {course.instructor_name}
+          </div>
+        )}
+
+                    {/* Last Watched */}
+                    {lastWatched && (
+                      <div className="text-xs text-[#667085] mb-3">
+                        Last watched: {lastWatched.lessons?.title}
+              </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2">
+                      <button className="flex-1 bg-[#1342ff] text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-[#2313ff] transition-colors duration-200 flex items-center justify-center gap-2">
+                        <Play className="w-4 h-4" />
+                        Continue
+                      </button>
+                      
+                      {enrollment.progress_percentage === 100 && (
+                        <div className="flex items-center gap-1 text-green-600 text-sm">
+                          <CheckCircle className="w-4 h-4" />
+                          Completed
               </div>
             )}
           </div>
-        )}
-        {activeTab === "wishlist" && (
-          <div>
-            {wishlistClasses.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">
-                No saved classes yet.
+                  </div>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                {wishlistClasses.map((classItem) => {
-                  const CardComponent = getCardComponent(classItem);
-                  return <CardComponent key={classItem.id} data={classItem} />;
-                })}
-              </div>
-            )}
-          </div>
-        )}
-        {activeTab === "progress" && (
-          <div>
-            {progressClasses.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">
-                No in-progress classes yet.
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                {progressClasses.map((classItem) => {
-                  const CardComponent = getCardComponent(classItem);
-                  return <CardComponent key={classItem.id} data={classItem} />;
-                })}
-              </div>
-            )}
-          </div>
-        )}
-        {activeTab === "completed" && (
-          <div>
-            {completedClassesList.length === 0 ? (
-              <div className="text-[#667085] text-center py-8">
-                No completed classes yet.
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                {completedClassesList.map((classItem) => {
-                  const CardComponent = getCardComponent(classItem);
-                  return <CardComponent key={classItem.id} data={classItem} />;
-                })}
-              </div>
-            )}
+              );
+            })}
           </div>
         )}
       </div>
