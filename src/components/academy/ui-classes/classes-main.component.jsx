@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { academyItems } from "@/data/academy-data/academy.data";
+import { usePublishedCourses } from "@/hooks/useCourses";
 import {
   BookmarkIcon,
   PlusIcon,
@@ -48,6 +48,9 @@ const ClassesMain = () => {
   const [lengthFilter, setLengthFilter] = useState("all");
   const [lengthDropdownOpen, setLengthDropdownOpen] = useState(false);
 
+  // Fetch courses from database
+  const { data: courses = [], isLoading, error } = usePublishedCourses();
+
   // Read category from query param on mount and when location.search changes
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -60,12 +63,30 @@ const ClassesMain = () => {
     setShowSaved(false); // Reset saved view when category changes
   }, [location.search]);
 
+  // Transform database courses to match the expected format
+  const transformedCourses = React.useMemo(() => {
+    return courses.map(course => ({
+      id: course.id,
+      image: course.cover_image,
+      title: course.title,
+      instructor: course.instructor_name || "Instructor",
+      totalCourses: course.total_lessons || 0,
+      totalTime: course.total_duration || "0h 0m",
+      price: course.price || 0,
+      category: course.category,
+      type: "course",
+      rating: course.rating,
+      numberOfRatings: course.number_of_ratings,
+      enrollment_count: course.enrollment_count,
+    }));
+  }, [courses]);
+
   // Filter logic
   let filteredClasses = [];
   let filteredCourses = [];
 
   if (category === "courses") {
-    filteredCourses = academyItems.filter((item) => {
+    filteredCourses = transformedCourses.filter((item) => {
       if (item.type !== "course") return false;
 
       // 👇 This filters by saved status if toggled
@@ -74,27 +95,76 @@ const ClassesMain = () => {
       return true;
     });
   } else {
-    filteredClasses = academyItems.filter((item) => {
-      if (item.type !== "class") return false;
+    filteredClasses = transformedCourses.filter((item) => {
+      if (item.type !== "course") return false;
 
       // Saved classes logic
       if (showSaved && !savedClasses.includes(item.id)) return false;
 
-      // Category logic
-      if (category !== "all" && item.category !== category) return false;
+      // Category logic - map database categories to UI categories
+      if (category !== "all") {
+        if (category === "uiux" && item.category !== "User Experience Design") return false;
+        if (category === "20min" && item.category !== "User Experience Design") return false; // 20min classes are typically UI/UX related
+        if (category === "free" && item.price !== 0) return false;
+      }
 
-      // // Length filter logic
-      // if (lengthFilter === "short" && item.totalTime > 10) return false;
-      // if (lengthFilter === "medium" && item.totalTime > 20) return false;
-      // if (lengthFilter === "long" && item.totalTime > 30) return false;
-      // if (lengthFilter === "extended" && item.totalTime <= 30) return false;
+      // Length filter logic - parse duration string
+      if (lengthFilter !== "all") {
+        const duration = item.totalTime;
+        const minutes = parseDurationToMinutes(duration);
+        
+        if (lengthFilter === "short" && minutes > 10) return false;
+        if (lengthFilter === "medium" && minutes > 20) return false;
+        if (lengthFilter === "long" && minutes > 30) return false;
+        if (lengthFilter === "extended" && minutes <= 30) return false;
+      }
 
       return true;
     });
   }
 
+  // Helper function to parse duration string to minutes
+  const parseDurationToMinutes = (duration) => {
+    if (!duration) return 0;
+    
+    const match = duration.match(/(\d+)h\s*(\d+)m/);
+    if (match) {
+      const hours = parseInt(match[1]) || 0;
+      const minutes = parseInt(match[2]) || 0;
+      return hours * 60 + minutes;
+    }
+    
+    // Try to parse just minutes
+    const minutesMatch = duration.match(/(\d+)m/);
+    if (minutesMatch) {
+      return parseInt(minutesMatch[1]) || 0;
+    }
+    
+    return 0;
+  };
+
   // Heading
   const heading = category === "courses" ? "Courses" : "Classes";
+
+  if (isLoading) {
+    return (
+      <div className="px-[5%] py-8">
+        <div className="text-center text-[#667085] py-10">
+          Loading classes...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="px-[5%] py-8">
+        <div className="text-center text-red-500 py-10">
+          Error loading classes: {error.message}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="px-[5%] py-8">
@@ -268,7 +338,9 @@ const ClassesMain = () => {
 
               const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
 
-              if (cls.category === "uiux") {
+              // For now, all courses are treated as UI/UX classes since they're all design-related
+              // You can add more specific category mapping logic here
+              if (cls.category === "User Experience Design" || category === "uiux") {
                 return (
                   <UiuxClassCard
                     key={cls.id}
@@ -277,7 +349,7 @@ const ClassesMain = () => {
                   />
                 );
               }
-              if (cls.category === "20min") {
+              if (category === "20min") {
                 return (
                   <Min20ClassCard
                     key={cls.id}
@@ -286,7 +358,7 @@ const ClassesMain = () => {
                   />
                 );
               }
-              if (cls.category === "free") {
+              if (category === "free" || cls.price === 0) {
                 return (
                   <FreeClassCard
                     key={cls.id}
@@ -295,8 +367,14 @@ const ClassesMain = () => {
                   />
                 );
               }
-              // Placeholder for other categories
-              return null;
+              // Default to UI/UX card for other categories
+              return (
+                <UiuxClassCard
+                  key={cls.id}
+                  data={cls}
+                  className={cardClass}
+                />
+              );
             })
           )}
         </div>

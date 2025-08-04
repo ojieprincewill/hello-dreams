@@ -3,31 +3,35 @@ import { ChevronDown, Play, FileText, Lock, Award } from 'lucide-react';
 import { BookmarkIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import { useCourse } from '@/hooks/useCourses';
-import { useCourseSectionsData } from '@/hooks/useAcademy';
+import { useLessons } from '@/hooks/useLessons';
 
 const PAGE_SIZE = 15;
 
 const CoursePreview = ({ courseId }) => {
   const { data: course, isLoading, error } = useCourse(courseId);
   const {
-    data: sections = [],
-    isLoading: sectionsLoading,
-    error: sectionsError,
-  } = useCourseSectionsData(courseId);
-  const [visibleSections, setVisibleSections] = useState(PAGE_SIZE);
+    data: lessons = [],
+    isLoading: lessonsLoading,
+    error: lessonsError,
+  } = useLessons(courseId);
+  const [visibleLessons, setVisibleLessons] = useState(PAGE_SIZE);
   const loader = useRef();
 
-  // Infinite scroll: load more sections when the loader is visible
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
+  // Infinite scroll: load more lessons when the loader is visible
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting) {
-        setVisibleSections((prev) =>
-          Math.min(prev + PAGE_SIZE, sections.length),
+        setVisibleLessons((prev) =>
+          Math.min(prev + PAGE_SIZE, lessons.length),
         );
       }
     },
-    [sections.length],
+    [lessons.length],
   );
 
   React.useEffect(() => {
@@ -41,8 +45,8 @@ const CoursePreview = ({ courseId }) => {
     return () => observer.disconnect();
   }, [handleObserver]);
 
-  if (isLoading || sectionsLoading) return <div>Loading course...</div>;
-  if (error || sectionsError) return <div>Error loading course.</div>;
+  if (isLoading || lessonsLoading) return <div>Loading course...</div>;
+  if (error || lessonsError) return <div>Error loading course.</div>;
   if (!course) return <div>Course not found.</div>;
 
   return (
@@ -87,38 +91,40 @@ const CoursePreview = ({ courseId }) => {
                 Content
               </p>
               <div>
-                {sections.slice(0, visibleSections).map((section) => (
-                  <div
-                    key={section.id}
-                    className="bg-[#f7f7f7] xl:text-[14px] text-[12px] flex justify-between items-center overflow-hidden border border-[#eaecf0] rounded-sm p-3"
+                {lessons.slice(0, visibleLessons).map((lesson) => (
+                  <Link
+                    key={lesson.id}
+                    to={`/academy/courses/${course.id}/player?lesson=${lesson.id}`}
+                    onClick={handleOrigins}
+                    className="block bg-[#f7f7f7] xl:text-[14px] text-[12px] flex justify-between items-center overflow-hidden border border-[#eaecf0] rounded-sm p-3 hover:bg-[#f0f0f0] transition-colors duration-200"
                   >
                     <div className="flex items-center space-x-2">
                       <Play className="w-4 h-4" />
                       <p className="text-[#212121] font-medium">
-                        {section.title}
+                        {lesson.title}
                       </p>
                       <span className="text-[#787777] text-[12px]">
-                        {section.duration}
+                        {lesson.video_duration_formatted || lesson.duration || '0:00'}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="hidden md:block bg-[#78787850] border border-[#78787850] w-[56.87px] h-[4px] rounded-2xl"></div>
                       <BookmarkIcon className="w-4 h-4 xl:w-[16px] xl:h-[20.57px] text-[#333333]" />
                     </div>
-                  </div>
+                  </Link>
                 ))}
                 <div ref={loader} />
-                {visibleSections < sections.length && (
+                {visibleLessons < lessons.length && (
                   <button
                     className="w-full bg-transparent border-[1.5px] border-[#101828] text-[12px] md:text-[16px] text-center font-medium px-6 py-2 rounded-md hover:bg-[#1342ff] hover:text-white hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                     onClick={() =>
-                      setVisibleSections((prev) =>
-                        Math.min(prev + PAGE_SIZE, sections.length),
+                      setVisibleLessons((prev) =>
+                        Math.min(prev + PAGE_SIZE, lessons.length),
                       )
                     }
                   >
-                    Load 15 More Sections
+                    Load 15 More Lessons
                   </button>
                 )}
               </div>

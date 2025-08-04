@@ -54,8 +54,7 @@ const CourseManagement = () => {
   const [newCourse, setNewCourse] = useState({
     title: '',
     description: '',
-    coverImage: '',
-    tutor_id: '',
+    cover_image: '',
     instructor_name: '',
     instructor_title: '',
     instructor_image: '',
@@ -83,8 +82,7 @@ const CourseManagement = () => {
     setNewCourse({
       title: '',
       description: '',
-      coverImage: '',
-      tutor_id: '',
+      cover_image: '',
       instructor_name: '',
       instructor_title: '',
       instructor_image: '',
@@ -335,12 +333,11 @@ const CourseManagement = () => {
               <div>
                 <Label htmlFor="tutor-select">Tutor</Label>
                 <Select
-                  value={newCourse.tutor_id || ''}
+                  value={newCourse.instructor_name || ''}
                   onValueChange={(value) => {
-                    const selected = tutors.find((t) => t.id === value);
+                    const selected = tutors.find((t) => t.name === value);
                     setNewCourse({
                       ...newCourse,
-                      tutor_id: selected?.id || '',
                       instructor_name: selected?.name || '',
                       instructor_title: selected?.title || '',
                       instructor_image: selected?.avatar_url || '',
@@ -351,7 +348,7 @@ const CourseManagement = () => {
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue>
-                      {newCourse.tutor_id ? (
+                      {newCourse.instructor_name ? (
                         <div className="flex items-center gap-2">
                           {newCourse.instructor_image && (
                             <img
@@ -369,7 +366,7 @@ const CourseManagement = () => {
                   </SelectTrigger>
                   <SelectContent>
                     {tutors.map((tutor) => (
-                      <SelectItem key={tutor.id} value={tutor.id}>
+                      <SelectItem key={tutor.id} value={tutor.name}>
                         <div className="flex items-center gap-2">
                           {tutor.avatar_url && (
                             <img
@@ -387,7 +384,7 @@ const CourseManagement = () => {
                     ))}
                   </SelectContent>
                 </Select>
-                {newCourse.tutor_id && (
+                {newCourse.instructor_name && (
                   <div className="flex items-center mt-2 space-x-2">
                     {newCourse.instructor_image && (
                       <img
