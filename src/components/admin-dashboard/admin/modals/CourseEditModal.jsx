@@ -180,12 +180,11 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
           <div>
             <Label htmlFor="edit-tutor-select">Tutor</Label>
             <Select
-              value={editedCourse.tutor_id || ''}
+              value={editedCourse.instructor_name || ''}
               onValueChange={(value) => {
-                const selected = tutors.find((t) => t.id === value);
+                const selected = tutors.find((t) => t.name === value);
                 setEditedCourse({
                   ...editedCourse,
-                  tutor_id: selected?.id || '',
                   instructor_name: selected?.name || '',
                   instructor_title: selected?.title || '',
                   instructor_image: selected?.avatar_url || '',
@@ -196,7 +195,7 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
             >
               <SelectTrigger className="w-full">
                 <SelectValue>
-                  {editedCourse.tutor_id ? (
+                  {editedCourse.instructor_name ? (
                     <div className="flex items-center gap-2">
                       {editedCourse.instructor_image && (
                         <img
@@ -214,7 +213,7 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
               </SelectTrigger>
               <SelectContent>
                 {tutors.map((tutor) => (
-                  <SelectItem key={tutor.id} value={tutor.id}>
+                  <SelectItem key={tutor.id} value={tutor.name}>
                     <div className="flex items-center gap-2">
                       {tutor.avatar_url && (
                         <img
@@ -232,7 +231,7 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
                 ))}
               </SelectContent>
             </Select>
-            {editedCourse.tutor_id && (
+            {editedCourse.instructor_name && (
               <div className="flex items-center mt-2 space-x-2">
                 {editedCourse.instructor_image && (
                   <img

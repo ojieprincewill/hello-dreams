@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   Shield,
@@ -12,7 +12,10 @@ import MyLearnings from "./MyLearnings";
 import AccountSecurity from "./AccountSecurity";
 import AccountSettings from "./AccountSettings";
 import HelpCenter from "./HelpCenter";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
+import { useCourseProgress } from "@/hooks/useCourseProgress";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
 
@@ -23,9 +26,36 @@ const navItems = [
   { key: "help", label: "Help Center", icon: <HelpCircle size={20} /> },
 ];
 
-const Sidebar = ({ active, setActive, onClose = null }) => {
+const Sidebar = ({ active, setActive, onClose = null, onLogout, user, profile, isFetching }) => {
   return (
     <aside className="w-64 min-h-screen bg-white border-r border-[#eaecf0] flex flex-col py-8 px-2 shadow-md sticky top-0 left-0 z-10">
+      {/* User Info */}
+      <div className="px-6 mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 bg-[#1342ff] rounded-full flex items-center justify-center text-white font-semibold text-lg">
+            {profile?.first_name && profile?.last_name 
+              ? `${profile.first_name.charAt(0)}${profile.last_name.charAt(0)}`
+              : user?.email?.charAt(0).toUpperCase() || "U"
+            }
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-[#101828] text-sm">
+              {profile?.first_name && profile?.last_name 
+                ? `${profile.first_name} ${profile.last_name}`
+                : user?.email || "User"
+              }
+            </h3>
+            <p className="text-[#667085] text-xs">
+              {profile?.role || "Student"}
+            </p>
+          </div>
+          {/* Background sync indicator */}
+          {isFetching && (
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing data..."></div>
+          )}
+        </div>
+      </div>
+
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
           <button
@@ -45,14 +75,18 @@ const Sidebar = ({ active, setActive, onClose = null }) => {
           </button>
         ))}
       </nav>
-      <button className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer">
+      
+      <button 
+        onClick={onLogout}
+        className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer"
+      >
         <LogOut size={20} /> Log out
       </button>
     </aside>
   );
 };
 
-const MobileSidebar = ({ active, setActive, onClose }) => {
+const MobileSidebar = ({ active, setActive, onClose, onLogout, user, profile, isFetching }) => {
   return (
     <div className="fixed inset-0 z-90 xl:hidden">
       {/* Backdrop - only on tablet (md and up) */}
@@ -79,6 +113,34 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
               <X size={24} />
             </button>
           </div>
+
+          {/* User Info */}
+          <div className="px-6 mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-[#1342ff] rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                {profile?.first_name && profile?.last_name 
+                  ? `${profile.first_name.charAt(0)}${profile.last_name.charAt(0)}`
+                  : user?.email?.charAt(0).toUpperCase() || "U"
+                }
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-[#101828] text-sm">
+                  {profile?.first_name && profile?.last_name 
+                    ? `${profile.first_name} ${profile.last_name}`
+                    : user?.email || "User"
+                  }
+                </h3>
+                <p className="text-[#667085] text-xs">
+                  {profile?.role || "Student"}
+                </p>
+              </div>
+              {/* Background sync indicator */}
+              {isFetching && (
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing data..."></div>
+              )}
+            </div>
+          </div>
+
           <nav className="flex-1 space-y-2">
             {navItems.map((item) => (
               <button
@@ -101,7 +163,11 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
               </button>
             ))}
           </nav>
-          <button className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer">
+          
+          <button 
+            onClick={onLogout}
+            className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer"
+          >
             <LogOut size={20} /> Log out
           </button>
         </div>
@@ -112,15 +178,69 @@ const MobileSidebar = ({ active, setActive, onClose }) => {
 
 const UserProfileMain = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut, isAuthenticated } = useAuth();
+  const { profile, isLoading: profileLoading, isFetching: profileFetching, error: profileError } = useProfile();
+  const { isFetching: courseProgressFetching } = useCourseProgress();
+  
   const initialTab = location.state?.active || "learnings";
   const [active, setActive] = useState(initialTab);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Handle authentication redirect in useEffect
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut.mutateAsync();
+      navigate("/academy");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  // Don't render anything if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  // Show minimal loading only if no profile data exists at all
+  if (profileLoading && !profile) {
+    return (
+      <div className="flex min-h-[80vh] items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1342ff]"></div>
+      </div>
+    );
+  }
+
+  const isFetching = profileFetching || courseProgressFetching;
+
+  // Debug information (remove in production)
+  if (profileError) {
+    console.log('Profile Error Details:', {
+      error: profileError,
+      user: user?.id,
+      isAuthenticated,
+      profile
+    });
+  }
 
   return (
     <div className="flex min-h-[80vh]">
       {/* Desktop Sidebar - hidden on mobile/tablet, visible on desktop */}
       <div className="hidden xl:block">
-        <Sidebar active={active} setActive={setActive} />
+        <Sidebar 
+          active={active} 
+          setActive={setActive} 
+          onLogout={handleLogout}
+          user={user}
+          profile={profile}
+          isFetching={isFetching}
+        />
       </div>
 
       {/* Mobile/Tablet Menu Button - visible on mobile/tablet, hidden on desktop */}
@@ -140,6 +260,10 @@ const UserProfileMain = () => {
             active={active}
             setActive={setActive}
             onClose={() => setIsMobileMenuOpen(false)}
+            onLogout={handleLogout}
+            user={user}
+            profile={profile}
+            isFetching={isFetching}
           />
         )}
       </AnimatePresence>

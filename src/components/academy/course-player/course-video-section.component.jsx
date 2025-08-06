@@ -4,7 +4,18 @@ import CourseTabs from "./course-tabs.component";
 import CourseInfo from "./course-info.component";
 import CourseDescription from "./course-description.component";
 
-const CourseVideoSection = ({ image, title, playbackId, userId, assetId, lessonTitle }) => {
+const CourseVideoSection = ({ 
+  image, 
+  title, 
+  playbackId, 
+  userId, 
+  assetId, 
+  lessonTitle,
+  currentLesson,
+  lessons,
+  courseId,
+  course
+}) => {
   return (
     <div>
       <VideoPlayer
@@ -12,13 +23,14 @@ const CourseVideoSection = ({ image, title, playbackId, userId, assetId, lessonT
         userId={userId}
         assetId={assetId}
         lessonTitle={lessonTitle}
-        videoUrl="https://www.w3schools.com/html/mov_bbb.mp4"
+        videoUrl={currentLesson?.video_url}
         poster={image}
         captions={null}
+        currentLesson={currentLesson}
       />
-      <CourseTabs />
-      <CourseInfo title={title} />
-      <CourseDescription />
+      <CourseTabs course={course} lessons={lessons} />
+      <CourseInfo course={course} lessons={lessons} />
+      <CourseDescription course={course} />
     </div>
   );
 };
