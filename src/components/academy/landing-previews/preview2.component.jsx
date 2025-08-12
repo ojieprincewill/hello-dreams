@@ -21,7 +21,7 @@ const handleOrigins = () => {
   window.scrollTo(0, 0);
 };
 
-const Preview2 = () => {
+const Preview2 = ({ user, isAuthenticated }) => {
   const previewCourses = academyItems
     .filter((item) => item.type === "course")
     .slice(0, 3);
@@ -52,7 +52,7 @@ const Preview2 = () => {
           const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
 
           return (
-            <CourseCard key={course.id} course={course} className={cardClass} />
+            <CourseCard key={course.id} course={course} className={cardClass} user={user} isAuthenticated={isAuthenticated} />
           );
         })}
         <div className="md:hidden flex justify-end">

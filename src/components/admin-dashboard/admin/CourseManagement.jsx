@@ -65,7 +65,7 @@ const CourseManagement = () => {
     difficulty_level: '',
     language: '',
     captions_available: false,
-    last_updated: '',
+    last_updated: null,
     certificate_available: false,
     certificate_image: '',
     requirements: '',
@@ -93,7 +93,7 @@ const CourseManagement = () => {
       difficulty_level: '',
       language: '',
       captions_available: false,
-      last_updated: '',
+      last_updated: null,
       certificate_available: false,
       certificate_image: '',
       requirements: '',
@@ -179,14 +179,22 @@ const CourseManagement = () => {
         imageUrl = await uploadImage(imageFile);
       }
 
-      await createCourse.mutateAsync({
+      // Clean up the data before sending to database
+      const courseData = {
         ...newCourse,
-        cover_image: imageUrl || '',
+        cover_image: imageUrl || null,
+        last_updated: newCourse.last_updated ? new Date(newCourse.last_updated).toISOString().split('T')[0] : null,
         skills_covered: newCourse.skills_covered
-          .split(',')
-          .map((s) => s.trim()),
-        tags: newCourse.tags.split(',').map((s) => s.trim()),
-      });
+          ? newCourse.skills_covered.split(',').map((s) => s.trim()).filter(s => s)
+          : [],
+        tags: newCourse.tags
+          ? newCourse.tags.split(',').map((s) => s.trim()).filter(s => s)
+          : [],
+        price: newCourse.price ? parseFloat(newCourse.price) : null,
+        total_lessons: newCourse.total_lessons ? parseInt(newCourse.total_lessons) : null,
+      };
+
+      await createCourse.mutateAsync(courseData);
       resetForm();
       setCreateModalOpen(false);
       toast({
@@ -486,9 +494,9 @@ const CourseManagement = () => {
                 <Input
                   id="last_updated"
                   type="date"
-                  value={newCourse.last_updated}
+                  value={newCourse.last_updated || ''}
                   onChange={(e) =>
-                    setNewCourse({ ...newCourse, last_updated: e.target.value })
+                    setNewCourse({ ...newCourse, last_updated: e.target.value || null })
                   }
                 />
               </div>

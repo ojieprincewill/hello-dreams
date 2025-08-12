@@ -336,7 +336,7 @@ const CourseEditModal = ({ course, isOpen, onClose, onSave }) => {
               onChange={(e) =>
                 setEditedCourse({
                   ...editedCourse,
-                  last_updated: e.target.value,
+                  last_updated: e.target.value || null,
                 })
               }
             />

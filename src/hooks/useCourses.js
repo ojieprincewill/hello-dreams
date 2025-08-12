@@ -113,7 +113,7 @@ export const usePublishedCourses = () => {
             created_at,
             updated_at
           `)
-          .eq('status', 'published')
+          .ilike('status', 'published')
           .order('created_at', { ascending: false });
 
         if (error) {

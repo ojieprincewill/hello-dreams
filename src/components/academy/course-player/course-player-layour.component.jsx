@@ -2,7 +2,7 @@ import React from 'react';
 import CourseVideoSection from './course-video-section.component';
 import CourseContentSidebar from './course-content-sidebar.component';
 
-const CoursePlayerLayout = ({ course }) => {
+const CoursePlayerLayout = ({ course, isEnrolled }) => {
   const { currentLesson, lessons } = course;
 
   return (
@@ -29,6 +29,7 @@ const CoursePlayerLayout = ({ course }) => {
             course={course}
             currentLesson={currentLesson}
             lessons={lessons}
+            isEnrolled={isEnrolled}
           />
         </aside>
       </div>

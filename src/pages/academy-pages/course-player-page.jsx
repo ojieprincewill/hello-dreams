@@ -6,6 +6,7 @@ import React from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useCourse } from '@/hooks/useCourses';
 import { useLessons } from '@/hooks/useLessons';
+import { useCourseProgress } from '@/hooks/useCourseProgress';
 
 const CoursePlayerPage = () => {
   const { courseId } = useParams();
@@ -14,6 +15,13 @@ const CoursePlayerPage = () => {
   
   const { data: course, isLoading, error } = useCourse(courseId);
   const { data: lessons = [], isLoading: lessonsLoading } = useLessons(courseId);
+  const { enrollments = [] } = useCourseProgress();
+
+  // Check if user is enrolled in this course
+  const isEnrolled = React.useMemo(() => {
+    if (!enrollments || !courseId) return false;
+    return enrollments.some(e => e.course_id === courseId);
+  }, [enrollments, courseId]);
 
   // Find the current lesson
   const currentLesson = React.useMemo(() => {
@@ -46,7 +54,7 @@ const CoursePlayerPage = () => {
   return (
     <>
       <AcademyNavbar />
-      <CoursePlayerLayout course={courseWithLesson} />
+      <CoursePlayerLayout course={courseWithLesson} isEnrolled={isEnrolled} />
       <FooterSection />
     </>
   );

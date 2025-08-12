@@ -14,38 +14,32 @@ const CourseTabs = ({ course, lessons = [] }) => {
 
   const renderOverview = () => (
     <div className="space-y-4">
-      <div>
-        <h4 className="text-lg font-semibold mb-2">What you'll learn</h4>
-        {course?.what_you_will_learn ? (
+      {course?.what_you_will_learn && (
+        <div>
+          <h4 className="text-lg font-semibold mb-2">What you'll learn</h4>
           <div className="text-gray-700 whitespace-pre-wrap">
             {course.what_you_will_learn}
           </div>
-        ) : (
-          <p className="text-gray-500">No learning objectives specified for this course.</p>
-        )}
-      </div>
+        </div>
+      )}
       
-      <div>
-        <h4 className="text-lg font-semibold mb-2">Requirements</h4>
-        {course?.requirements ? (
+      {course?.requirements && (
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Requirements</h4>
           <div className="text-gray-700 whitespace-pre-wrap">
             {course.requirements}
           </div>
-        ) : (
-          <p className="text-gray-500">No specific requirements for this course.</p>
-        )}
-      </div>
+        </div>
+      )}
 
-      <div>
-        <h4 className="text-lg font-semibold mb-2">Target Audience</h4>
-        {course?.target_audience ? (
+      {course?.target_audience && (
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Target Audience</h4>
           <div className="text-gray-700 whitespace-pre-wrap">
             {course.target_audience}
           </div>
-        ) : (
-          <p className="text-gray-500">This course is suitable for all skill levels.</p>
-        )}
-      </div>
+        </div>
+      )}
 
       <div>
         <h4 className="text-lg font-semibold mb-2">Course Content</h4>

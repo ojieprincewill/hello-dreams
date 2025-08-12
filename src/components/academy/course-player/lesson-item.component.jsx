@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import { Lock } from "lucide-react";
 
 const LessonItem = ({
   number,
@@ -11,10 +12,11 @@ const LessonItem = ({
   isActive,
   isResourceOpen,
   onResourceToggle,
+  isLocked,
 }) => (
   <div
     className={`flex flex-col py-2 px-3 rounded-lg cursor-pointer transition-colors duration-200 select-none ${
-      isActive ? "bg-[#eef2fe]" : "hover:bg-gray-100"
+      isActive ? "bg-[#eef2fe]" : isLocked ? "bg-gray-100 opacity-60" : "hover:bg-gray-100"
     }`}
     style={{ fontFamily: "DM Sans, sans-serif" }}
     onClick={onClick}
@@ -27,18 +29,17 @@ const LessonItem = ({
           readOnly
           className="accent-[#1342ff] w-4 h-4"
         />
-
-        <div className="space-y-1 text-[#101828]">
+        <div className="space-y-1 text-[#101828] flex items-center gap-1">
           <div className="flex items-start gap-1 min-w-0">
             <span className="text-[14px] font-medium">{number}.</span>
             <span className="text-[14px]">{title}</span>
+            {isLocked && <Lock size={16} className="ml-1 text-[#b0b0b0]" />}
           </div>
           <span className="text-[13px] text-[#667085] min-w-[32px] text-right">
             {duration}
           </span>
         </div>
       </div>
-
       <div
         className="flex-shrink-0 relative"
         onClick={(e) => e.stopPropagation()}

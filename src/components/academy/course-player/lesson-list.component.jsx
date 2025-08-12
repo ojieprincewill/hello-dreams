@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LessonItem from "./lesson-item.component";
 
-const LessonList = ({ lessons = [], currentLesson, courseId }) => {
+const LessonList = ({ lessons = [], currentLesson, courseId, isEnrolled }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [openResourceLesson, setOpenResourceLesson] = useState(null);
 
-  const handleLessonClick = (lessonId) => {
+  const handleLessonClick = (lessonId, index) => {
+    // If not enrolled and lesson is 3rd or later, redirect to membership page
+    if (!isEnrolled && index >= 2) {
+      navigate(`/membership?active=course&courseId=${courseId}`);
+      return;
+    }
     setSearchParams({ lesson: lessonId });
   };
 
@@ -38,9 +43,10 @@ const LessonList = ({ lessons = [], currentLesson, courseId }) => {
           completed={lesson.completed || false}
           resources={lesson.resources_available}
           isActive={currentLesson?.id === lesson.id}
-          onClick={() => handleLessonClick(lesson.id)}
+          onClick={() => handleLessonClick(lesson.id, index)}
           isResourceOpen={openResourceLesson === lesson.id}
           onResourceToggle={() => handleResourceToggle(lesson.id)}
+          isLocked={!isEnrolled && index >= 2}
         />
       ))}
     </div>

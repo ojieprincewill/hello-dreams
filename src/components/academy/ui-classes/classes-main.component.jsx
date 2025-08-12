@@ -85,41 +85,49 @@ const ClassesMain = () => {
   let filteredClasses = [];
   let filteredCourses = [];
 
-  if (category === "courses") {
+  // Helper: map CATEGORY_OPTIONS value to DB category
+  const mapCategoryValueToDb = (value) => {
+    switch (value) {
+      case "uiux":
+        return "User Experience Design";
+      case "20min":
+        return "20min"; // If you have a DB category for 20min, otherwise handle below
+      case "free":
+        return "free"; // We'll handle free by price below
+      default:
+        return value;
+    }
+  };
+
+  if (category === "courses" || category === "all") {
+    // Show ALL published courses, even those with no category
     filteredCourses = transformedCourses.filter((item) => {
       if (item.type !== "course") return false;
-
-      // 👇 This filters by saved status if toggled
       if (showSaved && !savedClasses.includes(item.id)) return false;
-
+      // No category filter for 'all' or 'courses'
+      // No length filter for 'courses' (keep as is for 'all' if you want)
       return true;
     });
+    filteredClasses = filteredCourses; // For grid below
   } else {
+    // Filter by category
     filteredClasses = transformedCourses.filter((item) => {
       if (item.type !== "course") return false;
-
-      // Saved classes logic
       if (showSaved && !savedClasses.includes(item.id)) return false;
-
-      // Category logic - map database categories to UI categories
-      if (category !== "all") {
-        if (category === "uiux" && item.category !== "User Experience Design") return false;
-        if (category === "20min" && item.category !== "User Experience Design") return false; // 20min classes are typically UI/UX related
-        if (category === "free" && item.price !== 0) return false;
+      // Category logic
+      if (category === "uiux") {
+        return item.category === "User Experience Design";
       }
-
-      // Length filter logic - parse duration string
-      if (lengthFilter !== "all") {
-        const duration = item.totalTime;
-        const minutes = parseDurationToMinutes(duration);
-        
-        if (lengthFilter === "short" && minutes > 10) return false;
-        if (lengthFilter === "medium" && minutes > 20) return false;
-        if (lengthFilter === "long" && minutes > 30) return false;
-        if (lengthFilter === "extended" && minutes <= 30) return false;
+      if (category === "20min") {
+        // If you have a DB category for 20min, use it; otherwise, filter by duration
+        const minutes = parseDurationToMinutes(item.totalTime);
+        return minutes <= 20;
       }
-
-      return true;
+      if (category === "free") {
+        return item.price === 0;
+      }
+      // Fallback: match category exactly
+      return item.category === mapCategoryValueToDb(category);
     });
   }
 
@@ -217,31 +225,29 @@ const ClassesMain = () => {
           onClick={() => setShowSaved((prev) => !prev)}
         >
           <BookmarkIcon
-            className={`w-5 h-5 mr-2 ${
+            className={`w-5 h-5 ${
               showSaved ? "text-[#ff7f50]" : "text-[#41414150]"
             }`}
           />
           Saved {category === "courses" ? "courses" : "classes"}
         </button>
 
-        <div className="relative">
+        {/* Dropdown for length selection */}
+        <div className=" relative">
           <button
-            className="bg-[#efece9] border border-[#eaecf0] text-[#010413] text-[16px] px-4 py-3 rounded font-bold flex items-center cursor-pointer"
-            onClick={() => setLengthDropdownOpen((prev) => !prev)}
-            disabled={showSaved}
+            className="bg-[#f7f7f7] text-[#010413] text-[16px] px-4 py-3 rounded font-bold flex items-center justify-between md:w-auto md:text-[16px] md:px-4 md:py-2 md:justify-start cursor-pointer"
+            onClick={() => setLengthDropdownOpen((open) => !open)}
           >
-            + Length
+            {LENGTH_OPTIONS.find((opt) => opt.value === lengthFilter)?.label}
             <ChevronDownIcon className="w-4 h-4 ml-2" />
           </button>
           {lengthDropdownOpen && (
-            <div className="absolute mt-2 bg-white border border-[#e5e7eb] rounded shadow z-10">
+            <div className="absolute left-0 mt-2 w-auto md:w-48 bg-white border border-[#e5e7eb] rounded shadow z-10">
               {LENGTH_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
-                  className={`block px-4 py-2 w-full text-left hover:bg-[#f7f7f7] ${
-                    lengthFilter === opt.value
-                      ? "font-bold text-[#ff7f50]"
-                      : "text-[#010413]"
+                  className={`w-full text-left px-4 py-2 text-[#010413] hover:bg-[#f7f7f7] ${
+                    lengthFilter === opt.value ? "font-bold" : ""
                   }`}
                   onClick={() => {
                     setLengthFilter(opt.value);
@@ -256,129 +262,21 @@ const ClassesMain = () => {
         </div>
       </div>
 
-      {/* Grid */}
-      {category === "courses" ? (
-        <>
-          {showSaved ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-              {filteredCourses.length === 0 ? (
-                <p className="text-center text-[#667085] py-6">
-                  You haven't saved any courses yet. Try bookmarking one! 📚✨
-                </p>
-              ) : (
-                filteredCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))
-              )}
-            </div>
-          ) : (
-            <>
-              {COURSE_CATEGORIES.map((cat) => {
-                const coursesInCat = filteredCourses.filter(
-                  (c) => c.category === cat
-                );
-                if (coursesInCat.length === 0) return null;
-                return (
-                  <div key={cat} className="mb-15">
-                    <h2
-                      className="text-[20px] md:text-[30px] xl:text-[40px] font-bold mb-5 text-[#010413]"
-                      style={{ fontFamily: "DM Sans, sans-serif" }}
-                    >
-                      {cat}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-                      {coursesInCat.map((course, index) => {
-                        const isLastOdd =
-                          index === coursesInCat.length - 1 &&
-                          coursesInCat.length % 2 !== 0;
-
-                        const cardClass = isLastOdd
-                          ? "md:col-span-2 xl:col-span-1"
-                          : "";
-
-                        return (
-                          <CourseCard
-                            key={course.id}
-                            course={course}
-                            className={cardClass}
-                          />
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* Cohort card still renders at the bottom */}
-              <div className="mt-10">
-                <h2 className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold mb-7">
-                  {CohortsData[0].category}
-                </h2>
-                <CohortCard
-                  info={CohortsData[0].info}
-                  price={CohortsData[0].price}
-                  oldPrice={CohortsData[0].oldPrice}
-                  currency={CohortsData[0].currency}
-                />
-              </div>
-            </>
-          )}
-        </>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 md:gap-y-10">
-          {filteredClasses.length === 0 ? (
-            <div className="col-span-full text-center text-[#667085] text-lg py-10">
-              No classes found.
-            </div>
-          ) : (
-            filteredClasses.map((cls, index) => {
-              const isLastOdd =
-                index === filteredClasses.length - 1 &&
-                filteredClasses.length % 2 !== 0;
-
-              const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
-
-              // For now, all courses are treated as UI/UX classes since they're all design-related
-              // You can add more specific category mapping logic here
-              if (cls.category === "User Experience Design" || category === "uiux") {
-                return (
-                  <UiuxClassCard
-                    key={cls.id}
-                    data={cls}
-                    className={cardClass}
-                  />
-                );
-              }
-              if (category === "20min") {
-                return (
-                  <Min20ClassCard
-                    key={cls.id}
-                    data={cls}
-                    className={cardClass}
-                  />
-                );
-              }
-              if (category === "free" || cls.price === 0) {
-                return (
-                  <FreeClassCard
-                    key={cls.id}
-                    data={cls}
-                    className={cardClass}
-                  />
-                );
-              }
-              // Default to UI/UX card for other categories
-              return (
-                <UiuxClassCard
-                  key={cls.id}
-                  data={cls}
-                  className={cardClass}
-                />
-              );
-            })
-          )}
-        </div>
-      )}
+      {/* Grid of classes/courses */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredClasses.map((item) => {
+          if (item.type === "course") {
+            return <CourseCard key={item.id} course={item} />;
+          } else if (item.type === "uiux") {
+            return <UiuxClassCard key={item.id} class={item} />;
+          } else if (item.type === "free") {
+            return <FreeClassCard key={item.id} class={item} />;
+          } else if (item.type === "min20") {
+            return <Min20ClassCard key={item.id} class={item} />;
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 };

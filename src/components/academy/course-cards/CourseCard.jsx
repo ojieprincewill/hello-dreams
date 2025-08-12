@@ -6,12 +6,20 @@ import {
 } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "@/state-slices/saved-classes/savedClassesSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import supabase from '@/supabase/client';
+import PaystackPop from "@paystack/inline-js";
 
-const CourseCard = ({ course, className = "" }) => {
+const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const dispatch = useDispatch();
   const savedClasses = useSelector((state) => state.savedClasses);
   const isSaved = savedClasses.includes(course.id);
+
+  const navigate = useNavigate();
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handleBookmark = (e) => {
     e.stopPropagation();
@@ -20,6 +28,68 @@ const CourseCard = ({ course, className = "" }) => {
 
   const handleOrigins = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleBuyNow = async () => {
+    if (!course) return;
+    if (!isAuthenticated || !user?.email) {
+      setPaymentError("Please log in to purchase this course.");
+      return;
+    }
+    setPaymentLoading(true);
+    setPaymentError(null);
+    setPaymentSuccess(false);
+    try {
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
+        {
+          body: {
+            email: user.email,
+            amount: course.price || 50000,
+          },
+        }
+      );
+      if (initError || !data?.access_code || !data?.reference) {
+        setPaymentError("Payment initiation failed.");
+        setPaymentLoading(false);
+        return;
+      }
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
+        reference: data.reference,
+        email: user.email,
+        amount: (course.price || 50000) * 100,
+        onSuccess: async (response) => {
+          const { data: verifyData, error: verifyError } = await supabase.functions.invoke("enroll-student", {
+            body: {
+              reference: response.reference,
+              courseId: course.id,
+              courseTitle: course.title,
+              amount: course.price || 50000,
+              userId: user.id,
+              userEmail: user.email,
+            },
+          });
+          if (verifyError || verifyData?.error) {
+            setPaymentError("Verification failed. Payment may not be confirmed.");
+          } else {
+            setPaymentSuccess(true);
+            setTimeout(() => {
+              navigate(`/academy/courses/${course.id}/player`);
+            }, 2000);
+          }
+          setPaymentLoading(false);
+        },
+        onCancel: () => {
+          setPaymentError("Payment was cancelled.");
+          setPaymentLoading(false);
+        },
+      });
+    } catch (err) {
+      setPaymentError("An unexpected error occurred.");
+      setPaymentLoading(false);
+    }
   };
 
   return (
@@ -68,6 +138,35 @@ const CourseCard = ({ course, className = "" }) => {
       <p className="text-[24px] md:text-[27.88px] text-[#010413] font-bold pt-2 ">
         NGN {course.price.toLocaleString()}
       </p>
+      {/* Buy Now Button for paid courses */}
+      {course.price > 0 && (
+        <>
+          {isAuthenticated ? (
+            <button
+              className="w-full mt-6 bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 disabled:opacity-60 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer"
+              onClick={handleBuyNow}
+              disabled={paymentLoading}
+            >
+              {paymentLoading ? "Processing..." : "Buy Now"}
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="w-full mt-6 bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer inline-block text-center"
+            >
+              Login to Purchase
+            </Link>
+          )}
+          {paymentError && (
+            <p className="text-red-500 text-sm mt-2">{paymentError}</p>
+          )}
+          {paymentSuccess && (
+            <p className="text-green-500 text-sm mt-2">
+              Payment successful! Redirecting you to the course...
+            </p>
+          )}
+        </>
+      )}
     </div>
   );
 };
