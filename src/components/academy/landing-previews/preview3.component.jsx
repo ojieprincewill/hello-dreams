@@ -1,15 +1,8 @@
 import React from "react";
-
-import {
-  ArrowTopRightOnSquareIcon,
-  BookmarkIcon,
-} from "@heroicons/react/24/solid";
-import { academyItems } from "../../../data/academy-data/academy.data";
-import { PlayIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import Min20ClassCard from "../class-cards/min20-class-card.component";
+import { useAcademySectionData } from "@/hooks/useAcademy"; // Update this path
+import Min20ClassCard from "../class-cards/min20-class-card.component"; // Use your existing Min20ClassCard
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -19,19 +12,85 @@ const cardVariants = {
     transition: {
       duration: 0.6,
       ease: "easeOut",
-      delay: index * 0.2, // Stagger effect per card
+      delay: index * 0.2,
     },
   }),
 };
 
-const Preview3 = () => {
+const Preview3 = ({ user, isAuthenticated }) => {
+  const { categorizedData, isLoading, error } = useAcademySectionData();
+
   const handleOrigins = () => {
     window.scrollTo(0, 0);
   };
-  // Filter for 20min classes
-  const min20Classes = academyItems
-    .filter((item) => item.type === "class" && item.category === "20min")
-    .slice(0, 3);
+
+  // Get 20min classes and limit to 3
+  const min20Classes = categorizedData['20min']?.slice(0, 3) || [];
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        <div className="flex justify-between items-center mb-5">
+          <p className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold">
+            20 Mins Classes
+          </p>
+        </div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
+          {[1, 2, 3].map((index) => (
+            <div
+              key={index}
+              className="w-full h-max md:h-[500px] xl:h-[464.63px] p-4 border border-[#dfdfe2] rounded-2xl animate-pulse"
+            >
+              <div className="w-full h-[181.55px] md:h-[221.16px] bg-gray-200 rounded-xl mb-4"></div>
+              <div className="space-y-2">
+                <div className="h-6 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    console.error("Preview3 error:", error);
+    return (
+      <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        <div className="flex justify-between items-center mb-5">
+          <p className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold">
+            20 Mins Classes
+          </p>
+        </div>
+        <div className="w-full text-center py-10">
+          <p className="text-gray-500">
+            Unable to load 20 min classes at the moment. Please try again later.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty state
+  if (min20Classes.length === 0) {
+    return (
+      <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        <div className="flex justify-between items-center mb-5">
+          <p className="text-[#010413] text-[20px] md:text-[24px] xl:text-[40px] font-bold">
+            20 Mins Classes
+          </p>
+        </div>
+        <div className="w-full text-center py-10">
+          <p className="text-gray-500">
+            No 20 min classes available at the moment. Check back soon!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -51,14 +110,26 @@ const Preview3 = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-15">
-        {min20Classes.map((data, index) => {
+        {min20Classes.map((course, index) => {
           const isLastOdd =
             index === min20Classes.length - 1 && min20Classes.length % 2 !== 0;
 
           const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
 
           return (
-            <Min20ClassCard key={data.id} data={data} className={cardClass} />
+            <motion.div
+              key={course.id}
+              className={cardClass}
+              initial="hidden"
+              whileInView="visible"
+              variants={cardVariants}
+              custom={index}
+            >
+              <Min20ClassCard 
+                data={course} 
+                className={cardClass}
+              />
+            </motion.div>
           );
         })}
         <div className="md:hidden flex justify-end">

@@ -141,29 +141,108 @@ export const useCourseSectionsData = (courseId) => {
   };
 };
 
+// // Hook for academy section data (for homepage)
+// export const useAcademySectionData = () => {
+//   // Optionally, prefetch the full course list for better perceived performance when navigating to the academy page
+//   // useQuery(['published-courses'], ... , { enabled: false }); // Prefetch on hover/focus of the "Go to academy" link
+
+//   const { data: courses = [], isLoading, error } = usePublishedCourses();
+
+//   // Transform data for academy section display
+//   const academyData = React.useMemo(() => {
+//     if (!courses.length) return [];
+
+//     // Take only the first 3 courses for the academy section
+//     return courses.slice(0, 3).map(course => ({
+//       id: course.id,
+//       image: course.cover_image || 'https://via.placeholder.com/400x200?text=Course+Image',
+//       title: course.title || 'Untitled Course',
+//       name: course.instructor_name || 'Instructor',
+//       totalCourses: course.total_lessons || 0,
+//       totalTime: course.total_duration || '0h 0m',
+//       price: course.price || 0,
+//       category: course.category || 'General',
+//     }));
+//   }, [courses]);
+
+//   // Robust error logging
+//   React.useEffect(() => {
+//     if (error) {
+//       logError('useAcademySectionData', error, { courses });
+//     }
+//   }, [error, courses]);
+
+//   return {
+//     data: academyData,
+//     isLoading,
+//     error,
+//     originalData: courses,
+//     // Optionally expose a refetch method if needed in the future
+//     // refetch,
+//   };
+// };
+
+// // Enhanced error logging utility (same as your courses hook)
+// const logError = (context, error, additionalData = {}) => {
+//   console.error(`[${context}] Error:`, {
+//     message: error.message,
+//     code: error.code,
+//     details: error.details,
+//     hint: error.hint,
+//     ...additionalData,
+//     timestamp: new Date().toISOString(),
+//   });
+// };
+
 // Hook for academy section data (for homepage)
 export const useAcademySectionData = () => {
-  // Optionally, prefetch the full course list for better perceived performance when navigating to the academy page
-  // useQuery(['published-courses'], ... , { enabled: false }); // Prefetch on hover/focus of the "Go to academy" link
-
   const { data: courses = [], isLoading, error } = usePublishedCourses();
 
   // Transform data for academy section display
   const academyData = React.useMemo(() => {
     if (!courses.length) return [];
 
-    // Take only the first 3 courses for the academy section
-    return courses.slice(0, 3).map(course => ({
+    // Transform courses to match the expected format
+    return courses.map(course => ({
       id: course.id,
+      type: 'course', // Add type for filtering
       image: course.cover_image || 'https://via.placeholder.com/400x200?text=Course+Image',
       title: course.title || 'Untitled Course',
-      name: course.instructor_name || 'Instructor',
+      instructor: course.instructor_name || 'Instructor',
+      instructor_name: course.instructor_name || 'Instructor', // Keep both for compatibility
       totalCourses: course.total_lessons || 0,
       totalTime: course.total_duration || '0h 0m',
       price: course.price || 0,
       category: course.category || 'General',
+      description: course.description || '',
+      difficulty_level: course.difficulty_level || 'Beginner',
+      rating: course.rating || 0,
+      number_of_ratings: course.number_of_ratings || 0,
+      enrollment_count: course.enrollment_count || 0,
+      status: course.status,
+      created_at: course.created_at,
+      updated_at: course.updated_at,
     }));
   }, [courses]);
+
+  // Separate data by category for different preview sections
+  const categorizedData = React.useMemo(() => {
+    return {
+      all: academyData,
+      uiux: academyData.filter(course => 
+        course.category?.toLowerCase().includes('ui') || 
+        course.category?.toLowerCase().includes('ux') ||
+        course.category?.toLowerCase().includes('design')
+      ),
+      tech: academyData.filter(course => 
+        course.category?.toLowerCase().includes('tech') ||
+        course.category?.toLowerCase().includes('programming') ||
+        course.category?.toLowerCase().includes('development') ||
+        course.category?.toLowerCase().includes('coding')
+      ),
+      // Add more categories as needed
+    };
+  }, [academyData]);
 
   // Robust error logging
   React.useEffect(() => {
@@ -174,11 +253,10 @@ export const useAcademySectionData = () => {
 
   return {
     data: academyData,
+    categorizedData,
     isLoading,
     error,
     originalData: courses,
-    // Optionally expose a refetch method if needed in the future
-    // refetch,
   };
 };
 
