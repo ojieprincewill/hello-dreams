@@ -7,15 +7,20 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { useCourse } from '@/hooks/useCourses';
 import { useLessons } from '@/hooks/useLessons';
 import { useCourseProgress } from '@/hooks/useCourseProgress';
+import { useProfile } from '@/hooks/useProfile';
+import { useAuth } from '@/hooks/useAuth';
 
 const CoursePlayerPage = () => {
   const { courseId } = useParams();
   const [searchParams] = useSearchParams();
   const lessonId = searchParams.get('lesson');
-  
+  const {user, isAuthenticated} = useAuth();
+  // console.log(user);
   const { data: course, isLoading, error } = useCourse(courseId);
   const { data: lessons = [], isLoading: lessonsLoading } = useLessons(courseId);
   const { enrollments = [] } = useCourseProgress();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  console.log(profile);
 
   // Check if user is enrolled in this course
   const isEnrolled = React.useMemo(() => {

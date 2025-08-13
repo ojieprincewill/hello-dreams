@@ -4,15 +4,19 @@ import ClassesHeader from "@/components/academy/ui-classes/classes-header.compon
 import ClassesMain from "@/components/academy/ui-classes/classes-main.component";
 import FooterSection from "@/components/footer-section/footer-section.component";
 import React from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 const ClassesPage = () => {
+  const {user, isAuthenticated} = useAuth();
+  // console.log(isAuthenticated);
+
   return (
     <>
       <AcademyNavbar />
       <div className="py-5">
         <ClassesHeader />
         <ClassesMain />
-        <ClassesAction />
+        {isAuthenticated ? null : <ClassesAction /> }
       </div>
       <FooterSection />
     </>

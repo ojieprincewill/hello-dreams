@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const ClassesHeader = () => {
   const handleOrigins = () => {
     window.scrollTo(0,0);
   }
+  const {user, isAuthenticated} = useAuth();
+  console.log(user);
 
   return (
     <div
@@ -45,9 +48,15 @@ const ClassesHeader = () => {
         You can develop your UI/UX career & skills for less than $2/week —
         cancel anytime
       </p>
-      <Link to="/signup" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
-        Sign up
-      </Link>
+      {isAuthenticated ? (
+        <Link to="/userprofile" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
+          Welcome back, {user.user_metadata.full_name.split(" ")[0]}
+        </Link>
+      ) : (
+        <Link to="/signin" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
+          Sign in
+        </Link>
+      )}
     </div>
   );
 };

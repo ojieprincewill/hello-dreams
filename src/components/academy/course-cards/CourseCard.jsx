@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import supabase from '@/supabase/client';
 import PaystackPop from "@paystack/inline-js";
+import { useAuth } from "@/hooks/useAuth";
 
 const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  // const {isAuthenticated} = useAuth;
 
   const handleBookmark = (e) => {
     e.stopPropagation();
@@ -73,6 +76,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
           });
           if (verifyError || verifyData?.error) {
             setPaymentError("Verification failed. Payment may not be confirmed.");
+            console.log(verifyError);
           } else {
             setPaymentSuccess(true);
             setTimeout(() => {
@@ -151,7 +155,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
             </button>
           ) : (
             <Link
-              to="/login"
+              to="/signin"
               className="w-full mt-6 bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer inline-block text-center"
             >
               Login to Purchase

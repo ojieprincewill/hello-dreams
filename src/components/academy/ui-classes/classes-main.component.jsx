@@ -13,6 +13,7 @@ import CourseCard from "../course-cards/CourseCard";
 import { useSelector } from "react-redux";
 import CohortCard from "../cohort-card/CohortCard";
 import { CohortsData } from "@/data/academy-data/academy.data";
+import { useAuth } from "@/hooks/useAuth";
 
 const CATEGORY_OPTIONS = [
   { label: "All classes", value: "all" },
@@ -47,6 +48,7 @@ const ClassesMain = () => {
   const savedClasses = useSelector((state) => state.savedClasses);
   const [lengthFilter, setLengthFilter] = useState("all");
   const [lengthDropdownOpen, setLengthDropdownOpen] = useState(false);
+  const {user, isAuthenticated} = useAuth();
 
   // Fetch courses from database
   const { data: courses = [], isLoading, error } = usePublishedCourses();
@@ -266,7 +268,7 @@ const ClassesMain = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredClasses.map((item) => {
           if (item.type === "course") {
-            return <CourseCard key={item.id} course={item} />;
+            return <CourseCard key={item.id} course={item} user={user} isAuthenticated={isAuthenticated} />;
           } else if (item.type === "uiux") {
             return <UiuxClassCard key={item.id} class={item} />;
           } else if (item.type === "free") {
