@@ -172,7 +172,6 @@ const ManageMembership = () => {
                 reference: response.reference,
                 membership_type: membershipType,
                 amount,
-                user_id: user.id,
                 user_email: formData.email,
                 user_name: formData.name,
                 billing_address: {
