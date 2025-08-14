@@ -46,7 +46,12 @@ const CoursePlayerPage = () => {
     );
   }
 
-  if (error) return <div>Error loading course.</div>;
+  if (error) return 
+    <>
+     <AcademyNavbar />
+      <div>Error loading course.</div>
+      <FooterSection />
+    </>
   if (!course) return <div>Course not found.</div>;
 
   // Prepare course data with current lesson

@@ -6,6 +6,8 @@ const LessonList = ({ lessons = [], currentLesson, courseId, isEnrolled }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [openResourceLesson, setOpenResourceLesson] = useState(null);
+  console.log(currentLesson);
+  console.log(lessons)
 
   const handleLessonClick = (lessonId, index) => {
     // If not enrolled and lesson is 3rd or later, redirect to membership page
@@ -46,7 +48,7 @@ const LessonList = ({ lessons = [], currentLesson, courseId, isEnrolled }) => {
           onClick={() => handleLessonClick(lesson.id, index)}
           isResourceOpen={openResourceLesson === lesson.id}
           onResourceToggle={() => handleResourceToggle(lesson.id)}
-          isLocked={!isEnrolled && index >= 2}
+          isLocked={!isEnrolled && index >= 2 && lesson.price !== 0}
         />
       ))}
     </div>

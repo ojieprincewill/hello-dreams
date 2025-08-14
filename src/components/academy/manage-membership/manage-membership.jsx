@@ -79,7 +79,7 @@ const ManageMembership = () => {
         setPaymentLoading(false);
         return;
       }
-
+      setFormStep(2);
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
@@ -104,6 +104,7 @@ const ManageMembership = () => {
             setPaymentError("Verification failed. Payment may not be confirmed.");
           } else {
             setPaymentSuccess(true);
+            setFormStep(3);
             // Redirect to the course player after successful payment
             setTimeout(() => {
               navigate(`/academy/courses/${selectedCourse.id}/player`);
@@ -157,6 +158,7 @@ const ManageMembership = () => {
         setMembershipPaymentLoading(false);
         return;
       }
+      setFormStep(2);
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
@@ -164,6 +166,7 @@ const ManageMembership = () => {
         email: formData.email,
         amount: amount * 100,
         onSuccess: async (response) => {
+          
           // STEP 2: Call handle-membership edge function
           const { data: verifyData, error: verifyError } = await supabase.functions.invoke(
             "handle-membership",
