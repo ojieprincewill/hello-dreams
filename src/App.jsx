@@ -53,7 +53,6 @@ import DashboardPage from "./pages/dashboard-page/dashboard-page";
 import ClassesPage from "./pages/academy-pages/classes-page";
 
 // Import new auth pages
-import LoginPage from "./pages/login-page/login-page";
 import UnauthorizedPage from "./pages/unauthorized-page/unauthorized-page";
 import CoursePlayerPage from "./pages/academy-pages/course-player-page";
 import CohortsPage from "./pages/cohorts-page/CohortsPage";
@@ -89,7 +88,6 @@ function App() {
           <Routes>
             {/* Public routes - no authentication required */}
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
             {/* Service pages - public */}

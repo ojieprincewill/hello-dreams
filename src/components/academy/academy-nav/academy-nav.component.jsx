@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -17,11 +17,13 @@ import NavbarSearch from "../navbar-search/navbar-search.component";
 import { academyItems } from "@/data/academy-data/academy.data";
 import UserDropdown from "../user-dropdown/user-dropdown.component";
 import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
 
 const AcademyNavbar = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const { isAuthenticated, user } = useAuth();
+  const { profile } = useProfile();
 
   const openSideBar = () => {
     setSideBarOpen(true);
@@ -106,7 +108,7 @@ const AcademyNavbar = () => {
               >
                 Manage Membership
               </Link>
-              <UserDropdown />
+              <UserDropdown profile={profile} />
             </div>
           ) : (
             <div className="flex items-center space-x-3">

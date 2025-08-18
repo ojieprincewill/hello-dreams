@@ -8,9 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "@/state-slices/saved-classes/savedClassesSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import supabase from '@/supabase/client';
+import supabase from "@/supabase/client";
 import PaystackPop from "@paystack/inline-js";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "react-toastify";
 
 const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const dispatch = useDispatch();
@@ -22,11 +23,15 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const [paymentError, setPaymentError] = useState(null);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-  // const {isAuthenticated} = useAuth;
-
   const handleBookmark = (e) => {
     e.stopPropagation();
+    if (!isAuthenticated) {
+      toast.info("Please sign in to save this item.");
+      return;
+    }
+
     dispatch(toggleSavedClass(course.id));
+    toast.success("Item saved.");
   };
 
   const handleOrigins = () => {
@@ -64,18 +69,21 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
         email: user.email,
         amount: (course.price || 50000) * 100,
         onSuccess: async (response) => {
-          const { data: verifyData, error: verifyError } = await supabase.functions.invoke("enroll-student", {
-            body: {
-              reference: response.reference,
-              courseId: course.id,
-              courseTitle: course.title,
-              amount: course.price || 50000,
-              userId: user.id,
-              userEmail: user.email,
-            },
-          });
+          const { data: verifyData, error: verifyError } =
+            await supabase.functions.invoke("enroll-student", {
+              body: {
+                reference: response.reference,
+                courseId: course.id,
+                courseTitle: course.title,
+                amount: course.price || 50000,
+                userId: user.id,
+                userEmail: user.email,
+              },
+            });
           if (verifyError || verifyData?.error) {
-            setPaymentError("Verification failed. Payment may not be confirmed.");
+            setPaymentError(
+              "Verification failed. Payment may not be confirmed."
+            );
             console.log(verifyError);
           } else {
             setPaymentSuccess(true);
@@ -109,6 +117,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
         <button
           onClick={handleBookmark}
           aria-label={isSaved ? "Unsave" : "Save"}
+          title={isSaved ? "Remove from saved" : "Save this item"}
           className="absolute top-2 right-2 bg-black/30 hover:bg-black/50 p-2 rounded-full shadow-md transition duration-200 cursor-pointer"
         >
           <BookmarkIcon

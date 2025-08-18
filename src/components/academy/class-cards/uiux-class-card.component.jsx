@@ -7,15 +7,24 @@ import { PlayIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "../../../state-slices/saved-classes/savedClassesSlice";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "react-toastify";
 
 const UiuxClassCard = ({ data, className = "" }) => {
   const dispatch = useDispatch();
   const savedClasses = useSelector((state) => state.savedClasses);
   const isSaved = savedClasses.includes(data.id);
+  const { isAuthenticated } = useAuth();
 
   const handleBookmark = (e) => {
     e.stopPropagation();
+    if (!isAuthenticated) {
+      toast.info("Please sign in to save this item.");
+      return;
+    }
+
     dispatch(toggleSavedClass(data.id));
+    toast.success("Item saved.");
   };
 
   const handleOrigins = () => {
@@ -41,6 +50,7 @@ const UiuxClassCard = ({ data, className = "" }) => {
         <button
           onClick={handleBookmark}
           aria-label={isSaved ? "Unsave" : "Save"}
+          title={isSaved ? "Remove from saved" : "Save this item"}
           className="cursor-pointer"
         >
           <BookmarkIcon

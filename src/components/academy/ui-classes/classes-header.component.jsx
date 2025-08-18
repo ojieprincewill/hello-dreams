@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
 
 const ClassesHeader = () => {
   const handleOrigins = () => {
-    window.scrollTo(0,0);
-  }
-  const {user, isAuthenticated} = useAuth();
+    window.scrollTo(0, 0);
+  };
+  const { user, isAuthenticated } = useAuth();
   console.log(user);
+  const { profile } = useProfile();
 
   return (
     <div
@@ -49,11 +51,22 @@ const ClassesHeader = () => {
         cancel anytime
       </p>
       {isAuthenticated ? (
-        <Link to="/userprofile" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
-          Welcome back, {user.user_metadata.full_name.split(" ")[0]}
+        <Link
+          to="/userprofile"
+          onClick={handleOrigins}
+          className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer"
+        >
+          Welcome back,{" "}
+          {profile?.first_name && profile?.last_name
+            ? `${profile.first_name}`
+            : user?.email || "User"}
         </Link>
       ) : (
-        <Link to="/signin" onClick={handleOrigins} className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer">
+        <Link
+          to="/signin"
+          onClick={handleOrigins}
+          className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer"
+        >
           Sign in
         </Link>
       )}

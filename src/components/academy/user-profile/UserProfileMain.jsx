@@ -18,6 +18,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { useCourseProgress } from "@/hooks/useCourseProgress";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
+import LoadingSpinner from "@/components/loading-spinner/loading-spinner.component";
 
 const navItems = [
   { key: "learnings", label: "My Learning", icon: <Home size={20} /> },
@@ -26,24 +27,30 @@ const navItems = [
   { key: "help", label: "Help Center", icon: <HelpCircle size={20} /> },
 ];
 
-const Sidebar = ({ active, setActive, onClose = null, onLogout, user, profile, isFetching }) => {
+const Sidebar = ({
+  active,
+  setActive,
+  onClose = null,
+  onLogout,
+  user,
+  profile,
+  isFetching,
+}) => {
   return (
     <aside className="w-64 min-h-screen bg-white border-r border-[#eaecf0] flex flex-col py-8 px-2 shadow-md sticky top-0 left-0 z-10">
       {/* User Info */}
       <div className="px-6 mb-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 bg-[#1342ff] rounded-full flex items-center justify-center text-white font-semibold text-lg">
-            {profile?.first_name && profile?.last_name 
+            {profile?.first_name && profile?.last_name
               ? `${profile.first_name.charAt(0)}${profile.last_name.charAt(0)}`
-              : user?.email?.charAt(0).toUpperCase() || "U"
-            }
+              : user?.email?.charAt(0).toUpperCase() || "U"}
           </div>
           <div className="flex-1">
             <h3 className="font-semibold text-[#101828] text-sm">
-              {profile?.first_name && profile?.last_name 
+              {profile?.first_name && profile?.last_name
                 ? `${profile.first_name} ${profile.last_name}`
-                : user?.email || "User"
-              }
+                : user?.email || "User"}
             </h3>
             <p className="text-[#667085] text-xs">
               {profile?.role || "Student"}
@@ -51,7 +58,10 @@ const Sidebar = ({ active, setActive, onClose = null, onLogout, user, profile, i
           </div>
           {/* Background sync indicator */}
           {isFetching && (
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing data..."></div>
+            <div
+              className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+              title="Syncing data..."
+            ></div>
           )}
         </div>
       </div>
@@ -75,8 +85,8 @@ const Sidebar = ({ active, setActive, onClose = null, onLogout, user, profile, i
           </button>
         ))}
       </nav>
-      
-      <button 
+
+      <button
         onClick={onLogout}
         className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer"
       >
@@ -86,7 +96,15 @@ const Sidebar = ({ active, setActive, onClose = null, onLogout, user, profile, i
   );
 };
 
-const MobileSidebar = ({ active, setActive, onClose, onLogout, user, profile, isFetching }) => {
+const MobileSidebar = ({
+  active,
+  setActive,
+  onClose,
+  onLogout,
+  user,
+  profile,
+  isFetching,
+}) => {
   return (
     <div className="fixed inset-0 z-90 xl:hidden">
       {/* Backdrop - only on tablet (md and up) */}
@@ -118,17 +136,17 @@ const MobileSidebar = ({ active, setActive, onClose, onLogout, user, profile, is
           <div className="px-6 mb-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-[#1342ff] rounded-full flex items-center justify-center text-white font-semibold text-lg">
-                {profile?.first_name && profile?.last_name 
-                  ? `${profile.first_name.charAt(0)}${profile.last_name.charAt(0)}`
-                  : user?.email?.charAt(0).toUpperCase() || "U"
-                }
+                {profile?.first_name && profile?.last_name
+                  ? `${profile.first_name.charAt(0)}${profile.last_name.charAt(
+                      0
+                    )}`
+                  : user?.email?.charAt(0).toUpperCase() || "U"}
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-[#101828] text-sm">
-                  {profile?.first_name && profile?.last_name 
+                  {profile?.first_name && profile?.last_name
                     ? `${profile.first_name} ${profile.last_name}`
-                    : user?.email || "User"
-                  }
+                    : user?.email || "User"}
                 </h3>
                 <p className="text-[#667085] text-xs">
                   {profile?.role || "Student"}
@@ -136,7 +154,10 @@ const MobileSidebar = ({ active, setActive, onClose, onLogout, user, profile, is
               </div>
               {/* Background sync indicator */}
               {isFetching && (
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" title="Syncing data..."></div>
+                <div
+                  className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
+                  title="Syncing data..."
+                ></div>
               )}
             </div>
           </div>
@@ -163,8 +184,8 @@ const MobileSidebar = ({ active, setActive, onClose, onLogout, user, profile, is
               </button>
             ))}
           </nav>
-          
-          <button 
+
+          <button
             onClick={onLogout}
             className="mt-auto flex items-center gap-3 px-6 py-3 text-[#101828] hover:text-white hover:bg-[#ff7f50] font-medium text-[16px] rounded-lg transition-colors duration-200 cursor-pointer"
           >
@@ -180,24 +201,34 @@ const UserProfileMain = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut, isAuthenticated } = useAuth();
-  const { profile, isLoading: profileLoading, isFetching: profileFetching, error: profileError } = useProfile();
+  const {
+    profile,
+    isLoading: profileLoading,
+    isFetching: profileFetching,
+    error: profileError,
+  } = useProfile();
   const { isFetching: courseProgressFetching } = useCourseProgress();
-  
+
   const initialTab = location.state?.active || "learnings";
   const [active, setActive] = useState(initialTab);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleOrigins = () => {
+    window.scrollTo(0, 0);
+  };
+
   // Handle authentication redirect in useEffect
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigate("/signin");
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   const handleLogout = async () => {
     try {
       await signOut.mutateAsync();
       navigate("/academy");
+      handleOrigins();
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -210,22 +241,18 @@ const UserProfileMain = () => {
 
   // Show minimal loading only if no profile data exists at all
   if (profileLoading && !profile) {
-    return (
-      <div className="flex min-h-[80vh] items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1342ff]"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   const isFetching = profileFetching || courseProgressFetching;
 
   // Debug information (remove in production)
   if (profileError) {
-    console.log('Profile Error Details:', {
+    console.log("Profile Error Details:", {
       error: profileError,
       user: user?.id,
       isAuthenticated,
-      profile
+      profile,
     });
   }
 
@@ -233,9 +260,9 @@ const UserProfileMain = () => {
     <div className="flex min-h-[80vh]">
       {/* Desktop Sidebar - hidden on mobile/tablet, visible on desktop */}
       <div className="hidden xl:block">
-        <Sidebar 
-          active={active} 
-          setActive={setActive} 
+        <Sidebar
+          active={active}
+          setActive={setActive}
           onLogout={handleLogout}
           user={user}
           profile={profile}

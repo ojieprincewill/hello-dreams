@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import CohortCard from "../cohort-card/CohortCard";
 import { CohortsData } from "@/data/academy-data/academy.data";
 import { useAuth } from "@/hooks/useAuth";
+import LoadingSpinner from "@/components/loading-spinner/loading-spinner.component";
 
 const CATEGORY_OPTIONS = [
   { label: "All classes", value: "all" },
@@ -48,7 +49,7 @@ const ClassesMain = () => {
   const savedClasses = useSelector((state) => state.savedClasses);
   const [lengthFilter, setLengthFilter] = useState("all");
   const [lengthDropdownOpen, setLengthDropdownOpen] = useState(false);
-  const {user, isAuthenticated} = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
   // Fetch courses from database
   const { data: courses = [], isLoading, error } = usePublishedCourses();
@@ -67,7 +68,7 @@ const ClassesMain = () => {
 
   // Transform database courses to match the expected format
   const transformedCourses = React.useMemo(() => {
-    return courses.map(course => ({
+    return courses.map((course) => ({
       id: course.id,
       image: course.cover_image,
       title: course.title,
@@ -83,10 +84,6 @@ const ClassesMain = () => {
     }));
   }, [courses]);
 
-  // Filter logic
-  let filteredClasses = [];
-  let filteredCourses = [];
-
   // Helper: map CATEGORY_OPTIONS value to DB category
   const mapCategoryValueToDb = (value) => {
     switch (value) {
@@ -101,69 +98,78 @@ const ClassesMain = () => {
     }
   };
 
-  if (category === "courses" || category === "all") {
-    // Show ALL published courses, even those with no category
-    filteredCourses = transformedCourses.filter((item) => {
-      if (item.type !== "course") return false;
-      if (showSaved && !savedClasses.includes(item.id)) return false;
-      // No category filter for 'all' or 'courses'
-      // No length filter for 'courses' (keep as is for 'all' if you want)
-      return true;
-    });
-    filteredClasses = filteredCourses; // For grid below
-  } else {
-    // Filter by category
-    filteredClasses = transformedCourses.filter((item) => {
-      if (item.type !== "course") return false;
-      if (showSaved && !savedClasses.includes(item.id)) return false;
-      // Category logic
-      if (category === "uiux") {
-        return item.category === "User Experience Design";
-      }
-      if (category === "20min") {
-        // If you have a DB category for 20min, use it; otherwise, filter by duration
-        const minutes = parseDurationToMinutes(item.totalTime);
-        return minutes <= 20;
-      }
-      if (category === "free") {
-        return item.price === 0;
-      }
-      // Fallback: match category exactly
-      return item.category === mapCategoryValueToDb(category);
-    });
-  }
-
   // Helper function to parse duration string to minutes
   const parseDurationToMinutes = (duration) => {
     if (!duration) return 0;
-    
+
     const match = duration.match(/(\d+)h\s*(\d+)m/);
     if (match) {
       const hours = parseInt(match[1]) || 0;
       const minutes = parseInt(match[2]) || 0;
       return hours * 60 + minutes;
     }
-    
-    // Try to parse just minutes
+
     const minutesMatch = duration.match(/(\d+)m/);
     if (minutesMatch) {
       return parseInt(minutesMatch[1]) || 0;
     }
-    
+
     return 0;
   };
+
+  // Helper function to apply length filter
+  const passesLengthFilter = (minutes) => {
+    switch (lengthFilter) {
+      case "short":
+        return minutes <= 10;
+      case "medium":
+        return minutes <= 20;
+      case "long":
+        return minutes <= 30;
+      case "extended":
+        return minutes > 30;
+      default:
+        return true; // "all"
+    }
+  };
+
+  // Filtering logic
+  let filteredClasses = [];
+
+  filteredClasses = transformedCourses.filter((item) => {
+    if (item.type !== "course") return false;
+    if (showSaved && !savedClasses.includes(item.id)) return false;
+
+    const minutes = parseDurationToMinutes(item.totalTime);
+
+    // Apply length filter
+    if (!passesLengthFilter(minutes)) return false;
+
+    // Apply category filter
+    switch (category) {
+      case "all":
+      case "courses":
+        return true; // Already filtered by length above
+
+      case "uiux":
+        return item.category === "User Experience Design";
+
+      case "20min":
+        return minutes <= 20;
+
+      case "free":
+        return item.price === 0;
+
+      default:
+        return item.category === mapCategoryValueToDb(category);
+    }
+  });
 
   // Heading
   const heading = category === "courses" ? "Courses" : "Classes";
 
   if (isLoading) {
-    return (
-      <div className="px-[5%] py-8">
-        <div className="text-center text-[#667085] py-10">
-          Loading classes...
-        </div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
@@ -265,20 +271,34 @@ const ClassesMain = () => {
       </div>
 
       {/* Grid of classes/courses */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredClasses.map((item) => {
-          if (item.type === "course") {
-            return <CourseCard key={item.id} course={item} user={user} isAuthenticated={isAuthenticated} />;
-          } else if (item.type === "uiux") {
-            return <UiuxClassCard key={item.id} class={item} />;
-          } else if (item.type === "free") {
-            return <FreeClassCard key={item.id} class={item} />;
-          } else if (item.type === "min20") {
-            return <Min20ClassCard key={item.id} class={item} />;
-          }
-          return null;
-        })}
-      </div>
+      {filteredClasses.length === 0 && showSaved ? (
+        <div className="text-center text-[#667085] py-10">
+          You haven't saved any {category === "courses" ? "courses" : "classes"}
+          .
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredClasses.map((item) => {
+            if (item.type === "course") {
+              return (
+                <CourseCard
+                  key={item.id}
+                  course={item}
+                  user={user}
+                  isAuthenticated={isAuthenticated}
+                />
+              );
+            } else if (item.type === "uiux") {
+              return <UiuxClassCard key={item.id} class={item} />;
+            } else if (item.type === "free") {
+              return <FreeClassCard key={item.id} class={item} />;
+            } else if (item.type === "min20") {
+              return <Min20ClassCard key={item.id} class={item} />;
+            }
+            return null;
+          })}
+        </div>
+      )}
     </div>
   );
 };

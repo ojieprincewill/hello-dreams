@@ -1,31 +1,32 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { 
-  getCurrentSession, 
-  getCurrentUser, 
-  signInWithEmail, 
-  signUpWithEmail, 
-  signOut, 
-  resetPassword, 
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getCurrentSession,
+  getCurrentUser,
+  signInWithEmail,
+  signUpWithEmail,
+  signOut,
+  resetPassword,
   updatePassword,
   updatePasswordWithToken,
   updateUserProfile,
-  updateUserProfileWithAvatar
-} from '../services/auth';
+  updateUserProfileWithAvatar,
+} from "../services/auth";
 
 export function useAuth() {
   const queryClient = useQueryClient();
 
   // Get current session
   const sessionQuery = useQuery({
-    queryKey: ['auth', 'session'],
+    queryKey: ["auth", "session"],
     queryFn: getCurrentSession,
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   // Get current user
   const userQuery = useQuery({
-    queryKey: ['auth', 'user'],
+    queryKey: ["auth", "user"],
     queryFn: getCurrentUser,
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: false,
@@ -36,7 +37,7 @@ export function useAuth() {
   const signIn = useMutation({
     mutationFn: signInWithEmail,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
 
@@ -44,16 +45,17 @@ export function useAuth() {
   const signUp = useMutation({
     mutationFn: signUpWithEmail,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
 
   // Sign out mutation
   const signOutMutation = useMutation({
     mutationFn: signOut,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
-      queryClient.clear(); // Clear all queries on sign out
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["auth", "session"] });
+      await queryClient.invalidateQueries({ queryKey: ["auth", "user"] });
+      queryClient.clear(); // optional, but good for full reset
     },
   });
 
@@ -76,7 +78,7 @@ export function useAuth() {
   const updateProfile = useMutation({
     mutationFn: updateUserProfile,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
 
@@ -84,7 +86,7 @@ export function useAuth() {
   const updateProfileWithAvatar = useMutation({
     mutationFn: updateUserProfileWithAvatar,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
     },
   });
 
@@ -94,7 +96,7 @@ export function useAuth() {
     user: userQuery.data,
     isLoading: sessionQuery.isLoading || userQuery.isLoading,
     isError: sessionQuery.isError || userQuery.isError,
-    
+
     // Mutations
     signIn,
     signUp,
@@ -104,9 +106,9 @@ export function useAuth() {
     updatePasswordWithToken: updatePasswordWithTokenMutation,
     updateProfile,
     updateProfileWithAvatar,
-    
+
     // Computed values
     isAuthenticated: !!sessionQuery.data?.user,
-    isAdmin: sessionQuery.data?.user?.user_metadata?.role === 'admin',
+    isAdmin: sessionQuery.data?.user?.user_metadata?.role === "admin",
   };
-} 
+}
