@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 import Preview2 from "../landing-previews/preview2.component";
 import JoinCohort from "../landing-previews/join-cohort.component";
-import { useCourse } from '@/hooks/useCourses';
-import { useAuth } from '@/hooks/useAuth';
-import supabase from '@/supabase/client';
+import { useCourse } from "@/hooks/useCourses";
+import { useAuth } from "@/hooks/useAuth";
+import supabase from "@/supabase/client";
 import PaystackPop from "@paystack/inline-js";
 
 const ManageMembership = () => {
@@ -36,12 +36,15 @@ const ManageMembership = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   // Add new state for membership payment
-  const [membershipPaymentLoading, setMembershipPaymentLoading] = useState(false);
+  const [membershipPaymentLoading, setMembershipPaymentLoading] =
+    useState(false);
   const [membershipPaymentError, setMembershipPaymentError] = useState(null);
-  const [membershipPaymentSuccess, setMembershipPaymentSuccess] = useState(false);
+  const [membershipPaymentSuccess, setMembershipPaymentSuccess] =
+    useState(false);
 
   // Fetch the selected course if courseId is present
-  const { data: selectedCourse, isLoading: courseLoading } = useCourse(courseIdParam);
+  const { data: selectedCourse, isLoading: courseLoading } =
+    useCourse(courseIdParam);
   const { user, isAuthenticated } = useAuth();
 
   const handleChange = (e) => {
@@ -51,13 +54,13 @@ const ManageMembership = () => {
 
   const handleBuyNow = async () => {
     if (!selectedCourse) return;
-    
+
     // Check if user is authenticated
     if (!isAuthenticated || !user?.email) {
       setPaymentError("Please log in to purchase this course.");
       return;
     }
-    
+
     setPaymentLoading(true);
     setPaymentError(null);
     setPaymentSuccess(false);
@@ -101,7 +104,9 @@ const ManageMembership = () => {
             });
 
           if (verifyError || verifyData?.error) {
-            setPaymentError("Verification failed. Payment may not be confirmed.");
+            setPaymentError(
+              "Verification failed. Payment may not be confirmed."
+            );
           } else {
             setPaymentSuccess(true);
             setFormStep(3);
@@ -132,7 +137,14 @@ const ManageMembership = () => {
     setMembershipPaymentSuccess(false);
 
     // Validate form
-    if (!formData.email || !formData.name || !formData.country || !formData.city || !formData.state || !formData.zip) {
+    if (
+      !formData.email ||
+      !formData.name ||
+      !formData.country ||
+      !formData.city ||
+      !formData.state ||
+      !formData.zip
+    ) {
       setMembershipPaymentError("Please fill all required fields.");
       setMembershipPaymentLoading(false);
       return;
@@ -166,11 +178,9 @@ const ManageMembership = () => {
         email: formData.email,
         amount: amount * 100,
         onSuccess: async (response) => {
-          
           // STEP 2: Call handle-membership edge function
-          const { data: verifyData, error: verifyError } = await supabase.functions.invoke(
-            "handle-membership",
-            {
+          const { data: verifyData, error: verifyError } =
+            await supabase.functions.invoke("handle-membership", {
               body: {
                 reference: response.reference,
                 membership_type: membershipType,
@@ -184,10 +194,11 @@ const ManageMembership = () => {
                   zip: formData.zip,
                 },
               },
-            }
-          );
+            });
           if (verifyError || verifyData?.error) {
-            setMembershipPaymentError("Verification failed. Payment may not be confirmed.");
+            setMembershipPaymentError(
+              "Verification failed. Payment may not be confirmed."
+            );
           } else {
             setMembershipPaymentSuccess(true);
             setFormStep(3);
@@ -318,7 +329,7 @@ const ManageMembership = () => {
                       }`}
                     >
                       <span
-                        className={`mr-1 w-[22px] h-[22px] bg-[#efece9] text-[#000000] text-[12px] rounded-full flex justify-center items-center ${
+                        className={`mr-1 w-[22px] h-[22px] text-[10px] md:text-[12px] rounded-full flex justify-center items-center ${
                           formStep === 2
                             ? "bg-[#1342ff] text-[#fff]"
                             : "bg-[#efece9] text-[#000000]"
@@ -334,7 +345,7 @@ const ManageMembership = () => {
                       }`}
                     >
                       <span
-                        className={`mr-1 w-[22px] h-[22px] bg-[#efece9] text-[#000000] text-[12px] rounded-full flex justify-center items-center ${
+                        className={`mr-1 w-[22px] h-[22px] text-[10px] md:text-[12px] rounded-full flex justify-center items-center ${
                           formStep === 3
                             ? "bg-[#1342ff] text-[#fff]"
                             : "bg-[#efece9] text-[#000000]"
@@ -474,20 +485,35 @@ const ManageMembership = () => {
                           : "Pay 100,800/annually"}
                       </button>
                       {membershipPaymentError && (
-                        <p className="text-red-500 text-sm mt-2">{membershipPaymentError}</p>
+                        <p className="text-red-500 text-sm mt-2">
+                          {membershipPaymentError}
+                        </p>
                       )}
                     </form>
                   </div>
                 )}
                 {formStep === 2 && (
-                  <div className="text-center text-[#667085]">
-                    [Payment step placeholder]
+                  <div className="flex flex-col space-y-3 justify-center items-center">
+                    <p className="text-center text-[#667085]">
+                      Complete payment on Paystack popup.
+                    </p>
+                    <button
+                      onClick={() => setFormStep(Math.max(1, formStep - 1))}
+                      className="bg-[#1342ff] text-white text-[14px] md:text-[16px] font-medium rounded-lg py-2 px-5 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer"
+                    >
+                      Retry
+                    </button>
                   </div>
                 )}
                 {formStep === 3 && (
                   <div className="text-center text-[#1342ff]">
-                    <h3 className="text-[18px] font-bold mb-2">Membership Activated!</h3>
-                    <p className="text-[#667085]">Thank you for becoming a member. You now have full access to all courses and features.</p>
+                    <h3 className="text-[18px] font-bold mb-2">
+                      Membership Activated!
+                    </h3>
+                    <p className="text-[#667085]">
+                      Thank you for becoming a member. You now have full access
+                      to all courses and features.
+                    </p>
                     <button
                       className="mt-6 bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 px-6 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer"
                       onClick={() => navigate("/academy")}
@@ -528,7 +554,8 @@ const ManageMembership = () => {
                       {selectedCourse.instructor_name}
                     </p>
                     <p className="text-[14px] w-max md:text-[16px] text-[#787777] font-bold mb-2 pb-2 border-b-4 border-b-[#efece9] flex items-center ">
-                      {selectedCourse.total_lessons} Lessons . {selectedCourse.total_duration}
+                      {selectedCourse.total_lessons} Lessons .{" "}
+                      {selectedCourse.total_duration}
                     </p>
                     <p className="text-[24px] md:text-[27.88px] text-[#010413] font-bold pt-2 ">
                       NGN {selectedCourse.price?.toLocaleString()}
@@ -543,7 +570,9 @@ const ManageMembership = () => {
                       </button>
                     ) : (
                       <div className="mt-6 text-center">
-                        <p className="text-[#667085] text-sm mb-3">Please log in to purchase this course</p>
+                        <p className="text-[#667085] text-sm mb-3">
+                          Please log in to purchase this course
+                        </p>
                         <Link
                           to="/login"
                           className="w-full bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer inline-block"
@@ -553,7 +582,9 @@ const ManageMembership = () => {
                       </div>
                     )}
                     {paymentError && (
-                      <p className="text-red-500 text-sm mt-2">{paymentError}</p>
+                      <p className="text-red-500 text-sm mt-2">
+                        {paymentError}
+                      </p>
                     )}
                     {paymentSuccess && (
                       <p className="text-green-500 text-sm mt-2">
