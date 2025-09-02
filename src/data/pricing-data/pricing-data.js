@@ -198,3 +198,97 @@ export const BrandingSmeData = [
     ],
   },
 ];
+
+export const BrandingPackageData = [
+  {
+    id: 1,
+    price: "$300",
+    purpose: "Printing",
+    title: "Starter Pack",
+    text: "Start off strong",
+    options: [
+      {
+        id: 1,
+        option: "250 business cards",
+      },
+      {
+        id: 2,
+        option: "100 flyers",
+      },
+      {
+        id: 3,
+        option: "2 branded T-shirts",
+      },
+      {
+        id: 4,
+        option:
+          "Perfect for SMEs just starting out and needing basic visibility.",
+      },
+    ],
+  },
+  {
+    id: 2,
+    price: "$450",
+    purpose: "Printing",
+    title: "Growth Marketing Pack",
+    text: "Anything is possible",
+    options: [
+      {
+        id: 1,
+        option: "500 business cards",
+      },
+      {
+        id: 2,
+        option: "200 flyers",
+      },
+      {
+        id: 3,
+        option: "3 branded T-shirts",
+      },
+      {
+        id: 4,
+        option: "3 branded mugs",
+      },
+      {
+        id: 5,
+        option: "1 pull-up banner",
+      },
+    ],
+  },
+  {
+    id: 3,
+    price: "$600",
+    title: "Specialized and Sector",
+    options: [
+      {
+        id: 1,
+        option: "1000 business cards",
+      },
+      {
+        id: 2,
+        option: "500 flyers",
+      },
+      {
+        id: 3,
+        option: "5 branded T-shirts",
+      },
+      {
+        id: 4,
+        option: "5 branded mugs",
+      },
+      {
+        id: 5,
+        option: "5 branded gift bags",
+      },
+      {
+        id: 6,
+        option: "1 roll-up banner",
+      },
+      {
+        id: 7,
+        option: "1 backdrop banner",
+      },
+    ],
+    message: "We cater for all",
+  },
+];

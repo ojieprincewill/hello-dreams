@@ -1,5 +1,5 @@
 import React from "react";
-import { CvPricingData } from "../../data/pricing-data/pricing-data";
+import { BrandingPackageData } from "../../data/pricing-data/pricing-data";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
@@ -47,14 +47,14 @@ const BrandingPackage = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="md:relative w-full h-max md:w-[642.68px] md:h-[295px] xl:w-[937px] xl:h-[467px] rounded-xl md:rounded-3xl md:bg-[#fff] p-1 md:p-5 xl:px-10 xl:py-7 flex flex-col space-y-4 md:flex-row"
         >
-          {CvPricingData.slice(0, 2).map((data, index) => (
+          {BrandingPackageData.slice(0, 2).map((data, index) => (
             <motion.div
               key={data.id}
               initial="hidden"
               whileInView="visible"
               variants={cardVariants}
               custom={index}
-              className="md:mr-5 xl:mr-10 p-5 md:p-0 relative bg-[#fff] rounded-xl md:bg-none md:rounded-none"
+              className="md:mr-15 p-5 md:p-0 relative bg-[#fff] rounded-xl md:bg-none md:rounded-none"
             >
               <p className="text-[#010413] text-[20.85px] xl:text-[36px] font-bold mb-3">
                 {data.price}{" "}
@@ -77,7 +77,7 @@ const BrandingPackage = () => {
                     </p>
                     <p
                       key={data.id}
-                      className="text-[#667085] text-[8.69px] xl:text-[15px] font-medium"
+                      className="text-[#667085] text-[8.69px] xl:text-[15px] font-medium md:max-w-[120px] xl:max-w-[200px]"
                     >
                       {data.option}
                     </p>
@@ -96,7 +96,7 @@ const BrandingPackage = () => {
               </Link>
             </motion.div>
           ))}
-          {CvPricingData.slice(2).map((data) => (
+          {BrandingPackageData.slice(2).map((data) => (
             <motion.div
               key={data.id}
               initial={{ opacity: 0, x: -30 }}

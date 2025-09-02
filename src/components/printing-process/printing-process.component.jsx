@@ -26,7 +26,8 @@ const PrintingProcess = () => {
         className="text-[12px] xl:text-[17.44px] text-[#667085] text-center font-bold capitalize"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        CV Writing & LinkedIn Optimisation
+        From design to delivery, we make printing simple, fast, and
+        high-quality.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-5 mt-10 md:mt-20">
         {PrintingProcessData.map((data, index) => (

@@ -38,17 +38,17 @@ export const PrintingProcessData = [
   {
     id: 1,
     title: "Consultation & Design",
-    text: "Our team of designers collaborates with you to create custom designs or use your provided artwork.",
+    text: "We refine your artwork or create fresh designs, ensuring every file is print-ready and aligned with your brand.",
   },
   {
     id: 2,
-    title: "Proofing & Printing",
-    text: "Our experts craft compelling CVs and optimize LinkedIn profiles with the right keywords, ensuring your professional brand stands out to potential employers and clients.",
+    title: "High-Quality Printing",
+    text: "Using premium materials and modern machines, we print with precision for clear, vibrant, and durable results.",
   },
   {
     id: 3,
-    title: "Quality Control",
-    text: "We conduct a thorough review and incorporate your feedback to ensure your CV and LinkedIn profile meet the highest standards. Our goal is to equip you with powerful tools for career advancement",
+    title: "Packaging & Delivery",
+    text: "Your prints are carefully finished, packaged, and delivered to your doorstep or event, ready to impress.",
   },
 ];
 

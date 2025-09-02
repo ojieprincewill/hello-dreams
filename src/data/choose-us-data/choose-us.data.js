@@ -149,7 +149,7 @@ export const MeetExpertsData = [
   {
     id: 6,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248852/About%20page/c68d4beed3c66d72d5a6b7eacec44a9feeacbb8d_l5zfmc.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1756798431/About%20page/WhatsApp_Image_2025-09-02_at_08.27.42_e3532705_g8zrz6.jpg",
     name: "Lynda",
     text: "Lynda, a Founding Member of Hello Dreams, blends educational and administrative leadership with real-world operational expertise.",
     text1:
@@ -158,7 +158,7 @@ export const MeetExpertsData = [
       "At Hello Dreams, Lynda ensures that every project is executed efficiently and on time, while also overseeing the company's operational and financial integrity. She keeps the team organized, ensures deliverables meet high standards, and guarantees that clients and partners honor their commitments, making sure Hello Dreams gets paid what it's due.",
     text3:
       "Her unique blend of educational leadership, administrative expertise, and people management keeps Hello Dreams running smoothly, supporting the team to deliver exceptional work and empowering others to dream and grow.",
-    role: "Senior UX Consultant",
+    role: "Director",
     bgColor: "#ffc501",
     modalPosition: "left",
   },

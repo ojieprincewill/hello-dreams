@@ -39,7 +39,7 @@ const UiTestimonial = () => {
             whileInView="visible"
             variants={cardVariants}
             custom={index}
-            className="border border-[#cccccc] rounded-2xl p-3 md:p-5"
+            className="border border-[#cccccc] rounded-2xl p-3 md:p-5 md:h-[326px] relative"
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row space-x-3 items-center">
@@ -47,7 +47,9 @@ const UiTestimonial = () => {
                   <img
                     src={data.logo}
                     alt={data.client}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${
+                      index === 1 ? "object-contain" : "object-cover"
+                    }`}
                   />
                 </div>
                 <div className="space-y-1 md:space-y-2">
@@ -84,7 +86,7 @@ const UiTestimonial = () => {
                 {data.text2}
               </p>
             </div>
-            <div className="flex space-x-1">
+            <div className="flex space-x-1 md:absolute md:bottom-5">
               {[...Array(5)].map((_, index) => (
                 <StarIcon
                   key={index}

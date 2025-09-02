@@ -16,7 +16,7 @@ const AcademyHeader = () => {
     {
       id: 2,
       backgroundImage:
-        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706959/Academy/landing/30790dd232a38fc204599d3a1cb34cb3440a1b99_xkvxqt.jpg",
+        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1756799516/Academy/landing/36222312187e1cd1b399589c1791d320058ad40d_aemygq.jpg",
       title: "Knowledge is Power",
       subtitle:
         "Unlocking opportunities through education and skills development and acquisition",
@@ -25,7 +25,7 @@ const AcademyHeader = () => {
     {
       id: 3,
       backgroundImage:
-        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750706958/Academy/landing/002a21ce8ac67e0d5d9f8e4fc999263f79258a74_aezjah.jpg",
+        "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1756799515/Academy/landing/90fac0766ef59a6b3e4d08d44f6a221bc0c63fdf_jopmwh.jpg",
       title: "Transforming Lives",
       subtitle:
         "Building a brighter future by equipping people with valuable tech skills",
