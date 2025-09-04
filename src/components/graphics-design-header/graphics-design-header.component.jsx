@@ -5,9 +5,7 @@ import NavBar from "../landing-header/nav-bar/nav-bar.component";
 import { motion } from "motion/react";
 
 const GraphicsDesignHeader = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="relative bg-[#ffc501] py-3 md:pl-15 xl:pl-30 md:py-15 h-[755px] md:h-[663.07px] xl:h-[1024px] overflow-hidden">

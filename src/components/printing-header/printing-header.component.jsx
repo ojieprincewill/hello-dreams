@@ -5,9 +5,7 @@ import NavBar from "../landing-header/nav-bar/nav-bar.component";
 import { motion } from "motion/react";
 
 const PrintingHeader = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className=" bg-[#eef2fe] pt-3 md:pt-0">

@@ -9,9 +9,7 @@ const OurPackages = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   const handleClick = (type) => {
     dispatch(setConsultationType(type));
@@ -31,7 +29,7 @@ const OurPackages = () => {
         className="text-[12px] xl:text-[17px] text-[#f7f7f7] font-medium xl:font-bold text-center mb-5 xl:mb-7"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
-        No contracts or hidden costs, pause or cancel anytime.
+        No hidden costs, pause or cancel anytime.
         <br />
         Each package comes with a design lead.
       </p>

@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const JobHeader = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <>

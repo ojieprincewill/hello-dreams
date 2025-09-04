@@ -8,9 +8,7 @@ import { useDispatch } from "react-redux";
 import { resetCart } from "@/state-slices/cart/cartSlice";
 import PaystackPop from "@paystack/inline-js";
 const CheckoutForm = ({ onSuccess }) => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
   const dispatch = useDispatch();
 
   // Access cart data from Redux store

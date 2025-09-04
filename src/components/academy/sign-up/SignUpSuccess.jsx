@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "@/components/logo/logo.component";
 
 const SignUpSuccess = ({ formData }) => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="relative min-h-screen w-full p-[5%] flex items-center justify-center bg-[url('https://res.cloudinary.com/dganx8kmn/image/upload/v1752984140/Academy/sign%20up/3f66b694a8196a4df5f2b870dc9901b56806d575_pntsis.png')] bg-cover bg-center">

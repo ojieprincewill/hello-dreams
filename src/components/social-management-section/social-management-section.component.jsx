@@ -4,9 +4,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const SocialManagementSection = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="space-y-3">

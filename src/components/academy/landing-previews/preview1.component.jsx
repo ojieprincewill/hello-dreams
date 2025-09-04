@@ -20,9 +20,7 @@ const cardVariants = {
 const Preview1 = ({ user, isAuthenticated }) => {
   const { categorizedData, isLoading, error } = useAcademySectionData();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Get UI/UX courses and limit to 3
   const uiuxCourses = categorizedData.uiux?.slice(0, 3) || [];
@@ -125,9 +123,9 @@ const Preview1 = ({ user, isAuthenticated }) => {
               variants={cardVariants}
               custom={index}
             >
-              <CourseCard 
-                course={course} 
-                user={user} 
+              <CourseCard
+                course={course}
+                user={user}
                 isAuthenticated={isAuthenticated}
               />
             </motion.div>

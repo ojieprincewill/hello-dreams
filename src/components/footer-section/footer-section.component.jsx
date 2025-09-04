@@ -6,9 +6,7 @@ const FooterSection = () => {
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   const handleNavigate = (path) => {
     navigate(path);

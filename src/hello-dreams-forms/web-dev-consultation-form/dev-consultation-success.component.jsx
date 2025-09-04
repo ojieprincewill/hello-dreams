@@ -6,9 +6,7 @@ const DevConsultationSuccess = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="flex flex-col justify-center items-center px-[5%] py-20">

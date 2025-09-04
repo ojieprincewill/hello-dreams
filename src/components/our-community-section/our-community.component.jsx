@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const OurCommunity = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="bg-[#f6f6f8] px-[5%] py-5 md:py-10">

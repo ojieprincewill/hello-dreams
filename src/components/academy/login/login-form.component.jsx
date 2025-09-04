@@ -13,7 +13,7 @@ const LoginForm = () => {
   });
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  
+
   // Forgot password states
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    navigate('/userprofile');
+    navigate("/userprofile");
     return null;
   }
 
@@ -45,7 +45,9 @@ const LoginForm = () => {
     try {
       // For now, we'll use email login since phone login requires additional setup
       if (activeTab === "phone") {
-        setLoginError("Phone login is not yet supported. Please use email login.");
+        setLoginError(
+          "Phone login is not yet supported. Please use email login."
+        );
         setIsLoggingIn(false);
         return;
       }
@@ -56,7 +58,7 @@ const LoginForm = () => {
       });
 
       // Successful login - redirect to user profile
-      navigate('/userprofile');
+      navigate("/userprofile");
     } catch (error) {
       console.error("Login error:", error);
       setLoginError(
@@ -96,9 +98,7 @@ const LoginForm = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <>
@@ -183,10 +183,7 @@ const LoginForm = () => {
               </div>
             )}
 
-            <form
-              className="space-y-5"
-              onSubmit={handleSubmit}
-            >
+            <form className="space-y-5" onSubmit={handleSubmit}>
               {activeTab === "email" ? (
                 <>
                   <div>
@@ -311,7 +308,9 @@ const LoginForm = () => {
                     (activeTab === "email" &&
                       formData.email &&
                       formData.password) ||
-                    (activeTab === "phone" && formData.phone && formData.password)
+                    (activeTab === "phone" &&
+                      formData.phone &&
+                      formData.password)
                   )
                 }
               >
@@ -342,7 +341,9 @@ const LoginForm = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-[#101828]">Reset Password</h3>
+              <h3 className="text-lg font-semibold text-[#101828]">
+                Reset Password
+              </h3>
               <button
                 onClick={closeForgotPassword}
                 className="text-gray-400 hover:text-gray-600 text-xl"
@@ -355,13 +356,26 @@ const LoginForm = () => {
             {resetSuccess ? (
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-8 h-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
-                <h4 className="text-lg font-semibold text-[#101828] mb-2">Check your email</h4>
+                <h4 className="text-lg font-semibold text-[#101828] mb-2">
+                  Check your email
+                </h4>
                 <p className="text-[#667085] text-sm mb-4">
-                  We've sent a password reset link to your email address. Click the link to reset your password.
+                  We've sent a password reset link to your email address. Click
+                  the link to reset your password.
                 </p>
                 <button
                   onClick={closeForgotPassword}
@@ -373,7 +387,8 @@ const LoginForm = () => {
             ) : (
               <>
                 <p className="text-[#667085] text-sm mb-4">
-                  Enter your email address and we'll send you a link to reset your password.
+                  Enter your email address and we'll send you a link to reset
+                  your password.
                 </p>
 
                 {resetError && (

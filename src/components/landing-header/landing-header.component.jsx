@@ -5,9 +5,7 @@ import NavBar from "./nav-bar/nav-bar.component";
 import { Link } from "react-router-dom";
 
 const LandingHeader = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <>
@@ -20,14 +18,13 @@ const LandingHeader = () => {
           className="hidden absolute md:bottom-[130px] xl:bottom-[230px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]"
         >
           <h1 className="md:text-[40px] xl:text-[52px] w-[630px] leading-[1.1] font-extrabold">
-            Unlock your potential.
-            <br />
-            Build skills. Transform your future.
+            Unlock your business potential. Build skills. Transform your future.
           </h1>
           <p className="mt-8 text-[20px] font-bold w-[556px] leading-[1.4]">
-            Get access to expert-led training, career guidance, and tools to
-            help you succeed. Join thousands taking their first step toward a
-            better future!
+            Hello Dreams helps businesses and individuals stand out with
+            stunning design, social media management, printing, web & mobile
+            development, and branding solutions. We also support professionals
+            with CV and LinkedIn optimization, career tools, and training.
           </p>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

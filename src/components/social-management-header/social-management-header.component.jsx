@@ -5,9 +5,7 @@ import NavBar from "../landing-header/nav-bar/nav-bar.component";
 import { motion } from "motion/react";
 
 const SocialManagementHeader = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="bg-[#ff7f50] md:bg-[#eef2fe] pt-3 md:pt-0">

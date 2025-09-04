@@ -5,9 +5,7 @@ import NavBar from "../landing-header/nav-bar/nav-bar.component";
 import { motion } from "motion/react";
 
 const CvOptimizationHeader = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <>

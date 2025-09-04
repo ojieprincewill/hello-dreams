@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const CvOptimizationCta = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="bg-[#010413] text-[#fff] px-2 py-5 md:px-10">

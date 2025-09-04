@@ -8,7 +8,6 @@ const OrderSuccess = () => {
 
   const handleClose = () => {
     navigate("/services/our-collection");
-    window.scrollTo(0, 0);
   };
 
   return (

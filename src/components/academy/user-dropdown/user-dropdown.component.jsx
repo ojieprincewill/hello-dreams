@@ -9,9 +9,7 @@ const UserDropdown = ({ active, setActive, profile }) => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Generate user initials from full name
   // const getUserInitials = () => {

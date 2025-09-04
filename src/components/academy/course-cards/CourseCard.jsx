@@ -34,9 +34,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
     toast.success("Item saved.");
   };
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   const handleBuyNow = async () => {
     if (!course) return;

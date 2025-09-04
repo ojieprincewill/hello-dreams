@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import ExpertTeam from "../expert-team/expert-team.component";
 
 const MeetExperts = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="w-full px-[5%] py-10">

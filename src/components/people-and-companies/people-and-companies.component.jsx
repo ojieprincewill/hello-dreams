@@ -74,7 +74,7 @@ const PeopleAndCompanies = () => {
           >
             Large corporations looking to outsource UI/UX design projects.
             Companies with existing products that need polishing or redesigning.
-            SEO and design agencies seeking collaborative partnerships for web
+            CEO and design agencies seeking collaborative partnerships for web
             development projects using Webflow, Framer, and WordPress.
           </p>
           <motion.div

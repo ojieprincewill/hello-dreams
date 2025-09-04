@@ -5,9 +5,7 @@ const NavbarSearch = ({ coursesArray }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCourses, setFilteredCourses] = useState([]);
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   useEffect(() => {
     if (searchTerm.trim()) {

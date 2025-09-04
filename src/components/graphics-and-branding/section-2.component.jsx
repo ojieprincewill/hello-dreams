@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const SectionTwo = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="relative bg-[#008080]/12 h-max md:h-[526.66px] xl:h-[982px] px-[5%] py-5 overflow-hidden">
@@ -32,14 +30,14 @@ const SectionTwo = () => {
             professionals, individual brands, just name it.
           </p>
 
-          <div className="hidden md:flex justify-between items-center md:mt-5 md:mb-8 xl:mt-25 xl:mb-15">
-            <p className="text-[#101828] md:text-[8.91px] xl:text-[16.73px]">
+          <div className="hidden md:grid grid-cols-3 gap-3 md:mt-5 md:mb-8 xl:mt-25 xl:mb-15">
+            <p className="text-[#101828] md:text-[8.91px] xl:text-[15px]">
               Get a brand style guide
             </p>
-            <p className="text-[#101828] md:text-[8.84px] xl:text-[16.59px]">
+            <p className="text-[#101828] md:text-[8.84px] xl:text-[15px]">
               Get color palettes, typography
             </p>
-            <p className="text-[#101828] md:text-[9.06px] xl:text-[17.02px]">
+            <p className="text-[#101828] md:text-[9.06px] xl:text-[15px]">
               Guidelines to maintain brand consistency.
             </p>
           </div>

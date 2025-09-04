@@ -33,9 +33,7 @@ const AcademyNavbar = () => {
     setSideBarOpen(false);
   };
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <>

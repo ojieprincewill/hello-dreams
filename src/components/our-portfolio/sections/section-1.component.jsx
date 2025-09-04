@@ -64,7 +64,7 @@ const Section1 = () => {
           UI/UX Design & development
         </p>
         <div className="relative z-20">
-          <a href="" target="_blank">
+          <a href="https://www.myhellodreams.com" target="_blank">
             <button className="bg-gradient-to-b from-[#f7f7f7] to-[#9f6c65] min-w-[89.74px] md:min-w-[78.26px] xl:min-w-[160px] text-[#041856] text-[13.46px] md:text-[11.74px] xl:text-[16px] px-6 py-3 xl:py-4 font-bold text-center rounded-4xl cursor-pointer  ">
               View
             </button>

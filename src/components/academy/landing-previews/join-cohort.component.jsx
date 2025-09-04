@@ -7,9 +7,7 @@ const JoinCohort = () => {
   // For landing, show the first cohort (UI/UX)
   const cohort = CohortsData[0];
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="mt-10 mb-25">

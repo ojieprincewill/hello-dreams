@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const SectionOne = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="relative bg-[#eef2fe] h-max md:h-[626.66px] xl:h-[1082px] px-[5%] py-5">
@@ -51,16 +49,16 @@ const SectionOne = () => {
             professionals, individual brands, just name it.
           </p>
 
-          <div className="hidden md:flex justify-between items-center md:mt-10 md:mb-8 xl:mt-25 xl:mb-15">
-            <p className="text-[#101828] md:text-[8.91px] xl:text-[16.73px]">
+          <div className="hidden md:grid grid-cols-3 gap-3 md:mt-10 md:mb-8 xl:mt-25 xl:mb-15">
+            <span className="text-[#101828] md:text-[8.91px] xl:text-[15px]">
               Receive multiple logo concepts to choose from
-            </p>
-            <p className="text-[#101828] md:text-[8.84px] xl:text-[16.59px]">
+            </span>
+            <span className="text-[#101828] md:text-[8.84px] xl:text-[15px]">
               Multiple revisions(Based on package)
-            </p>
-            <p className="text-[#101828] md:text-[9.06px] xl:text-[17.02px]">
+            </span>
+            <span className="text-[#101828] md:text-[9.06px] xl:text-[15px]">
               Complete satisfaction.
-            </p>
+            </span>
           </div>
 
           <Link to="/services/graphics-consultation" onClick={HandleOrigins}>

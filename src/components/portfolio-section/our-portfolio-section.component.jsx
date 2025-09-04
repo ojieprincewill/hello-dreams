@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const OurPortfolioSection = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="w-full px-[5%] py-10">
@@ -46,9 +44,12 @@ const OurPortfolioSection = () => {
           <p className="text-[12px] md:text-[18px] md:font-bold text-[#fff] mb-3">
             UI/UX design
           </p>
-          <button className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
-            View Website
-          </button>
+          <a href="https://www.sisenow.co.uk" target="_blank">
+            <button className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+              View Website
+            </button>
+          </a>
+
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -74,9 +75,15 @@ const OurPortfolioSection = () => {
           <p className="text-[12px] md:text-[18px] md:font-bold text-[#fff] mb-3">
             UI/UX design
           </p>
-          <button className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
-            View designs
-          </button>
+          <a
+            href="https://www.figma.com/proto/SMBy8E3g1PPMDfhhBDSTnE/Pamela-Ohaeri-s-Porfolio?page-id=1296%3A4449&node-id=1296-4523&viewport=260%2C-160%2C0.04&t=dIgKLO89EA16VBZs-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1296%3A4523"
+            target="_blank"
+          >
+            <button className="bg-[#fff] text-[#010413] font-semibold border border-[#fff] text-[14px] md:text-[18px] px-12 py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer">
+              View designs
+            </button>
+          </a>
+
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}

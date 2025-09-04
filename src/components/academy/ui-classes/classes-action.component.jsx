@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ClassesAction = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div

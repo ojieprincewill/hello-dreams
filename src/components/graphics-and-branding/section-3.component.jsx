@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const SectionThree = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="relative bg-[#ff7f50]/12 h-max md:h-[526.66px] xl:h-[982px] px-[5%] py-5">
@@ -32,15 +30,15 @@ const SectionThree = () => {
             professionals, individual brands, just name it.
           </p>
 
-          <div className="hidden md:flex justify-between items-center md:mt-3 md:mb-4 xl:mt-25 xl:mb-15">
-            <p className="text-[#101828] md:text-[8.91px] xl:text-[16.73px]">
-              Find opportunities for every stage of your freelance career
+          <div className="hidden md:grid grid-cols-3 gap-3 md:mt-3 md:mb-4 xl:mt-25 xl:mb-15">
+            <p className="text-[#101828] md:text-[8.91px] xl:text-[15px]">
+              Professional branding materials
             </p>
-            <p className="text-[#101828] md:text-[8.84px] xl:text-[16.59px]">
-              Control when, where and how you work
+            <p className="text-[#101828] md:text-[8.84px] xl:text-[15px]">
+              Custom merch & giveaways
             </p>
-            <p className="text-[#101828] md:text-[9.06px] xl:text-[17.02px]">
-              Explore different ways to earn
+            <p className="text-[#101828] md:text-[9.06px] xl:text-[15px]">
+              Make your brand stand out
             </p>
           </div>
 

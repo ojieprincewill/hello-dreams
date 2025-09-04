@@ -27,9 +27,7 @@ const Min20ClassCard = ({ data, className = "" }) => {
     toast.success("Item saved.");
   };
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div

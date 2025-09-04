@@ -27,9 +27,7 @@ const CartContent = () => {
       .toFixed(2)
   );
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="bg-[#f7f7f7] px-[5%] xl:px-[10%] py-10 md:py-20 xl:py-30 ">

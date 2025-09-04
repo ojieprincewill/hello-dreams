@@ -18,9 +18,7 @@ const cardVariants = {
 };
 
 const Development = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="w-full px-[5%] py-10">

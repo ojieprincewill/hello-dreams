@@ -17,9 +17,7 @@ const cardVariants = {
   }),
 };
 
-const handleOrigins = () => {
-  window.scrollTo(0, 0);
-};
+const handleOrigins = () => {};
 
 const Preview2 = ({ user, isAuthenticated }) => {
   const previewCourses = academyItems
@@ -52,7 +50,13 @@ const Preview2 = ({ user, isAuthenticated }) => {
           const cardClass = isLastOdd ? "md:col-span-2 xl:col-span-1" : "";
 
           return (
-            <CourseCard key={course.id} course={course} className={cardClass} user={user} isAuthenticated={isAuthenticated} />
+            <CourseCard
+              key={course.id}
+              course={course}
+              className={cardClass}
+              user={user}
+              isAuthenticated={isAuthenticated}
+            />
           );
         })}
         <div className="md:hidden flex justify-end">

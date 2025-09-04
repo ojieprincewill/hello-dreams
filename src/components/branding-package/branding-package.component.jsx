@@ -19,9 +19,7 @@ const cardVariants = {
 };
 
 const BrandingPackage = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="w-full h-max md:h-[542.68px] xl:h-[937px] bg-gradient-to-b from-[#010413] to-[#ffffff] px-[3%] md:px-0 py-5 md:py-15 xl:py-30 my-10">

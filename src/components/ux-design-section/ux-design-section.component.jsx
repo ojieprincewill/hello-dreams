@@ -4,9 +4,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 const UxDesignSection = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="flex flex-col-reverse md:flex-col">

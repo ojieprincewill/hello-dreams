@@ -30,9 +30,7 @@ const AcademySidebar = ({ closeSidebar, user }) => {
     setDropDownOpen(!dropDownOpen);
   };
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div

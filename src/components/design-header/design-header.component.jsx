@@ -5,9 +5,7 @@ import { motion } from "motion/react";
 import NavBar from "../landing-header/nav-bar/nav-bar.component";
 
 const DesignHeader = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="pt-3 md:pt-0">

@@ -14,9 +14,7 @@ const CartIcon = () => {
         )
       : 0;
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="relative mt-2 p-2 rounded-md bg-[#fff] border border-[#eaecf0] text-[#010413] hover:text-[#1342ff] transition-colors duration-300 cursor-pointer">

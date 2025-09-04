@@ -65,9 +65,6 @@ function PrintingServicesWeOffer() {
                     >
                       {option.title}
                     </p>
-                    <div>
-                      <ArrowTopRightOnSquareIcon className="w-[23px] h-[23px] md:w-[28px] md:h-[28px]" />
-                    </div>
                   </div>
                   <ul className="list-disc pl-3 space-y-4">
                     {option.sub.map((data) => (

@@ -21,9 +21,7 @@ const imageVariants = {
 const SustainabilityContent = () => {
   const { data, isLoading, error } = usePublishedBlogs();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Flatten the paginated data
   const publishedBlogs = data?.pages.flatMap((page) => page.items) || [];
@@ -65,9 +63,7 @@ const SustainabilityContent = () => {
           variants={imageVariants}
           custom={index}
           key={blog.id}
-          className={`relative w-full h-[448px] p-1 ${
-            index === publishedBlogs.length - 1 ? "xl:col-span-3" : ""
-          }`}
+          className="relative w-full h-[448px] p-1"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <div className="w-full h-[240px] rounded-2xl overflow-hidden">

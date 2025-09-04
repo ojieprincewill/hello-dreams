@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
 const BrandingPackageSme = () => {
-  const HandleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const HandleOrigins = () => {};
 
   return (
     <div className="bg-[#ededf0] px-5 py-10">

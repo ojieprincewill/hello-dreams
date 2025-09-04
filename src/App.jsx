@@ -61,6 +61,7 @@ import LoginForm from "./components/academy/login/login-form.component";
 import PricingPage from "./pages/academy-pages/pricing-page";
 import MembershipPage from "./pages/academy-pages/membership-page";
 import UserProfilePage from "./pages/academy-pages/user-profile-page";
+import ScrollRestoration from "./components/scroll-manager/scroll-manager";
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,8 @@ function App() {
           />
           <Toaster />
           <Sonner />
+
+          <ScrollRestoration />
           <Routes>
             {/* Public routes - no authentication required */}
             <Route path="/" element={<HomePage />} />

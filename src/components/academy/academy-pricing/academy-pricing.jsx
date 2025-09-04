@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AcademyPricing = () => {
   const navigate = useNavigate();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   const handleNavigate = (path) => {
     navigate(path);

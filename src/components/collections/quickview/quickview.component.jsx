@@ -21,9 +21,7 @@ const Quickview = () => {
 
   if (!selectedProduct) return null;
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   const handlePay = () => {
     dispatch(addItem(selectedProduct));

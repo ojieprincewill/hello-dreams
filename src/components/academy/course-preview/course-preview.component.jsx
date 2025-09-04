@@ -1,9 +1,9 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { ChevronDown, Play, FileText, Lock, Award } from 'lucide-react';
-import { BookmarkIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
-import { useCourse } from '@/hooks/useCourses';
-import { useLessons } from '@/hooks/useLessons';
+import React, { useState, useRef, useCallback } from "react";
+import { ChevronDown, Play, FileText, Lock, Award } from "lucide-react";
+import { BookmarkIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
+import { useCourse } from "@/hooks/useCourses";
+import { useLessons } from "@/hooks/useLessons";
 
 const PAGE_SIZE = 15;
 
@@ -17,27 +17,23 @@ const CoursePreview = ({ courseId }) => {
   const [visibleLessons, setVisibleLessons] = useState(PAGE_SIZE);
   const loader = useRef();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Infinite scroll: load more lessons when the loader is visible
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting) {
-        setVisibleLessons((prev) =>
-          Math.min(prev + PAGE_SIZE, lessons.length),
-        );
+        setVisibleLessons((prev) => Math.min(prev + PAGE_SIZE, lessons.length));
       }
     },
-    [lessons.length],
+    [lessons.length]
   );
 
   React.useEffect(() => {
     const option = {
       root: null,
-      rootMargin: '20px',
+      rootMargin: "20px",
       threshold: 1.0,
     };
     const observer = new window.IntersectionObserver(handleObserver, option);
@@ -104,7 +100,9 @@ const CoursePreview = ({ courseId }) => {
                         {lesson.title}
                       </p>
                       <span className="text-[#787777] text-[12px]">
-                        {lesson.video_duration_formatted || lesson.duration || '0:00'}
+                        {lesson.video_duration_formatted ||
+                          lesson.duration ||
+                          "0:00"}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -120,7 +118,7 @@ const CoursePreview = ({ courseId }) => {
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                     onClick={() =>
                       setVisibleLessons((prev) =>
-                        Math.min(prev + PAGE_SIZE, lessons.length),
+                        Math.min(prev + PAGE_SIZE, lessons.length)
                       )
                     }
                   >
@@ -140,7 +138,7 @@ const CoursePreview = ({ courseId }) => {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {course.requirements &&
-                  course.requirements.split('\n').map((req, idx) => (
+                  course.requirements.split("\n").map((req, idx) => (
                     <li
                       key={idx}
                       className="text-[#2d2f31] lg:text-[14px] text-[13px] "

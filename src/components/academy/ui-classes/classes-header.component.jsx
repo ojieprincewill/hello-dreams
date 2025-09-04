@@ -4,9 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 
 const ClassesHeader = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
   const { user, isAuthenticated } = useAuth();
   console.log(user);
   const { profile } = useProfile();

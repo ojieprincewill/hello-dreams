@@ -9,9 +9,7 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
 
   const currentYear = new Date().getFullYear();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="min-h-screen w-full px-[5%] xl:px-0 flex items-center justify-center">

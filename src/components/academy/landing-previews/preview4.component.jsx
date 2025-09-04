@@ -20,9 +20,7 @@ const cardVariants = {
 const Preview4 = ({ user, isAuthenticated }) => {
   const { categorizedData, isLoading, error } = useAcademySectionData();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Get free classes and limit to 3
   const freeClasses = categorizedData.free?.slice(0, 3) || [];
@@ -125,10 +123,7 @@ const Preview4 = ({ user, isAuthenticated }) => {
               variants={cardVariants}
               custom={index}
             >
-              <FreeClassCard 
-                data={course} 
-                className={cardClass}
-              />
+              <FreeClassCard data={course} className={cardClass} />
             </motion.div>
           );
         })}

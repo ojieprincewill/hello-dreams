@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ContactSuccess = () => {
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   return (
     <div className="flex flex-col justify-center items-center py-20 px-[5%]">

@@ -20,12 +20,10 @@ const cardVariants = {
 const Preview3 = ({ user, isAuthenticated }) => {
   const { categorizedData, isLoading, error } = useAcademySectionData();
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Get 20min classes and limit to 3
-  const min20Classes = categorizedData['20min']?.slice(0, 3) || [];
+  const min20Classes = categorizedData["20min"]?.slice(0, 3) || [];
 
   // Loading state
   if (isLoading) {
@@ -125,10 +123,7 @@ const Preview3 = ({ user, isAuthenticated }) => {
               variants={cardVariants}
               custom={index}
             >
-              <Min20ClassCard 
-                data={course} 
-                className={cardClass}
-              />
+              <Min20ClassCard data={course} className={cardClass} />
             </motion.div>
           );
         })}

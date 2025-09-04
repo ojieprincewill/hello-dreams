@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export function ProtectedRoute({ children, requireAdmin = false }) {
   const { isAuthenticated, isAdmin, isLoading } = useAuth();
@@ -15,7 +15,7 @@ export function ProtectedRoute({ children, requireAdmin = false }) {
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/signin" replace />;
   }
 
   // Redirect to unauthorized if admin access required but user is not admin

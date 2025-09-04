@@ -213,9 +213,7 @@ const UserProfileMain = () => {
   const [active, setActive] = useState(initialTab);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleOrigins = () => {
-    window.scrollTo(0, 0);
-  };
+  const handleOrigins = () => {};
 
   // Handle authentication redirect in useEffect
   // useEffect(() => {
