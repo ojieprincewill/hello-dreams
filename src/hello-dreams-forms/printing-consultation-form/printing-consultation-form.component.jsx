@@ -1,11 +1,19 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import PrintingConsultationSuccess from "./printing-consultation-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { useSearchParams } from "react-router-dom";
+import PaystackPop from "@paystack/inline-js";
+import { convertAndFormatUsdToNgn, convertUsdToNgn } from "../../utils/currency";
 
 const PrintingConsultationForm = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const price = searchParams.get("price");
+  // console.log(price);
+  const title = searchParams.get("title");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,6 +28,40 @@ const PrintingConsultationForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [priceInNgn, setPriceInNgn] = useState(null);
+  const [payLabel, setPayLabel] = useState("");
+
+  // Compute NGN amounts and display label when price changes
+  useEffect(() => {
+    let isCancelled = false;
+    async function computePrice() {
+      if (!price) {
+        setPriceInNgn(null);
+        setPayLabel("");
+        return;
+      }
+      try {
+        const cleanPrice = String(price).replace("$", "");
+        const [ngn, label] = await Promise.all([
+          convertUsdToNgn(cleanPrice),
+          convertAndFormatUsdToNgn(cleanPrice),
+        ]);
+        if (!isCancelled) {
+          setPriceInNgn(ngn);
+          setPayLabel(label);
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          setPriceInNgn(null);
+          setPayLabel("");
+        }
+      }
+    }
+    computePrice();
+    return () => {
+      isCancelled = true;
+    };
+  }, [price]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,6 +135,149 @@ const PrintingConsultationForm = () => {
     }
   };
 
+  const handlePay = async (event) => {
+    event.preventDefault();
+    
+    // Prevent multiple simultaneous calls
+    if (loading) {
+      return;
+    }
+    
+    setLoading(true);
+    setSuccess(null);
+    setError(null);
+
+    const {
+      name,
+      email,
+      phone,
+      company,
+      message,
+      service,
+      accompanyingServices,
+      howDidYouHear,
+    } = formData;
+    if (!name || !email || !phone || !service) {
+      setError("Please fill in all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    const payload = {
+      type: "Printing Order",
+      name,
+      email,
+      phone,
+      data: { company, message, service, accompanyingServices, howDidYouHear, title },
+    };
+
+    // Remove dollar sign before passing to backend
+    const cleanPrice = String(price).replace('$', '');
+    const PriceInNgn = await convertUsdToNgn(cleanPrice);
+    console.log(PriceInNgn);
+    
+    const paymentData = {
+      amount: PriceInNgn,
+      email,
+      currency: "NGN",
+    };
+
+    console.log(paymentData);
+
+    try {
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
+        {
+          body: paymentData,
+        }
+      );
+      console.log(paymentData);
+      console.log(data);
+      console.log(initError);
+
+      if (initError || !data?.access_code || !data?.reference) {
+        setError("Payment initiation failed.");
+        setLoading(false);
+        return;
+      }
+
+      const orderData = {
+        name: formData.name,
+        totalItems: 1,
+        orderStatus: "pending",
+        orderTotal: PriceInNgn,
+        orderItems: title,
+        orderEmail: email,
+        orderPhone: formData.phone,
+        orderAddress: formData.address,
+        orderCity: formData.city,
+        orderState: formData.state,
+        orderCountry: formData.country || "Nigeria",
+        orderPaymentReference: data.reference,
+      };
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
+        reference: data.reference,
+        email: email,
+        amount: Math.round(Number(PriceInNgn) * 100), // Convert to kobo/cents
+        currency: "NGN", // Match backend currency
+        onSuccess: (response) => {
+          // Handle success immediately without async operations
+          console.log("Payment successful:", response);
+          
+          // Set success state immediately
+          setSuccess("Payment Successful!");
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            message: "",
+            service: "",
+            accompanyingServices: "",
+            howDidYouHear: "",
+          });
+          setLoading(false);
+          
+          // Optionally verify payment in background (don't await)
+          verifyPaymentInBackground(response.reference, orderData);
+        },
+        onCancel: () => {
+          setError("Payment was cancelled.");
+          setLoading(false);
+        },
+      });
+    } catch (err) {
+      console.error("Submission Error:", err);
+      setError("An unexpected error occurred.");
+      setLoading(false);
+    }
+  };
+
+  // Separate function to handle verification in background
+  const verifyPaymentInBackground = async (reference, orderData) => {
+    try {
+      const { data: verifyData, error: verifyError } =
+        await supabase.functions.invoke("collections-checkout-handler", {
+          body: {
+            reference: reference,
+            ...orderData,
+          },
+        });
+
+      if (verifyError || verifyData?.error) {
+        console.error("Verification failed:", verifyError);
+        // You could show a warning here, but don't change the success state
+      } else {
+        console.log("Payment verified successfully");
+      }
+    } catch (error) {
+      console.error("Verification error:", error);
+    }
+  };
+
   return success ? (
     <PrintingConsultationSuccess />
   ) : (
@@ -105,7 +290,7 @@ const PrintingConsultationForm = () => {
         className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Get a free consultation
+        Order {title}
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 50 }}
@@ -114,13 +299,13 @@ const PrintingConsultationForm = () => {
         className="text-[#667085] text-[14px] md:text-[16px] text-center xl:text-[18px] mb-10 xl:mb-20 xl:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Please provide the details below
+        Please fill out the form below to order {title}.
       </motion.p>
       <motion.form
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-        onSubmit={handleSubmit}
+        onSubmit={price ? handlePay : handleSubmit}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:gap-x-20  space-y-8 text-[#000000] md:p-6 "
       >
         <div>
@@ -267,12 +452,24 @@ const PrintingConsultationForm = () => {
           </select>
         </div>
         <div>
-          <button
-            type="submit"
-            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
-          >
-            {loading ? "Submitting..." : "Submit"}
-          </button>
+          {price ? (
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Processing..." : (payLabel ? `Pay ${payLabel}` : "Pay")}
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Submitting..." : "Submit"}
+            </button>
+          )}
+
           {error && <p className="text-red-600 mt-4">{error}</p>}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>

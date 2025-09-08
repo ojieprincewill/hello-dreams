@@ -84,7 +84,7 @@ const BrandingPackage = () => {
               </div>
 
               <Link
-                to="/services/printing-consultation"
+                to={`/services/printing-consultation?price=${data.price}&title=${data.title}`}
                 onClick={handleOrigins}
                 className="xl:absolute xl:bottom-0 xl:left-0 xl:right-0"
               >
@@ -131,7 +131,7 @@ const BrandingPackage = () => {
               </div>
 
               <Link
-                to="/services/printing-consultation"
+                to={`/services/printing-consultation?price=${data.price}&title=${data.title}`}
                 onClick={handleOrigins}
               >
                 <button className="bg-[#efece9] w-full text-[#101828] font-bold border border-[#efece9] text-[8.91px] xl:text-[15px] px-6 py-2 xl:py-3 rounded-3xl hover:text-white hover:bg-[#101828] hover:border-[#101828] transition-colors duration-300 cursor-pointer">
