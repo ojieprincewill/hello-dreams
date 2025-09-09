@@ -67,7 +67,7 @@ const BrandingPackageSme = () => {
                   </div>
                 ))}
                 <Link
-                  to="/services/graphics-consultation"
+                  to={`/services/graphics-consultation?price=${data.price}&title=${data.title}`}
                   onClick={HandleOrigins}
                   className="mt-10"
                 >
@@ -121,7 +121,7 @@ const BrandingPackageSme = () => {
                   </div>
                 ))}
                 <Link
-                  to="/services/graphics-consultation"
+                  to={`/services/graphics-consultation?price=${data.price}&title=${data.title}`}
                   onClick={HandleOrigins}
                   className="mt-10"
                 >
@@ -169,7 +169,7 @@ const BrandingPackageSme = () => {
                   </div>
                 ))}
                 <Link
-                  to="/services/graphics-consultation"
+                  to={`/services/graphics-consultation?price=${data.price}&title=${data.title}`}
                   onClick={HandleOrigins}
                   className="mt-10"
                 >

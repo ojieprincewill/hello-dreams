@@ -290,7 +290,7 @@ const PrintingConsultationForm = () => {
         className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Order {title}
+        {title ? `Order ${title}` : "Get a free consultation"}
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 50 }}
@@ -299,7 +299,7 @@ const PrintingConsultationForm = () => {
         className="text-[#667085] text-[14px] md:text-[16px] text-center xl:text-[18px] mb-10 xl:mb-20 xl:w-[793px] mx-auto leading-[1.5]"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Please fill out the form below to order {title}.
+        {title ? `Please fill out the form below to order ${title}.` : "Please fill out the form below"}
       </motion.p>
       <motion.form
         initial={{ opacity: 0, y: 50 }}
@@ -458,7 +458,7 @@ const PrintingConsultationForm = () => {
               disabled={loading}
               className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Processing..." : (payLabel ? `Pay ${payLabel}` : "Pay")}
+              {loading ? "Processing..." : (payLabel ? `Pay ${payLabel}` : `Pay ${price}`)}
             </button>
           ) : (
             <button

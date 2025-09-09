@@ -6,8 +6,15 @@ import GraphicsConsultationSuccess from "./graphics-consultation-success.compone
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { useSearchParams } from "react-router-dom";
+import PaystackPop from "@paystack/inline-js";
+import { convertAndFormatUsdToNgn, convertUsdToNgn } from "../../utils/currency";
 
 const GraphicsConsultationForm = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const price = searchParams.get("price");
+  const title = searchParams.get("title");
+
   const [formData, setFormData] = useState({
     name: "",
     type: "Graphics Design",
@@ -22,6 +29,40 @@ const GraphicsConsultationForm = () => {
   const [success, setSuccess] = useState(null);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [priceInNgn, setPriceInNgn] = useState(null);
+  const [payLabel, setPayLabel] = useState("");
+
+  // Compute NGN amounts and label when price query param is present
+  React.useEffect(() => {
+    let isCancelled = false;
+    async function computePrice() {
+      if (!price) {
+        setPriceInNgn(null);
+        setPayLabel("");
+        return;
+      }
+      try {
+        const cleanPrice = String(price).replace("$", "");
+        const [ngn, label] = await Promise.all([
+          convertUsdToNgn(cleanPrice),
+          convertAndFormatUsdToNgn(cleanPrice),
+        ]);
+        if (!isCancelled) {
+          setPriceInNgn(ngn);
+          setPayLabel(label);
+        }
+      } catch (e) {
+        if (!isCancelled) {
+          setPriceInNgn(null);
+          setPayLabel("");
+        }
+      }
+    }
+    computePrice();
+    return () => {
+      isCancelled = true;
+    };
+  }, [price]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,6 +134,117 @@ const GraphicsConsultationForm = () => {
     }
   };
 
+  const handlePay = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    setSuccess(null);
+
+    const { type, name, email, phone, company, message, service, accompanyingService, howDidYouHear } = formData;
+
+    try {
+      // Prepare payment initiation
+      const cleanPrice = String(price).replace("$", "");
+      const amountInNgn = await convertUsdToNgn(cleanPrice);
+
+      const paymentData = {
+        amount: amountInNgn,
+        email,
+        currency: "NGN",
+      };
+
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
+        {
+          body: paymentData,
+        }
+      );
+
+      if (initError || !data?.access_code || !data?.reference) {
+        toast.error("Payment initiation failed.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const orderData = {
+        name,
+        totalItems: 1,
+        orderStatus: "pending",
+        orderTotal: amountInNgn,
+        orderItems: title,
+        orderEmail: email,
+        orderPhone: phone,
+        orderPaymentReference: data.reference,
+      };
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
+        reference: data.reference,
+        email,
+        amount: Math.round(Number(amountInNgn) * 100),
+        currency: "NGN",
+        onSuccess: (response) => {
+          // Submit enquiry/order after payment success
+          const payload = {
+            type: "Graphics Order",
+            name,
+            email,
+            phone,
+            data: {
+              company,
+              message,
+              service,
+              accompanyingService,
+              howDidYouHear,
+              title,
+            },
+          };
+
+          // Fire-and-forget: record order/enquiry
+          supabase.functions
+            .invoke("handle-service-enquiries", { body: payload })
+            .catch(() => {});
+
+          // Verify in background
+          supabase.functions
+            .invoke("collections-checkout-handler", {
+              body: {
+                reference: response.reference,
+                ...orderData,
+              },
+            })
+            .catch(() => {});
+
+          toast.success("Payment Successful!");
+          setSuccess(true);
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            message: "",
+            service: "",
+            accompanyingService: "",
+            howDidYouHear: "",
+            type: "Graphics Design",
+          });
+          setIsSubmitting(false);
+        },
+        onCancel: () => {
+          toast.error("Payment was cancelled.");
+          setIsSubmitting(false);
+        },
+      });
+    } catch (err) {
+      console.error("Payment Error:", err);
+      toast.error("An unexpected error occurred.");
+      setIsSubmitting(false);
+    }
+  };
+
   return success ? (
     <GraphicsConsultationSuccess />
   ) : (
@@ -105,7 +257,7 @@ const GraphicsConsultationForm = () => {
         className="text-[20px] md:text-[32px] text-center xl:text-[64px] font-bold mb-5"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        Get a free consultation for our Graphics & Branding Services
+        {title ? `Order ${title}` : "Get a free consultation for our Graphics & Branding Services"}
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 50 }}
@@ -120,7 +272,7 @@ const GraphicsConsultationForm = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-        onSubmit={handleSubmit}
+        onSubmit={price ? handlePay : handleSubmit}
         className="w-full grid grid-cols-1 gap-x-8 md:grid-cols-2 xl:gap-x-20 space-y-8 text-[#000000] md:p-6"
       >
         <div>
@@ -274,7 +426,7 @@ const GraphicsConsultationForm = () => {
           </label>
           <select
             name="howDidYouHear"
-            value={formData.referral}
+            value={formData.howDidYouHear}
             onChange={handleChange}
             className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
@@ -292,12 +444,15 @@ const GraphicsConsultationForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer"
+            className="w-full bg-[#010413] text-[#f7f7f7] font-semibold border border-[#010413] mt-7 text-[10.91px] xl:text-[16px] px-6 py-3 xl:py-4 rounded-lg hover:text-white hover:bg-[#1342ff] hover:border-[#1342ff] transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "Submitting..." : "Schedule My Free Consultation"}
+            {isSubmitting
+              ? (price ? "Processing..." : "Submitting...")
+              : price
+              ? (payLabel ? `Pay ${payLabel}` : "Pay")
+              : "Schedule My Free Consultation"}
           </button>
 
-          {/* {errors && <p className="text-red-600 mt-4"></p>} */}
           {success && <p className="text-green-600 mt-4">{success}</p>}
         </div>
       </motion.form>
