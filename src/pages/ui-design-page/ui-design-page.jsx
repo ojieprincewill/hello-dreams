@@ -9,7 +9,7 @@ import CheckOutGallery from "../../components/project-gallery/check-out-gallery.
 import PeopleAndCompanies from "../../components/people-and-companies/people-and-companies.component";
 import OurPackages from "../../components/our-packages/our-packages.component";
 import FaqSection from "../../components/faq-section/faq-section.component";
-import ConsultationCall from "../../components/Consultation-CTA/consultation-cta.component";
+import ConsultationCall from "../../components/consultation-cta-temp/consultation-cta.component";
 import NewsletterSection from "../../components/newsletter-section/newsletter-section.component";
 // import ConsultationCall from "../../components/consultation-cta/consultation-cta.component";
 import FooterSection from "../../components/footer-section/footer-section.component";
