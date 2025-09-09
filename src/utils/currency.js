@@ -78,6 +78,7 @@ export async function convertUsdToNgn(usdAmount, options) {
   const numericUsd = typeof usdAmount === "number" ? usdAmount : Number(usdAmount);
   if (!Number.isFinite(numericUsd)) return NaN;
   const rate = await getUsdToNgnRate(options);
+  console.log(rate)
   return numericUsd * rate;
 }
 
