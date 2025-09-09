@@ -10,8 +10,8 @@ const ConsultationCall = () => {
     <div className="bg-[#010413] text-[#fff] px-2 py-5 md:px-10">
       <div className="flex flex-col-reverse justify-center items-center md:grid md:grid-cols-2 md:gap-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }} // Starts faded and lower
-          whileInView={{ opacity: 1, y: 0 }} // Moves up and fades in
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="w-full h-[382.33px] md:h-[463.33px] xl:h-[800px] bg-[#ffc501] rounded-2xl overflow-hidden"
