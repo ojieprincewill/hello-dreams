@@ -10,9 +10,9 @@ import PeopleAndCompanies from "../../components/people-and-companies/people-and
 import OurPackages from "../../components/our-packages/our-packages.component";
 import FaqSection from "../../components/faq-section/faq-section.component";
 import NewsletterSection from "../../components/newsletter-section/newsletter-section.component";
+import ConsultationCall from "../../components/consultation-cta/consultation-cta.component";
 import FooterSection from "../../components/footer-section/footer-section.component";
 import UiTestimonial from "../../components/ui-testimonial/ui-testimonial.component";
-import ConsultationCall from "../../components/consultation-cta/consultation-cta.component";
 const UiDesignPage = () => {
   return (
     <>
