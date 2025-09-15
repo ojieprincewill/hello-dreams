@@ -77,7 +77,7 @@ export const MeetExpertsData = [
   {
     id: 1,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248863/About%20page/3785487c563d7bc058e44ee94c8d03a2024f1eae_jbibrr.png",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1750248863/About%20page/3785487c563d7bc058e44ee94c8d03a2024f1eae_jbibrr.png",
     name: "Pamela",
     text: "Pamela is the founder of Hello Dreams. She started from law and moved to Tech.",
     text1:
@@ -93,7 +93,7 @@ export const MeetExpertsData = [
   {
     id: 2,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248831/About%20page/5d85fc7c25981c6d1182607b92f56fcd30381dba_easvvk.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1750248831/About%20page/5d85fc7c25981c6d1182607b92f56fcd30381dba_easvvk.jpg",
     name: "Arinze",
     text: "Arinze is the co-founder of Hello Dreams, he is the head of Graphics and branding. ",
     text1:
@@ -105,7 +105,7 @@ export const MeetExpertsData = [
   {
     id: 3,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248843/About%20page/0403d085380ae5044431065acc5f41ea08b08b7c_j085l0.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1750248843/About%20page/0403d085380ae5044431065acc5f41ea08b08b7c_j085l0.jpg",
     name: "Cynthia",
     text: "Cynthia is a petrophysicist who works at Hello Dreams as the Project Delivery Manager.",
     text1:
@@ -121,7 +121,7 @@ export const MeetExpertsData = [
   {
     id: 4,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750085444/cv%20optimization%20page/2df0a4ea796e5398d4b722280a1e7e08c0404d17_cldiub.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1750085444/cv%20optimization%20page/2df0a4ea796e5398d4b722280a1e7e08c0404d17_cldiub.jpg",
     name: "Lilian",
     text: "Lilian is a Software tester and ensures all our work at Hello Dreams is top notch.",
     text1:
@@ -133,7 +133,7 @@ export const MeetExpertsData = [
   {
     id: 5,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330671/59889901474710ef1bcd3aa9b3ca78aa7c16443a_salk6z.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1749330671/59889901474710ef1bcd3aa9b3ca78aa7c16443a_salk6z.jpg",
     name: "Jennifer",
     text: "Jennifer is a customer experience leader and digital transformation expert, leading impactful digital campaigns and AI powered solutions.",
     text1:
@@ -149,7 +149,7 @@ export const MeetExpertsData = [
   {
     id: 6,
     image:
-      "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1756798431/About%20page/WhatsApp_Image_2025-09-02_at_08.27.42_e3532705_g8zrz6.jpg",
+      "https://res.cloudinary.com/dganx8kmn/image/upload/c_fill,w_400,h_400,g_auto,f_webp,q_auto/v1756798431/About%20page/WhatsApp_Image_2025-09-02_at_08.27.42_e3532705_g8zrz6.jpg",
     name: "Lynda",
     text: "Lynda, a Founding Member of Hello Dreams, blends educational and administrative leadership with real-world operational expertise.",
     text1:

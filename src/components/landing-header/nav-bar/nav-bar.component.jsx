@@ -85,7 +85,7 @@ const NavBar = () => {
 
         <div className="space-x-5">
           <Link
-            to="/refer-and-earn"
+            to="/referandearn"
             className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >
@@ -93,7 +93,7 @@ const NavBar = () => {
           </Link>
 
           <Link
-            to="/work-with-us"
+            to="/workwithus"
             className="bg-[#010413] text-white border border-[#6941c6] font-semibold text-[12px] md:text-[16px] xl:text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#1342ff] hover:border-[#1342ff] hover:text-white cursor-pointer"
             onClick={handleOrigins}
           >

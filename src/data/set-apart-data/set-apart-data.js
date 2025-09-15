@@ -52,20 +52,20 @@ export const DevSetApartData = [
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330732/f47c9a636290219cb81998d02d6159a2291a55a4_jdiidy.png",
     title: "Expertise & Experience",
-    text: "We have a team of professionals with expertise in various areas such as design, marketing, data analysis.",
+    text: "Backed by years of delivering impactful digital solutions across industries.",
   },
   {
     id: 2,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330711/d3c7c418a62359648c81729b5bdad60d5346fa6b_fegub6.png",
     title: "Strategic Approach",
-    text: "We develop a comprehensive branding strategy tailored to your business or individual goals & target audience.",
+    text: "Every project is guided by data, creativity, and long-term business vision.",
   },
   {
     id: 3,
     image:
       "https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330696/c5d1dadfbaae40e4e7a518c9c76a96333bbb6519_bluj4b.png",
-    title: "Mentorship Programs",
-    text: "We have structured mentorship programs connecting experienced professionals with aspiring talents.",
+    title: "Scalable Solutions",
+    text: "Every site we build grows with your business, not against it.",
   },
 ];

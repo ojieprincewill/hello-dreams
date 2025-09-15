@@ -9,7 +9,7 @@ const BrandingPackageSme = () => {
   const HandleOrigins = () => {};
 
   return (
-    <div className="bg-[#ededf0] px-5 py-10">
+    <div className="bg-[#ededf0] px-5 py-10 overflow-hidden">
       <p
         className="text-[#000000] text-[20px] md:text-[29.96px] xl:text-[64px] text-center font-bold mb-3 drop-shadow-[0px_4px_4px] drop-shadow-[#3232327a]"
         style={{ fontFamily: "'Radio Canada', sans-serif" }}

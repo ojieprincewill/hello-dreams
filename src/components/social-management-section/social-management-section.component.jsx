@@ -7,7 +7,7 @@ const SocialManagementSection = () => {
   const handleOrigins = () => {};
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 overflow-hidden">
       <div className="grid grid-cols-1 xl:grid-cols-2 w-full gap-3">
         <div className="bg-[#f5f5f7] w-full h-[420px] md:h-[590px] flex items-center justify-center">
           <motion.img

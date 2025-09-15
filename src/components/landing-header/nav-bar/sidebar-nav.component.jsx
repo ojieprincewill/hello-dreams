@@ -140,7 +140,7 @@ const SidebarNav = ({ closeSidebar }) => {
             About Us
           </Link>
           <Link
-            to="/refer-and-earn"
+            to="/referandearn"
             className="flex flex-row bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
             onClick={handleOrigins}
           >

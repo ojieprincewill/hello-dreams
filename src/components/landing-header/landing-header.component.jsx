@@ -17,14 +17,13 @@ const LandingHeader = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="hidden absolute md:bottom-[130px] xl:bottom-[230px] left-[7%] md:flex flex-col items-start justify-start text-[#fff]"
         >
-          <h1 className="md:text-[40px] xl:text-[52px] w-[630px] leading-[1.1] font-extrabold">
+          <h1 className="md:text-[40px] xl:text-[52px] w-[630px] leading-[1.1] font-bold">
             Unlock your business potential. Build skills. Transform your future.
           </h1>
-          <p className="mt-8 text-[20px] font-bold w-[556px] leading-[1.4]">
-            Hello Dreams helps businesses and individuals stand out with
-            stunning design, social media management, printing, web & mobile
-            development, and branding solutions. We also support professionals
-            with CV and LinkedIn optimization, career tools, and training.
+          <p className="mt-8 text-[20px] font-semibold w-[556px] leading-[1.4]">
+            We combine web development, personal branding, and edutech to help
+            you grow. Join businesses and individuals building a smarter future
+            with Hello Dreams!
           </p>
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -33,7 +32,7 @@ const LandingHeader = () => {
             className="mt-10 space-x-4"
           >
             <Link
-              to="/work-with-us"
+              to="/workwithus"
               className="bg-white text-[#010413] font-semibold border border-[#010413] text-[20px] px-4 py-2 rounded-lg transition-colors duration-300 cursor-pointer"
               onClick={handleOrigins}
             >
@@ -54,17 +53,17 @@ const LandingHeader = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="px-5 py-10 md:hidden"
       >
-        <h1 className="text-[20px] w-full leading-[1.1] font-extrabold">
+        <h1 className="text-[20px] w-full leading-[1.1] font-bold">
           Unlock your potential. Build skills. Transform your future.
         </h1>
         <p className="mt-2 text-[12px] w-full leading-[tight]">
-          Get access to expert-led training, career guidance, and tools to help
-          you succeed. Join thousands taking their first step toward a better
-          future!
+          We combine web development, personal branding, and edutech to help you
+          grow. Join businesses and individuals building a smarter future with
+          Hello Dreams!
         </p>
         <div className="mt-5 flex flex-col space-y-3">
           <Link
-            to="/work-with-us"
+            to="/workwithus"
             className="bg-[#010413] text-[#fff] text-center font-semibold border border-[#010413] text-[14px] px-4 py-4 rounded-lg transition-colors duration-300 cursor-pointer"
             onClick={handleOrigins}
           >

@@ -74,7 +74,7 @@ const FooterSection = () => {
                   About us
                 </Link>
                 <Link
-                  to="/refer-and-earn"
+                  to="/referandearn"
                   onClick={handleOrigins}
                   className="hover:text-[#99c8ff] transition-colors duration-300 cursor-pointer"
                 >

@@ -164,8 +164,8 @@ function App() {
             <Route path="/membership" element={<MembershipPage />} />
             <Route path="/userprofile" element={<UserProfilePage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/refer-and-earn" element={<ReferPage />} />
-            <Route path="/work-with-us" element={<BookCallPage />} />
+            <Route path="/referandearn" element={<ReferPage />} />
+            <Route path="/workwithus" element={<BookCallPage />} />
             <Route
               path="/community-challenge"
               element={<CommunityChallengePage />}

@@ -60,21 +60,21 @@ const AcademyNavbar = () => {
         {/* Navigation Links */}
         <div className=" hidden xl:flex space-x-6 items-center">
           <Link
-            className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
+            className="text-[#010413] font-semibold text-[17px] hover:text-[#1342ff] transition-colors duration-300"
             to="/"
             onClick={handleOrigins}
           >
             Home
           </Link>
           <Link
-            className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
+            className="text-[#010413] font-semibold text-[17px] hover:text-[#1342ff] transition-colors duration-300"
             to="/academy/classes"
             onClick={handleOrigins}
           >
             UI/UX Classes
           </Link>
           <div
-            className="relative text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300 flex items-center space-x-1 cursor-pointer"
+            className="relative text-[#010413] font-semibold text-[17px] hover:text-[#1342ff] transition-colors duration-300 flex items-center space-x-1 cursor-pointer"
             onClick={() => setOptionsOpen(true)}
           >
             Courses
@@ -88,7 +88,7 @@ const AcademyNavbar = () => {
           <NavbarSearch coursesArray={academyItems} />
 
           <Link
-            className="text-[#010413] font-medium text-[18px] hover:text-[#1342ff] transition-colors duration-300"
+            className="text-[#010413] font-semibold text-[17px] hover:text-[#1342ff] transition-colors duration-300"
             to="/academy/pricing"
             onClick={handleOrigins}
           >
@@ -101,7 +101,7 @@ const AcademyNavbar = () => {
             <div className="flex items-center space-x-3">
               <Link
                 to="/membership"
-                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[17px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
                 onClick={handleOrigins}
               >
                 Manage Membership
@@ -112,7 +112,7 @@ const AcademyNavbar = () => {
             <div className="flex items-center space-x-3">
               <Link
                 to="/signin"
-                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-medium text-[18px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
+                className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[17px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
                 onClick={handleOrigins}
               >
                 Sign in

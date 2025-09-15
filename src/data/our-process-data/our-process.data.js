@@ -103,18 +103,18 @@ export const SocialProcessData = [
 export const WebDevProcessData = [
   {
     id: 1,
-    title: "Consultation And Planning",
-    text: "By taking an active part in governance, you gain the power to directly influence the laws and policies that impact your community and your life.",
+    title: "Consultation & Planning",
+    text: "We start by listening. Every brand has unique goals, audiences, and challenges. Through in-depth consultancy sessions, we clarify your objectives, audit existing digital touchpoints, and map out a strategic plan. This ensures that every line of code and design decision is tied directly to your business growth.",
   },
   {
     id: 2,
-    title: "Design And Development",
-    text: "Your engagement in the legislative and electoral processes promotes transparency and ensures that elected officials are accountable for their actions.",
+    title: "Design & Development",
+    text: "From wireframes to fully functional interfaces, we merge creativity with technology. Our design process focuses on clean, user-centric experiences, while development ensures speed, security, and scalability. Whether it's a simple landing page or a complex platform, we build with precision and future-readiness in mind.",
   },
   {
     id: 3,
-    title: "Testing, Deployment And Support",
-    text: "Your participation guarantees that your unique perspectives and needs are represented, leading to more inclusive and responsive governance.",
+    title: "Testing, Deployment & Support",
+    text: "Before launch, we rigorously test across devices and browsers to guarantee seamless performance. Once deployed, we don't disappear, we provide continuous support, updates, and optimization based on our agreed timelines with you, making sure your website evolves with your business and stays ahead of industry standards.",
   },
 ];
 
