@@ -150,7 +150,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
         NGN {course.price.toLocaleString()}
       </p>
       {/* Buy Now Button for paid courses */}
-      {course.price > 0 && (
+      {/* {course.price > 0 && (
         <>
           {isAuthenticated ? (
             <button
@@ -177,7 +177,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
             </p>
           )}
         </>
-      )}
+      )} */}
     </div>
   );
 };
