@@ -3,7 +3,7 @@ import supabase from "../../supabase/client";
 import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { toast } from "react-toastify";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 import ReferSuccess from "./refer-success.component";
 import { isEmail, required, minLength, validateForm as runValidation } from "@/utils/validation";
 

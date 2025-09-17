@@ -16,7 +16,7 @@ import CourseViewModal from "./modals/CourseViewModal";
 import CourseEditModal from "./modals/CourseEditModal";
 import DeleteConfirmModal from "./modals/DeleteConfirmModal";
 import CourseSectionModal from "./modals/CourseSectionModal";
-import { useToast } from "../hooks/use-toast";
+import { toast } from "../ui/sonner";
 import supabase from "@/supabase/client";
 
 import {
@@ -35,7 +35,6 @@ import {
 } from '../ui/select';
 
 const CourseManagement = () => {
-  const { toast } = useToast();
   const { data: courses = [], isLoading } = useCourses();
   const createCourse = useCreateCourse();
   const updateCourse = useUpdateCourse();
@@ -165,11 +164,7 @@ const CourseManagement = () => {
 
   const handleCreateCourse = async () => {
     if (!newCourse.title || !newCourse.description) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive",
-      });
+      toast.error("Please fill in all required fields");
       return;
     }
 
@@ -197,51 +192,30 @@ const CourseManagement = () => {
       await createCourse.mutateAsync(courseData);
       resetForm();
       setCreateModalOpen(false);
-      toast({
-        title: "Course created",
-        description: "The course has been successfully added.",
-      });
+      toast.success("Course created successfully!");
     } catch (error) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error(error.message);
     }
   };
 
   const handleSave = async (updatedCourse) => {
     try {
       await updateCourse.mutateAsync(updatedCourse);
-      toast({
-        title: "Course updated",
-        description: `${updatedCourse.title} has been successfully updated.`,
-      });
+      toast.success(`${updatedCourse.title} updated successfully!`);
       setEditModalOpen(false);
     } catch (error) {
-      toast({
-        title: "Update failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error(error.message);
     }
   };
 
   const confirmDelete = async () => {
     try {
       await deleteCourse.mutateAsync(selectedCourse.id);
-      toast({
-        title: "Course deleted",
-        description: `${selectedCourse.title} has been removed.`,
-      });
+      toast.success(`${selectedCourse.title} deleted successfully!`);
       setSelectedCourse(null);
       setDeleteModalOpen(false);
     } catch (error) {
-      toast({
-        title: "Delete failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error(error.message);
     }
   };
 

@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useMemo } from "react";
 import CohortCard from "../cohort-card/CohortCard";
 import { CohortsData } from "../../../data/academy-data/academy.data";
 import { Link } from "react-router-dom";
+import { useClosestCohort } from "@/hooks/useCohorts";
 
 const JoinCohort = () => {
-  // For landing, show the first cohort (UI/UX)
-  const cohort = CohortsData[0];
+  const { data: closestCohort } = useClosestCohort();
+  
+  // For landing, show the first cohort (UI/UX) with dynamic date
+  const cohort = useMemo(() => {
+    const baseCohort = CohortsData[0];
+    
+    // If we have a closest cohort with a start date, update the date text
+    if (closestCohort?.start_date) {
+      const formattedDate = new Date(closestCohort.start_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      return {
+        ...baseCohort,
+        info: baseCohort.info.map((item, index) => {
+          // Update the first item (index 0) which contains the date
+          if (index === 0) {
+            return {
+              ...item,
+              text: formattedDate
+            };
+          }
+          return item;
+        })
+      };
+    }
+    
+    return baseCohort;
+  }, [closestCohort]);
 
   const handleOrigins = () => {};
 

@@ -31,12 +31,11 @@ import {
 import CollectionViewModal from "./modals/CollectionViewModal";
 import CollectionEditModal from "./modals/CollectionEditModal";
 import DeleteConfirmModal from "./modals/DeleteConfirmModal";
-import { useToast } from "../hooks/use-toast";
+import { toast } from "../ui/sonner";
 import { useCollections } from "../../../hooks/useCollections";
 import supabase from "../../../supabase/client";
 
 const CollectionsManagement = () => {
-  const { toast } = useToast();
   const [selectedItem, setSelectedItem] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -140,29 +139,20 @@ const CollectionsManagement = () => {
     if (!selectedItem) return;
     try {
       await deleteCollection.mutateAsync(selectedItem.id);
-      toast({
-        title: "Collection Deleted",
-        description: `${selectedItem.title} was successfully removed.`,
-      });
+      toast.success(`${selectedItem.title} deleted successfully!`);
       setDeleteModalOpen(false);
       setSelectedItem(null);
     } catch (err) {
-      toast({
-        title: "Error deleting collection",
-        description: err.message,
-      });
+      toast.error(err.message);
     }
   };
 
   const handleSave = async (updatedItem) => {
     try {
       await updateCollection.mutateAsync(updatedItem);
-      toast({
-        title: "Collection Updated",
-        description: `${updatedItem.title} was successfully updated.`,
-      });
+      toast.success(`${updatedItem.title} updated successfully!`);
     } catch (err) {
-      toast({ title: "Error updating collection", description: err.message });
+      toast.error(err.message);
     }
   };
 
@@ -180,13 +170,10 @@ const CollectionsManagement = () => {
         image: imageUrl,
       });
 
-      toast({
-        title: "Collection Created",
-        description: `${newItem.title} was successfully added.`,
-      });
+      toast.success(`${newItem.title} created successfully!`);
       resetForm();
     } catch (err) {
-      toast({ title: "Error creating collection", description: err.message });
+      toast.error(err.message);
     }
   };
 

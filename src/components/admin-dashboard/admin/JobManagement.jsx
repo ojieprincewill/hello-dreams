@@ -31,7 +31,7 @@ import {
   Mail,
   Calendar,
 } from "lucide-react";
-import { useToast } from "../hooks/use-toast";
+import { toast } from "../ui/sonner";
 import JobViewModal from "./modals/JobViewModal";
 import JobEditModal from "./modals/JobEditModal";
 import DeleteConfirmModal from "./modals/DeleteConfirmModal";
@@ -44,7 +44,6 @@ import {
 } from "@/hooks/useJobs";
 
 const JobManagement = () => {
-  const { toast } = useToast();
   const { data: jobs = [], isLoading } = useJobs();
   const createJob = useCreateJob();
   const updateJob = useUpdateJob();
@@ -99,10 +98,7 @@ const JobManagement = () => {
         company_email: newJob.companyEmail,
         published: newJob.published,
       });
-      toast({
-        title: "Job posted",
-        description: `${newJob.title} is now live.`,
-      });
+      toast.success(`${newJob.title} posted successfully!`);
       setNewJob({
         title: "",
         description: "",
@@ -118,7 +114,7 @@ const JobManagement = () => {
       });
       setViewModalOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
@@ -132,20 +128,20 @@ const JobManagement = () => {
         companyName: job.company_name,
         companyEmail: job.company_email,
       });
-      toast({ title: "Job updated", description: `${job.title} was updated.` });
+      toast.success(`${job.title} updated successfully!`);
       setEditModalOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
   const handleDelete = async () => {
     try {
       await deleteJob.mutateAsync({ id: selectedJob.id });
-      toast({ title: "Deleted", description: `${selectedJob.title} removed.` });
+      toast.success(`${selectedJob.title} deleted successfully!`);
       setDeleteModalOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
@@ -158,14 +154,9 @@ const JobManagement = () => {
         published: newPublishedState,
       });
 
-      toast({
-        title: newPublishedState ? "Job published" : "Job unpublished",
-        description: `${job.title} is now ${
-          newPublishedState ? "published" : "unpublished"
-        }.`,
-      });
+      toast.success(`${job.title} ${newPublishedState ? "published" : "unpublished"} successfully!`);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 

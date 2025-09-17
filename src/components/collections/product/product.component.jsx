@@ -8,7 +8,7 @@ import { addItem } from '../../../state-slices/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import AddToCart from '../add-to-cart/add-to-cart.component';
 import QuantityControl from '../quantity-control/quantity-control.component';
-import { toast } from 'react-toastify';
+import { toast } from '@/components/admin-dashboard/ui/sonner';
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();

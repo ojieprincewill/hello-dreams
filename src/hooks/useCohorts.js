@@ -41,6 +41,27 @@ export function useUpcomingCohort() {
   });
 }
 
+export function useClosestCohort() {
+  return useQuery({
+    queryKey: ["cohorts", "closest"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("cohorts")
+        .select("*")
+        .order("start_date", { ascending: true })
+        .limit(1)
+        .maybeSingle();
+      if (error && error.code !== "PGRST116") {
+        console.error("Closest cohort query error:", error);
+        throw error;
+      }
+      return data || null;
+    },
+    staleTime: 60 * 1000,
+    retry: false, // Don't retry on 404 errors
+  });
+}
+
 export function useUpsertCohort() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -56,6 +77,7 @@ export function useUpsertCohort() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cohorts"] });
       queryClient.invalidateQueries({ queryKey: ["cohorts", "upcoming"] });
+      queryClient.invalidateQueries({ queryKey: ["cohorts", "closest"] });
     },
   });
 }

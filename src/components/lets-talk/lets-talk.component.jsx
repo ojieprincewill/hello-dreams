@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 import supabase from "../../supabase/client";
 import LoadingSpinner from "../loading-spinner/loading-spinner.component";
 import ContactSuccess from "./contact-success.component";

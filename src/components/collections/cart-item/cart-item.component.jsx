@@ -3,7 +3,7 @@ import QuantityControl from "../quantity-control/quantity-control.component";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { clearItem } from "../../../state-slices/cart/cartSlice";
-import { toast } from "react-toastify";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const CartItem = ({ cartProduct }) => {
   const dispatch = useDispatch();

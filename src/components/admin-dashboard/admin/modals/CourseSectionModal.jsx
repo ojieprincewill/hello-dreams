@@ -19,7 +19,7 @@ import {
   Upload,
   CheckCircle,
 } from 'lucide-react';
-import { useToast } from '../../hooks/use-toast';
+import { toast } from '../../ui/sonner';
 import { useLessons, useDeleteLesson } from '@/hooks/useLessons';
 import {
   uploadLessonWithProgress,
@@ -29,7 +29,6 @@ import {
 import { Progress } from '../../ui/progress';
 
 const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
-  const { toast } = useToast();
   const [newLesson, setNewLesson] = useState({
     title: '',
     duration: '',
@@ -57,11 +56,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       !newLesson.duration.trim() ||
       !newLesson.videoFile
     ) {
-      toast({
-        title: 'Missing information',
-        description: 'Please provide title, duration, and video file.',
-        variant: 'destructive',
-      });
+      toast.error('Please provide title, duration, and video file.');
       return;
     }
 
@@ -90,11 +85,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
             newLesson.thumbnail_image,
           );
         } catch (err) {
-          toast({
-            title: 'Thumbnail upload failed',
-            description: err.message,
-            variant: 'destructive',
-          });
+          toast.error(err.message);
           thumbnailUrl = '';
         }
       }
@@ -109,11 +100,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
           const files = newLesson.attachments.filter((a) => a instanceof File);
           attachmentsUrls = await uploadAttachmentsToStorage(files);
         } catch (err) {
-          toast({
-            title: 'Attachment upload failed',
-            description: err.message,
-            variant: 'destructive',
-          });
+          toast.error(err.message);
           attachmentsUrls = [];
         }
       } else if (typeof newLesson.attachments === 'string') {
@@ -126,11 +113,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       // Example: await createLesson.mutateAsync({ ...newLesson, thumbnail_image: thumbnailUrl, attachments: attachmentsUrls });
       // You may need to adjust this to fit your actual mutation logic
 
-      toast({
-        title: 'Lesson added',
-        description:
-          'Video uploaded successfully and sent to Mux for processing. This may take a few minutes.',
-      });
+      toast.success('Lesson added successfully! Video is being processed.');
 
       setNewLesson({
         title: '',
@@ -145,11 +128,7 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
       setShowAddLesson(false);
       setUploadProgress({ stage: '', percent: 0 });
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: error.message || 'Upload failed',
-        variant: 'destructive',
-      });
+      toast.error(error.message || 'Upload failed');
     } finally {
       setUploading(false);
       setUploadProgress({ stage: '', percent: 0 });
@@ -159,16 +138,9 @@ const CourseSectionModal = ({ courseId, courseTitle, isOpen, onClose }) => {
   const handleDelete = async (lessonId) => {
     try {
       await deleteLesson.mutateAsync({ id: lessonId, courseId });
-      toast({
-        title: 'Lesson deleted',
-        description: 'The lesson has been removed.',
-      });
+      toast.success('Lesson deleted successfully!');
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: error.message,
-        variant: 'destructive',
-      });
+      toast.error(error.message);
     }
   };
 

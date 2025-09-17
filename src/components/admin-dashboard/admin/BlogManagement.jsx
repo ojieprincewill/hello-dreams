@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Plus, Edit, Trash2, Eye, Calendar, Upload, User } from "lucide-react";
-import { useToast } from "../hooks/use-toast";
+import { toast } from "../ui/sonner";
 import BlogViewModal from "./modals/BlogViewModal";
 import BlogEditModal from "./modals/BlogEditModal";
 import DeleteConfirmModal from "./modals/DeleteConfirmModal";
@@ -26,7 +26,6 @@ import {
 import supabase from "@/supabase/client";
 
 const BlogManagement = () => {
-  const { toast } = useToast();
   const blogsQuery = useBlogs();
   const createBlog = useCreateBlog();
   const updateBlog = useUpdateBlog();
@@ -109,11 +108,7 @@ const BlogManagement = () => {
 
   const handleCreate = async () => {
     if (!form.title || !form.content || !form.author) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive",
-      });
+      toast.error("Please fill in all required fields");
       return;
     }
 
@@ -134,11 +129,11 @@ const BlogManagement = () => {
         image_url: imageUrl,
         author_image_url: authorImageUrl,
       });
-      toast({ title: "Article created" });
+      toast.success("Article created successfully!");
       resetForm();
       setViewOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
@@ -175,20 +170,20 @@ const BlogManagement = () => {
         image_url: imageUrl,
         author_image_url: authorImageUrl,
       });
-      toast({ title: "Article updated" });
+      toast.success("Article updated successfully!");
       setEditOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
   const handleDelete = async () => {
     try {
       await deleteBlog.mutateAsync(selected.id);
-      toast({ title: "Article deleted" });
+      toast.success("Article deleted successfully!");
       setDeleteOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 

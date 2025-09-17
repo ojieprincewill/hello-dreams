@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "../../../state-slices/saved-classes/savedClassesSlice";
 import { useAuth } from "@/hooks/useAuth";
-import { toast } from "react-toastify";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const FreeClassCard = ({ data, className = "" }) => {
   const dispatch = useDispatch();

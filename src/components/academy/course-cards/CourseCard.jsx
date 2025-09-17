@@ -11,7 +11,7 @@ import { useState } from "react";
 import supabase from "@/supabase/client";
 import PaystackPop from "@paystack/inline-js";
 import { useAuth } from "@/hooks/useAuth";
-import { toast } from "react-toastify";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const dispatch = useDispatch();

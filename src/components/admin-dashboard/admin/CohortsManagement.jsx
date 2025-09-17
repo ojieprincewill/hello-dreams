@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useCohorts, useUpsertCohort } from "@/hooks/useCohorts";
+import { toast } from "../ui/sonner";
 
 const CohortsManagement = () => {
   const { data: cohorts = [], isLoading, isError, error } = useCohorts();
@@ -26,7 +27,12 @@ const CohortsManagement = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await upsert.mutateAsync(form);
+    try {
+      await upsert.mutateAsync(form);
+      toast.success("Cohort saved successfully!");
+    } catch (error) {
+      toast.error("Failed to save cohort. Please try again.");
+    }
   };
 
   // Show error message if table doesn't exist
@@ -63,6 +69,7 @@ const CohortsManagement = () => {
       </div>
 
       <div className="bg-white border border-gray-200 rounded-xl p-4 xl:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Add/Edit Upcoming Cohort</h2>
         <form className="grid grid-cols-1 gap-4" onSubmit={onSubmit}>
           <div>
             <label className="block text-sm text-gray-700 mb-1">Category</label>
@@ -104,6 +111,55 @@ const CohortsManagement = () => {
             </button>
           </div>
         </form>
+      </div>
+
+      {/* All Cohorts List */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 xl:p-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">All Cohorts</h2>
+        {isLoading ? (
+          <div className="text-center py-8">
+            <div className="text-gray-500">Loading cohorts...</div>
+          </div>
+        ) : cohorts.length === 0 ? (
+          <div className="text-center py-8">
+            <div className="text-gray-500">No cohorts found. Create your first cohort above.</div>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {cohorts.map((cohort) => (
+              <div key={cohort.id} className="border border-gray-200 rounded-lg p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-semibold text-gray-900">{cohort.category}</h3>
+                  <div className="flex items-center space-x-2">
+                    {cohort.is_upcoming && (
+                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                        Upcoming
+                      </span>
+                    )}
+                    <span className="text-sm text-gray-500">
+                      {cohort.start_date ? new Date(cohort.start_date).toLocaleDateString() : 'No date set'}
+                    </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="font-medium text-gray-700">Price:</span>
+                    <span className="ml-2 text-gray-900">{cohort.currency} {cohort.price?.toLocaleString()}</span>
+                    {cohort.old_price && (
+                      <span className="ml-2 text-red-500 line-through">
+                        {cohort.currency} {cohort.old_price?.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <span className="font-medium text-gray-700">Course Details:</span>
+                    <p className="text-gray-600 mt-1 line-clamp-2">{cohort.course_details || 'No details provided'}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import CartItem from "../cart-item/cart-item.component";
 import { resetCart } from "../../../state-slices/cart/cartSlice";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-toastify";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 const CartContent = () => {

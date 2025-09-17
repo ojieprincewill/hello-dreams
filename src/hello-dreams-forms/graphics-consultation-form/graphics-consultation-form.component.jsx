@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 import supabase from "../../supabase/client";
 import GraphicsConsultationSuccess from "./graphics-consultation-success.component";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";

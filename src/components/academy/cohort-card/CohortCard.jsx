@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import supabase from "@/supabase/client";
 import PaystackPop from "@paystack/inline-js";
-import { useUpcomingCohort } from "@/hooks/useCohorts";
+import { useClosestCohort } from "@/hooks/useCohorts";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -25,17 +25,17 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
-  const { data: upcomingCohort } = useUpcomingCohort();
+  const { data: closestCohort } = useClosestCohort();
 
   const dynamicTabs = useMemo(() => {
-    if (!upcomingCohort) return null;
+    if (!closestCohort) return null;
     return [
-      { id: "course-details", label: "Course details", details: upcomingCohort.course_details || "Course details" },
-      { id: "requirements", label: "Requirements", details: upcomingCohort.requirements || "Requirements" },
-      { id: "curriculum", label: "Curriculum", details: upcomingCohort.curriculum || "Curriculum" },
+      { id: "course-details", label: "Course details", details: closestCohort.course_details || "Course details" },
+      { id: "requirements", label: "Requirements", details: closestCohort.requirements || "Requirements" },
+      { id: "curriculum", label: "Curriculum", details: closestCohort.curriculum || "Curriculum" },
       { id: "course-fee", label: "Course fee", details: "Course fee" },
     ];
-  }, [upcomingCohort]);
+  }, [closestCohort]);
 
   const handlePayNow = async () => {
     if (!isAuthenticated || !user?.email) {
@@ -43,7 +43,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
       return;
     }
 
-    if (!price) return;
+    if (!price && !closestCohort?.price) return;
 
     setPaymentLoading(true);
     try {
@@ -52,7 +52,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
         {
           body: {
             email: user.email,
-            amount: price,
+            amount: closestCohort?.price ?? price,
           },
         }
       );
@@ -67,7 +67,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
         key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
         reference: data.reference,
         email: user.email,
-        amount: price * 100,
+        amount: (closestCohort?.price ?? price) * 100,
         onSuccess: async () => {
           setPaymentLoading(false);
         },
@@ -92,6 +92,15 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
       <p className="text-[#000000] text-[20px] md:text-[24px] xl:text-[40px] text-center font-bold my-3">
         Join our next cohort
       </p>
+      {closestCohort?.start_date && (
+        <p className="text-[#666666] text-[14px] md:text-[16px] xl:text-[18px] text-center font-medium mb-3">
+          Starting {new Date(closestCohort.start_date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}
+        </p>
+      )}
       <div className="grid grid-cols-2 xl:grid-cols-4 my-10 gap-y-10">
         {info.map((data, index) => (
           <motion.div
@@ -156,10 +165,10 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-[#010413] text-[9px] md:text-[16px] xl:text-[20px] font-bold ">
-              {currency} {(upcomingCohort?.price ?? price).toLocaleString()}
+              {currency} {(closestCohort?.price ?? price).toLocaleString()}
             </span>
             <span className="text-[#ed405c] text-[9px] md:text-[16px] xl:text-[20px] font-bold line-through">
-              {currency} {(upcomingCohort?.old_price ?? oldPrice).toLocaleString()}
+              {currency} {(closestCohort?.old_price ?? oldPrice).toLocaleString()}
             </span>
           </div>
           <button className="bg-[#1342ff] w-[100px] md:w-[176px] text-[#fff] text-[9px] md:text-[16px] xl:text-[20px] font-bold rounded-md px-6 py-2 overflow-hidden hover:bg-[#1b13ff] cursor-pointer transition-colors duration-300" onClick={handlePayNow} disabled={paymentLoading}>

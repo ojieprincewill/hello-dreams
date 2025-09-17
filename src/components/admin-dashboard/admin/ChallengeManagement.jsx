@@ -13,7 +13,7 @@ import {
 } from "../ui/dialog";
 import { Plus, Edit, Trash2, Eye, Target } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { useToast } from "../hooks/use-toast";
+import { toast } from "../ui/sonner";
 
 import {
   useChallenges,
@@ -23,7 +23,6 @@ import {
 } from "@/hooks/useChallenges";
 
 const ChallengeManagement = () => {
-  const { toast } = useToast();
   const { data: challenges = [], isLoading } = useChallenges();
   const createCh = useCreateChallenge();
   const updateCh = useUpdateChallenge();
@@ -52,11 +51,11 @@ const ChallengeManagement = () => {
   const handleCreate = async () => {
     try {
       await createCh.mutateAsync(formData);
-      toast({ title: "Challenge created" });
+      toast.success("Challenge created successfully!");
       resetForm();
       setViewOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
@@ -74,20 +73,20 @@ const ChallengeManagement = () => {
   const handleUpdate = async () => {
     try {
       await updateCh.mutateAsync({ ...selected, ...formData });
-      toast({ title: "Challenge updated" });
+      toast.success("Challenge updated successfully!");
       setEditOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
   const handleDelete = async () => {
     try {
       await deleteCh.mutateAsync(selected);
-      toast({ title: "Challenge deleted" });
+      toast.success("Challenge deleted successfully!");
       setDeleteOpen(false);
     } catch (e) {
-      toast({ title: "Error", description: e.message, variant: "destructive" });
+      toast.error(e.message);
     }
   };
 
