@@ -4,11 +4,20 @@ import PaystackPop from "@paystack/inline-js";
 import PostJobSuccess from "./post-job-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
+import {
+  isEmail,
+  required,
+  minLength,
+  maxLength,
+  validateForm as runValidation,
+} from "@/utils/validation";
 
 const PostJobForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -34,6 +43,7 @@ const PostJobForm = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
+    setErrors({});
 
     const {
       jobTitle,
@@ -46,17 +56,45 @@ const PostJobForm = () => {
       companyEmail,
     } = formData;
 
-    if (
-      !jobTitle ||
-      !jobDescription ||
-      !experienceLevel ||
-      !workHours ||
-      !payType ||
-      !applicationInstructions ||
-      !companyEmail ||
-      !companyName
-    ) {
-      setError("Missing required fields");
+    // Schema-based validation
+    const schema = {
+      jobTitle: [
+        { rule: required, message: "Job title is required" },
+        { rule: minLength(3), message: "Job title must be at least 3 characters" },
+        { rule: maxLength(120), message: "Job title must be 120 characters or less" },
+      ],
+      experienceLevel: [
+        { rule: required, message: "Experience level is required" },
+      ],
+      workHours: [
+        { rule: required, message: "Work hours are required" },
+      ],
+      payType: [
+        { rule: required, message: "Pay type is required" },
+      ],
+      jobDescription: [
+        { rule: required, message: "Job description is required" },
+        { rule: minLength(20), message: "Description should be at least 20 characters" },
+      ],
+      applicationInstructions: [
+        { rule: required, message: "Application instructions are required" },
+        { rule: minLength(10), message: "Instructions should be at least 10 characters" },
+      ],
+      companyName: [
+        { rule: required, message: "Company name is required" },
+      ],
+      companyEmail: [
+        { rule: required, message: "Company email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+    };
+
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      setLoading(false);
+      toast.error("Please fix the highlighted errors");
+      return;
     }
 
     try {
@@ -73,6 +111,7 @@ const PostJobForm = () => {
       // console.log(data);
       // console.log(initError);
       if (initError || !data?.access_code || !data?.reference) {
+        toast.error("Payment initiation failed.");
         setError("Payment initiation failed.");
         setLoading(false);
         return;
@@ -95,6 +134,7 @@ const PostJobForm = () => {
             });
 
           if (verifyError || verifyData?.error) {
+            toast.error("Verification failed. Payment may not be confirmed.");
             setError("Verification failed. Payment may not be confirmed.");
           } else {
             setSuccess("Job posted successfully!");
@@ -112,12 +152,14 @@ const PostJobForm = () => {
           setLoading(false);
         },
         onCancel: () => {
+          toast.error("Payment was cancelled.");
           setError("Payment was cancelled.");
           setLoading(false);
         },
       });
     } catch (err) {
       console.error("Submission Error:", err);
+      toast.error("An unexpected error occurred.");
       setError("An unexpected error occurred.");
       setLoading(false);
     }
@@ -166,6 +208,7 @@ const PostJobForm = () => {
             value={formData.jobTitle}
             onChange={handleChange}
             required
+            error={errors.jobTitle}
           />
           <InputField
             label="Experience Level"
@@ -173,6 +216,7 @@ const PostJobForm = () => {
             value={formData.experienceLevel}
             onChange={handleChange}
             required
+            error={errors.experienceLevel}
           />
           <InputField
             label="Work Hours"
@@ -180,6 +224,7 @@ const PostJobForm = () => {
             value={formData.workHours}
             onChange={handleChange}
             required
+            error={errors.workHours}
           />
           <InputField
             label="Pay Type"
@@ -187,6 +232,7 @@ const PostJobForm = () => {
             value={formData.payType}
             onChange={handleChange}
             required
+            error={errors.payType}
           />
         </div>
 
@@ -196,6 +242,7 @@ const PostJobForm = () => {
           value={formData.jobDescription}
           onChange={handleChange}
           required
+          error={errors.jobDescription}
         />
         <TextAreaField
           label="Application Instructions"
@@ -204,6 +251,7 @@ const PostJobForm = () => {
           onChange={handleChange}
           required
           hint="(e.g., Send your portfolio to email@example.com or apply via website.)"
+          error={errors.applicationInstructions}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -213,6 +261,7 @@ const PostJobForm = () => {
             value={formData.companyName}
             onChange={handleChange}
             required
+            error={errors.companyName}
           />
           <InputField
             label="Company Email"
@@ -220,6 +269,8 @@ const PostJobForm = () => {
             value={formData.companyEmail}
             onChange={handleChange}
             required
+            type="email"
+            error={errors.companyEmail}
           />
         </div>
 
@@ -236,23 +287,24 @@ const PostJobForm = () => {
 };
 
 // Reusable Input Field
-const InputField = ({ label, name, value, onChange, required }) => (
+const InputField = ({ label, name, value, onChange, required, error, type = "text" }) => (
   <div>
     <label className="block text-sm font-medium mb-2">
       {label} {required && <span className="text-red-500">*</span>}
     </label>
     <input
-      type="text"
+      type={type}
       name={name}
       value={value}
       onChange={onChange}
       className="w-full p-3 border border-[#c9c9c9] bg-transparent rounded-sm focus:outline-none"
     />
+    {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
   </div>
 );
 
 // Reusable Text Area Field
-const TextAreaField = ({ label, name, value, onChange, required, hint }) => (
+const TextAreaField = ({ label, name, value, onChange, required, hint, error }) => (
   <div>
     <label className="block text-sm font-medium mb-2">
       {label} {required && <span className="text-red-500">*</span>}
@@ -264,6 +316,7 @@ const TextAreaField = ({ label, name, value, onChange, required, hint }) => (
       className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] rounded-sm focus:outline-none"
     />
     {hint && <span className="text-xs text-gray-500 mt-1 block">{hint}</span>}
+    {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
   </div>
 );
 

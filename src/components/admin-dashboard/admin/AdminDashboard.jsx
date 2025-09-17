@@ -6,6 +6,7 @@ import JobManagement from "./JobManagement";
 import ChallengeManagement from "./ChallengeManagement";
 import BlogManagement from "./BlogManagement";
 import CollectionsManagement from "./CollectionsManagement";
+import CohortsManagement from "./CohortsManagement";
 import RecentActivityManagement from "./RecentActivityManagement";
 import { Menu, X } from "lucide-react";
 import { useRealtimeSubscriptions } from "@/hooks/useRealtimeSubscriptions";
@@ -31,6 +32,8 @@ const AdminDashboard = () => {
         return <BlogManagement />;
       case "collections":
         return <CollectionsManagement />;
+      case "cohorts":
+        return <CohortsManagement />;
       case "activity":
         return <RecentActivityManagement />;
       default:

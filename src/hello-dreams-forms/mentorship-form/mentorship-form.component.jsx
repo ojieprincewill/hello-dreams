@@ -3,11 +3,13 @@ import supabase from "../../supabase/client";
 import MentorshipSuccess from "./mentorship-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const MentorshipForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const [formData, setFormData] = useState({
     type: "Hello dreams mentorship",
     name: "",
@@ -34,19 +36,31 @@ const MentorshipForm = () => {
     setError(null);
     setSuccess(null);
 
-    const { name, email, phone, mentorshipFormat, goals } = formData;
-
-    // Validate required fields
-    if (!name || !email || !phone || !mentorshipFormat || !goals) {
-      setError("Please fill in all required fields");
-      setLoading(false);
-      return;
-    }
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      mentorshipFormat: [
+        { rule: required, message: "Mentorship format is required" },
+      ],
+      goals: [
+        { rule: required, message: "Goals are required" },
+        { rule: minLength(10), message: "Goals should be at least 10 characters" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setError(Object.values(validation.errors)[0] || "Please fix the highlighted errors.");
       setLoading(false);
       return;
     }
@@ -142,6 +156,7 @@ const MentorshipForm = () => {
             onChange={handleChange}
             required
           />
+          {fieldErrors.name && <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>}
         </div>
         <div>
           <label
@@ -158,6 +173,7 @@ const MentorshipForm = () => {
             onChange={handleChange}
             required
           />
+          {fieldErrors.email && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
         </div>
         <div>
           <label
@@ -174,6 +190,7 @@ const MentorshipForm = () => {
             onChange={handleChange}
             required
           />
+          {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -206,6 +223,7 @@ const MentorshipForm = () => {
             <option value="Group sessions">Group sessions</option>
             <option value="Chat-based">Chat-based</option>
           </select>
+          {fieldErrors.mentorshipFormat && <p className="text-red-500 text-xs mt-1">{fieldErrors.mentorshipFormat}</p>}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -240,6 +258,7 @@ const MentorshipForm = () => {
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
             required
           />
+          {fieldErrors.goals && <p className="text-red-500 text-xs mt-1">{fieldErrors.goals}</p>}
         </div>
         <div className="space-y-5 md:space-y-10">
           <div>

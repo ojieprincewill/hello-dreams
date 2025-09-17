@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { useSearchParams } from "react-router-dom";
 import PaystackPop from "@paystack/inline-js";
 import { convertAndFormatUsdToNgn, convertUsdToNgn } from "../../utils/currency";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const PrintingConsultationForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -87,8 +88,26 @@ const PrintingConsultationForm = () => {
       accompanyingServices,
       howDidYouHear,
     } = formData;
-    if (!name || !email || !phone || !service) {
-      setError("Please fill in all required fields.");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      service: [
+        { rule: required, message: "Service selection is required" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setError("Please fill in all required fields correctly.");
       setLoading(false);
       return;
     }
@@ -157,8 +176,26 @@ const PrintingConsultationForm = () => {
       accompanyingServices,
       howDidYouHear,
     } = formData;
-    if (!name || !email || !phone || !service) {
-      setError("Please fill in all required fields.");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      service: [
+        { rule: required, message: "Service selection is required" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setError("Please fill in all required fields correctly.");
       setLoading(false);
       return;
     }

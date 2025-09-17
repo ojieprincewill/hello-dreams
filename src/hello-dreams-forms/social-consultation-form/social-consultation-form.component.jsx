@@ -4,6 +4,7 @@ import LoadingSpinner from "../../components/loading-spinner/loading-spinner.com
 import SocialConsultationSuccess from "./social-consultation-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const SocialConsultationForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const SocialConsultationForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,17 +38,35 @@ const SocialConsultationForm = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
+    setFieldErrors({});
 
     const { name, email, phone, socialMediaGoals, socialMediaPlatforms } =
       formData;
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !socialMediaGoals ||
-      !socialMediaPlatforms
-    ) {
-      setError("Please fill in all required fields.");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      socialMediaPlatforms: [
+        { rule: required, message: "Platforms selection is required" },
+      ],
+      socialMediaGoals: [
+        { rule: required, message: "Goals are required" },
+        { rule: minLength(10), message: "Goals should be at least 10 characters" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setError(Object.values(validation.errors)[0] || "Please fix the highlighted errors.");
       setLoading(false);
       return;
     }
@@ -145,6 +165,7 @@ const SocialConsultationForm = () => {
             onChange={handleChange}
           />
           <input type="hidden" name="type" value="Social Media Management" />
+          {fieldErrors.name && <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>}
         </div>
         <div>
           <label
@@ -160,6 +181,7 @@ const SocialConsultationForm = () => {
             value={formData.email}
             onChange={handleChange}
           />
+          {fieldErrors.email && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
         </div>
         <div>
           <label
@@ -175,6 +197,7 @@ const SocialConsultationForm = () => {
             value={formData.phone}
             onChange={handleChange}
           />
+          {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -208,6 +231,7 @@ const SocialConsultationForm = () => {
             <option value="service3">X (Former Twitter)</option>
             <option value="service3">Facebook</option>
           </select>
+          {fieldErrors.socialMediaPlatforms && <p className="text-red-500 text-xs mt-1">{fieldErrors.socialMediaPlatforms}</p>}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -283,6 +307,7 @@ const SocialConsultationForm = () => {
             onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
+          {fieldErrors.socialMediaGoals && <p className="text-red-500 text-xs mt-1">{fieldErrors.socialMediaGoals}</p>}
         </div>
         <div className="space-y-5 md:space-y-10">
           <div>

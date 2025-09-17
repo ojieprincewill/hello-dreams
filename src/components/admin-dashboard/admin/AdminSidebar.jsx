@@ -20,6 +20,7 @@ const menuItems = [
   { id: "challenges", label: "UI/UX Challenges", icon: Users },
   { id: "blog", label: "Blog Articles", icon: FileText },
   { id: "collections", label: "Collections", icon: ShoppingBag },
+  { id: "cohorts", label: "Cohorts", icon: PlusCircle },
   { id: "activity", label: "Recent Activity", icon: Activity },
 ];
 

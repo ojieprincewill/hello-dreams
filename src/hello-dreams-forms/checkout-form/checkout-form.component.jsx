@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { useDispatch } from "react-redux";
 import { resetCart } from "@/state-slices/cart/cartSlice";
 import PaystackPop from "@paystack/inline-js";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 const CheckoutForm = ({ onSuccess }) => {
   const handleOrigins = () => {};
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const CheckoutForm = ({ onSuccess }) => {
     state: "",
     phone: "",
   });
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,6 +54,7 @@ const CheckoutForm = ({ onSuccess }) => {
     setIsLoading(true);
     setError(null);
     setSuccess(null);
+    setFieldErrors({});
 
     const { title, image, price } = cartItems;
     console.log(formData);
@@ -65,6 +68,39 @@ const CheckoutForm = ({ onSuccess }) => {
       amount,
       email,
     };
+
+    // Validate form
+    const schema = {
+      fullName: [
+        { rule: required, message: "Full name is required" },
+        { rule: minLength(2), message: "Full name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      deliveryAddress: [
+        { rule: required, message: "Delivery address is required" },
+        { rule: minLength(6), message: "Address must be at least 6 characters" },
+      ],
+      city: [
+        { rule: required, message: "City is required" },
+      ],
+      state: [
+        { rule: required, message: "State is required" },
+      ],
+      phone: [
+        { rule: required, message: "Phone is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+    };
+
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const { data, error: initError } = await supabase.functions.invoke(
@@ -190,6 +226,9 @@ const CheckoutForm = ({ onSuccess }) => {
               required
               className="w-full p-2 md:p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             />
+            {fieldErrors.fullName && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.fullName}</p>
+            )}
           </div>
           <div>
             <label
@@ -206,6 +245,9 @@ const CheckoutForm = ({ onSuccess }) => {
               required
               className="w-full p-2 md:p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             />
+            {fieldErrors.email && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+            )}
           </div>
           <div>
             <label
@@ -222,6 +264,9 @@ const CheckoutForm = ({ onSuccess }) => {
               required
               className="w-full p-2 md:p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             />
+            {fieldErrors.deliveryAddress && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.deliveryAddress}</p>
+            )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3 space-y-6 md:space-y-0">
             <div>
@@ -239,6 +284,9 @@ const CheckoutForm = ({ onSuccess }) => {
                 required
                 className="w-full p-2 md:p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
               />
+              {fieldErrors.city && (
+                <p className="text-red-500 text-xs mt-1">{fieldErrors.city}</p>
+              )}
             </div>
             <div>
               <label className="block text-[12px] md:text-[14px] font-medium mb-2 md:mb-3">
@@ -291,6 +339,9 @@ const CheckoutForm = ({ onSuccess }) => {
                 <option value="Yobe">Yobe</option>
                 <option value="Zamfara">Zamfara</option>
               </select>
+              {fieldErrors.state && (
+                <p className="text-red-500 text-xs mt-1">{fieldErrors.state}</p>
+              )}
             </div>
           </div>
           <div className="pb-5 border-b border-b-[#eaecf0]">
@@ -308,6 +359,9 @@ const CheckoutForm = ({ onSuccess }) => {
               required
               className="w-full p-2 md:p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
             />
+            {fieldErrors.phone && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
+            )}
           </div>
           <div>
             <button

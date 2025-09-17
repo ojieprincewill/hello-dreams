@@ -5,6 +5,7 @@ import VerifyAccount from "@/components/academy/sign-up/VerifyAccount";
 import SignUpSuccess from "@/components/academy/sign-up/SignUpSuccess";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const SignUpFlow = () => {
   // 0: SignUpForm, 1: CreatePassword, 2: VerifyAccount, 3: SignUpSuccess
@@ -44,19 +45,25 @@ const SignUpFlow = () => {
 
       // Sign up with Supabase (email verification is automatic)
       // Profile creation is handled automatically by database trigger
-      await signUp.mutateAsync({
+      const res = await signUp.mutateAsync({
         email: formData.email,
         password: formData.password,
         user_metadata: userMetadata,
       });
 
+      console.log("Sign up response:", res);
+      console.log("Sign up error:", res.error);
+
       // Move to verification step
       handleContinue();
     } catch (error) {
       console.error("Sign up error:", error);
-      setSignUpError(
-        error.message || "Failed to create account. Please try again."
-      );
+      const message =
+        error?.message || "Failed to create account. Please try again.";
+      setSignUpError(message);
+      // Surface feedback and return user to the initial form to correct inputs
+      toast.error(message);
+      setStep(0);
     } finally {
       setIsSigningUp(false);
     }

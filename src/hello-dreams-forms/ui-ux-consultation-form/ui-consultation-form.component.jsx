@@ -5,6 +5,7 @@ import UiConsultationSuccess from "./ui-consultation-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 import { useSelector } from "react-redux";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const UiConsultationForm = () => {
   const consultationType = useSelector((state) => state.consultation.type);
@@ -21,6 +22,7 @@ const UiConsultationForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,10 +37,30 @@ const UiConsultationForm = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
+    setFieldErrors({});
 
-    const { name, email, phone, message } = formData;
-    if (!name || !email || !phone || !message) {
-      setError("Please fill in all required fields.");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      message: [
+        { rule: required, message: "Message is required" },
+        { rule: minLength(10), message: "Message should be at least 10 characters" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setError(Object.values(validation.errors)[0] || "Please fix the highlighted errors.");
       setLoading(false);
       return;
     }
@@ -126,6 +148,9 @@ const UiConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {fieldErrors.name && (
+            <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+          )}
         </div>
 
         <div>
@@ -139,6 +164,9 @@ const UiConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {fieldErrors.email && (
+            <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+          )}
         </div>
 
         <div>
@@ -152,6 +180,9 @@ const UiConsultationForm = () => {
             onChange={handleChange}
             className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           />
+          {fieldErrors.phone && (
+            <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
+          )}
         </div>
 
         <div>
@@ -175,6 +206,9 @@ const UiConsultationForm = () => {
             onChange={handleChange}
             className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
+          {fieldErrors.message && (
+            <p className="text-red-500 text-xs mt-1">{fieldErrors.message}</p>
+          )}
           <span className="mt-2 text-[#161616] text-[11px]">
             Tell us a bit about your project and what you hope to achieve
           </span>

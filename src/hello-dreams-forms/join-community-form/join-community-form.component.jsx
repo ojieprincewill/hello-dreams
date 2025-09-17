@@ -3,11 +3,13 @@ import supabase from "../../supabase/client";
 import JoinCommunitySuccess from "./join-community-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const JoinCommunityForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,20 +24,30 @@ const JoinCommunityForm = () => {
     setLoading(true);
     setError(null);
     setSuccess(null);
+    setFieldErrors({});
 
-    const { name, email, phone, message } = formData;
-
-    // Validate required fields
-    if (!name || !email || !phone || !message) {
-      setError("Please fill in all required fields");
-      setLoading(false);
-      return;
-    }
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address");
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      message: [
+        { rule: required, message: "Message is required" },
+        { rule: minLength(10), message: "Message should be at least 10 characters" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setError("Please fix the highlighted errors");
       setLoading(false);
       return;
     }
@@ -130,6 +142,7 @@ const JoinCommunityForm = () => {
               className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
               required
             />
+            {fieldErrors.name && <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>}
           </div>
           <div>
             <label
@@ -146,6 +159,7 @@ const JoinCommunityForm = () => {
               className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
               required
             />
+            {fieldErrors.email && <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>}
           </div>
           <div>
             <label
@@ -162,6 +176,7 @@ const JoinCommunityForm = () => {
               className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
               required
             />
+            {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
           </div>
           <div>
             <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -190,6 +205,7 @@ const JoinCommunityForm = () => {
               className="w-full h-[200px] resize-none p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
               required
             />
+            {fieldErrors.message && <p className="text-red-500 text-xs mt-1">{fieldErrors.message}</p>}
             <span className="mt-2 text-[#161616] text-[11px]">
               Tell us why you want to join hello dreams community
             </span>

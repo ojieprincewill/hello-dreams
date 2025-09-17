@@ -5,6 +5,7 @@ import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { motion } from "motion/react";
 import { toast } from "react-toastify";
 import ReferSuccess from "./refer-success.component";
+import { isEmail, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const ReferForm = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ const ReferForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [generatedCode, setGeneratedCode] = useState("");
   const [step, setStep] = useState(1);
@@ -50,20 +52,42 @@ const ReferForm = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
+    setFieldErrors({});
 
     console.log("Form Data on Submit:", formData);
 
     const { service, name, email, data, referralCode } = formData;
-    if (
-      !service ||
-      !name ||
-      !email ||
-      !data.referralName ||
-      !data.referralEmail
-    ) {
-      setError(
-        "Please fill in all required fields, including referral details."
-      );
+    const schema = {
+      service: [
+        { rule: required, message: "Service is required" },
+      ],
+      name: [
+        { rule: required, message: "Your name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Your email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      referralName: [
+        { rule: required, message: "Referral name is required" },
+      ],
+      referralEmail: [
+        { rule: required, message: "Referral email is required" },
+        { rule: isEmail, message: "Enter a valid referral email" },
+      ],
+    };
+    const flatValues = {
+      service,
+      name,
+      email,
+      referralName: data?.referralName,
+      referralEmail: data?.referralEmail,
+    };
+    const validation = runValidation(schema, flatValues);
+    if (!validation.isValid) {
+      setFieldErrors(validation.errors);
+      setError(Object.values(validation.errors)[0] || "Please fix the highlighted errors.");
       setLoading(false);
       return;
     }
@@ -234,6 +258,9 @@ const ReferForm = () => {
                     Printing
                   </option>
                 </select>
+                {fieldErrors.service && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.service}</p>
+                )}
               </div>
               <div>
                 <label
@@ -250,6 +277,9 @@ const ReferForm = () => {
                   onChange={handleReferralDataChange}
                   className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
                 />
+                {fieldErrors.referralName && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.referralName}</p>
+                )}
               </div>
               <div>
                 <label
@@ -266,6 +296,9 @@ const ReferForm = () => {
                   onChange={handleChange}
                   className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
                 />
+                {fieldErrors.name && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+                )}
               </div>
               <div>
                 <label
@@ -282,6 +315,9 @@ const ReferForm = () => {
                   onChange={handleChange}
                   className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
                 />
+                {fieldErrors.email && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+                )}
               </div>
               <div>
                 <label
@@ -298,6 +334,9 @@ const ReferForm = () => {
                   onChange={handleReferralDataChange}
                   className="w-full p-3 border border-[#dee2e6] bg-transparent focus:outline-none rounded-md"
                 />
+                {fieldErrors.referralEmail && (
+                  <p className="text-red-500 text-xs mt-1">{fieldErrors.referralEmail}</p>
+                )}
               </div>
 
               <div className="w-full md:w-[401.75px] mx-auto flex flex-col items-center space-y-4 mt-3">

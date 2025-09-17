@@ -8,6 +8,7 @@ import { useCourse } from "@/hooks/useCourses";
 import { useAuth } from "@/hooks/useAuth";
 import supabase from "@/supabase/client";
 import PaystackPop from "@paystack/inline-js";
+import { isEmail, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const ManageMembership = () => {
   const [searchParams] = useSearchParams();
@@ -137,15 +138,32 @@ const ManageMembership = () => {
     setMembershipPaymentSuccess(false);
 
     // Validate form
-    if (
-      !formData.email ||
-      !formData.name ||
-      !formData.country ||
-      !formData.city ||
-      !formData.state ||
-      !formData.zip
-    ) {
-      setMembershipPaymentError("Please fill all required fields.");
+    const schema = {
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      country: [
+        { rule: required, message: "Country is required" },
+      ],
+      city: [
+        { rule: required, message: "City is required" },
+      ],
+      state: [
+        { rule: required, message: "State is required" },
+      ],
+      zip: [
+        { rule: required, message: "Zip is required" },
+        { rule: minLength(3), message: "Zip must be at least 3 characters" },
+      ],
+    };
+    const validation = runValidation(schema, formData);
+    if (!validation.isValid) {
+      setMembershipPaymentError(Object.values(validation.errors)[0] || "Please correct the errors in the form.");
       setMembershipPaymentLoading(false);
       return;
     }

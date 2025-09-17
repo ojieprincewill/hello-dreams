@@ -9,6 +9,7 @@ import { motion } from "motion/react";
 import { useSearchParams } from "react-router-dom";
 import PaystackPop from "@paystack/inline-js";
 import { convertAndFormatUsdToNgn, convertUsdToNgn } from "../../utils/currency";
+import { isEmail, isPhone, required, minLength, validateForm as runValidation } from "@/utils/validation";
 
 const GraphicsConsultationForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,16 +71,33 @@ const GraphicsConsultationForm = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
-    if (!formData.message) newErrors.message = "Message is required";
-    if (!formData.service) newErrors.service = "Service selection is required";
-    if (!formData.accompanyingService)
-      newErrors.accompanyingService = "Accompanying service is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const schema = {
+      name: [
+        { rule: required, message: "Name is required" },
+        { rule: minLength(2), message: "Name must be at least 2 characters" },
+      ],
+      email: [
+        { rule: required, message: "Email is required" },
+        { rule: isEmail, message: "Enter a valid email address" },
+      ],
+      phone: [
+        { rule: required, message: "Phone number is required" },
+        { rule: isPhone, message: "Enter a valid phone number" },
+      ],
+      message: [
+        { rule: required, message: "Message is required" },
+        { rule: minLength(10), message: "Message should be at least 10 characters" },
+      ],
+      service: [
+        { rule: required, message: "Service selection is required" },
+      ],
+      accompanyingService: [
+        { rule: required, message: "Accompanying service is required" },
+      ],
+    };
+    const result = runValidation(schema, formData);
+    setErrors(result.errors);
+    return result.isValid;
   };
 
   const handleSubmit = async (e) => {

@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import supabase from "@/supabase/client";
+import PaystackPop from "@paystack/inline-js";
+import { useUpcomingCohort } from "@/hooks/useCohorts";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -17,12 +22,69 @@ const cardVariants = {
 
 const CohortCard = ({ info, price, oldPrice, currency, children }) => {
   const [activeTab, setActiveTab] = useState("course-fee");
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
+  const { data: upcomingCohort } = useUpcomingCohort();
+
+  const dynamicTabs = useMemo(() => {
+    if (!upcomingCohort) return null;
+    return [
+      { id: "course-details", label: "Course details", details: upcomingCohort.course_details || "Course details" },
+      { id: "requirements", label: "Requirements", details: upcomingCohort.requirements || "Requirements" },
+      { id: "curriculum", label: "Curriculum", details: upcomingCohort.curriculum || "Curriculum" },
+      { id: "course-fee", label: "Course fee", details: "Course fee" },
+    ];
+  }, [upcomingCohort]);
+
+  const handlePayNow = async () => {
+    if (!isAuthenticated || !user?.email) {
+      navigate("/login");
+      return;
+    }
+
+    if (!price) return;
+
+    setPaymentLoading(true);
+    try {
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
+        {
+          body: {
+            email: user.email,
+            amount: price,
+          },
+        }
+      );
+
+      if (initError || !data?.access_code || !data?.reference) {
+        setPaymentLoading(false);
+        return;
+      }
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f",
+        reference: data.reference,
+        email: user.email,
+        amount: price * 100,
+        onSuccess: async () => {
+          setPaymentLoading(false);
+        },
+        onCancel: () => {
+          setPaymentLoading(false);
+        },
+      });
+    } catch (err) {
+      setPaymentLoading(false);
+    }
+  };
 
   const tabs = [
-    { id: "course-details", label: "Course details" },
-    { id: "requirements", label: "Requirements" },
-    { id: "curriculum", label: "Curriculum" },
-    { id: "course-fee", label: "Course fee" },
+    { id: "course-details", label: "Course details", details: "Course details" },
+    { id: "requirements", label: "Requirements", details: "Requirements" },
+    { id: "curriculum", label: "Curriculum", details: "Curriculum" },
+    { id: "course-fee", label: "Course fee", details: "Course fee" },
   ];
 
   return (
@@ -61,7 +123,7 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
           className="flex flex-row gap-2 overflow-x-auto whitespace-nowrap md:justify-center bg-[#010413] w-full h-[38px] md:h-[58px] xl:h-[98px] items-center rounded-xl overflow-hidden my-5 "
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          {tabs.map((tab) => (
+          {(dynamicTabs || tabs).map((tab) => (
             <span
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -94,21 +156,21 @@ const CohortCard = ({ info, price, oldPrice, currency, children }) => {
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-[#010413] text-[9px] md:text-[16px] xl:text-[20px] font-bold ">
-              {currency} {price.toLocaleString()}
+              {currency} {(upcomingCohort?.price ?? price).toLocaleString()}
             </span>
             <span className="text-[#ed405c] text-[9px] md:text-[16px] xl:text-[20px] font-bold line-through">
-              {currency} {oldPrice.toLocaleString()}
+              {currency} {(upcomingCohort?.old_price ?? oldPrice).toLocaleString()}
             </span>
           </div>
-          <button className="bg-[#1342ff] w-[100px] md:w-[176px] text-[#fff] text-[9px] md:text-[16px] xl:text-[20px] font-bold rounded-md px-6 py-2 overflow-hidden hover:bg-[#1b13ff] cursor-pointer transition-colors duration-300">
-            Pay now
+          <button className="bg-[#1342ff] w-[100px] md:w-[176px] text-[#fff] text-[9px] md:text-[16px] xl:text-[20px] font-bold rounded-md px-6 py-2 overflow-hidden hover:bg-[#1b13ff] cursor-pointer transition-colors duration-300" onClick={handlePayNow} disabled={paymentLoading}>
+            {paymentLoading ? "Processing..." : "Pay now"}
           </button>
         </div>
       )}
 
       {activeTab !== "course-fee" && (
         <div className="w-full text-center mt-5 text-[#010413] text-[14px] md:text-[16px] xl:text-[18px]">
-          Placeholder content for {activeTab.replace("-", " ")}
+          {(dynamicTabs || tabs).find((tab) => tab.id === activeTab)?.details}
         </div>
       )}
     </div>
