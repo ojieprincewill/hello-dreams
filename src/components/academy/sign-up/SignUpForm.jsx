@@ -1,13 +1,80 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { checkUserExists } from "@/services/auth";
+import { isEmail } from "@/utils/validation";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const SignUpForm = ({ onContinue, formData, setFormData }) => {
+  const [emailValidation, setEmailValidation] = useState({
+    isValid: false,
+    isChecking: false,
+    exists: false,
+    hasChecked: false
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const currentYear = new Date().getFullYear();
+
+  // Debounced email validation
+  const validateEmail = useCallback(async (email) => {
+    if (!email || !isEmail(email)) {
+      setEmailValidation({
+        isValid: false,
+        isChecking: false,
+        exists: false,
+        hasChecked: false
+      });
+      return;
+    }
+
+    setEmailValidation(prev => ({ ...prev, isChecking: true }));
+
+    try {
+      const exists = await checkUserExists(email);
+      console.log(exists);
+      setEmailValidation({
+        isValid: true,
+        isChecking: false,
+        exists: exists,
+        hasChecked: true
+      });
+
+      if (exists.account_exists === true) {
+        toast.error("This email address is already registered. Please use a different email or sign in instead.");
+      }
+    } catch (error) {
+      console.error('Email validation error:', error);
+      setEmailValidation({
+        isValid: false,
+        isChecking: false,
+        exists: false,
+        hasChecked: false
+      });
+      toast.error("Unable to validate email. Please try again.");
+    }
+  }, []);
+
+  // Debounce email validation
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (formData.email) {
+        validateEmail(formData.email);
+      } else {
+        setEmailValidation({
+          isValid: false,
+          isChecking: false,
+          exists: false,
+          hasChecked: false
+        });
+      }
+    }, 500); // 500ms debounce
+
+    return () => clearTimeout(timeoutId);
+  }, [formData.email, validateEmail]);
 
   const handleOrigins = () => {};
 
@@ -104,15 +171,40 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
               <label className="block text-[#101828] text-[16px] mb-2">
                 Email Address
               </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email address"
-                className="w-full px-4 py-3 rounded-lg border border-[#eaecf0] bg-[#f7f7f7] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1342ff]"
-                required
-              />
+              <div className="relative">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Enter your email address"
+                  className={`w-full px-4 py-3 pr-12 rounded-lg border text-[15px] focus:outline-none focus:ring-2 ${
+                    emailValidation.isChecking
+                      ? 'border-[#1342ff] bg-[#f7f7f7] focus:ring-[#1342ff]'
+                      : emailValidation.hasChecked && emailValidation.isValid && !emailValidation.exists
+                      ? 'border-green-500 bg-[#f7f7f7] focus:ring-green-500'
+                      : emailValidation.hasChecked && emailValidation.exists
+                      ? 'border-red-500 bg-[#f7f7f7] focus:ring-red-500'
+                      : 'border-[#eaecf0] bg-[#f7f7f7] focus:ring-[#1342ff]'
+                  }`}
+                  required
+                />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  {emailValidation.isChecking && (
+                    <div className="w-5 h-5 border-2 border-[#1342ff] border-t-transparent rounded-full animate-spin"></div>
+                  )}
+                  {emailValidation.hasChecked && emailValidation.isValid && !emailValidation.exists && (
+                    <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                  {emailValidation.hasChecked && emailValidation.exists && (
+                    <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  )}
+                </div>
+              </div>
             </div>
             <div>
               <label className="block text-[#101828] text-[16px] mb-2">
@@ -157,7 +249,10 @@ const SignUpForm = ({ onContinue, formData, setFormData }) => {
                   formData.email &&
                   formData.phone &&
                   formData.country
-                )
+                ) ||
+                emailValidation.isChecking ||
+                (emailValidation.hasChecked && emailValidation.exists) ||
+                (emailValidation.hasChecked && !emailValidation.isValid)
               }
             >
               Continue

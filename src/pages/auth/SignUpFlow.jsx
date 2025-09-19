@@ -52,10 +52,14 @@ const SignUpFlow = () => {
       });
 
       console.log("Sign up response:", res);
-      console.log("Sign up error:", res.error);
 
-      // Move to verification step
-      handleContinue();
+      // Check if sign up was successful before proceeding
+      if (res && res.user) {
+        // Sign up was successful, move to verification step
+        handleContinue();
+      } else {
+        throw new Error("Sign up failed - no user created");
+      }
     } catch (error) {
       console.error("Sign up error:", error);
       const message =

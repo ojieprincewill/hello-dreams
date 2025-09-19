@@ -91,6 +91,29 @@ export async function updateUserProfile({ user_metadata }) {
   return data;
 }
 
+// Check if user exists by email using edge function
+export async function checkUserExists(email) {
+  if (!email) return false;
+  
+  try {
+    const { data, error } = await supabase.functions.invoke('check-email-exists', {
+      body: { email }
+    });
+    
+    if (error) {
+      console.error('Error calling check-email-exists function:', error);
+      throw error;
+    }
+    
+    // The edge function returns account_exists and exists_exact_match
+    // We want to use exists_exact_match for precise validation
+    return data?.exists_exact_match || false;
+  } catch (error) {
+    console.error('Exception in checkUserExists:', error);
+    throw error;
+  }
+}
+
 // Update user profile with avatar
 export async function updateUserProfileWithAvatar({ user_metadata, avatarFile, userId }) {
   let avatarUrl = user_metadata.avatar_url;
