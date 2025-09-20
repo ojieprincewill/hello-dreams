@@ -176,16 +176,10 @@ function App() {
             <Route path="/sustainability/:blogId" element={<BlogPage />} />
             <Route path="/terms-of-service" element={<TermsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPage />} />
+            <Route path="/post-a-job" element={<PostJobPage />}/>
 
             {/* Protected routes - require authentication */}
-            <Route
-              path="/post-a-job"
-              element={
-                <ProtectedRoute>
-                  <PostJobPage />
-                </ProtectedRoute>
-              }
-            />
+            
             <Route
               path="/cart-summary"
               element={
