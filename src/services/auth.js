@@ -114,6 +114,27 @@ export async function checkUserExists(email) {
   }
 }
 
+// Resend verification email using edge function
+export async function resendVerificationEmail(email) {
+  if (!email) throw new Error('Email is required');
+  
+  try {
+    const { data, error } = await supabase.functions.invoke('resend-confirmation', {
+      body: { email }
+    });
+    
+    if (error) {
+      console.error('Error calling resend-confirmation function:', error);
+      throw error;
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Exception in resendVerificationEmail:', error);
+    throw error;
+  }
+}
+
 // Update user profile with avatar
 export async function updateUserProfileWithAvatar({ user_metadata, avatarFile, userId }) {
   let avatarUrl = user_metadata.avatar_url;

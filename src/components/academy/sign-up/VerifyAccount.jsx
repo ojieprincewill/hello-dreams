@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import Logo from "@/components/logo/logo.component";
+import { resendVerificationEmail } from "@/services/auth";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const VerifyAccount = ({ onContinue, onBack, formData }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(30);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [resendTimer, setResendTimer] = useState(60); // 1 minute timer for resend
+  const [isResending, setIsResending] = useState(false);
+  const [canResend, setCanResend] = useState(false);
   const inputRefs = useRef([]);
 
   // Timer countdown
@@ -15,6 +20,16 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
       return () => clearInterval(interval);
     }
   }, [timer]);
+
+  // Resend timer countdown
+  useEffect(() => {
+    if (resendTimer > 0) {
+      const interval = setInterval(() => setResendTimer((t) => t - 1), 1000);
+      return () => clearInterval(interval);
+    } else {
+      setCanResend(true);
+    }
+  }, [resendTimer]);
 
   // Handle OTP input
   const handleChange = (e, idx) => {
@@ -58,6 +73,25 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
       setIsVerifying(false);
       onContinue();
     }, 1000);
+  };
+
+  const handleResendVerification = async () => {
+    if (!canResend || isResending) return;
+    
+    setIsResending(true);
+    try {
+      await resendVerificationEmail(formData.email);
+      toast.success("Verification email sent successfully!");
+      
+      // Reset the timer
+      setResendTimer(60);
+      setCanResend(false);
+    } catch (error) {
+      console.error('Error resending verification email:', error);
+      toast.error("Failed to resend verification email. Please try again.");
+    } finally {
+      setIsResending(false);
+    }
   };
 
   return (
@@ -129,6 +163,30 @@ const VerifyAccount = ({ onContinue, onBack, formData }) => {
                     </ul>
                   </div>
                 </div>
+              </div>
+
+              {/* Resend Verification Button */}
+              <div className="w-full">
+                <button
+                  onClick={handleResendVerification}
+                  disabled={!canResend || isResending}
+                  className={`w-full py-3 rounded-lg text-[16px] md:text-[18px] font-bold transition-colors duration-200 ${
+                    canResend && !isResending
+                      ? 'bg-[#1342ff] text-white hover:bg-[#2313ff] cursor-pointer'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                  {isResending ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending...</span>
+                    </div>
+                  ) : canResend ? (
+                    'Resend Verification Email'
+                  ) : (
+                    `Resend in ${resendTimer}s`
+                  )}
+                </button>
               </div>
 
               <button
