@@ -149,40 +149,65 @@ const AcademyNavbar = () => {
             className="fixed top-[80px] left-[235px]  z-80 "
           >
             <div className="bg-[#fff] p-5 w-[717px] h-[388px] grid grid-cols-2 gap-y-4 gap-x-12 rounded-xl">
-              {CourseOptions.map((data) => (
-                <Link
-                  to={data.target}
-                  key={data.id}
-                  className="grid grid-cols-[10%_90%] gap-5 items-center hover:bg-[#ecf3f5] p-2 rounded-xl cursor-pointer"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  onClick={handleOrigins}
-                >
-                  <div className="w-[37px] h-[37px] ">
-                    <img
-                      src={data.icon}
-                      alt={`svg icon ${data.id}`}
-                      className="text-[#1d68f4] w-full h-full object-contain"
-                    />
-                  </div>
-                  <div>
-                    <div className="relative flex flex-row justify-between items-center">
-                      <p className=" text-[#353535] max-w-[200px] text-[18px] font-bold mb-1">
+              {CourseOptions.map((data) =>
+                data.target !== "#" ? (
+                  <Link
+                    to={data.target}
+                    key={data.id}
+                    className="grid grid-cols-[10%_90%] gap-5 items-center hover:bg-[#ecf3f5] p-2 rounded-xl cursor-pointer transition"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    onClick={handleOrigins}
+                  >
+                    <div className="w-[37px] h-[37px]">
+                      <img
+                        src={data.icon}
+                        alt={`svg icon ${data.id}`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <div className="relative flex flex-row justify-between items-center">
+                        <p className="text-[#353535] max-w-[200px] text-[18px] font-bold mb-1">
+                          {data.title}
+                        </p>
+                        <div className="absolute right-[15px] w-[17.87px] h-[13.8px]">
+                          <img
+                            src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330686/Button_SVG_mmlmot.png"
+                            alt="blue arrow"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <p className="text-[#353535] max-w-[200px] text-[14px] font-medium">
+                        {data.text}
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div
+                    key={data.id}
+                    className="grid grid-cols-[10%_90%] gap-5 items-center p-2 rounded-xl cursor-not-allowed opacity-50 bg-[#f5f5f5]"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    title="Coming soon"
+                  >
+                    <div className="w-[37px] h-[37px]">
+                      <img
+                        src={data.icon}
+                        alt={`svg icon ${data.id}`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-[#353535] max-w-[200px] text-[18px] font-bold mb-1">
                         {data.title}
                       </p>
-                      <div className=" absolute right-[15px] w-[17.87px] h-[13.8px]">
-                        <img
-                          src="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1749330686/Button_SVG_mmlmot.png"
-                          alt="blue arrow"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <p className="text-[#353535] max-w-[200px] text-[14px] font-medium">
+                        {data.text}
+                      </p>
                     </div>
-                    <p className="text-[#353535] max-w-[200px] text-[14px] font-medium">
-                      {data.text}
-                    </p>
                   </div>
-                </Link>
-              ))}
+                )
+              )}
             </div>
           </motion.div>
         )}

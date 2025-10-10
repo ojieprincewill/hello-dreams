@@ -15,7 +15,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
@@ -27,13 +26,6 @@
       "@/app-store/*": ["./src/app-store/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "index.html"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build"
-  ]
-} 
+  "include": ["src/**/*", "index.html"],
+  "exclude": ["node_modules", "dist", "build"]
+}

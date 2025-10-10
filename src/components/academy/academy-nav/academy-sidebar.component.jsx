@@ -102,30 +102,58 @@ const AcademySidebar = ({ closeSidebar, user }) => {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="flex flex-col space-y-2 bg-[#1342ff] p-2 w-[90%] mx-auto rounded-md"
               >
-                {CourseOptions.map((data) => (
-                  <Link
-                    to={data.target}
-                    key={data.id}
-                    className="grid grid-cols-[10%_90%] gap-1 items-center hover:bg-[#ecf3f5] p-1 rounded-xl cursor-pointer"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    onClick={handleOrigins}
-                  >
-                    <div className="w-[16px] h-[16px] ">
-                      <img
-                        src={data.icon}
-                        alt={`svg icon ${data.id}`}
-                        className="text-[#fff] w-full h-full object-contain"
-                      />
+                {CourseOptions.map((data) =>
+                  data.target !== "#" ? (
+                    <Link
+                      to={data.target}
+                      key={data.id}
+                      className="grid grid-cols-[10%_90%] gap-1 items-center hover:bg-[#ecf3f5] p-1 rounded-xl cursor-pointer"
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                      onClick={handleOrigins}
+                    >
+                      <div className="w-[16px] h-[16px]">
+                        <img
+                          src={data.icon}
+                          alt={`svg icon ${data.id}`}
+                          className="text-[#fff] w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <p className="flex flex-row justify-between items-center text-[#fff] text-[12px] font-bold">
+                          {data.title}
+                          <ArrowRightIcon className="text-[#fff] font-bold w-[15px] h-auto" />
+                        </p>
+                        <p className="text-[#d3c8c8] text-[10px]">
+                          {data.text}
+                        </p>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div
+                      key={data.id}
+                      className="grid grid-cols-[10%_90%] gap-1 items-center p-1 rounded-xl cursor-not-allowed opacity-50 bg-[#1b2bff]/20"
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                      title="Coming soon"
+                      onClick={(e) => e.stopPropagation()} // Prevents sidebar from closing
+                    >
+                      <div className="w-[16px] h-[16px]">
+                        <img
+                          src={data.icon}
+                          alt={`svg icon ${data.id}`}
+                          className="text-[#fff] w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <p className="flex flex-row justify-between items-center text-[#fff] text-[12px] font-bold">
+                          {data.title}
+                        </p>
+                        <p className="text-[#d3c8c8] text-[10px]">
+                          {data.text}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="flex flex-row justify-between items-center text-[#fff] text-[12px] font-bold">
-                        {data.title}
-                        <ArrowRightIcon className="text-[#fff] font-bold w-[15px] h-auto" />
-                      </p>
-                      <p className="text-[#d3c8c8] text-[10px]">{data.text}</p>
-                    </div>
-                  </Link>
-                ))}
+                  )
+                )}
               </motion.div>
             )}
           </AnimatePresence>
