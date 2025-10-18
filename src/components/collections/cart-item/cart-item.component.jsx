@@ -25,7 +25,7 @@ const CartItem = ({ cartProduct }) => {
             {title}
           </p>
           <p className="text-[#667085] text-[16px] md:text-[20px] ">
-            &#8358;{price}
+            &#8358;{price.toLocaleString()}
           </p>
 
           <QuantityControl cartItem={cartProduct} />
