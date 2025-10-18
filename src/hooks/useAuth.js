@@ -110,5 +110,6 @@ export function useAuth() {
     // Computed values
     isAuthenticated: !!sessionQuery.data?.user,
     isAdmin: sessionQuery.data?.user?.user_metadata?.role === "admin",
+    isSuperuser: sessionQuery.data?.user?.user_metadata?.role === "superuser",
   };
 }

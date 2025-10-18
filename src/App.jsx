@@ -57,6 +57,7 @@ import UnauthorizedPage from "./pages/unauthorized-page/unauthorized-page";
 import CoursePlayerPage from "./pages/academy-pages/course-player-page";
 import CohortsPage from "./pages/cohorts-page/CohortsPage";
 import SignUpFlow from "./pages/auth/SignUpFlow";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import LoginForm from "./components/academy/login/login-form.component";
 import PricingPage from "./pages/academy-pages/pricing-page";
 import MembershipPage from "./pages/academy-pages/membership-page";
@@ -161,6 +162,7 @@ function App() {
             <Route path="/academy/pricing" element={<PricingPage />} />
             <Route path="/signup" element={<SignUpFlow />} />
             <Route path="/signin" element={<LoginForm />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/membership" element={<MembershipPage />} />
             <Route path="/userprofile" element={<UserProfilePage />} />
             <Route path="/about" element={<AboutPage />} />

@@ -230,9 +230,11 @@ export default function DashboardPage() {
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                       >
                         <option value="">Select Role</option>
-                        <option value="user">User</option>
+                        <option value="student">Student</option>
+                        <option value="tutor">Instructor/Tutor</option>
                         <option value="admin">Admin</option>
                         <option value="moderator">Moderator</option>
+                        <option value="superuser">Superuser</option>
                       </select>
                     ) : (
                       <p className="mt-1 text-sm text-gray-900">
