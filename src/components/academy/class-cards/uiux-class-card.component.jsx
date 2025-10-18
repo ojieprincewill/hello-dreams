@@ -4,7 +4,7 @@ import {
   BookmarkIcon,
 } from "@heroicons/react/24/solid";
 import { PlayIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSavedClass } from "../../../state-slices/saved-classes/savedClassesSlice";
 import { useAuth } from "@/hooks/useAuth";
@@ -12,6 +12,7 @@ import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const UiuxClassCard = ({ data, className = "" }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const savedClasses = useSelector((state) => state.savedClasses);
   const isSaved = savedClasses.includes(data.id);
   const { isAuthenticated } = useAuth();
@@ -19,7 +20,8 @@ const UiuxClassCard = ({ data, className = "" }) => {
   const handleBookmark = (e) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      toast.info("Please sign in to save this item.");
+      // Redirect to login with current page as redirect parameter
+      navigate(`/signin?redirect=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
 

@@ -14,7 +14,6 @@ import { addItem } from "../../../state-slices/cart/cartSlice";
 const Quickview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector((state) => state.products.items);
   const selectedProduct = useSelector(
     (state) => state.quickview.selectedProduct
   );
@@ -25,13 +24,13 @@ const Quickview = () => {
 
   const handlePay = () => {
     dispatch(addItem(selectedProduct));
-    closeQuickview();
+    dispatch(closeQuickview());
     navigate("/cart-summary");
     handleOrigins();
   };
 
-  const product = products.find((p) => p.id === selectedProduct.id);
-  if (!product) return null;
+  // Use selectedProduct directly instead of looking it up in static store
+  const product = selectedProduct;
 
   const handleCloseQuickview = () => {
     dispatch(closeQuickview());

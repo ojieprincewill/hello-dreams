@@ -182,14 +182,7 @@ function App() {
 
             {/* Protected routes - require authentication */}
             
-            <Route
-              path="/cart-summary"
-              element={
-                <ProtectedRoute>
-                  <CartPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/cart-summary" element={<CartPage />} />
             <Route
               path="/checkout"
               element={

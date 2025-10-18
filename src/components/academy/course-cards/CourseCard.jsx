@@ -26,7 +26,8 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const handleBookmark = (e) => {
     e.stopPropagation();
     if (!isAuthenticated) {
-      toast.info("Please sign in to save this item.");
+      // Redirect to login with current page as redirect parameter
+      navigate(`/signin?redirect=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
 
@@ -39,7 +40,8 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
   const handleBuyNow = async () => {
     if (!course) return;
     if (!isAuthenticated || !user?.email) {
-      setPaymentError("Please log in to purchase this course.");
+      // Redirect to login with current page as redirect parameter
+      navigate(`/signin?redirect=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
     setPaymentLoading(true);
@@ -162,7 +164,7 @@ const CourseCard = ({ course, className = "", user, isAuthenticated }) => {
             </button>
           ) : (
             <Link
-              to="/signin"
+              to={`/signin?redirect=${encodeURIComponent(window.location.pathname)}`}
               className="w-full mt-6 bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer inline-block text-center"
             >
               Login to Purchase

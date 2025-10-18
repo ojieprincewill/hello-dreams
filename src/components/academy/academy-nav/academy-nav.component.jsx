@@ -111,7 +111,7 @@ const AcademyNavbar = () => {
           ) : (
             <div className="flex items-center space-x-3">
               <Link
-                to="/signin"
+                to={`/signin?redirect=${encodeURIComponent(window.location.pathname)}`}
                 className="hidden xl:inline bg-white text-[#010413] border border-[#010413] font-semibold text-[17px] px-3 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] cursor-pointer"
                 onClick={handleOrigins}
               >

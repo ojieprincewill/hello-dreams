@@ -61,7 +61,7 @@ const ClassesHeader = () => {
         </Link>
       ) : (
         <Link
-          to="/signin"
+          to={`/signin?redirect=${encodeURIComponent(window.location.pathname)}`}
           onClick={handleOrigins}
           className="block bg-[#1342ff] text-[14px] md:text-[16px] text-[#fff] px-6 py-2 rounded-md font-medium hover:bg-[#1b13ff] transition-colors duration-300 cursor-pointer"
         >
