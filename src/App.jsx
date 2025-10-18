@@ -184,13 +184,8 @@ function App() {
             
             <Route path="/cart-summary" element={<CartPage />} />
             <Route
-              path="/checkout"
-              element={
-                <ProtectedRoute>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              }
-            />
+              path="/checkout" element={<CheckoutPage />} />
+              
             <Route
               path="/dashboard"
               element={
