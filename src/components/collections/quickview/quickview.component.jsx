@@ -14,24 +14,14 @@ import { addItem } from "../../../state-slices/cart/cartSlice";
 const Quickview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector((state) => state.products.items);
-  const selectedProduct = useSelector(
-    (state) => state.quickview.selectedProduct
-  );
-
-  if (!selectedProduct) return null;
-
-  const handleOrigins = () => {};
+  const product = useSelector((state) => state.quickview.selectedProduct);
+  if (!product) return null;
 
   const handlePay = () => {
-    dispatch(addItem(selectedProduct));
+    dispatch(addItem(product));
     closeQuickview();
     navigate("/cart-summary");
-    handleOrigins();
   };
-
-  const product = products.find((p) => p.id === selectedProduct.id);
-  if (!product) return null;
 
   const handleCloseQuickview = () => {
     dispatch(closeQuickview());
@@ -56,7 +46,6 @@ const Quickview = () => {
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.7 }}
-        // transition={{ duration: 0.3, ease: "easeInOut" }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
         key={id}
@@ -78,10 +67,10 @@ const Quickview = () => {
           <img src={image} alt={title} className="w-full h-full object-cover" />
         </div>
         <ul className="list-disc pl-6 space-y-2 text-[#4a4b54] text-[14px] my-3">
-          <li>{size}</li>
-          <li>{quality}</li>
-          <li>{shipment}</li>
-          <li>{shipTime}</li>
+          {size && <li>{size}</li>}
+          {quality && <li>{quality}</li>}
+          {shipment && <li>{shipment}</li>}
+          {shipTime && <li>{shipTime}</li>}
         </ul>
 
         <button

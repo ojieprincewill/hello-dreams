@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 import {
   openQuickview,
   selectProduct,
-} from '../../../state-slices/quickview/quickviewSlice';
-import { addItem } from '../../../state-slices/cart/cartSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import AddToCart from '../add-to-cart/add-to-cart.component';
-import QuantityControl from '../quantity-control/quantity-control.component';
-import { toast } from '@/components/admin-dashboard/ui/sonner';
+} from "../../../state-slices/quickview/quickviewSlice";
+import { addItem } from "../../../state-slices/cart/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import AddToCart from "../add-to-cart/add-to-cart.component";
+import QuantityControl from "../quantity-control/quantity-control.component";
+import { toast } from "@/components/admin-dashboard/ui/sonner";
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();
@@ -33,12 +33,12 @@ const Product = ({ product }) => {
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="flex justify-between items-center text-[#1e1e1e] text-[16px] md:text-[20px] font-semibold mt-6 mb-3">
-        <p>{title}</p>
+        <p className="max-w-[200px] leading-snug line-clamp-2">{title}</p>
         <p>&#8358;{price}</p>
       </div>
       <ul className="list-disc pl-6 space-y-3 text-[#4a4b54] text-[14px] mb-3">
-        <li>{size}</li>
-        <li>{quality}</li>
+        {size && <li>{size}</li>}
+        {quality && <li>{quality}</li>}
       </ul>
 
       <div className="flex flex-col space-y-3 md:flex-row md:space-x-3 md:space-y-0 items-center mt-6">
