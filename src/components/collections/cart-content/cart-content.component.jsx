@@ -54,7 +54,7 @@ const CartContent = () => {
             </div>
 
             <p className="text-[#0c111d] text-[18px] md:text-[24px] font-semibold w-max ml-auto mr-1 mt-5">
-              Total: &#8358;{cartTotal}
+              Total: &#8358;{cartTotal.toLocaleString()}
             </p>
           </div>
         ) : (

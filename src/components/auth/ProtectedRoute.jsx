@@ -1,8 +1,9 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-export function ProtectedRoute({ children, requireAdmin = false }) {
-  const { isAuthenticated, isAdmin, isLoading } = useAuth();
+export function ProtectedRoute({ children, requireAdmin = false, requireSuperuser = false }) {
+  const { isAuthenticated, isAdmin, isSuperuser, isLoading } = useAuth();
+  const location = useLocation();
 
   // Show loading while checking auth status
   if (isLoading) {
@@ -15,11 +16,17 @@ export function ProtectedRoute({ children, requireAdmin = false }) {
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/signin" replace />;
+    // Preserve the current location as redirect parameter
+    return <Navigate to={`/signin?redirect=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
-  // Redirect to unauthorized if admin access required but user is not admin
-  if (requireAdmin && !isAdmin) {
+  // Redirect to unauthorized if superuser access required but user is not superuser
+  if (requireSuperuser && !isSuperuser) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  // Redirect to unauthorized if admin access required but user is not admin or superuser
+  if (requireAdmin && !isAdmin && !isSuperuser) {
     return <Navigate to="/unauthorized" replace />;
   }
 

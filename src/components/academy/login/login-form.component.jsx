@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 const LoginForm = () => {
@@ -23,10 +23,14 @@ const LoginForm = () => {
 
   const { signIn, isAuthenticated, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    navigate("/userprofile");
+    // Get redirect URL from query params or default to userprofile
+    const searchParams = new URLSearchParams(location.search);
+    const redirectTo = searchParams.get('redirect') || '/userprofile';
+    navigate(redirectTo);
     return null;
   }
 
@@ -57,8 +61,12 @@ const LoginForm = () => {
         password: formData.password,
       });
 
-      // Successful login - redirect to user profile
-      navigate("/userprofile");
+      // Get redirect URL from query params or default to userprofile
+      const searchParams = new URLSearchParams(location.search);
+      const redirectTo = searchParams.get('redirect') || '/userprofile';
+      
+      // Successful login - redirect to intended destination
+      navigate(redirectTo);
     } catch (error) {
       console.error("Login error:", error);
       setLoginError(

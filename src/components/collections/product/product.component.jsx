@@ -34,7 +34,7 @@ const Product = ({ product }) => {
       </div>
       <div className="flex justify-between items-center text-[#1e1e1e] text-[16px] md:text-[20px] font-semibold mt-6 mb-3">
         <p className="max-w-[200px] leading-snug line-clamp-2">{title}</p>
-        <p>&#8358;{price}</p>
+        <p>&#8358;{price.toLocaleString()}</p>
       </div>
       <ul className="list-disc pl-6 space-y-3 text-[#4a4b54] text-[14px] mb-3">
         {size && <li>{size}</li>}

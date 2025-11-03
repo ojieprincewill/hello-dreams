@@ -177,7 +177,7 @@ const AcademySidebar = ({ closeSidebar, user }) => {
             </Link>
           ) : (
             <Link
-              to="/signin"
+              to={`/signin?redirect=${encodeURIComponent(window.location.pathname)}`}
               className="flex flex-row items-center bg-[#010413] w-full text-[#fff] border border-[#010413] text-[16px] px-4 py-2 rounded-md transition-colors duration-300 hover:text-[#1342ff] hover:border-[#1342ff] cursor-pointer"
               onClick={handleOrigins}
             >

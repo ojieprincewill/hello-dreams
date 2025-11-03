@@ -58,7 +58,8 @@ const ManageMembership = () => {
 
     // Check if user is authenticated
     if (!isAuthenticated || !user?.email) {
-      setPaymentError("Please log in to purchase this course.");
+      // Redirect to login with current page as redirect parameter
+      navigate(`/signin?redirect=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
 
@@ -592,7 +593,7 @@ const ManageMembership = () => {
                           Please log in to purchase this course
                         </p>
                         <Link
-                          to="/login"
+                          to={`/signin?redirect=${encodeURIComponent(window.location.pathname)}`}
                           className="w-full bg-[#1342ff] text-white text-[16px] font-bold rounded-lg py-3 hover:bg-[#2313ff] transition-colors duration-200 cursor-pointer inline-block"
                         >
                           Login to Purchase

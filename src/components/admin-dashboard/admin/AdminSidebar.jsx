@@ -11,10 +11,12 @@ import {
   ShoppingBag,
   X,
   Activity,
+  UserCheck,
 } from "lucide-react";
 
 const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "users", label: "User Management", icon: UserCheck },
   { id: "courses", label: "Courses", icon: BookOpen },
   { id: "jobs", label: "Job Postings", icon: Briefcase },
   { id: "challenges", label: "UI/UX Challenges", icon: Users },

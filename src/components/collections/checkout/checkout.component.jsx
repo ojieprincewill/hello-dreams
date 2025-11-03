@@ -34,13 +34,13 @@ const Checkout = ({ onPaymentSuccess }) => {
             <div key={item.id} className="flex justify-between text-[#010413]">
               <span className="text-[16px] md:text-[20px] ">{item.title}</span>
               <span className="text-[16px] md:text-[20px] font-medium">
-                &#8358;{item.price}
+                &#8358;{item.price.toLocaleString()}
               </span>
             </div>
           ))}
         </div>
         <p className="text-[#010413] text-[20px] md:text-[24px] font-semibold my-5">
-          &#8358;{cartTotal}
+          &#8358;{cartTotal.toLocaleString()}
         </p>
       </motion.div>
     </div>

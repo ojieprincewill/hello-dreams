@@ -8,6 +8,7 @@ import BlogManagement from "./BlogManagement";
 import CollectionsManagement from "./CollectionsManagement";
 import CohortsManagement from "./CohortsManagement";
 import RecentActivityManagement from "./RecentActivityManagement";
+import UserManagement from "./UserManagement";
 import { Menu, X } from "lucide-react";
 import { useRealtimeSubscriptions } from "@/hooks/useRealtimeSubscriptions";
 
@@ -36,6 +37,8 @@ const AdminDashboard = () => {
         return <CohortsManagement />;
       case "activity":
         return <RecentActivityManagement />;
+      case "users":
+        return <UserManagement />;
       default:
         return <DashboardOverview setActiveSection={setActiveSection} />;
     }
