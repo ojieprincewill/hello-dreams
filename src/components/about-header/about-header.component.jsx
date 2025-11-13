@@ -12,7 +12,7 @@ const AboutHeader = () => {
           poster="https://res.cloudinary.com/dganx8kmn/image/upload/f_webp,q_auto/v1750248830/About%20page/1db42bac4995832729ae334fa348520949dee99e_nwyp3t.png"
         >
           <source
-            src="https://res.cloudinary.com/dganx8kmn/video/upload/q_auto,f_mp4/v1754299733/videos/About_hello_dreams_compressed_uknvqd.mp4"
+            src="https://res.cloudinary.com/dganx8kmn/video/upload/v1763027928/videos/About_hello_dreams_-_reedited_cqkqko.mp4"
             type="video/mp4"
           />
         </video>
