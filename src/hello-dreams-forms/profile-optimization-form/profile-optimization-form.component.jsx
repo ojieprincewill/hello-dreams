@@ -5,6 +5,49 @@ import ProfileOptimizationSuccess from "./profile-optimization-success.component
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 
+const pricingPlan = {
+  service1: {
+    // CV Writing alone
+    student: 30,
+    entry: 30,
+    internship: 30,
+    mid: 65,
+    careerChange: 65,
+    executive: 75,
+  },
+  service2: {
+    // CV + LinkedIn bundle
+    student: 55,
+    entry: 55,
+    internship: 55,
+    mid: 125,
+    careerChange: 125,
+    executive: 140,
+  },
+  service3: {
+    // LinkedIn only (individuals)
+    student: 30,
+    entry: 30,
+    internship: 30,
+    mid: 65,
+    careerChange: 65,
+    executive: 75,
+  },
+  service4: {
+    // LinkedIn for business
+    flat: 100,
+  },
+};
+
+const careerLevelMap = {
+  service1: "student",
+  service2: "entry",
+  service3: "internship",
+  service4: "mid",
+  service5: "careerChange",
+  service6: "executive",
+};
+
 const ProfileOptimizationForm = () => {
   const [formData, setFormData] = useState({
     type: "Profile Optimization",
@@ -23,10 +66,24 @@ const ProfileOptimizationForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => {
+      const updated = { ...prev, [name]: value };
+
+      let calculatedPrice = "";
+
+      if (updated.selectService) {
+        if (updated.selectService === "service4") {
+          // Business flat rate
+          calculatedPrice = pricingPlan.service4.flat;
+        } else if (updated.selectCareerLevel) {
+          const careerKey = careerLevelMap[updated.selectCareerLevel];
+          calculatedPrice = pricingPlan[updated.selectService][careerKey] || "";
+        }
+      }
+
+      updated.price = calculatedPrice;
+      return updated;
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -199,7 +256,7 @@ const ProfileOptimizationForm = () => {
             name="selectService"
             value={formData.selectService}
             onChange={handleChange}
-            className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            className="w-full text-[#333] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
           >
             <option value="" disabled className="">
               Select an option
@@ -220,18 +277,29 @@ const ProfileOptimizationForm = () => {
             name="selectCareerLevel"
             value={formData.selectCareerLevel}
             onChange={handleChange}
-            className="w-full text-[#b2b2b2] text-[10px] md:text-[14px] font-medium p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            disabled={formData.selectService === "service4"} // disable for business flat rate
+            className={`w-full text-[#000] text-[14px] font-medium p-3 border rounded-sm focus:outline-none
+    ${
+      formData.selectService === "service4"
+        ? "bg-gray-100 cursor-not-allowed text-gray-400 border-gray-300"
+        : "bg-transparent border-[#c9c9c9]"
+    }`}
           >
-            <option value="" disabled className="">
+            <option value="" disabled>
               Select an option
             </option>
-            <option value="service1">Student </option>
-            <option value="service2">Entry-Level </option>
+            <option value="service1">Student</option>
+            <option value="service2">Entry-Level</option>
             <option value="service3">Internship resume</option>
-            <option value="service4">Mid - Senior level </option>
+            <option value="service4">Mid - Senior level</option>
             <option value="service5">Career change</option>
             <option value="service6">Executive Level</option>
           </select>
+          {formData.selectService === "service4" && (
+            <p className="text-sm text-gray-500 mt-2">
+              Career level not required for Business service
+            </p>
+          )}
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
@@ -240,9 +308,9 @@ const ProfileOptimizationForm = () => {
           <input
             type="text"
             name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="w-full p-3 border border-[#c9c9c9] bg-transparent focus:outline-none rounded-sm"
+            value={formData.price ? `$${formData.price.toLocaleString()}` : ""}
+            readOnly
+            className="w-full text-[#333] bg-[#f8f8f8] p-3 border border-[#c9c9c9] focus:outline-none rounded-sm"
           />
         </div>
         <div>
