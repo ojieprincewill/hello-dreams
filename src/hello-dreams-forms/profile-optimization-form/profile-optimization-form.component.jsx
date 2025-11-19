@@ -271,7 +271,7 @@ const ProfileOptimizationForm = () => {
         </div>
         <div>
           <label className="block text-[12px] md:text-[16px] font-medium mb-3 md:mb-4">
-            Select Career Level
+            Select Career Level <span class="text-red-500">*</span>
           </label>
           <select
             name="selectCareerLevel"
