@@ -4,6 +4,7 @@ import LoadingSpinner from "../../components/loading-spinner/loading-spinner.com
 import ProfileOptimizationSuccess from "./profile-optimization-success.component";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
+import PaystackPop from "@paystack/inline-js";
 
 const pricingPlan = {
   service1: {
@@ -109,6 +110,11 @@ const ProfileOptimizationForm = () => {
 
     const { type, ...rest } = formData;
 
+    const paymentData = {
+      price,
+      email,
+    };
+
     const payload = {
       type: "Profile Optimization",
       name,
@@ -123,21 +129,45 @@ const ProfileOptimizationForm = () => {
     };
 
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "handle-service-enquiries",
+      const { data, error: initError } = await supabase.functions.invoke(
+        "paystack-payment-initiation",
         {
-          body: payload,
+          body: paymentData,
         }
       );
-
+      console.log(paymentData);
       console.log(data);
+      console.log(initError);
 
-      if (error) {
-        const supabaseError = error.message || error;
-        console.error("Supabase Error:", supabaseError);
-        setError("Submission failed. Please try again.");
+      if (initError || !data?.access_code || !data?.reference) {
+        setError("Payment initiation failed.");
+        setLoading(false);
         return;
       }
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f", // Optional: You can omit if set in backend
+        reference: data.reference,
+        email: email,
+        amount: price * 100,
+        onSuccess: async (response) => {
+          // STEP 2: On success, verify the payment and update the order status
+          const { data: verifyData, error: verifyError } =
+            await supabase.functions.invoke("collections-checkout-handler", {
+              body: {
+                reference: response.reference,
+                ...formData,
+              },
+            });
+        },
+        onCancel: () => {
+          setError("Payment was cancelled.");
+          setLoading(false);
+        },
+      });
+
+      console.log(data);
 
       setSuccess("Your enquiry has been submitted!");
 
