@@ -148,9 +148,9 @@ const ProfileOptimizationForm = () => {
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: "pk_live_384ca29b338470fc9f955754a1b4d1fefa83573f", // Optional: You can omit if set in backend
-        reference: data.reference,
+        // reference: data.reference,
         email: email,
-        amount: price * 100,
+        amount: price * 1500 * 100,
         onSuccess: async (response) => {
           // STEP 2: On success, verify the payment and update the order status
           const { data: verifyData, error: verifyError } =
