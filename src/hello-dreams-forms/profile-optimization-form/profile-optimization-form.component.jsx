@@ -111,7 +111,7 @@ const ProfileOptimizationForm = () => {
     const { type, ...rest } = formData;
 
     const paymentData = {
-      price,
+      amount: price * 100,
       email,
     };
 
@@ -124,7 +124,7 @@ const ProfileOptimizationForm = () => {
         currentJob,
         selectService,
         selectCareerLevel,
-        price,
+        amount: price,
       },
     };
 
