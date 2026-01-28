@@ -133,7 +133,7 @@ const ProfileOptimizationForm = () => {
         "paystack-payment-initiation",
         {
           body: paymentData,
-        }
+        },
       );
       console.log(paymentData);
       console.log(data);
