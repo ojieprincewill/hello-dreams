@@ -12,6 +12,7 @@ import {
   Award,
   Mail,
 } from "lucide-react";
+import { formatNgn } from "@/utils/currency";
 
 const jobVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -174,6 +175,9 @@ const JobBoard = () => {
                 <span className="text-[#667085] text-[10px] xl:text-[14px] ">
                   Pay: {job.pay_type}
                 </span>
+                {/* <span className="text-[#667085] text-[10px] xl:text-[14px] ">
+                  Amount: {formatNgn(job.pay_amount)}
+                </span> */}
                 <span className="text-[#667085] text-[10px] xl:text-[14px] ">
                   Posted: {getTimeAgo(job.created_at)}
                 </span>
