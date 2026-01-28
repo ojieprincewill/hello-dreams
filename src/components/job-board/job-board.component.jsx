@@ -50,8 +50,10 @@ const JobBoard = () => {
       });
       if (node) observer.current.observe(node);
     },
-    [isLoading, hasNextPage, isFetchingNextPage, fetchNextPage]
+    [isLoading, hasNextPage, isFetchingNextPage, fetchNextPage],
   );
+
+  console.log("data", data);
 
   const toggleModal = (jobId) => {
     setActiveJob(activeJob === jobId ? null : jobId);
@@ -195,6 +197,15 @@ const JobBoard = () => {
                     {job.pay_type === "contract" ? "Work type" : "Hours needed"}
                   </p>
                 </div>
+                <div className="space-y-1 xl:space-y-2">
+                  <p className="text-[#000000] text-[12px] xl:text-[20px] font-semibold">
+                    <span>₦</span>
+                    {job.pay_amount}
+                  </p>
+                  <p className="text-[#667085] text-[10px] xl:text-[14px] font-medium">
+                    Salary
+                  </p>
+                </div>
               </div>
               <p className="text-[#667085] text-[10px] xl:text-[14px] py-5">
                 {job.description?.substring(0, 150)}...
@@ -244,7 +255,7 @@ const JobBoard = () => {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   onClick={(e) => e.stopPropagation()}
                   key={job.id}
-                  className="absolute right-0 bg-[#fff] w-[300px] xl:w-[508px] h-full p-5 rounded-xl overflow-auto"
+                  className="absolute right-0 bg-[#fff] w-[300px] xl:w-[508px] h-full p-5 rounded-xl overflow-auto scrollbar-hide"
                 >
                   <div className="flex justify-between items-center mb-5 text-[#1b212c]">
                     <h2 className="text-[18px] xl:text-[30px] font-extrabold">

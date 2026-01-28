@@ -91,6 +91,7 @@ const JobManagement = () => {
         experience_level: newJob.experience,
         work_hours: newJob.hoursNeeded,
         pay_type: newJob.payType,
+        pay_amount: newJob.payAmount,
         transaction_id: null,
         payment_reference: newJob.transactionRef,
         application_instructions: newJob.applicationInstructions,
@@ -154,7 +155,11 @@ const JobManagement = () => {
         published: newPublishedState,
       });
 
-      toast.success(`${job.title} ${newPublishedState ? "published" : "unpublished"} successfully!`);
+      toast.success(
+        `${job.title} ${
+          newPublishedState ? "published" : "unpublished"
+        } successfully!`
+      );
     } catch (e) {
       toast.error(e.message);
     }

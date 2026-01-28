@@ -194,14 +194,14 @@ const CommunityChallenge = () => {
                     exit={{ opacity: 0, scale: 0.7 }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     onClick={(e) => e.stopPropagation()}
-                    className="bg-[#fff] p-6 rounded-lg w-[90%] md:w-[483px]"
+                    className="bg-[#fff] p-6 rounded-lg w-[90%] h-[90%] md:w-[483px] whitespace-pre-wrap overflow-auto scrollbar-hide "
                   >
                     <div ref={textRef}>
                       {transformedData
                         .filter((data) =>
                           data.options.some(
-                            (option) => option.id === activeOption
-                          )
+                            (option) => option.id === activeOption,
+                          ),
                         )
                         .map((data) => (
                           <div key={data.id}>

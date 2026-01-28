@@ -1,14 +1,19 @@
-import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query';
-import supabase from '@/supabase/client';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
+import supabase from "@/supabase/client";
 
 export const useJobs = () =>
   useQuery({
-    queryKey: ['jobs'],
+    queryKey: ["jobs"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('job_postings')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("job_postings")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (error) throw new Error(error.message);
       return data;
     },
@@ -16,20 +21,20 @@ export const useJobs = () =>
 
 export const usePublicJobs = (pageSize = 6) =>
   useInfiniteQuery({
-    queryKey: ['public-jobs'],
+    queryKey: ["public-jobs"],
     queryFn: async ({ pageParam = 0 }) => {
       const from = pageParam * pageSize;
       const to = from + pageSize - 1;
-      
+
       const { data, error, count } = await supabase
-        .from('job_postings')
-        .select('*', { count: 'exact' })
-        .eq('published', true)
-        .order('created_at', { ascending: false })
+        .from("job_postings")
+        .select("*", { count: "exact" })
+        .eq("published", true)
+        .order("created_at", { ascending: false })
         .range(from, to);
-      
+
       if (error) throw new Error(error.message);
-      
+
       return {
         data,
         nextPage: data.length === pageSize ? pageParam + 1 : undefined,
@@ -46,14 +51,14 @@ export const useCreateJob = () => {
   return useMutation({
     mutationFn: async (newJob) => {
       const { data, error } = await supabase
-        .from('job_postings')
+        .from("job_postings")
         .insert([newJob])
         .select()
         .single();
       if (error) throw new Error(error.message);
       return data;
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['jobs'] }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["jobs"] }),
   });
 };
 
@@ -67,6 +72,7 @@ export const useUpdateJob = () => {
         experience_level: job.experience_level,
         work_hours: job.hoursNeeded,
         pay_type: job.payType,
+        pay_amount: job.payAmount,
         payment_reference: job.transactionRef,
         application_instructions: job.applicationInstructions,
         company_name: job.companyName,
@@ -80,20 +86,20 @@ export const useUpdateJob = () => {
       }
 
       const { data, error } = await supabase
-        .from('job_postings')
+        .from("job_postings")
         .update(updateData)
-        .eq('id', job.id)
+        .eq("id", job.id)
         .select()
         .single();
-        
+
       if (error) throw new Error(error.message);
       return data;
     },
     onSuccess: () => {
       // Real-time subscriptions will handle the cache updates automatically
       // Just invalidate queries to ensure consistency
-      qc.invalidateQueries({ queryKey: ['jobs'] });
-      qc.invalidateQueries({ queryKey: ['public-jobs'] });
+      qc.invalidateQueries({ queryKey: ["jobs"] });
+      qc.invalidateQueries({ queryKey: ["public-jobs"] });
     },
   });
 };
@@ -102,9 +108,12 @@ export const useDeleteJob = () => {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async ({ id }) => {
-      const { error } = await supabase.from('job_postings').delete().eq('id', id);
+      const { error } = await supabase
+        .from("job_postings")
+        .delete()
+        .eq("id", id);
       if (error) throw new Error(error.message);
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['jobs'] }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["jobs"] }),
   });
 };
